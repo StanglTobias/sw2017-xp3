@@ -1,7 +1,9 @@
 package at.sw2017xp3.regionalo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.EditText;
@@ -33,23 +35,19 @@ import static org.junit.Assert.assertEquals;
 @RunWith(AndroidJUnit4.class)
 public class RegistryInstrumentedTest {
 
-
-
-
     @Rule
-    public ActivityTestRule<HomeActivity> mActivityRule = new
-            ActivityTestRule<>(HomeActivity.class);
-    @Ignore
+    public ActivityTestRule<RegisterActivity> mActivityRule = new
+            ActivityTestRule<>(RegisterActivity.class);
+
     @Test
-    public void checkButtonClicks() throws Exception {
+    public void checkButtonClicks() {
 
         onView(withId(R.id.scrollView_Register_ID_vertical)).perform(swipeUp());
         onView(withText("Registrieren")).perform(click());
-        onView(withText("Abbrechen")).perform(click());
     }
 
     @Test
-    public void checkTextViews() throws Exception {
+    public void checkTextViews() {
 
         onView(withId(R.id.textView_Register_ID_Hofname)).perform(typeText("Testhofname"));
         onView(withId(R.id.textView_Register_ID_Vorname)).perform(typeText("Vorname1"));
@@ -59,9 +57,8 @@ public class RegistryInstrumentedTest {
         onView(withId(R.id.textView_Register_ID_Ort)).perform(typeText("Testort"));
         onView(withId(R.id.textView_Register_ID_PLZ)).perform(typeText("1234"));
         onView(withId(R.id.textView_Register_ID_Adresse)).perform(typeText("Testaddresse"));
-        onView(withId(R.id.textView_Register_ID_Hausnr)).perform(typeText("1111"));
-        onView(withId(R.id.textView_Register_ID_Passwort)).perform(typeText("passwort1234"));
         onView(withId(R.id.scrollView_Register_ID_vertical)).perform(swipeUp());
+        onView(withId(R.id.textView_Register_ID_Passwort)).perform(typeText("passwort1234"));
         onView(withId(R.id.textView_Register_ID_Passwortwieder)).perform(typeText("passwort1235"));
 
         onView(withId(R.id.textView_Register_ID_Hofname)).check(matches(withText("Testhofname")));
@@ -72,10 +69,7 @@ public class RegistryInstrumentedTest {
         onView(withId(R.id.textView_Register_ID_Ort)).check(matches(withText("Testort")));
         onView(withId(R.id.textView_Register_ID_PLZ)).check(matches(withText("1234")));
         onView(withId(R.id.textView_Register_ID_Adresse)).check(matches(withText("Testaddresse")));
-        onView(withId(R.id.textView_Register_ID_Hausnr)).check(matches(withText("1111")));
         onView(withId(R.id.textView_Register_ID_Passwort)).check(matches(withText("passwort1234")));
         onView(withId(R.id.textView_Register_ID_Passwortwieder)).check(matches(withText("passwort1235")));
     }
-
-
 }
