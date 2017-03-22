@@ -10,12 +10,20 @@
 
 
     <HorizontalScrollView
+<<<<<<< HEAD
         android:id="@+id/horizontalScrollView"
         android:layout_width="0dp"
         android:layout_height="52dp"
         android:layout_marginEnd="29dp"
         android:layout_marginStart="29dp"
         android:layout_marginTop="24dp"
+=======
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="14dp"
+>>>>>>> b97fa2dabc4a87e756ccb16f9c3053f6186f92f4
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView"
@@ -30,6 +38,7 @@
 
 
             <Button
+                android:id="@+id/BtnFleisch"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginRight="7dp"
@@ -38,6 +47,7 @@
                 android:textSize="8sp" />
 
             <Button
+                android:id="@+id/BtnGemuese"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="7dp"
@@ -47,6 +57,7 @@
                 android:textSize="8sp" />
 
             <Button
+                android:id="@+id/BtnObst"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="7dp"
@@ -55,6 +66,7 @@
                 android:text="Obst"
                 android:textSize="8sp" />
 
+<<<<<<< HEAD
 
         </LinearLayout>
     </HorizontalScrollView>
@@ -72,6 +84,36 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1" />
+=======
+            <Button
+                android:id="@+id/BtnMilch"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:background="@drawable/roundedbutton"
+                android:text="Milch"
+                android:textSize="8sp" />
+
+            <Button
+                android:id="@+id/BtnGetreide"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:background="@drawable/roundedbutton"
+                android:text="Getreide"
+                android:textSize="8sp" />
+
+            <Button
+                android:id="@+id/BtnSonstiges"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="7dp"
+                android:background="@drawable/roundedbutton"
+                android:text="Sonstiges"
+                android:textSize="8sp" />
+>>>>>>> b97fa2dabc4a87e756ccb16f9c3053f6186f92f4
 
     <ImageButton
         android:id="@+id/imageButton5"

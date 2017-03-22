@@ -3,21 +3,26 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\Tobias\Desktop\sw2017-xp3\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jar="C:\Desktop\clone\sw2017-xp3\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
+<<<<<<< HEAD
         sha1="5da7becb7f20b89f0d8b6e8259ef298bf539abdc">
         <dex dex="C:\Users\Tobias\Desktop\sw2017-xp3\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_11bb19593a16cb9c87eb190401b3140689fc2cbd\classes.dex" />
+=======
+        sha1="bcc2bf86c77378252c01519ebe8a59c4d3d9320b">
+        <dex dex="C:\Desktop\clone\sw2017-xp3\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_1cdc98b0f822337bc15b482596aec3f08b5929ce\classes.dex" />
+>>>>>>> b97fa2dabc4a87e756ccb16f9c3053f6186f92f4
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Tobias\Desktop\sw2017-xp3\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="C:\Desktop\clone\sw2017-xp3\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
-        <dex dex="C:\Users\Tobias\Desktop\sw2017-xp3\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_e7f4c3c48006dbaddc6ecc7bfe7b99c7ee90dee8\classes.dex" />
+        <dex dex="C:\Desktop\clone\sw2017-xp3\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_0eaca79b63095bb5e5a507580bfc3fb7ff55cfbd\classes.dex" />
     </item>
 
 </items>
