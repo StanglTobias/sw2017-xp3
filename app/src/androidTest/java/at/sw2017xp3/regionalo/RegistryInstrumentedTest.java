@@ -72,4 +72,13 @@ public class RegistryInstrumentedTest {
         onView(withId(R.id.textView_Register_ID_Passwort)).check(matches(withText("passwort1234")));
         onView(withId(R.id.textView_Register_ID_Passwortwieder)).check(matches(withText("passwort1235")));
     }
+
+    @Test
+    public void checkGoToLogin(){
+        onView(withId(R.id.scrollView_Register_ID_vertical)).perform(swipeUp());
+        onView(withText("Registrieren")).perform(click());
+        onView(withId(R.id.textViewPassword)).perform(typeText("Testhofname"));
+        onView(withId(R.id.textViewPassword)).check(matches(withText("Testhofname")));
+
+    }
 }
