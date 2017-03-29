@@ -39,4 +39,11 @@ public class LoginInstrumentedTest {
         onView(withId(R.id.textViewEmail)).check(matches(withText("test@testmail.com")));
         onView(withId(R.id.textViewPassword)).check(matches(withText("passwort1234")));
     }
+
+    @Test
+    public void checkGoToRegister(){
+        onView(withId(R.id.buttonRegister)).perform(click());
+        onView(withId(R.id.textView_Register_ID_Hofname)).perform(typeText("Testhofname"));
+        onView(withId(R.id.textView_Register_ID_Hofname)).check(matches(withText("Testhofname")));
+    }
 }
