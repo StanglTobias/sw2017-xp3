@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Desktop\neuclone\sw2017-xp3\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="C:\Desktop\neuclone\sw2017-xp3\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_b4a3345ad735a65c5a8421748b3486f448537b02\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Desktop\neuclone\sw2017-xp3\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ee545e1dc799d31a6131cbf919c2fe0c096b4eaf">
+        <dex dex="C:\Desktop\neuclone\sw2017-xp3\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_645ada8bd8724b18c570d24f3bf1244d6e9f588f\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Desktop\neuclone\sw2017-xp3\app\build\intermediates\jacoco\jacocoagent.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="fdca30f45b60c6ba724c26a9ce127975e26d4bcb">
+        <dex dex="C:\Desktop\neuclone\sw2017-xp3\app\build\intermediates\pre-dexed\debug\jacocoagent_79315190bcf7eaeb1c1802d9a07171ef76fae971.jar" />
+    </item>
+
+</items>
