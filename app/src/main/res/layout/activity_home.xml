@@ -170,7 +170,9 @@
                     android:id="@+id/textViewRndProduct1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textViewRndCategory1"
@@ -202,6 +204,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
+                android:layout_marginTop="12dp"
                 android:orientation="vertical">
 
                 <ImageButton
@@ -214,7 +217,8 @@
                     android:id="@+id/textViewRndProduct2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="40sp" />
 
                 <TextView
                     android:id="@+id/textViewRndCategory2"
@@ -246,6 +250,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
+                android:layout_marginTop="12dp"
                 android:orientation="vertical">
 
                 <ImageButton
@@ -258,7 +263,8 @@
                     android:id="@+id/textViewRndProduct3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="40sp" />
 
                 <TextView
                     android:id="@+id/textViewRndCategory3"
@@ -290,6 +296,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
+                android:layout_marginTop="12dp"
                 android:orientation="vertical">
 
                 <ImageButton
@@ -302,7 +309,8 @@
                     android:id="@+id/textViewRndProduct4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="40sp" />
 
                 <TextView
                     android:id="@+id/textViewRndCategory4"
@@ -335,6 +343,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
+                android:layout_marginTop="12dp"
                 android:orientation="vertical">
 
                 <ImageButton
@@ -347,7 +356,8 @@
                     android:id="@+id/textViewRndProduct5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="40sp" />
 
                 <TextView
                     android:id="@+id/textViewRndCategory5"
@@ -379,7 +389,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
-                android:layout_weight="1"
+                android:layout_marginTop="12dp"
                 android:orientation="vertical">
 
                 <ImageButton
@@ -392,7 +402,8 @@
                     android:id="@+id/textViewRndProduct6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="40sp" />
 
                 <TextView
                     android:id="@+id/textViewRndCategory6"
