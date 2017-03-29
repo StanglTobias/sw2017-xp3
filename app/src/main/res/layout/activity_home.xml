@@ -48,9 +48,10 @@
                             android:id="@+id/searchView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginStart="12dp"
                             android:layout_marginTop="30dp"
+                            android:background="#ffffff"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -159,18 +160,15 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="40dp"
-                android:background="#ffffff"
-                android:shadowRadius="1"
-                android:shadowDy="3"
-                android:shadowDx="3"
+                android:background="@drawable/border_recommended_image"
                 android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/imgButtonRnd1"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:layout_margin="8dp"
-                    app:srcCompat="@drawable/speck2_large" />
+                    android:layout_margin="12dp"
+                    app:srcCompat="@drawable/speck2_large"/>
 
                 <TextView
                     android:id="@+id/textViewRndProduct1"
@@ -178,32 +176,37 @@
                     android:layout_height="wrap_content"
                     android:text="TextView"
                     android:textSize="40sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndCategory1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndPrice1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndPlace1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndProducer1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="TextView"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginBottom="12dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -212,12 +215,14 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="12dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@drawable/border_recommended_image">
 
                 <ImageButton
                     android:id="@+id/imgButtonRnd2"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:layout_margin="12dp"
                     app:srcCompat="@drawable/speck2_large" />
 
                 <TextView
@@ -225,31 +230,37 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="TextView"
-                    android:textSize="40sp" />
+                    android:textSize="40sp"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndCategory2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndPrice2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndPlace2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndProducer2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginBottom="12dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -258,44 +269,52 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="12dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@drawable/border_recommended_image">
 
                 <ImageButton
                     android:id="@+id/imgButtonRnd3"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    app:srcCompat="@drawable/speck2_large" />
+                    app:srcCompat="@drawable/speck2_large"
+                    android:layout_margin="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndProduct3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="TextView"
-                    android:textSize="40sp" />
+                    android:textSize="40sp"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndCategory3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndPrice3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndPlace3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndProducer3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginBottom="12dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -304,44 +323,52 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="12dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@drawable/border_recommended_image">
 
                 <ImageButton
                     android:id="@+id/imgButtonRnd4"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    app:srcCompat="@drawable/speck2_large" />
+                    app:srcCompat="@drawable/speck2_large"
+                    android:layout_margin="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndProduct4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="TextView"
-                    android:textSize="40sp" />
+                    android:textSize="40sp"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndCategory4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndPrice4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndPlace4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndProducer4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginBottom="12dp"/>
             </LinearLayout>
 
 
@@ -351,44 +378,52 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="12dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@drawable/border_recommended_image">
 
                 <ImageButton
                     android:id="@+id/imgButtonRnd5"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    app:srcCompat="@drawable/speck2_large" />
+                    app:srcCompat="@drawable/speck2_large"
+                    android:layout_margin="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndProduct5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="TextView"
-                    android:textSize="40sp" />
+                    android:textSize="40sp"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndCategory5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndPrice5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndPlace5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndProducer5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginBottom="12dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -397,44 +432,52 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="12dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@drawable/border_recommended_image">
 
                 <ImageButton
                     android:id="@+id/imgButtonRnd6"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    app:srcCompat="@mipmap/ic_launcher" />
+                    app:srcCompat="@mipmap/ic_launcher"
+                    android:layout_margin="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndProduct6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="TextView"
-                    android:textSize="40sp" />
+                    android:textSize="40sp"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndCategory6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndPrice6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndPlace6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"/>
 
                 <TextView
                     android:id="@+id/textViewRndProducer6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginBottom="12dp"/>
             </LinearLayout>
 
         </LinearLayout>
