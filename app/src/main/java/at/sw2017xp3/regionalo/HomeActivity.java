@@ -1,5 +1,6 @@
 package at.sw2017xp3.regionalo;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -66,6 +67,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private TextView rndTxtPlace6_;
     private TextView rndTxtProducer6_;
 
+    private Button btnLogin_;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +99,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         rndBtn5_.setOnClickListener(this);
         rndBtn6_ = (ImageButton) findViewById(R.id.imgButtonRnd6);
         rndBtn6_.setOnClickListener(this);
+        //btnLogin_ = (Button) findViewById(R.id.buttonLogin);
+        //btnLogin_.setOnClickListener(this);
 
         searchField_ = (ViewGroup) findViewById(R.id.searchView);
         searchField_.setOnClickListener(this);
@@ -183,7 +188,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.buttonLogin) {
-            return true;
+            Intent myIntent = new Intent(this, LoginActivity.class);
+            startActivity(myIntent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -191,6 +197,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-
+        Button myButton = (Button) v;
+        if(myButton.getId() == R.id.buttonLogin){
+        }
     }
 }
