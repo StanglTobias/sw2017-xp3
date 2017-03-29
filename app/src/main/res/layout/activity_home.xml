@@ -8,28 +8,33 @@
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
 
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="50dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <HorizontalScrollView
-<<<<<<< HEAD
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_marginEnd="29dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="24dp"
-=======
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginEnd="36dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="14dp"
->>>>>>> b97fa2dabc4a87e756ccb16f9c3053f6186f92f4
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1">
+        tools:layout_constraintTop_creator="1"
+        android:id="@+id/horizontalScrollView">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -66,25 +71,6 @@
                 android:text="Obst"
                 android:textSize="8sp" />
 
-<<<<<<< HEAD
-
-        </LinearLayout>
-    </HorizontalScrollView>
-
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
-=======
             <Button
                 android:id="@+id/BtnMilch"
                 android:layout_width="50dp"
@@ -113,69 +99,9 @@
                 android:background="@drawable/roundedbutton"
                 android:text="Sonstiges"
                 android:textSize="8sp" />
->>>>>>> b97fa2dabc4a87e756ccb16f9c3053f6186f92f4
 
-    <ImageButton
-        android:id="@+id/imageButton5"
-        android:layout_width="155dp"
-        android:layout_height="155dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="6dp"
-        app:layout_constraintLeft_toLeftOf="@+id/horizontalScrollView"
-        app:layout_constraintRight_toLeftOf="@+id/imageButton6"
-        app:srcCompat="@drawable/speck2_large"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="1.0"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton7"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
-    <ImageButton
-        android:id="@+id/imageButton6"
-        android:layout_width="155dp"
-        android:layout_height="155dp"
-        android:layout_marginEnd="31dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton8"
-        app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/speck2_large"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
-        android:layout_marginRight="31dp"
-        android:layout_marginBottom="0dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton8"
-        android:layout_width="0dp"
-        android:layout_height="155dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/imageButton6"
-        app:layout_constraintRight_toRightOf="@+id/imageButton6"
-        app:srcCompat="@drawable/speck2_large"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
-
-    <ImageButton
-        android:id="@+id/imageButton7"
-        android:layout_width="155dp"
-        android:layout_height="155dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
-        app:layout_constraintLeft_toLeftOf="@+id/imageButton5"
-        app:layout_constraintRight_toRightOf="@+id/imageButton5"
-        app:layout_constraintTop_toTopOf="@+id/imageButton8"
-        app:srcCompat="@drawable/speck2_large"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
-
+        </LinearLayout>
+    </HorizontalScrollView>
 
 </android.support.constraint.ConstraintLayout>
