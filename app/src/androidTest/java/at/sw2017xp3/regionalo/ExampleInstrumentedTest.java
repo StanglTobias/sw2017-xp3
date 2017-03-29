@@ -46,7 +46,7 @@ public class ExampleInstrumentedTest {
         onView(withText("Getreide")).perform(click());
         onView(withText("Obst")).perform(click());
         onView(withText("Milch")).perform(click());
-        onView(withId(R.id.BtnSonstiges)).perform(scrollTo(), click());
+        onView(withId(R.id.buttonOthers)).perform(scrollTo(), click());
     }
 
     @Test
@@ -57,6 +57,11 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testRecommendedPictures (){
-
+        onView(withId(R.id.imgButtonRnd1)).perform(scrollTo(), click());
+        onView(withId(R.id.imgButtonRnd2)).perform(scrollTo(), click());
+        onView(withId(R.id.imgButtonRnd3)).perform(scrollTo(), click());
+        onView(withId(R.id.imgButtonRnd4)).perform(scrollTo(), click());
+        onView(withId(R.id.imgButtonRnd5)).perform(scrollTo(), click());
+        onView(withId(R.id.imgButtonRnd6)).perform(scrollTo(), click());
     }
 }
