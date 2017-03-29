@@ -64,4 +64,9 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.imgButtonRnd5)).perform(scrollTo(), click());
         onView(withId(R.id.imgButtonRnd6)).perform(scrollTo(), click());
     }
+
+    @Test
+    public void testLoginButton(){
+        onView(withId(R.id.buttonLogin)).perform(click());
+    }
 }
