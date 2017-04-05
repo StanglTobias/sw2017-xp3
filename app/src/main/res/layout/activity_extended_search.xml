@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scrollView_ExtendedSearch_ID_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/Button_ID_ExtendedSearchStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:text="Suchen"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/Button_ID_ResetFilterExtendedSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:text="Filter zurücksetzen"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/Text_ID_SortierenNachExtendedSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Sortieren nach" />
+
+                <Spinner
+                    android:id="@+id/Spinner_ID_ExtendedSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:entries="@array/sort_arrays"
+                    android:prompt="@string/sort_prompt" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/Text_ID_ArtDesAnbaus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Art des Anbaus" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_BiologischerAnbau"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Biologisch" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/Text_ID_Kategorien"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Kategorien" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_KategorieObst"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Obst" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_KategorieGemüse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Gemüse" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_KategoriePilze"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Pilze" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_KategoriePlanzenUndSamen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Pflanzen und Samen" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_KategorieHolz"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Holz" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_WeitereGartenprodukte"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Weitere Gartenprodukte" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/Text_ID_OrtRegion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Ort / Region" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_Burgenland"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Burgenland" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_Kaernten"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Kärnten" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_Niederoesterreich"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Niederösterreich" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_Oberoesterreich"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Oberösterreich" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_Salzburg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Salzburg" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_Steiermark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Steiermark" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_Tirol"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tirol" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_Vorarlberg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Vorarlberg" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_Wien"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Wien" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/Text_ID_Verkaeufer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Verkäufer" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_Privat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Privat" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_Firma"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Firma" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/Text_ID_ArtderUebergabe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Art der Übergabe" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_Zustellung"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Zustellung" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_Selbstabholung"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Selbstabholung" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/Text_ID_TransportBehaeltnis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Transport Behältnis" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_NichtBenoetigt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nicht benötigt" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/Text_ID_ArtDerErnte"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Art der Ernte" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_BereitsGeerntet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bereits geerntet" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_ID_SelbstErnten"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Selbst ernten" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/Button_ID_ExtendedSearchStart2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:text="Suchen"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
