@@ -38,8 +38,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        fillArrayList();
-
+        fillArrayListWithImageButtons();
         list_of_elements.addAll(Arrays.asList(
                 findViewById(R.id.buttonMeat),
                 findViewById(R.id.buttonVegetables),
@@ -54,7 +53,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             list_of_elements.get(i).setOnClickListener(this);
         }
     }
-
 
     private class GetProductTask extends AsyncTask<String, Void, String> {
 
@@ -124,28 +122,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void fillArrayList() {
+    public void fillArrayListWithImageButtons() {
         for (int i = 1; i <= 6; i++) {
             String rndBtn = "imgButtonRnd" + i;
-            String textViewProducer = "textViewRndProducer" + i;
-            String textViewCategory = "textViewRndCategory" + i;
-            String textViewPrice = "textViewRndPrice" + i;
-            String textViewPlace = "textViewRndPlace" + i;
-            String textViewProduct = "textViewRndProduct" + i;
-
             int idBtn = getResources().getIdentifier(rndBtn, "id", R.class.getPackage().getName());
-            int idProducer = getResources().getIdentifier(textViewProducer, "id", R.class.getPackage().getName());
-            int idCategory = getResources().getIdentifier(textViewCategory, "id", R.class.getPackage().getName());
-            int idPrice = getResources().getIdentifier(textViewPrice, "id", R.class.getPackage().getName());
-            int idPlace = getResources().getIdentifier(textViewProduct, "id", R.class.getPackage().getName());
-            int idProduct = getResources().getIdentifier(textViewPlace, "id", R.class.getPackage().getName());
-
             list_of_elements.add(findViewById(idBtn));
-            list_of_elements.add(findViewById(idProducer));
-            list_of_elements.add(findViewById(idCategory));
-            list_of_elements.add(findViewById(idPrice));
-            list_of_elements.add(findViewById(idPlace));
-            list_of_elements.add(findViewById(idProduct));
         }
     }
 }
