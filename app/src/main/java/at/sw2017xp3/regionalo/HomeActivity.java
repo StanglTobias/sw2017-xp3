@@ -1,7 +1,8 @@
 package at.sw2017xp3.regionalo;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -13,6 +14,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+
+import at.sw2017xp3.regionalo.model.Product;
+import at.sw2017xp3.regionalo.util.HttpUtils;
+import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 
 import java.util.ArrayList;
 
@@ -54,11 +67,53 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         buttonMilk_ = (Button) findViewById(R.id.buttonMilk);
         buttonMilk_.setOnClickListener(this);
 
+
         searchField_ = (ViewGroup) findViewById(R.id.searchView);
      //   searchField_.setOnClickListener(this);
 
         setUpListeners();
     }
+
+
+    private class GetProductTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                return downloadContent(params[0]);
+            } catch (IOException e) {
+                return "Unable to retrieve data. URL may be invalid.";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Toast.makeText(HomeActivity.this, result, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private String downloadContent(String myurl) throws IOException {
+        InputStream is = null;
+        int length = 500;
+
+        try {
+            HttpURLConnection conn = HttpUtils.httpGet(myurl);
+
+            String contentAsString = HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
+            JSONArray arr = new JSONArray(contentAsString);
+            JSONObject mJsonObject = arr.getJSONObject(0);
+            Product p =  JsonObjectMapper.CreateProduct(mJsonObject);
+
+            return p.getName();
+        } catch (Exception ex) {
+            return "";
+        } finally {
+            if (is != null) {
+                is.close();
+            }
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
