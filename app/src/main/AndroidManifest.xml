@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="at.sw2017xp3.regionalo">
+    <uses-permission android:name="android.persmission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,13 +15,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".ProductDetailActivity"
-            android:parentActivityName=".HomeActivity">
-            <!-- to support API level 15 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
         </activity>
         <activity android:name=".RegisterActivity"
             android:parentActivityName=".HomeActivity">
@@ -36,7 +30,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
         </activity>
-
+        <activity android:name=".ProductDetailActivity"
+            android:parentActivityName=".HomeActivity">
+            <!-- to support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
     </application>
 
 </manifest>
