@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button buttonMeat_;
@@ -22,50 +24,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private Button buttonOthers_;
     private Button buttonMilk_;
     private Button buttonCereals_;
-
-    private ImageButton rndBtn1_;
-    private ImageButton rndBtn2_;
-    private ImageButton rndBtn3_;
-    private ImageButton rndBtn4_;
-    private ImageButton rndBtn5_;
-    private ImageButton rndBtn6_;
     private ViewGroup searchField_;
 
-    private TextView rndTxtProduct1_;
-    private TextView rndTxtCategorie1_;
-    private TextView rndTxtPrice1_;
-    private TextView rndTxtPlace1_;
-    private TextView rndTxtProducer1_;
 
-    private TextView rndTxtProduct2_;
-    private TextView rndTxtCategorie2_;
-    private TextView rndTxtPrice2_;
-    private TextView rndTxtPlace2_;
-    private TextView rndTxtProducer2_;
-
-    private TextView rndTxtProduct3_;
-    private TextView rndTxtCategorie3_;
-    private TextView rndTxtPrice3_;
-    private TextView rndTxtPlace3_;
-    private TextView rndTxtProducer3_;
-
-    private TextView rndTxtProduct4_;
-    private TextView rndTxtCategorie4_;
-    private TextView rndTxtPrice4_;
-    private TextView rndTxtPlace4_;
-    private TextView rndTxtProducer4_;
-
-    private TextView rndTxtProduct5_;
-    private TextView rndTxtCategorie5_;
-    private TextView rndTxtPrice5_;
-    private TextView rndTxtPlace5_;
-    private TextView rndTxtProducer5_;
-
-    private TextView rndTxtProduct6_;
-    private TextView rndTxtCategorie6_;
-    private TextView rndTxtPrice6_;
-    private TextView rndTxtPlace6_;
-    private TextView rndTxtProducer6_;
+    private ArrayList<ImageButton> numberImageButton;
+    private ArrayList<TextView> numberTextviewProducer;
+    private ArrayList<TextView> numberTextviewCategory;
+    private ArrayList<TextView> numberTextviewPrice;
+    private ArrayList<TextView> numberTextviewPlace;
+    private ArrayList<TextView> numberTextviewProduct;
 
     private Button btnLogin_;
 
@@ -87,89 +54,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         buttonMilk_ = (Button) findViewById(R.id.buttonMilk);
         buttonMilk_.setOnClickListener(this);
 
-        rndBtn1_ = (ImageButton) findViewById(R.id.imgButtonRnd1);
-        rndBtn1_.setOnClickListener(this);
-        rndBtn2_ = (ImageButton) findViewById(R.id.imgButtonRnd2);
-        rndBtn2_.setOnClickListener(this);
-        rndBtn3_ = (ImageButton) findViewById(R.id.imgButtonRnd3);
-        rndBtn3_.setOnClickListener(this);
-        rndBtn4_ = (ImageButton) findViewById(R.id.imgButtonRnd4);
-        rndBtn4_.setOnClickListener(this);
-        rndBtn5_ = (ImageButton) findViewById(R.id.imgButtonRnd5);
-        rndBtn5_.setOnClickListener(this);
-        rndBtn6_ = (ImageButton) findViewById(R.id.imgButtonRnd6);
-        rndBtn6_.setOnClickListener(this);
-        //btnLogin_ = (Button) findViewById(R.id.buttonLogin);
-        //btnLogin_.setOnClickListener(this);
-
         searchField_ = (ViewGroup) findViewById(R.id.searchView);
         searchField_.setOnClickListener(this);
 
-        rndTxtProducer1_ = (TextView) findViewById(R.id.textViewRndProducer1);
-        rndTxtProducer1_.setOnClickListener(this);
-        rndTxtCategorie1_ = (TextView) findViewById(R.id.textViewRndCategory1);
-        rndTxtCategorie1_.setOnClickListener(this);
-        rndTxtPrice1_ = (TextView) findViewById(R.id.textViewRndPrice1);
-        rndTxtPrice1_.setOnClickListener(this);
-        rndTxtPlace1_ = (TextView) findViewById(R.id.textViewRndPlace1);
-        rndTxtPlace1_.setOnClickListener(this);
-        rndTxtProduct1_ = (TextView) findViewById(R.id.textViewRndProduct1);
-        rndTxtProduct1_.setOnClickListener(this);
-
-        rndTxtProducer2_ = (TextView) findViewById(R.id.textViewRndProducer2);
-        rndTxtProducer2_.setOnClickListener(this);
-        rndTxtCategorie2_ = (TextView) findViewById(R.id.textViewRndCategory2);
-        rndTxtCategorie2_.setOnClickListener(this);
-        rndTxtPrice2_ = (TextView) findViewById(R.id.textViewRndPrice2);
-        rndTxtPrice2_.setOnClickListener(this);
-        rndTxtPlace2_ = (TextView) findViewById(R.id.textViewRndPlace2);
-        rndTxtPlace2_.setOnClickListener(this);
-        rndTxtProduct2_ = (TextView) findViewById(R.id.textViewRndProduct2);
-        rndTxtProduct2_.setOnClickListener(this);
-
-        rndTxtProducer3_ = (TextView) findViewById(R.id.textViewRndProducer3);
-        rndTxtProducer3_.setOnClickListener(this);
-        rndTxtCategorie3_ = (TextView) findViewById(R.id.textViewRndCategory3);
-        rndTxtCategorie3_.setOnClickListener(this);
-        rndTxtPrice3_ = (TextView) findViewById(R.id.textViewRndPrice3);
-        rndTxtPrice3_.setOnClickListener(this);
-        rndTxtPlace3_ = (TextView) findViewById(R.id.textViewRndPlace3);
-        rndTxtPlace3_.setOnClickListener(this);
-        rndTxtProduct3_ = (TextView) findViewById(R.id.textViewRndProduct3);
-        rndTxtProduct3_.setOnClickListener(this);
-
-        rndTxtProducer4_ = (TextView) findViewById(R.id.textViewRndProducer4);
-        rndTxtProducer4_.setOnClickListener(this);
-        rndTxtCategorie4_ = (TextView) findViewById(R.id.textViewRndCategory4);
-        rndTxtCategorie4_.setOnClickListener(this);
-        rndTxtPrice4_ = (TextView) findViewById(R.id.textViewRndPrice4);
-        rndTxtPrice4_.setOnClickListener(this);
-        rndTxtPlace4_ = (TextView) findViewById(R.id.textViewRndPlace4);
-        rndTxtPlace4_.setOnClickListener(this);
-        rndTxtProduct4_ = (TextView) findViewById(R.id.textViewRndProduct4);
-        rndTxtProduct4_.setOnClickListener(this);
-
-        rndTxtProducer5_ = (TextView) findViewById(R.id.textViewRndProducer5);
-        rndTxtProducer5_.setOnClickListener(this);
-        rndTxtCategorie5_ = (TextView) findViewById(R.id.textViewRndCategory5);
-        rndTxtCategorie5_.setOnClickListener(this);
-        rndTxtPrice5_ = (TextView) findViewById(R.id.textViewRndPrice5);
-        rndTxtPrice5_.setOnClickListener(this);
-        rndTxtPlace5_ = (TextView) findViewById(R.id.textViewRndPlace5);
-        rndTxtPlace5_.setOnClickListener(this);
-        rndTxtProduct5_ = (TextView) findViewById(R.id.textViewRndProduct5);
-        rndTxtProduct5_.setOnClickListener(this);
-
-        rndTxtProducer6_ = (TextView) findViewById(R.id.textViewRndProducer6);
-        rndTxtProducer6_.setOnClickListener(this);
-        rndTxtCategorie6_ = (TextView) findViewById(R.id.textViewRndCategory6);
-        rndTxtCategorie6_.setOnClickListener(this);
-        rndTxtPrice6_ = (TextView) findViewById(R.id.textViewRndPrice6);
-        rndTxtPrice6_.setOnClickListener(this);
-        rndTxtPlace6_ = (TextView) findViewById(R.id.textViewRndPlace6);
-        rndTxtPlace6_.setOnClickListener(this);
-        rndTxtProduct6_ = (TextView) findViewById(R.id.textViewRndProduct6);
-        rndTxtProduct6_.setOnClickListener(this);
+        setUpListeners();
     }
 
     @Override
@@ -197,8 +85,50 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Button myButton = (Button) v;
-        if(myButton.getId() == R.id.buttonLogin){
+
+    }
+
+    public void setUpListeners () {
+        for (int i = 1; i <= 6; i++)
+        {
+            String rndBtn = "imgButtonRnd" + i;
+            String textViewProducer = "textViewRndProducer" + i;
+            String textViewCategory = "textViewRndCategory" + i;
+            String textViewPrice = "textViewRndPrice" + i;
+            String textViewPlace = "textViewRndPlace" + i;
+            String textViewProduct = "textViewRndProduct" + i;
+
+            int idBtn = getResources (). getIdentifier ( rndBtn , "id" , R . class . getPackage (). getName ());
+            int idProducer = getResources (). getIdentifier ( textViewProducer , "id" , R . class . getPackage (). getName ());
+            int idCategory = getResources (). getIdentifier ( textViewCategory , "id" , R . class . getPackage (). getName ());
+            int idPrice = getResources (). getIdentifier ( textViewPrice , "id" , R . class . getPackage (). getName ());
+            int idPlace = getResources (). getIdentifier ( textViewProduct , "id" , R . class . getPackage (). getName ());
+            int idProduct = getResources (). getIdentifier ( textViewPlace , "id" , R . class . getPackage (). getName ());
+
+            ImageButton rndImgBtn = (ImageButton) findViewById(idBtn);
+            rndImgBtn.setOnClickListener(this);
+
+            TextView idProducerTxt = (TextView) findViewById(idProducer);
+            idProducerTxt.setOnClickListener(this);
+
+            TextView idCategoryTxt = (TextView) findViewById(idCategory);
+            idCategoryTxt.setOnClickListener(this);
+
+            TextView idPriceTxt = (TextView) findViewById(idPrice);
+            idPriceTxt.setOnClickListener(this);
+
+            TextView idPlaceTxt = (TextView) findViewById(idPlace);
+            idPlaceTxt.setOnClickListener(this);
+
+            TextView idProductTxt = (TextView) findViewById(idProduct);
+            idProductTxt.setOnClickListener(this);
+
+            numberImageButton = new ArrayList<>();
+            numberTextviewProducer = new ArrayList<>();
+            numberTextviewCategory = new ArrayList<>();
+            numberTextviewPrice = new ArrayList<>();
+            numberTextviewPlace = new ArrayList<>();
+            numberTextviewProduct = new ArrayList<>();
         }
     }
 }

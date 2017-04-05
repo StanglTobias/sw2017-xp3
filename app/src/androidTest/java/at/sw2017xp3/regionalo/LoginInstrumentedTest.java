@@ -25,9 +25,8 @@ public class LoginInstrumentedTest {
 
     @Test
     public void checkButtonClicks() {
-
-        onView(withText("Registrieren")).perform(click());
         onView(withText("Login")).perform(click());
+        onView(withText("Registrieren")).perform(click());
     }
 
     @Test
