@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -26,31 +27,40 @@
                 android:background="@android:color/background_light"
                 android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/editTextDescribtion"
+                <TextView
+                    android:id="@+id/textViewProductName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:background="@android:color/transparent"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:inputType="textPersonName"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="0dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
                     android:text="Freshy Tomaten"
                     android:textAlignment="center"
+                    android:textColor="@android:color/black"
                     android:textSize="30sp"
                     android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/editTextProductname"
+                <TextView
+                    android:id="@+id/textViewDescripton"
                     android:layout_width="match_parent"
-                    android:layout_height="31dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@android:color/transparent"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Diese Tomaten sind innen hell rot" />
+                    android:layout_marginTop="0dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="Diese Tomaten sind innen hell rot"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -69,12 +79,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:layout_margin="10dp"
-                    android:scaleType="centerCrop"
                     android:padding="0dp"
                     android:paddingBottom="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
+                    android:scaleType="centerCrop"
                     app:srcCompat="@drawable/tomato" />
             </LinearLayout>
 
@@ -88,18 +98,23 @@
                 android:background="@android:color/background_light"
                 android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/editTextPrice"
+                <TextView
+                    android:id="@+id/textViewPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
                     android:background="@drawable/roundedcornerdashedbutton"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:padding="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
                     android:text="€10/kg"
                     android:textAlignment="center"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@android:color/holo_green_light"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -121,25 +136,31 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/editTextCategory"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/textViewCategroy"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Kategorie: Gemüse" />
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="5dp"
+                        android:text="Kategorie: Gemüse"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
 
                     <Button
                         android:id="@+id/buttonLike"
                         android:layout_width="64dp"
                         android:layout_height="50dp"
-                        android:layout_margin="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="5dp"
                         android:background="@android:drawable/btn_star_big_on"
                         android:padding="10dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
@@ -152,34 +173,40 @@
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/editTextQuality"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/textViewQuality"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:paddingBottom="10dp"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:paddingTop="10dp"
-                        android:text="Biologisch: JA" />
+                        android:paddingTop="5dp"
+                        android:text="Biologisch: Ja"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
 
-                    <EditText
-                        android:id="@+id/editTextLikeCounter"
-                        android:layout_width="65dp"
+                    <TextView
+                        android:id="@+id/textViewLikeCount"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:background="@android:color/background_light"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:padding="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="0.23"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="5dp"
                         android:text="0"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -206,43 +233,53 @@
                     android:paddingTop="10dp"
                     app:srcCompat="@drawable/contact" />
 
-                <EditText
-                    android:id="@+id/editTextName"
+                <TextView
+                    android:id="@+id/textViewName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@android:color/transparent"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Fam. Gesau"
-                    android:textColor="@android:color/holo_orange_dark" />
+                    android:layout_marginTop="0dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="Fam. Gnesau"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/editTextAdress"
+                <TextView
+                    android:id="@+id/textViewAdress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="0dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@android:color/transparent"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Waldviertel Österreich" />
+                    android:layout_marginTop="0dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="Waldviertel Oberösterreich"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/editTextNumber"
+                <TextView
+                    android:id="@+id/textViewNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="0dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@android:color/transparent"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:layout_marginTop="0dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="+43 650 1234843"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/ButtonContact"
@@ -252,6 +289,7 @@
                     android:height="75dp"
                     android:background="@drawable/roundedcornerbutton"
                     android:elevation="0dp"
+                    android:focusableInTouchMode="false"
                     android:padding="10dp"
                     android:paddingBottom="10dp"
                     android:paddingLeft="10dp"
