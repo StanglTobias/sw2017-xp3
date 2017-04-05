@@ -68,7 +68,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:layout_margin="10dp"
-                    android:padding="10dp"
+                    android:scaleType="centerCrop"
+                    android:padding="0dp"
                     android:paddingBottom="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
@@ -107,38 +108,78 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:padding="10dp"
-                    android:paddingBottom="10dp"
+                    android:paddingBottom="5dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:paddingTop="10dp"
+                    android:paddingTop="5dp"
                     android:textAlignment="viewStart"
                     app:srcCompat="@drawable/info" />
 
-                <EditText
-                    android:id="@+id/editTextCategory"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@android:color/transparent"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Kategorie: Gemüse" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/editTextQuality"
+                    <EditText
+                        android:id="@+id/editTextCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="Kategorie: Gemüse" />
+
+                    <Button
+                        android:id="@+id/buttonLike"
+                        android:layout_width="64dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="10dp"
+                        android:background="@android:drawable/btn_star_big_on"
+                        android:padding="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@android:color/transparent"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Biologisch: JA" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editTextQuality"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
+                        android:text="Biologisch: JA" />
+
+                    <EditText
+                        android:id="@+id/editTextLikeCounter"
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@android:color/background_light"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:padding="10dp"
+                        android:text="0"
+                        android:textAlignment="center" />
+                </LinearLayout>
 
             </LinearLayout>
 
