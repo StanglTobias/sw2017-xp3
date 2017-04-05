@@ -11,6 +11,7 @@ public class ExtendedSearchActivity extends AppCompatActivity implements View.On
 
 
     Button button_extended_search_start;
+    Button button_extended_search_start2;
     Button button_reset_filter;
 
     private CheckBox checkBox_ID_BiologischerAnbau_;
@@ -43,6 +44,9 @@ public class ExtendedSearchActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_extended_search);
         button_extended_search_start = (Button) findViewById(R.id.Button_ID_ExtendedSearchStart);
         button_extended_search_start.setOnClickListener(this);
+
+        button_extended_search_start2 = (Button) findViewById(R.id.Button_ID_ExtendedSearchStart2);
+        button_extended_search_start2.setOnClickListener(this);
 
         button_reset_filter = (Button) findViewById(R.id.Button_ID_ResetFilterExtendedSearch);
         button_reset_filter.setOnClickListener(this);
@@ -79,7 +83,8 @@ public class ExtendedSearchActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View v) {
         Button button = (Button) v;
-        if (button.getId() == R.id.Button_ID_ExtendedSearchStart) {
+        if (button.getId() == R.id.Button_ID_ExtendedSearchStart ||
+                button.getId() == R.id.Button_ID_ExtendedSearchStart2 ) {
             //TODO implement search function (start new activity with parameters)
         }
         if (button.getId() == R.id.Button_ID_ResetFilterExtendedSearch) {
