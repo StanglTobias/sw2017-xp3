@@ -1,8 +1,10 @@
 package at.sw2017xp3.regionalo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 
 /**
  * Created by Christof on 05.04.2017.
@@ -21,5 +23,21 @@ public class ProductDetailActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.loginbutton, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.buttonLogin) {
+            Intent myIntent = new Intent(this, LoginActivity.class);
+            startActivity(myIntent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
