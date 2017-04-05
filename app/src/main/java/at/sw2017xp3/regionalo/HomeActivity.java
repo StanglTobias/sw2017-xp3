@@ -39,7 +39,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private Button buttonCereals_;
     private ViewGroup searchField_;
 
-
     private ArrayList<ImageButton> numberImageButton;
     private ArrayList<TextView> numberTextviewProducer;
     private ArrayList<TextView> numberTextviewCategory;
