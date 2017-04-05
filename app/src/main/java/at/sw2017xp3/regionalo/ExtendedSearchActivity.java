@@ -40,7 +40,7 @@ public class ExtendedSearchActivity extends AppCompatActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_extended_search);
         button_extended_search_start = (Button) findViewById(R.id.Button_ID_ExtendedSearchStart);
         button_extended_search_start.setOnClickListener(this);
 
@@ -72,7 +72,7 @@ public class ExtendedSearchActivity extends AppCompatActivity implements View.On
         checkBox_ID_SelbstErnten_ = (CheckBox) findViewById(R.id.checkBox_ID_SelbstErnten);
 
 
-        setContentView(R.layout.activity_extended_search);
+
     }
 
 
