@@ -28,49 +28,31 @@ import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
-
-    private Button buttonMeat_;
-    private Button buttonVegetables_;
-    private Button buttonFruit_;
-    private Button buttonOthers_;
-    private Button buttonMilk_;
-    private Button buttonCereals_;
-    private ViewGroup searchField_;
-
-    private ArrayList<ImageButton> numberImageButton;
-    private ArrayList<TextView> numberTextviewProducer;
-    private ArrayList<TextView> numberTextviewCategory;
-    private ArrayList<TextView> numberTextviewPrice;
-    private ArrayList<TextView> numberTextviewPlace;
-    private ArrayList<TextView> numberTextviewProduct;
-
-    private Button btnLogin_;
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+    private ArrayList<View> list_of_elements = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        buttonMeat_ = (Button) findViewById(R.id.buttonMeat);
-        buttonMeat_.setOnClickListener(this);
-        buttonVegetables_ = (Button) findViewById(R.id.buttonVegetables);
-        buttonVegetables_.setOnClickListener(this);
-        buttonFruit_ = (Button) findViewById(R.id.buttonFruit);
-        buttonFruit_.setOnClickListener(this);
-        buttonCereals_ = (Button) findViewById(R.id.buttonCereals);
-        buttonCereals_.setOnClickListener(this);
-        buttonOthers_ = (Button) findViewById(R.id.buttonOthers);
-        buttonOthers_.setOnClickListener(this);
-        buttonMilk_ = (Button) findViewById(R.id.buttonMilk);
-        buttonMilk_.setOnClickListener(this);
+        fillArrayList();
 
+        list_of_elements.addAll(Arrays.asList(
+                findViewById(R.id.buttonMeat),
+                findViewById(R.id.buttonVegetables),
+                findViewById(R.id.buttonFruit),
+                findViewById(R.id.buttonOthers),
+                findViewById(R.id.buttonMilk),
+                findViewById(R.id.buttonCereals),
+                findViewById(R.id.searchView),
+                findViewById(R.id.buttonMilk)));
 
-        searchField_ = (ViewGroup) findViewById(R.id.searchView);
-     //   searchField_.setOnClickListener(this);
-
-        setUpListeners();
+        for (int i = 0; i < list_of_elements.size(); i++) {
+            list_of_elements.get(i).setOnClickListener(this);
+        }
     }
 
 
@@ -101,7 +83,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             String contentAsString = HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
             JSONArray arr = new JSONArray(contentAsString);
             JSONObject mJsonObject = arr.getJSONObject(0);
-            Product p =  JsonObjectMapper.CreateProduct(mJsonObject);
+            Product p = JsonObjectMapper.CreateProduct(mJsonObject);
 
             return p.getName();
         } catch (Exception ex) {
@@ -142,9 +124,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void setUpListeners () {
-        for (int i = 1; i <= 6; i++)
-        {
+    public void fillArrayList() {
+        for (int i = 1; i <= 6; i++) {
             String rndBtn = "imgButtonRnd" + i;
             String textViewProducer = "textViewRndProducer" + i;
             String textViewCategory = "textViewRndCategory" + i;
@@ -152,37 +133,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             String textViewPlace = "textViewRndPlace" + i;
             String textViewProduct = "textViewRndProduct" + i;
 
-            int idBtn = getResources (). getIdentifier ( rndBtn , "id" , R . class . getPackage (). getName ());
-            int idProducer = getResources (). getIdentifier ( textViewProducer , "id" , R . class . getPackage (). getName ());
-            int idCategory = getResources (). getIdentifier ( textViewCategory , "id" , R . class . getPackage (). getName ());
-            int idPrice = getResources (). getIdentifier ( textViewPrice , "id" , R . class . getPackage (). getName ());
-            int idPlace = getResources (). getIdentifier ( textViewProduct , "id" , R . class . getPackage (). getName ());
-            int idProduct = getResources (). getIdentifier ( textViewPlace , "id" , R . class . getPackage (). getName ());
+            int idBtn = getResources().getIdentifier(rndBtn, "id", R.class.getPackage().getName());
+            int idProducer = getResources().getIdentifier(textViewProducer, "id", R.class.getPackage().getName());
+            int idCategory = getResources().getIdentifier(textViewCategory, "id", R.class.getPackage().getName());
+            int idPrice = getResources().getIdentifier(textViewPrice, "id", R.class.getPackage().getName());
+            int idPlace = getResources().getIdentifier(textViewProduct, "id", R.class.getPackage().getName());
+            int idProduct = getResources().getIdentifier(textViewPlace, "id", R.class.getPackage().getName());
 
-            ImageButton rndImgBtn = (ImageButton) findViewById(idBtn);
-            rndImgBtn.setOnClickListener(this);
-
-            TextView idProducerTxt = (TextView) findViewById(idProducer);
-            idProducerTxt.setOnClickListener(this);
-
-            TextView idCategoryTxt = (TextView) findViewById(idCategory);
-            idCategoryTxt.setOnClickListener(this);
-
-            TextView idPriceTxt = (TextView) findViewById(idPrice);
-            idPriceTxt.setOnClickListener(this);
-
-            TextView idPlaceTxt = (TextView) findViewById(idPlace);
-            idPlaceTxt.setOnClickListener(this);
-
-            TextView idProductTxt = (TextView) findViewById(idProduct);
-            idProductTxt.setOnClickListener(this);
-
-            numberImageButton = new ArrayList<>();
-            numberTextviewProducer = new ArrayList<>();
-            numberTextviewCategory = new ArrayList<>();
-            numberTextviewPrice = new ArrayList<>();
-            numberTextviewPlace = new ArrayList<>();
-            numberTextviewProduct = new ArrayList<>();
+            list_of_elements.add(findViewById(idBtn));
+            list_of_elements.add(findViewById(idProducer));
+            list_of_elements.add(findViewById(idCategory));
+            list_of_elements.add(findViewById(idPrice));
+            list_of_elements.add(findViewById(idPlace));
+            list_of_elements.add(findViewById(idProduct));
         }
     }
 }
