@@ -46,4 +46,24 @@ public class LoginInstrumentedTest {
         onView(withId(R.id.textView_Register_ID_Hofname)).perform(typeText("Testhofname"));
         onView(withId(R.id.textView_Register_ID_Hofname)).check(matches(withText("Testhofname")));
     }
+
+    @Test
+    public void checkLoginWihoutPasswordErrorMessages() {
+        onView(withId(R.id.textViewEmail)).perform(typeText("Lukas.Holder@gayporn.com"));
+        onView(withId(R.id.buttonLogin)).perform(click());
+        onView(withId(R.id.textView_ID_LoginErrors)).check(matches(withText("Bitte Passwort eingeben!")));
+    }
+
+    @Test
+    public void checkLoginWihoutEmailErrorMessages() {
+        onView(withId(R.id.textViewPassword)).perform(typeText("Lukas.Holder@gayporn.com"));
+        onView(withId(R.id.buttonLogin)).perform(click());
+        onView(withId(R.id.textView_ID_LoginErrors)).check(matches(withText("Bitte E-Mail eingeben!")));
+    }
+
+    @Test
+    public void checkLoginWihoutPasswordAndEmailErrorMessages() {
+        onView(withId(R.id.buttonLogin)).perform(click());
+        onView(withId(R.id.textView_ID_LoginErrors)).check(matches(withText("Bitte Email und Passwort eingeben!")));
+    }
 }
