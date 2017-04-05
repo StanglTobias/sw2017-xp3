@@ -130,5 +130,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             numberTextviewPlace = new ArrayList<>();
             numberTextviewProduct = new ArrayList<>();
         }
+
+        Intent myIntent = new Intent(this, ProductDetailActivity.class);
+        startActivity(myIntent);
     }
 }
