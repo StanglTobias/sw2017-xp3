@@ -6,4 +6,21 @@
         <item>Standardsortierung</item>
         <item>Alphabetisch</item>
     </string-array>
+
+    <string name="releaseAd_prompt">Bitte zuerst eine Kategorie waehlen</string>
+    <string-array name="releaseAd_arrays">
+        <item>Kategorie 1</item>
+        <item>Kategorie 2</item>
+    </string-array>
+
+    <string name="releaseAdUnterkategorie_prompt">Bitte zuerst eine Unterkategorie waehlen</string>
+    <string-array name="releaseAdUnterkategorie_arrays">
+        <item>Unterkategorie 1</item>
+        <item>Unterkategorie 2</item>
+    </string-array>
+
+    <string name="releaseAdEinheit_prompt">Bitte eine Einheit waehlen</string>
+    <string-array name="releaseAdEinheit_arrays">
+        <item>Kilogramm</item>
+    </string-array>
 </resources>

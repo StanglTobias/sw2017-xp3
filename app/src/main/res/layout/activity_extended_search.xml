@@ -56,9 +56,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contextClickable="false"
+                    android:cursorVisible="false"
+                    android:editable="false"
                     android:ems="10"
+                    android:enabled="false"
                     android:inputType="textPersonName"
-                    android:text="Sortieren nach" />
+                    android:text="Sortieren nach"
+                    android:textColor="@android:color/black" />
 
                 <Spinner
                     android:id="@+id/Spinner_ID_ExtendedSearch"
@@ -82,8 +87,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
+                    android:enabled="false"
                     android:inputType="textPersonName"
-                    android:text="Art des Anbaus" />
+                    android:text="Art des Anbaus"
+                    android:textColor="@android:color/black" />
 
                 <CheckBox
                     android:id="@+id/checkBox_ID_BiologischerAnbau"
@@ -106,8 +113,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
+                    android:enabled="false"
                     android:inputType="textPersonName"
-                    android:text="Kategorien" />
+                    android:text="Kategorien"
+                    android:textColor="@android:color/black" />
 
                 <CheckBox
                     android:id="@+id/checkBox_ID_KategorieObst"
@@ -166,8 +175,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
+                    android:enabled="false"
                     android:inputType="textPersonName"
-                    android:text="Ort / Region" />
+                    android:text="Ort / Region"
+                    android:textColor="@android:color/black" />
 
                 <CheckBox
                     android:id="@+id/checkBox_ID_Burgenland"
@@ -237,8 +248,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
+                    android:enabled="false"
                     android:inputType="textPersonName"
-                    android:text="Verkäufer" />
+                    android:text="Verkäufer"
+                    android:textColor="@android:color/black" />
 
                 <CheckBox
                     android:id="@+id/checkBox_ID_Privat"
@@ -267,8 +280,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
+                    android:enabled="false"
                     android:inputType="textPersonName"
-                    android:text="Art der Übergabe" />
+                    android:text="Art der Übergabe"
+                    android:textColor="@android:color/black" />
 
                 <CheckBox
                     android:id="@+id/checkBox_ID_Zustellung"
@@ -297,8 +312,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
+                    android:enabled="false"
                     android:inputType="textPersonName"
-                    android:text="Transport Behältnis" />
+                    android:text="Transport Behältnis"
+                    android:textColor="@android:color/black" />
 
                 <CheckBox
                     android:id="@+id/checkBox_ID_NichtBenoetigt"
@@ -311,7 +328,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -322,8 +338,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
+                    android:enabled="false"
                     android:inputType="textPersonName"
-                    android:text="Art der Ernte" />
+                    android:text="Art der Ernte"
+                    android:textColor="@android:color/black" />
 
                 <CheckBox
                     android:id="@+id/checkBox_ID_BereitsGeerntet"
@@ -336,6 +354,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Selbst ernten" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/Button_ID_ExtendedSearchStart2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:text="Suchen"
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
