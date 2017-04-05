@@ -103,7 +103,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         //btnLogin_.setOnClickListener(this);
 
         searchField_ = (ViewGroup) findViewById(R.id.searchView);
-        searchField_.setOnClickListener(this);
+     //   searchField_.setOnClickListener(this);
 
         rndTxtProducer1_ = (TextView) findViewById(R.id.textViewRndProducer1);
         rndTxtProducer1_.setOnClickListener(this);
