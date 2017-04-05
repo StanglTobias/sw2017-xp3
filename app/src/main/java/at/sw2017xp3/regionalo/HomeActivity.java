@@ -55,7 +55,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         buttonMilk_.setOnClickListener(this);
 
         searchField_ = (ViewGroup) findViewById(R.id.searchView);
-        searchField_.setOnClickListener(this);
+     //   searchField_.setOnClickListener(this);
 
         setUpListeners();
     }

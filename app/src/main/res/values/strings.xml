@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Regionalo</string>
+
+    <string name="sort_prompt">Bitte eine Sortierung auswaehlen</string>
+    <string-array name="sort_arrays">
+        <item>Standardsortierung</item>
+        <item>Alphabetisch</item>
+    </string-array>
 </resources>
