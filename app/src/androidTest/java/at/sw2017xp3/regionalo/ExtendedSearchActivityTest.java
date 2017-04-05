@@ -12,8 +12,11 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
+import static android.support.test.espresso.matcher.ViewMatchers.isNotChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
@@ -44,25 +47,83 @@ public class ExtendedSearchActivityTest {
         onView(withText("Alphabetisch")).perform(click());
 
         onView(withId(R.id.checkBox_ID_BiologischerAnbau)).perform(click());
-
         onView(withId(R.id.checkBox_ID_KategorieObst)).perform(click());
         onView(withId(R.id.checkBox_ID_KategorieGemüse)).perform(click());
         onView(withId(R.id.checkBox_ID_KategoriePilze)).perform(click());
         onView(withId(R.id.checkBox_ID_KategoriePlanzenUndSamen)).perform(click());
         onView(withId(R.id.checkBox_ID_KategorieHolz)).perform(click());
         onView(withId(R.id.checkBox_ID_WeitereGartenprodukte)).perform(click());
+        onView(withId(R.id.checkBox_ID_Burgenland)).perform(scrollTo(), click());
+        onView(withId(R.id.checkBox_ID_Kaernten)).perform(scrollTo(), click());
+        onView(withId(R.id.checkBox_ID_Niederoesterreich)).perform(scrollTo(), click());
+        onView(withId(R.id.checkBox_ID_Oberoesterreich)).perform(scrollTo(), click());
+        onView(withId(R.id.checkBox_ID_Salzburg)).perform(scrollTo(), click());
+        onView(withId(R.id.checkBox_ID_Steiermark)).perform(scrollTo(), click());
+        onView(withId(R.id.checkBox_ID_Tirol)).perform(scrollTo(), click());
+        onView(withId(R.id.checkBox_ID_Vorarlberg)).perform(scrollTo(), click());
+        onView(withId(R.id.checkBox_ID_Wien)).perform(scrollTo(), click());
+        onView(withId(R.id.checkBox_ID_Privat)).perform(scrollTo(), click());
+        onView(withId(R.id.checkBox_ID_Firma)).perform(scrollTo(), click());
+        onView(withId(R.id.checkBox_ID_Zustellung)).perform(scrollTo(), click());
+        onView(withId(R.id.checkBox_ID_Selbstabholung)).perform(scrollTo(), click());
+        onView(withId(R.id.checkBox_ID_NichtBenoetigt)).perform(scrollTo(), click());
+        onView(withId(R.id.checkBox_ID_BereitsGeerntet)).perform(scrollTo(), click());
+        onView(withId(R.id.checkBox_ID_SelbstErnten)).perform(scrollTo(), click());
+        onView(withId(R.id.Button_ID_ResetFilterExtendedSearch)).perform(scrollTo(), click());
 
 
-
-
-
-
-
-
-
-
-
-
+        onView(withId(R.id.checkBox_ID_BiologischerAnbau)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_BiologischerAnbau)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_KategorieObst)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_KategorieObst)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_KategorieGemüse)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_KategorieGemüse)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_KategoriePilze)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_KategoriePilze)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_KategoriePlanzenUndSamen)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_KategoriePlanzenUndSamen)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_KategorieHolz)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_KategorieHolz)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_WeitereGartenprodukte)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_WeitereGartenprodukte)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_Burgenland)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_Burgenland)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_Kaernten)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_Kaernten)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_Niederoesterreich)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_Niederoesterreich)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_Oberoesterreich)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_Oberoesterreich)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_Salzburg)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_Salzburg)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_Steiermark)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_Steiermark)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_Tirol)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_Tirol)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_Vorarlberg)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_Vorarlberg)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_Wien)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_Wien)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_Privat)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_Privat)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_Firma)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_Firma)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_Zustellung)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_Zustellung)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_Selbstabholung)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_Selbstabholung)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_NichtBenoetigt)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_NichtBenoetigt)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_BereitsGeerntet)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_BereitsGeerntet)).check(matches(isNotChecked()));
+        onView(withId(R.id.checkBox_ID_SelbstErnten)).perform(scrollTo());
+        onView(withId(R.id.checkBox_ID_SelbstErnten)).check(matches(isNotChecked()));
     }
 
+
+    //not implemented yet
+    @Test
+    public void testSearchFunction(){
+
+    }
 }
