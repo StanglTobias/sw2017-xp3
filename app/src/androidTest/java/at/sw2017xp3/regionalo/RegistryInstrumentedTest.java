@@ -79,6 +79,5 @@ public class RegistryInstrumentedTest {
         onView(withText("Registrieren")).perform(click());
         onView(withId(R.id.textViewPassword)).perform(typeText("Testhofname"));
         onView(withId(R.id.textViewPassword)).check(matches(withText("Testhofname")));
-
     }
 }
