@@ -130,9 +130,33 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Intent myIntent = new Intent(this, ProductDetailActivity.class);
-        startActivity(myIntent);
+        Intent myIntent = new Intent(getBaseContext(), ProductDetailActivity.class);
+        switch(v.getId())
+        {
+            case R.id.imgButtonRnd1:
+                startActivity(myIntent);
+                break;
 
+            case R.id.imgButtonRnd2:
+                startActivity(myIntent);
+                break;
+
+            case R.id.imgButtonRnd3:
+                startActivity(myIntent);
+                break;
+
+            case R.id.imgButtonRnd4:
+                startActivity(myIntent);
+                break;
+
+            case R.id.imgButtonRnd5:
+                startActivity(myIntent);
+                break;
+
+            case R.id.imgButtonRnd6:
+                startActivity(myIntent);
+                break;
+        }
     }
 
     public void fillArrayListWithImageButtons() {
