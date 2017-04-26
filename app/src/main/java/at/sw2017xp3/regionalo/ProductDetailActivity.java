@@ -31,7 +31,6 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
  */
 
 public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener{
-
     private ArrayList<View> list_of_elements = new ArrayList<>();
     private int like_button_counter_;
 
@@ -187,14 +186,14 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    public String isBio(boolean yes_or_no) {
+    public static String isBio(boolean yes_or_no) {
         if(yes_or_no == true)
             return "Ja";
         else
             return "Nein";
     }
 
-    public String productCategorieName (int type_id) {
+    public static String productCategorieName (int type_id) {
         switch (type_id) {
             case 1:
                 return "Fleisch";
