@@ -5,16 +5,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
@@ -31,10 +26,8 @@ import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Arrays;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchResultActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
     ExpandableRelativeLayout expandableLayout;
 
@@ -69,7 +62,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_search_result);
 
         expandableLayout
                 = (ExpandableRelativeLayout) findViewById(R.id.expandableLayout);
@@ -144,7 +137,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(HomeActivity.this, result, Toast.LENGTH_LONG).show();
+            Toast.makeText(SearchResultActivity.this, result, Toast.LENGTH_LONG).show();
         }
     }
 

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity"
+        <activity android:name=".SearchResultActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,32 +17,32 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity"
-            android:parentActivityName=".HomeActivity">
+            android:parentActivityName=".SearchResultActivity">
             <!-- to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
+                android:value=".SearchResultActivity" />
         </activity>
         <activity android:name=".LoginActivity"
-            android:parentActivityName=".HomeActivity">
+            android:parentActivityName=".SearchResultActivity">
             <!-- to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
+                android:value=".SearchResultActivity" />
         </activity>
         <activity android:name=".ProductDetailActivity"
-            android:parentActivityName=".HomeActivity">
+            android:parentActivityName=".SearchResultActivity">
             <!-- to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
+                android:value=".SearchResultActivity" />
         </activity>
         <activity android:name=".ExtendedSearchActivity"
-            android:parentActivityName=".HomeActivity">
+            android:parentActivityName=".SearchResultActivity">
             <!-- to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
+                android:value=".SearchResultActivity" />
         </activity>
     </application>
 
