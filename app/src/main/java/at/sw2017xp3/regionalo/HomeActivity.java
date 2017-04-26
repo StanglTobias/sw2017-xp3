@@ -23,7 +23,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
+import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.Product;
+import at.sw2017xp3.regionalo.model.ProductManager;
 import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 
@@ -38,6 +40,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        Core.getInstance();
 
         fillArrayListWithImageButtons();
         list_of_elements.addAll(Arrays.asList(
@@ -61,45 +65,20 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private class GetProductTask extends AsyncTask<String, Void, String> {
+    private class GetProductTask extends AsyncTask<String, Void, ArrayList<Product>> {
 
         @Override
-        protected String doInBackground(String... params) {
+        protected ArrayList<Product> doInBackground(String... params) {
             try {
-                return downloadContent(params[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve data. URL may be invalid.";
+                return Core.getInstance().getProducts().getFeaturedProducts();
+            } catch (Exception ex) {
+                return null;
             }
         }
 
         @Override
-        protected void onPostExecute(String result) {
-            Toast.makeText(HomeActivity.this, result, Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private String downloadContent(String myurl) throws IOException {
-        InputStream is = null;
-        int length = 10000;
-
-        try {
-            HttpURLConnection conn = HttpUtils.httpGet(myurl);
-
-            String contentAsString = HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
-            JSONArray arr = new JSONArray(contentAsString); //featured products
-            JSONObject mJsonObject = arr.getJSONObject(0);//one product
-
-            String allProductNames;
-
-            Product p =  JsonObjectMapper.CreateProduct(mJsonObject);
-
-            return p.getName();
-        } catch (Exception ex) {
-            return "";
-        } finally {
-            if (is != null) {
-                is.close();
-            }
+        protected void onPostExecute(ArrayList<Product> result) {
+            Toast.makeText(HomeActivity.this, result.get(1).getUser().getFullName(), Toast.LENGTH_LONG).show();
         }
     }
 

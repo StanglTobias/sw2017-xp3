@@ -1,5 +1,8 @@
 package at.sw2017xp3.regionalo.model;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+
 /**
  * Created by jo on 05.04.17.
  */
@@ -41,6 +44,12 @@ public class Product {
     }
 
     public String getUnit() { return unitType_;}
+
+    public User getUser()
+    {
+        return Core.getInstance().getUsers().getUser(id_);
+    }
+    
 
     int id_;
     String unitType_;
