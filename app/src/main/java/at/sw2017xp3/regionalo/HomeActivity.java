@@ -56,6 +56,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                // .appendQueryParameter("id", "1").build();
 
         new GetProductTask().execute(uri.toString());
+
         for (int i = 0; i < list_of_elements.size(); i++) {
             list_of_elements.get(i).setOnClickListener(this);
         }
