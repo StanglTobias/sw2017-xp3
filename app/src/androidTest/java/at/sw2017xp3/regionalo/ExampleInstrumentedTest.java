@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
@@ -63,10 +64,15 @@ public class ExampleInstrumentedTest {
     @Test
     public void testRecommendedPictures (){
         onView(withId(R.id.imgButtonRnd1)).perform(scrollTo(), click());
+        pressBack();
         onView(withId(R.id.imgButtonRnd2)).perform(scrollTo(), click());
+        pressBack();
         onView(withId(R.id.imgButtonRnd3)).perform(scrollTo(), click());
+        pressBack();
         onView(withId(R.id.imgButtonRnd4)).perform(scrollTo(), click());
+        pressBack();
         onView(withId(R.id.imgButtonRnd5)).perform(scrollTo(), click());
+        pressBack();
         onView(withId(R.id.imgButtonRnd6)).perform(scrollTo(), click());
     }
 

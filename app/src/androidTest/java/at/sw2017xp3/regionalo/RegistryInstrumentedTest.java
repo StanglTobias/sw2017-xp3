@@ -42,9 +42,7 @@ public class RegistryInstrumentedTest {
 
     @Test
     public void checkButtonClicks() {
-
-        onView(withId(R.id.scrollView_Register_ID_vertical)).perform(swipeUp());
-        onView(withText("Registrieren")).perform(click());
+        onView(withText("Registrieren")).perform(scrollTo(), click());
     }
 
     @Test
@@ -76,8 +74,7 @@ public class RegistryInstrumentedTest {
 
     @Test
     public void checkGoToLogin(){
-        onView(withId(R.id.scrollView_Register_ID_vertical)).perform(swipeUp());
-        onView(withText("Registrieren")).perform(click());
+        onView(withText("Registrieren")).perform(scrollTo(), click());
         onView(withId(R.id.textViewPassword)).perform(typeText("Testhofname"));
         onView(withId(R.id.textViewPassword)).check(matches(withText("Testhofname")));
     }
