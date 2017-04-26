@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +61,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < list_of_elements.size(); i++) {
             list_of_elements.get(i).setOnClickListener(this);
         }
+
+        LayoutInflater inflater = getLayoutInflater();
+        LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, null);
+       ((TextView) inflatedView.findViewById(R.id.textViewRndProduct1)).setText("Speck");
+       ((TextView) inflatedView.findViewById(R.id.textViewRndProduct2)).setText("2");
+       ((TextView) inflatedView.findViewById(R.id.textViewRndProduct3)).setText("3");
+       ((TextView) inflatedView.findViewById(R.id.textViewRndProduct4)).setText("4");
+       ((TextView) inflatedView.findViewById(R.id.textViewRndProduct5)).setText("5");
+
+
+
+        LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayout_Home_Activity);
+        linearLayoutHome.addView(inflatedView);
     }
 
     private class GetProductTask extends AsyncTask<String, Void, String> {
@@ -135,7 +150,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void fillArrayListWithImageButtons() {
-        for (int i = 1; i <= 6; i++) {
+        for (int i = 1; i <= 1; i++) {
             String rndBtn = "imgButtonRnd" + i;
             int idBtn = getResources().getIdentifier(rndBtn, "id", R.class.getPackage().getName());
             list_of_elements.add(findViewById(idBtn));
