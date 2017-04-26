@@ -31,6 +31,8 @@
     </activity>
     <activity android:name=".ExtendedSearchActivity">
     </activity>
+    <activity android:name=".ReleaseAdActivity">
+    </activity>
     </application>
 
 </manifest>

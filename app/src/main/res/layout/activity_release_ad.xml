@@ -92,31 +92,25 @@
                     android:orientation="horizontal">
 
                     <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <RadioButton
+                            android:id="@+id/radioButton_ID_Firma"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="horizontal">
+                            android:checked="true"
+                            android:text="Firma" />
 
-                            <RadioButton
-                                android:id="@+id/radioButton_ID_Privat"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="Privat" />
-
-                            <RadioButton
-                                android:id="@+id/radioButton_ID_Firma"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:checked="true"
-                                android:text="Firma" />
-                        </LinearLayout>
-
+                        <RadioButton
+                            android:id="@+id/radioButton_ID_Privat"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Privat" />
                     </RadioGroup>
 
                 </LinearLayout>
@@ -185,7 +179,7 @@
                     android:textColor="@android:color/black" />
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/editText_ID_Beschreibung"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -498,26 +492,21 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1" >
 
-                        <LinearLayout
+                        <RadioButton
+                            android:id="@+id/radioButton_ID_ReleaseAd_SelbstErnten"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:checked="true"
+                            android:text="Selbst ernten" />
 
-                            <RadioButton
-                                android:id="@+id/radioButton_ID_ReleaseAd_SelbstErnten"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:checked="true"
-                                android:text="Selbst ernten" />
+                        <RadioButton
+                            android:id="@+id/radioButton_ID_ReleaseAd_BereitsGeerntet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Bereits geerntet" />
 
-                            <RadioButton
-                                android:id="@+id/radioButton_ID_ReleaseAd_BereitsGeerntet"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Bereits geerntet" />
-                        </LinearLayout>
                     </RadioGroup>
 
                 </LinearLayout>
