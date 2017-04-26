@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import at.sw2017xp3.regionalo.model.Product;
+import at.sw2017xp3.regionalo.model.User;
 import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 
@@ -53,9 +54,9 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             list_of_elements.get(i).setOnClickListener(this);
         }
 
-        Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/user.php")
-         .buildUpon()
-         .appendQueryParameter("id", Integer.toString(id)).build();
+        Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/product.php")
+                .buildUpon()
+                .appendQueryParameter("id", Integer.toString(id)).build();
 
         new GetProductTask().execute(uri.toString());
     }
@@ -73,7 +74,6 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         @Override
         protected void onPostExecute(String result) {
-
             try {
                 JSONArray arr = new JSONArray(result); //featured products
                 JSONObject mJsonObject = arr.getJSONObject(0);//one product
@@ -83,9 +83,45 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 Product p = JsonObjectMapper.CreateProduct(mJsonObject);
 
                 ((TextView)findViewById(R.id.textViewProductName)).setText(p.getName());
-                ((TextView)findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()));
+                ((TextView)findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()) + "/" + p.getUnit());
                 ((TextView)findViewById(R.id.textViewQuality)).setText("Biologisch: "  + isBio(p.isBio()));
                 ((TextView)findViewById(R.id.textViewCategroy)).setText("Kategorie: " + productCategorieName(p.getType()));
+
+                Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/user.php")
+                        .buildUpon()
+                        .appendQueryParameter("id", Integer.toString(p.getProducerId())).build();
+
+                new GetUserTask().execute(uri.toString());
+            } catch(Exception e){
+                System.out.println("Halt Stop");
+            }
+        }
+    }
+
+    private class GetUserTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                return downloadContent(params[0]);
+            } catch (IOException e) {
+                return "Unable to retrieve data. URL may be invalid.";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                JSONArray arr = new JSONArray(result); //featured products
+                JSONObject mJsonObject = arr.getJSONObject(0);//one product
+
+                String allProductNames;
+
+                User p = JsonObjectMapper.CreateUser(mJsonObject);
+
+                ((TextView)findViewById(R.id.textViewName)).setText(p.getFullName());
+                ((TextView)findViewById(R.id.textViewAdress)).setText(p.getPostalCode() + " " + p.getCity() + "\n" + p.getAddress());
+                ((TextView)findViewById(R.id.textViewNumber)).setText(p.getPhoneNumber());
+                ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(p.getLikes()));
             } catch(Exception e){
                 System.out.println("Halt Stop");
             }
