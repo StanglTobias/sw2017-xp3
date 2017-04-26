@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,6 +37,12 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle b = getIntent().getExtras();
+        int id = 1; // or other values
+        if(b != null)
+            id = b.getInt("id");
+
         setContentView(R.layout.activity_product_detailes);
 
         list_of_elements.addAll(Arrays.asList(
@@ -46,9 +53,9 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             list_of_elements.get(i).setOnClickListener(this);
         }
 
-        Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/product.php")
+        Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/user.php")
          .buildUpon()
-         .appendQueryParameter("id", "1").build();
+         .appendQueryParameter("id", Integer.toString(id)).build();
 
         new GetProductTask().execute(uri.toString());
     }
@@ -63,6 +70,26 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 return "Unable to retrieve data. URL may be invalid.";
             }
         }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            try {
+                JSONArray arr = new JSONArray(result); //featured products
+                JSONObject mJsonObject = arr.getJSONObject(0);//one product
+
+                String allProductNames;
+
+                Product p = JsonObjectMapper.CreateProduct(mJsonObject);
+
+                ((TextView)findViewById(R.id.textViewProductName)).setText(p.getName());
+                ((TextView)findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()));
+                ((TextView)findViewById(R.id.textViewQuality)).setText("Biologisch: "  + isBio(p.isBio()));
+                ((TextView)findViewById(R.id.textViewCategroy)).setText("Kategorie: " + productCategorieName(p.getType()));
+            } catch(Exception e){
+                System.out.println("Halt Stop");
+            }
+        }
     }
 
     private String downloadContent(String myurl) throws IOException {
@@ -73,14 +100,8 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             HttpURLConnection conn = HttpUtils.httpGet(myurl);
 
             String contentAsString = HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
-            JSONArray arr = new JSONArray(contentAsString); //featured products
-            JSONObject mJsonObject = arr.getJSONObject(0);//one product
 
-            String allProductNames;
-
-            Product p =  JsonObjectMapper.CreateProduct(mJsonObject);
-
-            return p.getName();
+            return contentAsString;
         } catch (Exception ex) {
             return "";
         } finally {
@@ -89,7 +110,6 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             }
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -129,5 +149,30 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 //onClick moveTo Website or show contact data
                 break;
         }
+    }
+
+    public String isBio(boolean yes_or_no) {
+        if(yes_or_no == true)
+            return "Ja";
+        else
+            return "Nein";
+    }
+
+    public String productCategorieName (int type_id) {
+        switch (type_id) {
+            case 1:
+                return "Fleisch";
+            case 2:
+                return "Obst";
+            case 3:
+                return"Gemüse";
+            case 4:
+                return "Milchprodukte";
+            case 5:
+                return "Getreide";
+            case 6:
+                return "Sonstiges";
+        }
+        return "";
     }
 }
