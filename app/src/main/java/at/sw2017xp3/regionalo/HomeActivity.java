@@ -54,26 +54,35 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
         Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/featured.php");
-               // .buildUpon()
-               // .appendQueryParameter("id", "1").build();
+        // .buildUpon()
+        // .appendQueryParameter("id", "1").build();
 
         new GetProductTask().execute(uri.toString());
         for (int i = 0; i < list_of_elements.size(); i++) {
             list_of_elements.get(i).setOnClickListener(this);
         }
 
-        LayoutInflater inflater = getLayoutInflater();
-        LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, null);
-       ((TextView) inflatedView.findViewById(R.id.textViewRndProduct1)).setText("Speck");
-       ((TextView) inflatedView.findViewById(R.id.textViewRndProduct2)).setText("2");
-       ((TextView) inflatedView.findViewById(R.id.textViewRndProduct3)).setText("3");
-       ((TextView) inflatedView.findViewById(R.id.textViewRndProduct4)).setText("4");
-       ((TextView) inflatedView.findViewById(R.id.textViewRndProduct5)).setText("5");
+           /* LayoutInflater inflater = getLayoutInflater();
+            LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, null);
+            ((TextView) inflatedView.findViewById(R.id.textViewRndProduct1)).setText("Speck");
+            ((TextView) inflatedView.findViewById(R.id.textViewRndProduct2)).setText("2");
+            ((TextView) inflatedView.findViewById(R.id.textViewRndProduct3)).setText("3");
+            ((TextView) inflatedView.findViewById(R.id.textViewRndProduct4)).setText("4");
+            ((TextView) inflatedView.findViewById(R.id.textViewRndProduct5)).setText("5");
+
+            LinearLayout inflatedView2 = (LinearLayout) inflater.inflate(R.layout.product, null);
+            ((TextView) inflatedView2.findViewById(R.id.textViewRndProduct1)).setText("Apfel");
+            ((TextView) inflatedView2.findViewById(R.id.textViewRndProduct2)).setText("A");
+            ((TextView) inflatedView2.findViewById(R.id.textViewRndProduct3)).setText("P");
+            ((TextView) inflatedView2.findViewById(R.id.textViewRndProduct3)).setText("F");
+            ((TextView) inflatedView2.findViewById(R.id.textViewRndProduct5)).setText("E");
 
 
+            LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayout_Home_Activity);
+            linearLayoutHome.addView(inflatedView);
+            linearLayoutHome.addView(inflatedView2); */
 
-        LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayout_Home_Activity);
-        linearLayoutHome.addView(inflatedView);
+
     }
 
     private class GetProductTask extends AsyncTask<String, Void, String> {
@@ -89,7 +98,33 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(HomeActivity.this, result, Toast.LENGTH_LONG).show();
+            try {
+                JSONArray arr = new JSONArray(result); //featured products
+                JSONObject mJsonObject = arr.getJSONObject(0);//one product
+
+                String allProductNames;
+
+                Product p = JsonObjectMapper.CreateProduct(mJsonObject);
+
+                LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayout_Home_Activity);
+                for(int i=0; i<arr.length();i++) {
+                    JSONObject tempJson = (JSONObject) arr.get(i);
+                    LayoutInflater inflater = getLayoutInflater();
+                    LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, null);
+                    ((TextView) inflatedView.findViewById(R.id.textViewRndProduct1)).setText(tempJson.getString("name"));
+                    //((TextView) inflatedView.findViewById(R.id.textViewRndProduct2)).setText(tempJson.getString("name"));
+                    ((TextView) inflatedView.findViewById(R.id.textViewRndProduct3)).setText(tempJson.getString("price"));
+                    ((TextView) inflatedView.findViewById(R.id.textViewRndProduct4)).setText(tempJson.getString("quantity"));
+                    ((TextView) inflatedView.findViewById(R.id.textViewRndProduct5)).setText(tempJson.getString("unit_Type"));
+                    linearLayoutHome.addView(inflatedView);
+                }
+
+            }
+
+            catch (Exception ex) {
+
+
+            }
         }
     }
 
@@ -100,15 +135,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         try {
             HttpURLConnection conn = HttpUtils.httpGet(myurl);
 
-            String contentAsString = HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
-            JSONArray arr = new JSONArray(contentAsString); //featured products
-            JSONObject mJsonObject = arr.getJSONObject(0);//one product
+            return HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
 
-            String allProductNames;
-
-            Product p =  JsonObjectMapper.CreateProduct(mJsonObject);
-
-            return p.getName();
         } catch (Exception ex) {
             return "";
         } finally {
