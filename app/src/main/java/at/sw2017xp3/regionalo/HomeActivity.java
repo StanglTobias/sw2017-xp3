@@ -28,6 +28,7 @@ import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -72,6 +73,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
      //   searchField_.setOnClickListener(this);
 
         setUpListeners();
+
+        Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/featured.php");
+               // .buildUpon()
+               // .appendQueryParameter("id", "1").build();
+
+        new GetProductTask().execute(uri.toString());
     }
 
 
@@ -94,14 +101,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private String downloadContent(String myurl) throws IOException {
         InputStream is = null;
-        int length = 500;
+        int length = 10000;
 
         try {
             HttpURLConnection conn = HttpUtils.httpGet(myurl);
 
             String contentAsString = HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
-            JSONArray arr = new JSONArray(contentAsString);
-            JSONObject mJsonObject = arr.getJSONObject(0);
+            JSONArray arr = new JSONArray(contentAsString); //featured products
+            JSONObject mJsonObject = arr.getJSONObject(0);//one product
+
+            String allProductNames;
+
             Product p =  JsonObjectMapper.CreateProduct(mJsonObject);
 
             return p.getName();
