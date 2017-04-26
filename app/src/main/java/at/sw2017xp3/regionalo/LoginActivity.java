@@ -5,26 +5,52 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private ArrayList<View> list_of_elements = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        button = (Button) findViewById(R.id.buttonRegister);
-        button.setOnClickListener(this);
-    }
 
-    Button button;
+        list_of_elements.addAll(Arrays.asList(
+                findViewById(R.id.buttonRegister),
+                findViewById(R.id.buttonLogin)));
+
+        for (int i = 0; i < list_of_elements.size(); i++) {
+            list_of_elements.get(i).setOnClickListener(this);
+        }
+    }
 
     @Override
     public void onClick(View v) {
+        Button clickedButton = (Button) v;
 
-        Intent myIntent = new Intent(this, RegisterActivity.class);
-        startActivity(myIntent);
+        switch (clickedButton.getId()) {
+            case R.id.buttonLogin:
+                if (((TextView) findViewById(R.id.textViewEmail)).getText().toString().isEmpty() &&
+                        ((TextView) findViewById(R.id.textViewPassword)).getText().toString().isEmpty()) {
+                    ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText("Bitte Email und Passwort eingeben!");
+                } else if (((TextView) findViewById(R.id.textViewEmail)).getText().toString().isEmpty() &&
+                        !((TextView) findViewById(R.id.textViewPassword)).getText().toString().isEmpty()) {
+                    ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText("Bitte E-Mail eingeben!");
+                } else if (!((TextView) findViewById(R.id.textViewEmail)).getText().toString().isEmpty() &&
+                        ((TextView) findViewById(R.id.textViewPassword)).getText().toString().isEmpty()) {
+                    ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText("Bitte Passwort eingeben!");
+                } else {
+                    ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText("LOGIN USER CONTENT ÖFFNEN");
+                }
+                break;
 
+            case R.id.buttonRegister:
+                Intent myIntent = new Intent(this, RegisterActivity.class);
+                startActivity(myIntent);
+                break;
+        }
     }
-
-
 }
