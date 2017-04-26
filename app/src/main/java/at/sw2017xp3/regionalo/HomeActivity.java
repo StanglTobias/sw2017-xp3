@@ -174,7 +174,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Intent myIntent = new Intent(getBaseContext(), ProductDetailActivity.class);
         switch(v.getId())
         {
-            case R.id.imgButtonRnd1:
+           /* case R.id.imgButtonRnd1:
                 startActivity(myIntent);
                 break;
 
@@ -196,7 +196,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.imgButtonRnd6:
                 startActivity(myIntent);
-                break;
+                break;*/
+
         }
     }
 
