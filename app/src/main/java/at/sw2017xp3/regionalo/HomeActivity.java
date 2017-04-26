@@ -62,7 +62,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private class GetProductTask extends AsyncTask<String, Void, String> {
+    private class GetProductTask extends AsyncTask<String, Void, String>  implements View.OnClickListener{
 
         @Override
         protected String doInBackground(String... params) {
@@ -94,10 +94,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     LayoutInflater inflater = getLayoutInflater();
                     LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, linearLayoutHome);
 
-                    int productLayoutId = View.generateViewId();
-                    LinearLayout productLayout = (LinearLayout) inflatedView.findViewById(R.id.linearLayout_product_1);
-                    ((LinearLayout) inflatedView.findViewById(R.id.linearLayout_product_1)).setId(productLayoutId);
+                    int productLayoutId = p.getId();
+                    LinearLayout productLayout = (LinearLayout) inflatedView.findViewById(R.id.linearLayout_product);
+                    (inflatedView.findViewById(R.id.linearLayout_product)).setId(productLayoutId);
 
+                    (productLayout.findViewById(R.id.imageButtonProduct)).setOnClickListener(this);
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct1)).setText(p.getName());
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText("Id: " + String.valueOf(p.getId()));
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText("Erzeuger Id: " + String.valueOf(p.getProducerId()));
@@ -109,6 +110,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 System.out.println("GetProductTask.onPostExecute" + "exception");
                 ex.printStackTrace();
             }
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            ImageButton imageButton = (ImageButton) v;
+            LinearLayout productLayout = (LinearLayout)imageButton.getParent();
+            int productId = productLayout.getId();
+
+            Intent myIntent = new Intent(HomeActivity.this, ProductDetailActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("id", productId);
+            startActivity(myIntent);
         }
     }
 
@@ -158,6 +172,5 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent myIntent = new Intent(this, ProductDetailActivity.class);
         startActivity(myIntent);
-
     }
 }
