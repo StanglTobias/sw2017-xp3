@@ -16,6 +16,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -33,22 +35,20 @@ import java.util.Arrays;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
-
+    ExpandableRelativeLayout expandableLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        expandableLayout
+                = (ExpandableRelativeLayout) findViewById(R.id.expandableLayout);
+        Button expandButton
+                = (Button) findViewById(R.id.expand);
+        expandButton.setOnClickListener(this);
+
         fillArrayListWithImageButtons();
-        list_of_elements.addAll(Arrays.asList(
-                findViewById(R.id.buttonMeat),
-                findViewById(R.id.buttonVegetables),
-                findViewById(R.id.buttonFruit),
-                findViewById(R.id.buttonOthers),
-                findViewById(R.id.buttonMilk),
-                findViewById(R.id.buttonCereals),
-                findViewById(R.id.searchView),
-                findViewById(R.id.buttonMilk)));
+       ;
 
 
         Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/featured.php");
@@ -58,6 +58,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         new GetProductTask().execute(uri.toString());
         for (int i = 0; i < list_of_elements.size(); i++) {
             list_of_elements.get(i).setOnClickListener(this);
+
+
+
+
         }
     }
 
@@ -129,8 +133,23 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Intent myIntent = new Intent(this, ProductDetailActivity.class);
-        startActivity(myIntent);
+        //Intent myIntent = new Intent(this, ExtendedSearchActivity.class);
+       // startActivity(myIntent);
+
+        // toggle expand, collapse
+        expandableLayout.toggle();
+// expand
+        expandableLayout.expand();
+// collapse
+        expandableLayout.collapse();
+
+// move position of child view
+        expandableLayout.moveChild(0);
+// move optional position
+        expandableLayout.move(500);
+
+// set base position which is close position
+        expandableLayout.setClosePosition(500);
 
     }
 
@@ -141,4 +160,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             list_of_elements.add(findViewById(idBtn));
         }
     }
+
+
 }

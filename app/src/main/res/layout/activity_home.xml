@@ -38,6 +38,13 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    <Button
+                        android:id="@+id/expand"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="expand" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -62,92 +69,32 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="200dp"
                         android:orientation="horizontal">
 
-                        <HorizontalScrollView
-                            android:id="@+id/horizontalScrollView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="40dp"
-                            android:layout_marginEnd="12dp"
-                            android:layout_marginStart="12dp"
-                            android:layout_marginTop="30dp"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/searchView"
-                            tools:layout_constraintLeft_creator="1"
-                            tools:layout_constraintRight_creator="1"
-                            tools:layout_constraintTop_creator="1">
+                        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                            android:id="@+id/expandableLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible"
+                            app:ael_duration="500"
+                            app:ael_expanded="false"
+                            app:ael_interpolator="bounce"
+                            app:ael_orientation="vertical">
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
+                            <TextView
+                                android:id="@+id/text"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_gravity="center_horizontal">
+                                android:text="sample" />
 
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/text"
+                                android:text="sample2" />
+                        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
-                                <Button
-                                    android:id="@+id/buttonMeat"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:background="@drawable/roundedbutton"
-                                    android:text="Fleisch"
-                                    android:textSize="8sp"
-                                    android:layout_marginRight="7dp"/>
-
-                                <Button
-                                    android:id="@+id/buttonVegetables"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:background="@drawable/roundedbutton"
-                                    android:text="Gemüse"
-                                    android:textSize="8sp"
-                                    android:layout_marginRight="7dp"
-                                    android:layout_marginLeft="7dp"/>
-
-                                <Button
-                                    android:id="@+id/buttonFruit"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:background="@drawable/roundedbutton"
-                                    android:text="Obst"
-                                    android:textSize="8sp"
-                                    android:layout_marginRight="7dp"
-                                    android:layout_marginLeft="7dp"/>
-
-                                <Button
-                                    android:id="@+id/buttonMilk"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:background="@drawable/roundedbutton"
-                                    android:text="Milch"
-                                    android:textSize="8sp"
-                                    android:layout_marginRight="7dp"
-                                    android:layout_marginLeft="7dp"/>
-
-                                <Button
-                                    android:id="@+id/buttonCereals"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:background="@drawable/roundedbutton"
-                                    android:text="Getreide"
-                                    android:textSize="8sp"
-                                    android:layout_marginRight="7dp"
-                                    android:layout_marginLeft="7dp"/>
-
-                                <Button
-                                    android:id="@+id/buttonOthers"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:background="@drawable/roundedbutton"
-                                    android:text="Sonstiges"
-                                    android:textSize="8sp"
-                                    android:layout_marginLeft="7dp"/>
-
-
-                            </LinearLayout>
-                        </HorizontalScrollView>
                     </LinearLayout>
 
                 </LinearLayout>
