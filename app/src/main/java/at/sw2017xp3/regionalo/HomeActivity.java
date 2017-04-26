@@ -41,7 +41,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        fillArrayListWithImageButtons();
         list_of_elements.addAll(Arrays.asList(
                 findViewById(R.id.buttonMeat),
                 findViewById(R.id.buttonVegetables),
@@ -61,28 +60,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < list_of_elements.size(); i++) {
             list_of_elements.get(i).setOnClickListener(this);
         }
-
-           /* LayoutInflater inflater = getLayoutInflater();
-            LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, null);
-            ((TextView) inflatedView.findViewById(R.id.textViewRndProduct1)).setText("Speck");
-            ((TextView) inflatedView.findViewById(R.id.textViewRndProduct2)).setText("2");
-            ((TextView) inflatedView.findViewById(R.id.textViewRndProduct3)).setText("3");
-            ((TextView) inflatedView.findViewById(R.id.textViewRndProduct4)).setText("4");
-            ((TextView) inflatedView.findViewById(R.id.textViewRndProduct5)).setText("5");
-
-            LinearLayout inflatedView2 = (LinearLayout) inflater.inflate(R.layout.product, null);
-            ((TextView) inflatedView2.findViewById(R.id.textViewRndProduct1)).setText("Apfel");
-            ((TextView) inflatedView2.findViewById(R.id.textViewRndProduct2)).setText("A");
-            ((TextView) inflatedView2.findViewById(R.id.textViewRndProduct3)).setText("P");
-            ((TextView) inflatedView2.findViewById(R.id.textViewRndProduct3)).setText("F");
-            ((TextView) inflatedView2.findViewById(R.id.textViewRndProduct5)).setText("E");
-
-
-            LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayout_Home_Activity);
-            linearLayoutHome.addView(inflatedView);
-            linearLayoutHome.addView(inflatedView2); */
-
-
     }
 
     private class GetProductTask extends AsyncTask<String, Void, String> {
@@ -98,32 +75,39 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         protected void onPostExecute(String result) {
+
+            Toast.makeText(HomeActivity.this, "Daten geladen", Toast.LENGTH_LONG).show();
+
+
             try {
                 JSONArray arr = new JSONArray(result); //featured products
-                JSONObject mJsonObject = arr.getJSONObject(0);//one product
-
-                String allProductNames;
-
-                Product p = JsonObjectMapper.CreateProduct(mJsonObject);
 
                 LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayout_Home_Activity);
-                for(int i=0; i<arr.length();i++) {
-                    JSONObject tempJson = (JSONObject) arr.get(i);
+                for (int productCnt = 0; productCnt < arr.length(); productCnt++) {
+                    System.out.println("GetProductTask.onPostExecute array laenge " + arr.length());
+
+                    JSONObject mJsonObject = arr.getJSONObject(productCnt);
+                    Product p = JsonObjectMapper.CreateProduct(mJsonObject);
+
+                    System.out.println("GetProductTask.onPostExecute name of product: " + p.getName());
+
                     LayoutInflater inflater = getLayoutInflater();
-                    LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, null);
-                    ((TextView) inflatedView.findViewById(R.id.textViewRndProduct1)).setText(tempJson.getString("name"));
-                    //((TextView) inflatedView.findViewById(R.id.textViewRndProduct2)).setText(tempJson.getString("name"));
-                    ((TextView) inflatedView.findViewById(R.id.textViewRndProduct3)).setText(tempJson.getString("price"));
-                    ((TextView) inflatedView.findViewById(R.id.textViewRndProduct4)).setText(tempJson.getString("quantity"));
-                    ((TextView) inflatedView.findViewById(R.id.textViewRndProduct5)).setText(tempJson.getString("unit_Type"));
-                    linearLayoutHome.addView(inflatedView);
+                    LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, linearLayoutHome);
+
+                    int productLayoutId = View.generateViewId();
+                    LinearLayout productLayout = (LinearLayout) inflatedView.findViewById(R.id.linearLayout_product_1);
+                    ((LinearLayout) inflatedView.findViewById(R.id.linearLayout_product_1)).setId(productLayoutId);
+
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct1)).setText(p.getName());
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText("Id: " + String.valueOf(p.getId()));
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText("Erzeuger Id: " + String.valueOf(p.getProducerId()));
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText("Preis: " + String.valueOf(p.getPrice()));
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct5)).setText("Typ: " + String.valueOf(p.getType()));
                 }
 
-            }
-
-            catch (Exception ex) {
-
-
+            } catch (Exception ex) {
+                System.out.println("GetProductTask.onPostExecute" + "exception");
+                ex.printStackTrace();
             }
         }
     }
@@ -175,13 +159,5 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Intent myIntent = new Intent(this, ProductDetailActivity.class);
         startActivity(myIntent);
 
-    }
-
-    public void fillArrayListWithImageButtons() {
-        for (int i = 1; i <= 1; i++) {
-            String rndBtn = "imgButtonRnd" + i;
-            int idBtn = getResources().getIdentifier(rndBtn, "id", R.class.getPackage().getName());
-            list_of_elements.add(findViewById(idBtn));
-        }
     }
 }
