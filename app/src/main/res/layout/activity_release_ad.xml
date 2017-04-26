@@ -271,6 +271,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contextClickable="true"
+                    android:linksClickable="true"
+                    android:onClick="onClick"
                     android:text="Bild auswählen" />
 
             </LinearLayout>
@@ -562,7 +565,7 @@
                     android:textSize="25sp" />
 
                 <EditText
-                    android:id="@+id/Text_ID_AngebotGueltigBis"
+                    android:id="@+id/Text_ID_Postleitzahl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

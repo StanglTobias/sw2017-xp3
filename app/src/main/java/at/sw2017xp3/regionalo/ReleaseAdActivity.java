@@ -2,6 +2,7 @@ package at.sw2017xp3.regionalo;
 
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +27,19 @@ public class ReleaseAdActivity extends AppCompatActivity implements View.OnClick
 
     private ArrayList<View> list_of_buttons = new ArrayList<>();
 
+    private int year_, month_, day_;
+    static final int DIALOG_ID = 0;
+
+    private DatePickerDialog.OnDateSetListener datepickListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            year_ = year;
+            month_ = month;
+            day_ = dayOfMonth;
+            if (view.getId() == findViewById(R.id.textView_ID_DateVon).)
+            ((TextView) findViewById(R.id.textView_ID_DateVon)).setText(year + "/" + month + "/" + dayOfMonth);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +47,34 @@ public class ReleaseAdActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_release_ad);
 
         addButtonListeners();
-        findViewById(R.id.textView_ID_DateVon).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              //  datePickerDialog.show();
-            }
-        });
+
+        final Calendar calendar = Calendar.getInstance();
+        year_ = calendar.get(Calendar.YEAR);
+        month_ = calendar.get(Calendar.MONTH);
+        day_ = calendar.get(Calendar.DAY_OF_MONTH);
+
+
+        findViewById(R.id.textView_ID_DateVon).setOnClickListener(
+                new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v) {
+                        showDialog(DIALOG_ID);
+                    }
+                }
+        );
     }
 
-    private void addButtonListeners()
-    {
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        if (id == DIALOG_ID)
+        {
+            return new DatePickerDialog(this, datepickListener, year_, month_, day_ );
+        }
+        return null;
+    }
+
+    private void addButtonListeners() {
         list_of_buttons.addAll(Arrays.asList(
                 findViewById(R.id.button_ID_Bildauswaehlen),
                 findViewById(R.id.button_ID_Bild2auswaehlen),
