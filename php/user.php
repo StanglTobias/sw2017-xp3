@@ -15,12 +15,13 @@ while($row = mysqli_fetch_array($result))
         'company_name' => $row['company_name'],
         'address' => $row['address'],
         'city' => $row['city'],
+        'lon' => $row['lon'],
+        'lat' => $row['lat'],
         'address' => $row['address'],
         'postal_code' => $row['postal_code'],
         'email' => $row['email'],
         'phone_number' => $row['phone_number'],
         'is_bio' => $row['is_bio'],
-        'likes' => $row['likes']
     );
 }
 
