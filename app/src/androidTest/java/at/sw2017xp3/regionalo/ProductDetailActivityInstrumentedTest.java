@@ -28,5 +28,10 @@ public class ProductDetailActivityInstrumentedTest {
         onView(withId(R.id.buttonLike)).perform(click());
     }
 
+    @Test
+    public void pressLoginButton(){
+        onView(withId(R.id.buttonLogin)).perform(click());
+    }
+
 
 }
