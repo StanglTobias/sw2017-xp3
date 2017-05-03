@@ -18,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -51,6 +53,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 findViewById(R.id.buttonCereals),
                 findViewById(R.id.searchView),
                 findViewById(R.id.buttonMilk)));
+
+
 
 
         Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/featured.php");
@@ -97,7 +101,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         LinearLayout productLayout = (LinearLayout) inflatedView.findViewById(R.id.linearLayout_product);
                         (inflatedView.findViewById(R.id.linearLayout_product)).setId(productLayoutId);
 
-                        (productLayout.findViewById(R.id.imageButtonProduct)).setOnClickListener(this);
+                        ImageButton image_load = (ImageButton) productLayout.findViewById(R.id.imageButtonProduct);
+                        image_load.setOnClickListener(this);
+                        Glide.with(getApplicationContext()).load(Core.getInstance().getProducts().getImageUri(p.getId())).into(image_load);
+                        //Glide.with(this).load("http://goo.gl/gEgYUd").into(image_load);
                         ((TextView) productLayout.findViewById(R.id.textViewRndProduct1)).setText(p.getName());
                         ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText("Id: " + String.valueOf(p.getId()));
                         ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText("Erzeuger Id: " + String.valueOf(p.getProducerId()));

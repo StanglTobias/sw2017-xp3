@@ -22,6 +22,8 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 public class ProductManager {
 
     ConcurrentHashMap<Integer, Product> cache_ = new ConcurrentHashMap<Integer, Product>();
+    public static final  String PRODUCT_URI = "http://sw-ma-xp3.bplaced.net/MySQLadmin/product.php";
+    public static final String PRODUCT_IMAGE_URI="http://sw-ma-xp3.bplaced.net/MySQLadmin/image.php";
 
     public ProductManager() {
     }
@@ -32,19 +34,28 @@ public class ProductManager {
         }
     }
 
+    public String getProductUri(int id){
+        Uri uri = Uri.parse(PRODUCT_URI)
+                .buildUpon()
+                .appendQueryParameter("id", Integer.toString(id)).build();
+        return uri.toString();
+    }
+
+    public String getImageUri(int id){
+        Uri uri = Uri.parse(PRODUCT_IMAGE_URI)
+                .buildUpon()
+                .appendQueryParameter("id", Integer.toString(id)).build();
+        return uri.toString();
+    }
+
     public Product getProduct(int id) {
         Product p = cache_.get(id);
 
         if (p != null)
             return p;
 
-
-        Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/product.php")
-                .buildUpon()
-                .appendQueryParameter("id", Integer.toString(id)).build();
-
         try {
-           String content =  HttpUtils.downloadContent(uri.toString());
+            String content =  HttpUtils.downloadContent(getProductUri(id));
             JSONArray arr = new JSONArray(content); //featured products
             JSONObject mJsonObject = arr.getJSONObject(0);//one product
 
@@ -54,7 +65,7 @@ public class ProductManager {
             addProduct(p);
         } catch (Exception ex) {
 
-            Log.e("MYAPP", "exception", ex);
+            //Log.e("MYAPP", "exception", ex);
         }
 
         return p;

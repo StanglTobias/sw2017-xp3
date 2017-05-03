@@ -9,8 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -53,6 +57,9 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         for (int i = 0; i < list_of_elements.size(); i++) {
             list_of_elements.get(i).setOnClickListener(this);
         }
+
+        ImageView product_image = (ImageView) findViewById(R.id.iv_product);
+        Glide.with(getApplicationContext()).load(Core.getInstance().getProducts().getImageUri(id)).into(product_image);
 
         new GetProductTask().execute(id);
     }

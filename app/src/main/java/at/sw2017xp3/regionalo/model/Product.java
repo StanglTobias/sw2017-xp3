@@ -3,6 +3,9 @@ package at.sw2017xp3.regionalo.model;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
+import static at.sw2017xp3.regionalo.model.ProductManager.PRODUCT_IMAGE_URI;
+import static at.sw2017xp3.regionalo.model.ProductManager.PRODUCT_URI;
+
 /**
  * Created by jo on 05.04.17.
  */
@@ -21,7 +24,6 @@ public class Product {
     public String getName() {
         return name_;
     }
-
 
     public int getId() {
         return id_;
@@ -49,7 +51,6 @@ public class Product {
     {
         return Core.getInstance().getUsers().getUser(id_);
     }
-    
 
     int id_;
     String unitType_;
