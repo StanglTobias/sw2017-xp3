@@ -93,7 +93,7 @@ public class ProductManager {
 
             for (int i = 0; i < arr.length(); i++)
             {
-                JSONObject mJsonObject = arr.getJSONObject(0);
+                JSONObject mJsonObject = arr.getJSONObject(i);
                 Product p = JsonObjectMapper.CreateProduct(mJsonObject);
                 products.add(p);
             }
