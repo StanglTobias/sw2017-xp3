@@ -5,16 +5,13 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +27,6 @@ import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Arrays;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -48,8 +44,25 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 findViewById(R.id.buttonOthers),
                 findViewById(R.id.buttonMilk),
                 findViewById(R.id.buttonCereals),
-                findViewById(R.id.searchView),
                 findViewById(R.id.buttonMilk)));
+
+        SearchView sv = (SearchView)findViewById(R.id.searchViewHome);
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+
+
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
 
 
         Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/featured.php");
@@ -63,7 +76,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private class GetProductTask extends AsyncTask<String, Void, String>  implements View.OnClickListener{
+        private class GetProductTask extends AsyncTask<String, Void, String> implements View.OnClickListener {
 
         @Override
         protected String doInBackground(String... params) {
@@ -117,7 +130,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         public void onClick(View v) {
 
             ImageButton imageButton = (ImageButton) v;
-            LinearLayout productLayout = (LinearLayout)imageButton.getParent();
+            LinearLayout productLayout = (LinearLayout) imageButton.getParent();
             int productId = productLayout.getId();
 
             Intent myIntent = new Intent(HomeActivity.this, ProductDetailActivity.class);
