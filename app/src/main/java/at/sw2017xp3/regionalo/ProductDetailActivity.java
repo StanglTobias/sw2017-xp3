@@ -55,95 +55,41 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             list_of_elements.get(i).setOnClickListener(this);
         }
 
-        Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/product.php")
-                .buildUpon()
-                .appendQueryParameter("id", Integer.toString(id)).build();
-
-        new GetProductTask().execute(uri.toString());
+        new GetProductTask().execute(id);
     }
 
-    private class GetProductTask extends AsyncTask<String, Void, String> {
+    private class GetProductTask extends AsyncTask<Integer, Void, Product> {
 
         @Override
-        protected String doInBackground(String... params) {
+        protected Product doInBackground(Integer... params) {
             try {
-                return downloadContent(params[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve data. URL may be invalid.";
+                return Core.getInstance().getProducts().getProduct(params[0]);
+            } catch (Exception e) {
+                return null;
             }
         }
 
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(Product result) {
             try {
-                JSONArray arr = new JSONArray(result); //featured products
-                JSONObject mJsonObject = arr.getJSONObject(0);//one product
 
-                String allProductNames;
-
-                Product p = JsonObjectMapper.CreateProduct(mJsonObject);
+                Product p = result;
 
                 ((TextView)findViewById(R.id.textViewProductName)).setText(p.getName());
                 ((TextView)findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()) + "/" + p.getUnit());
                 ((TextView)findViewById(R.id.textViewQuality)).setText("Biologisch: "  + isBio(p.isBio()));
                 ((TextView)findViewById(R.id.textViewCategroy)).setText("Kategorie: " + productCategorieName(p.getType()));
 
-                Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/user.php")
-                        .buildUpon()
-                        .appendQueryParameter("id", Integer.toString(p.getProducerId())).build();
+                User u = p.getUser();
 
-                new GetUserTask().execute(uri.toString());
+                ((TextView)findViewById(R.id.textViewName)).setText(u.getFullName());
+                ((TextView)findViewById(R.id.textViewAdress)).setText(u.getPostalCode() + " " + u.getCity() + "\n" + u.getAddress());
+                ((TextView)findViewById(R.id.textViewNumber)).setText(u.getPhoneNumber());
+                ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(u.getLikes()));
+
+
             } catch(Exception e){
                 System.out.println("Halt Stop");
-            }
-        }
-    }
-
-    private class GetUserTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-                return downloadContent(params[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve data. URL may be invalid.";
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            try {
-                JSONArray arr = new JSONArray(result); //featured products
-                JSONObject mJsonObject = arr.getJSONObject(0);//one product
-
-                String allProductNames;
-
-                User p = JsonObjectMapper.CreateUser(mJsonObject);
-
-                ((TextView)findViewById(R.id.textViewName)).setText(p.getFullName());
-                ((TextView)findViewById(R.id.textViewAdress)).setText(p.getPostalCode() + " " + p.getCity() + "\n" + p.getAddress());
-                ((TextView)findViewById(R.id.textViewNumber)).setText(p.getPhoneNumber());
-              //  ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(p.getLikes()));
-            } catch(Exception e){
-                System.out.println("Halt Stop");
-            }
-        }
-    }
-
-    private String downloadContent(String myurl) throws IOException {
-        InputStream is = null;
-        int length = 10000;
-
-        try {
-            HttpURLConnection conn = HttpUtils.httpGet(myurl);
-
-            String contentAsString = HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
-
-            return contentAsString;
-        } catch (Exception ex) {
-            return "";
-        } finally {
-            if (is != null) {
-                is.close();
             }
         }
     }
@@ -178,10 +124,6 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         switch (clickedButton.getId()){
             case R.id.buttonLike:
                 new LikeTask().execute(1);
-                /*
-              like_button_counter_ =  Integer.valueOf((String)(((TextView)findViewById(R.id.textViewLikeCount)).getText()));
-              like_button_counter_++;
-              ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(like_button_counter_));*/
               break;
 
             case R.id.ButtonContact:

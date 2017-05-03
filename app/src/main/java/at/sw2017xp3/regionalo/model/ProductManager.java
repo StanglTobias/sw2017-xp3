@@ -1,6 +1,7 @@
 package at.sw2017xp3.regionalo.model;
 
 import android.net.Uri;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,7 +47,8 @@ public class ProductManager {
                 .appendQueryParameter("id", Integer.toString(id)).build();
 
         try {
-            JSONArray arr = new JSONArray(HttpUtils.downloadContent(uri.toString())); //featured products
+           String content =  HttpUtils.downloadContent(uri.toString());
+            JSONArray arr = new JSONArray(content); //featured products
             JSONObject mJsonObject = arr.getJSONObject(0);//one product
 
             p = JsonObjectMapper.CreateProduct(mJsonObject);
@@ -55,6 +57,8 @@ public class ProductManager {
 
             addProduct(p);
         } catch (Exception ex) {
+
+            Log.e("MYAPP", "exception", ex);
         }
 
         return p;

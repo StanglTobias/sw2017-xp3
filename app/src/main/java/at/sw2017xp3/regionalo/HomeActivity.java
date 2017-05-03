@@ -3,14 +3,11 @@ package at.sw2017xp3.regionalo;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
+import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.CurrentUser;
 import at.sw2017xp3.regionalo.util.Installation;
 import at.sw2017xp3.regionalo.model.Product;
@@ -38,9 +36,6 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Arrays;
-import android.provider.Settings.Secure;
-
-import static java.security.AccessController.getContext;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
@@ -74,48 +69,46 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private class GetProductTask extends AsyncTask<String, Void, String>  implements View.OnClickListener{
+    private class GetProductTask extends AsyncTask<String, Void, ArrayList<Product> >  implements View.OnClickListener{
 
         @Override
-        protected String doInBackground(String... params) {
+        protected ArrayList<Product>  doInBackground(String... params) {
             try {
-                return downloadContent(params[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve data. URL may be invalid.";
+                return Core.getInstance().getProducts().getFeaturedProducts();
+            } catch (Exception e) {
+                return null;
             }
         }
 
         @Override
-        protected void onPostExecute(String result) {
-
-            Toast.makeText(HomeActivity.this, "Daten geladen", Toast.LENGTH_LONG).show();
-
+        protected void onPostExecute(ArrayList<Product>  result) {
 
             try {
-                JSONArray arr = new JSONArray(result); //featured products
-
                 LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayout_Home_Activity);
-                for (int productCnt = 0; productCnt < arr.length(); productCnt++) {
-                    System.out.println("GetProductTask.onPostExecute array laenge " + arr.length());
+                for (int productCnt = 0; productCnt < result.size(); productCnt++) {
+                    System.out.println("GetProductTask.onPostExecute array laenge " + result.size());
 
-                    JSONObject mJsonObject = arr.getJSONObject(productCnt);
-                    Product p = JsonObjectMapper.CreateProduct(mJsonObject);
 
-                    System.out.println("GetProductTask.onPostExecute name of product: " + p.getName());
+                    Product p = result.get(productCnt);
 
-                    LayoutInflater inflater = getLayoutInflater();
-                    LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, linearLayoutHome);
+                    if(p != null) {
 
-                    int productLayoutId = p.getId();
-                    LinearLayout productLayout = (LinearLayout) inflatedView.findViewById(R.id.linearLayout_product);
-                    (inflatedView.findViewById(R.id.linearLayout_product)).setId(productLayoutId);
+                        System.out.println("GetProductTask.onPostExecute name of product: " + p.getName());
 
-                    (productLayout.findViewById(R.id.imageButtonProduct)).setOnClickListener(this);
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct1)).setText(p.getName());
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText("Id: " + String.valueOf(p.getId()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText("Erzeuger Id: " + String.valueOf(p.getProducerId()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText("Preis: " + String.valueOf(p.getPrice()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct5)).setText("Typ: " + String.valueOf(p.getType()));
+                        LayoutInflater inflater = getLayoutInflater();
+                        LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, linearLayoutHome);
+
+                        int productLayoutId = p.getId();
+                        LinearLayout productLayout = (LinearLayout) inflatedView.findViewById(R.id.linearLayout_product);
+                        (inflatedView.findViewById(R.id.linearLayout_product)).setId(productLayoutId);
+
+                        (productLayout.findViewById(R.id.imageButtonProduct)).setOnClickListener(this);
+                        ((TextView) productLayout.findViewById(R.id.textViewRndProduct1)).setText(p.getName());
+                        ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText("Id: " + String.valueOf(p.getId()));
+                        ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText("Erzeuger Id: " + String.valueOf(p.getProducerId()));
+                        ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText("Preis: " + String.valueOf(p.getPrice()));
+                        ((TextView) productLayout.findViewById(R.id.textViewRndProduct5)).setText("Typ: " + String.valueOf(p.getType()));
+                    }
                 }
 
             } catch (Exception ex) {
@@ -136,24 +129,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             bundle.putInt("id", productId);
             myIntent.putExtras(bundle);
             startActivity(myIntent);
-        }
-    }
-
-    private String downloadContent(String myurl) throws IOException {
-        InputStream is = null;
-        int length = 10000;
-
-        try {
-            HttpURLConnection conn = HttpUtils.httpGet(myurl);
-
-            return HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
-
-        } catch (Exception ex) {
-            return "";
-        } finally {
-            if (is != null) {
-                is.close();
-            }
         }
     }
 
