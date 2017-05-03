@@ -33,4 +33,21 @@ public class HttpUtils {
         reader.read(buffer);
         return new String(buffer);
     }
+
+    public static String downloadContent(String myurl) throws IOException {
+        InputStream is = null;
+        int length = 10000;
+
+        try {
+            HttpURLConnection conn = HttpUtils.httpGet(myurl);
+
+            return  HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
+        } catch (Exception ex) {
+            return "";
+        } finally {
+            if (is != null) {
+                is.close();
+            }
+        }
+    }
 }

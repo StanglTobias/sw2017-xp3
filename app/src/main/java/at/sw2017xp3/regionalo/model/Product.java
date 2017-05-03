@@ -1,22 +1,27 @@
 package at.sw2017xp3.regionalo.model;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+
 /**
  * Created by jo on 05.04.17.
  */
 
 public class Product {
-    public Product(int id, String name, boolean isBio, double price, int producerId, int typeID) {
+    public Product(int id, String name, boolean isBio, double price, int producerId, int typeID, String unitType) {
         id_ = id;
         name_ = name;
         isBio_ = isBio;
         price_ = price;
         producerId_ = producerId;
         typeID_ = typeID;
+        unitType_ = unitType;
     }
 
     public String getName() {
         return name_;
     }
+
 
     public int getId() {
         return id_;
@@ -38,7 +43,16 @@ public class Product {
         return typeID_;
     }
 
+    public String getUnit() { return unitType_;}
+
+    public User getUser()
+    {
+        return Core.getInstance().getUsers().getUser(id_);
+    }
+    
+
     int id_;
+    String unitType_;
     String name_;
     boolean isBio_;
     double price_;

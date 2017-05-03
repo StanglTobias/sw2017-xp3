@@ -42,25 +42,22 @@ public class RegistryInstrumentedTest {
 
     @Test
     public void checkButtonClicks() {
-
-        onView(withId(R.id.scrollView_Register_ID_vertical)).perform(swipeUp());
-        onView(withText("Registrieren")).perform(click());
+        onView(withText("Registrieren")).perform(scrollTo(), click());
     }
 
     @Test
     public void checkTextViews() {
 
-        onView(withId(R.id.textView_Register_ID_Hofname)).perform(typeText("Testhofname"));
-        onView(withId(R.id.textView_Register_ID_Vorname)).perform(typeText("Vorname1"));
-        onView(withId(R.id.textView_Register_ID_Nachname)).perform(typeText("Nachname1"));
-        onView(withId(R.id.textView_Register_ID_Email)).perform(typeText("test@testmail.com"));
-        onView(withId(R.id.textView_Register_ID_Telnr)).perform(typeText("0900666666"));
-        onView(withId(R.id.textView_Register_ID_Ort)).perform(typeText("Testort"));
-        onView(withId(R.id.textView_Register_ID_PLZ)).perform(typeText("1234"));
-        onView(withId(R.id.textView_Register_ID_Adresse)).perform(typeText("Testaddresse"));
-        onView(withId(R.id.scrollView_Register_ID_vertical)).perform(swipeUp());
-        onView(withId(R.id.textView_Register_ID_Passwort)).perform(typeText("passwort1234"));
-        onView(withId(R.id.textView_Register_ID_Passwortwieder)).perform(typeText("passwort1235"));
+        onView(withId(R.id.textView_Register_ID_Hofname)).perform(scrollTo(), typeText("Testhofname"));
+        onView(withId(R.id.textView_Register_ID_Vorname)).perform(scrollTo(), typeText("Vorname1"));
+        onView(withId(R.id.textView_Register_ID_Nachname)).perform(scrollTo(), typeText("Nachname1"));
+        onView(withId(R.id.textView_Register_ID_Email)).perform(scrollTo(), typeText("test@testmail.com"));
+        onView(withId(R.id.textView_Register_ID_Telnr)).perform(scrollTo(), typeText("0900666666"));
+        onView(withId(R.id.textView_Register_ID_Ort)).perform(scrollTo(), typeText("Testort"));
+        onView(withId(R.id.textView_Register_ID_PLZ)).perform(scrollTo(), typeText("1234"));
+        onView(withId(R.id.textView_Register_ID_Adresse)).perform(scrollTo(), typeText("Testaddresse"));
+        onView(withId(R.id.textView_Register_ID_Passwort)).perform(scrollTo(), typeText("passwort1234"));
+        onView(withId(R.id.textView_Register_ID_Passwortwieder)).perform(scrollTo(), typeText("passwort1235"));
 
         onView(withId(R.id.textView_Register_ID_Hofname)).check(matches(withText("Testhofname")));
         onView(withId(R.id.textView_Register_ID_Vorname)).check(matches(withText("Vorname1")));
@@ -76,8 +73,7 @@ public class RegistryInstrumentedTest {
 
     @Test
     public void checkGoToLogin(){
-        onView(withId(R.id.scrollView_Register_ID_vertical)).perform(swipeUp());
-        onView(withText("Registrieren")).perform(click());
+        onView(withText("Registrieren")).perform(scrollTo(), click());
         onView(withId(R.id.textViewPassword)).perform(typeText("Testhofname"));
         onView(withId(R.id.textViewPassword)).check(matches(withText("Testhofname")));
     }

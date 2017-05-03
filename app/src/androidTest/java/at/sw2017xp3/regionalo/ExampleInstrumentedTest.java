@@ -10,11 +10,13 @@ import android.view.View;
 import android.view.WindowManager;
 
 import org.hamcrest.Matcher;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
@@ -54,20 +56,11 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.buttonOthers)).perform(scrollTo(), click());
     }
 
+    @Ignore
     @Test
     public void testSearchFunction() {
         onView(withId(R.id.searchView)).perform(click());
         onView(withId(R.id.searchView)).perform(typeText("Hallo"), click());
-    }
-
-    @Test
-    public void testRecommendedPictures (){
-        onView(withId(R.id.imgButtonRnd1)).perform(scrollTo(), click());
-        onView(withId(R.id.imgButtonRnd2)).perform(scrollTo(), click());
-        onView(withId(R.id.imgButtonRnd3)).perform(scrollTo(), click());
-        onView(withId(R.id.imgButtonRnd4)).perform(scrollTo(), click());
-        onView(withId(R.id.imgButtonRnd5)).perform(scrollTo(), click());
-        onView(withId(R.id.imgButtonRnd6)).perform(scrollTo(), click());
     }
 
     @Test

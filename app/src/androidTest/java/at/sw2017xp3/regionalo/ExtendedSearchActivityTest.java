@@ -23,17 +23,16 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 public class ExtendedSearchActivityTest {
+    @Rule
+    public ActivityTestRule<ExtendedSearchActivity> extendedSearchActivityActivityTestRule =
+            new ActivityTestRule<>(ExtendedSearchActivity.class);
+
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
         assertEquals("at.sw2017xp3.regionalo", appContext.getPackageName());
     }
-
-    @Rule
-    public ActivityTestRule<ExtendedSearchActivity> extendedSearchActivityActivityTestRule =
-            new ActivityTestRule<>(ExtendedSearchActivity.class);
-
 
     @Test
     public void testButtons() {
