@@ -1,5 +1,7 @@
 package at.sw2017xp3.regionalo.util;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,9 +17,11 @@ import java.net.URL;
 public class HttpUtils {
 
     public static HttpURLConnection httpGet(String myurl)  throws IOException {
+        Log.d("HttpUtils.httpGet", myurl);
         URL url = new URL(myurl);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setReadTimeout(10000);
+        Log.d("HttpUtils",  conn.getPermission().toString());
         conn.setConnectTimeout(15000);
         conn.setRequestMethod("GET");
         conn.setDoInput(true);
@@ -37,12 +41,14 @@ public class HttpUtils {
     public static String downloadContent(String myurl) throws IOException {
         InputStream is = null;
         int length = 10000;
-
+        HttpURLConnection conn = null;
         try {
-            HttpURLConnection conn = HttpUtils.httpGet(myurl);
+            conn = HttpUtils.httpGet(myurl);
 
             return  HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
         } catch (Exception ex) {
+            if (conn != null)
+            conn.disconnect();
             return "";
         } finally {
             if (is != null) {

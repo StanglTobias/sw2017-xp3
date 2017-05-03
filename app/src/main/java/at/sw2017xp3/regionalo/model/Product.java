@@ -3,17 +3,22 @@ package at.sw2017xp3.regionalo.model;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
-/**
- * Created by jo on 05.04.17.
- */
-
 public class Product {
-    public Product(int id, String name, boolean isBio, double price, int producerId, int typeID, String unitType) {
+
+    private int id_;
+    private String unitType_;
+    private String name_;
+    private boolean isBio_;
+    private double price_;
+    private int userID_;
+    private int typeID_;
+
+    public Product(int id, String name, boolean isBio, double price, int userID, int typeID, String unitType) {
         id_ = id;
         name_ = name;
         isBio_ = isBio;
         price_ = price;
-        producerId_ = producerId;
+        userID_ = userID;
         typeID_ = typeID;
         unitType_ = unitType;
     }
@@ -21,7 +26,6 @@ public class Product {
     public String getName() {
         return name_;
     }
-
 
     public int getId() {
         return id_;
@@ -32,7 +36,7 @@ public class Product {
     }
 
     public int getProducerId() {
-        return producerId_;
+        return userID_;
     }
 
     public double getPrice() {
@@ -47,15 +51,7 @@ public class Product {
 
     public User getUser()
     {
-        return Core.getInstance().getUsers().getUser(id_);
+        return Core.getInstance().getUsers().getUser(userID_);
     }
-    
 
-    int id_;
-    String unitType_;
-    String name_;
-    boolean isBio_;
-    double price_;
-    int producerId_;
-    int typeID_;
 }

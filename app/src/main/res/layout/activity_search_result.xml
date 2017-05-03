@@ -47,7 +47,7 @@
                         android:orientation="horizontal">
 
                         <SearchView
-                            android:id="@+id/searchView"
+                            android:id="@+id/searchViewResult"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="12dp"

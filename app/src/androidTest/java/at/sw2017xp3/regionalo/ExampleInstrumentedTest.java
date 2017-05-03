@@ -132,4 +132,22 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.textViewEmail)).perform(typeText("Hallo Welt!"));
         onView(withId(R.id.textViewEmail)).check(matches(withText("Hallo Welt!")));
     }
+
+    @Test
+    public void testSearchSpeckDetail(){
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewHome)).perform(typeText("Speck"));
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(1)).perform(click());
+
+    }
+
+
+    @Test
+    public void testSpeckDetail(){
+        onView(withId(1)).perform(click());
+        onView(withId(R.id.textViewProductName)).check(matches(withText("Speck")));
+
+    }
 }

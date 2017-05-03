@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -118,6 +119,31 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         checkBox_ID_BereitsGeerntet_ = (CheckBox) findViewById(R.id.checkBox_ID_BereitsGeerntet);
         checkBox_ID_SelbstErnten_ = (CheckBox) findViewById(R.id.checkBox_ID_SelbstErnten);
 
+
+        SearchView sv = (SearchView) findViewById(R.id.searchViewResult);
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+
+                Intent myIntent = new Intent(SearchResultActivity.this, SearchResultActivity.class);
+                if (!query.isEmpty()) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("query", query);
+                    myIntent.putExtras(bundle);
+
+                    startActivity(myIntent);
+                }
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
         Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php?q=" + query);
 
         new GetProductTask().execute(query);
@@ -179,33 +205,6 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             bundle.putInt("id", productId);
             myIntent.putExtras(bundle);
             startActivity(myIntent);
-        }
-    }
-
-
-
-    private String downloadContent(String myurl) throws IOException {
-        InputStream is = null;
-        int length = 10000;
-
-        try {
-            HttpURLConnection conn = HttpUtils.httpGet(myurl);
-
-            String contentAsString = HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
-            JSONArray arr = new JSONArray(contentAsString); //featured products
-            JSONObject mJsonObject = arr.getJSONObject(0);//one product
-
-            String allProductNames;
-
-            Product p =  JsonObjectMapper.CreateProduct(mJsonObject);
-
-            return p.getName();
-        } catch (Exception ex) {
-            return "";
-        } finally {
-            if (is != null) {
-                is.close();
-            }
         }
     }
 
