@@ -120,7 +120,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
         Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php?q=" + query);
 
-        new GetProductTask().execute(uri.toString());
+        new GetProductTask().execute(query);
 
     }
 

@@ -82,28 +82,27 @@ public class ProductManager {
 
         ArrayList<Product> products = new ArrayList<Product>();
 
-        Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/product.php")
+        Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php")
                 .buildUpon()
-                .appendQueryParameter("id", Integer.toString(0)).build();
+                .appendQueryParameter("q", searchString).build();
 
         try {
             String content =  HttpUtils.downloadContent(uri.toString());
-            JSONArray arr = new JSONArray(content);
+            System.out.println("content search product " + content);
+            JSONArray arr = new JSONArray(content); //featured products
 
-            System.out.println("content " +  content);
-            System.out.println("array " +  arr.toString());
-
-
-            for(int i = 0; i < arr.length(); i++)
+            for (int i = 0; i < arr.length(); i++)
             {
-                JSONObject mJsonObject = arr.getJSONObject(i);
-                Product product = JsonObjectMapper.CreateProduct(mJsonObject);
-                products.add(product);
+                JSONObject mJsonObject = arr.getJSONObject(0);
+                Product p = JsonObjectMapper.CreateProduct(mJsonObject);
+                products.add(p);
             }
+
         } catch (Exception ex) {
 
-            Log.e("MYAPP", "search exception", ex);
+            Log.e("MYAPP", "exception", ex);
         }
+
         return products;
     }
 
