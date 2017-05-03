@@ -245,17 +245,17 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 // toggle expand, collapse
                 expandableLayout.toggle();
 // expand
-                expandableLayout.expand();
+           //     expandableLayout.expand();
 // collapse
-                expandableLayout.collapse();
+             //   expandableLayout.collapse();
 
 // move position of child view
-                expandableLayout.moveChild(0);
+         //       expandableLayout.moveChild(0);
 // move optional position
-                expandableLayout.move(500);
+        //        expandableLayout.move(500);
 
 // set base position which is close position
-                expandableLayout.setClosePosition(0);
+        //        expandableLayout.setClosePosition(0);
                 break;
             default:
                 break;

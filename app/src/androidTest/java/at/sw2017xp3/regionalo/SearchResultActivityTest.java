@@ -50,6 +50,7 @@ public class SearchResultActivityTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         onView(withId(R.id.Spinner_ID_ExtendedSearch)).perform(click());
 
         onView(withText("Alphabetisch")).perform(click());
