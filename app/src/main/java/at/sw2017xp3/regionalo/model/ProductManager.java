@@ -97,12 +97,14 @@ public class ProductManager {
             try {
                 HttpURLConnection urlConn = HttpUtils.httpPost(uri.toString());
 
-                urlConn.connect();
+
 
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(urlConn.getOutputStream()));
-                writer.write(GetLikePostJson(1, CurrentUser.getId()).toString());
+                writer.write("request=" + GetLikePostJson(1, CurrentUser.getId()).toString());
                 writer.flush();
                 writer.close();
+
+                urlConn.connect();
 
                if(urlConn.getResponseCode() == HttpURLConnection.HTTP_OK)
                {
