@@ -50,7 +50,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         //get User Identification
-        CurrentUser.setUserId(Installation.id(this));
+        CurrentUser.setCurrentUserId(Installation.id(this));
 
         list_of_elements.addAll(Arrays.asList(
                 findViewById(R.id.buttonMeat),
