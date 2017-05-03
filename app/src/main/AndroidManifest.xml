@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="at.sw2017xp3.regionalo">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -44,5 +45,6 @@
                 android:value=".HomeActivity" />
         </activity>
     </application>
+
 
 </manifest>

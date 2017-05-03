@@ -1,12 +1,16 @@
 package at.sw2017xp3.regionalo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +29,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
+import at.sw2017xp3.regionalo.model.CurrentUser;
+import at.sw2017xp3.regionalo.model.Installation;
 import at.sw2017xp3.regionalo.model.Product;
 import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
@@ -32,6 +38,9 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Arrays;
+import android.provider.Settings.Secure;
+
+import static java.security.AccessController.getContext;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
@@ -40,6 +49,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        //get User Identification
+        CurrentUser.setUserId(Installation.id(this));
 
         list_of_elements.addAll(Arrays.asList(
                 findViewById(R.id.buttonMeat),
