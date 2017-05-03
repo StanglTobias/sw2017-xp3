@@ -1,5 +1,6 @@
 package at.sw2017xp3.regionalo;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -11,6 +12,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,9 +42,31 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
  * Created by Christof on 05.04.2017.
  */
 
-public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener{
+public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback{
     private ArrayList<View> list_of_elements = new ArrayList<>();
     private int like_button_counter_;
+
+    GoogleMap googleMap;
+    MapFragment mapFragment;
+
+    public boolean googlServicesAvailable(){
+        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+
+        int isAvailable = api.isGooglePlayServicesAvailable(this) ;
+
+        if(isAvailable == ConnectionResult.SUCCESS)
+        {
+            return true;
+        }
+        else if(api.isUserResolvableError(isAvailable))
+        {
+            Dialog dialog = api.getErrorDialog(this, isAvailable, 0);
+            dialog.show();
+        }
+
+        return false;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +86,15 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         for (int i = 0; i < list_of_elements.size(); i++) {
             list_of_elements.get(i).setOnClickListener(this);
         }
+
+        if(googlServicesAvailable())
+        {
+            Toast.makeText(this, "YAY", Toast.LENGTH_LONG).show();
+            mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
+        }
+
+
 
         new GetProductTask().execute(id);
     }
@@ -156,5 +198,29 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 return "Sonstiges";
         }
         return "";
+    }
+
+    @Override
+    public void onMapReady(GoogleMap gMap) {
+        googleMap = gMap;
+       googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        try {
+            googleMap.setMyLocationEnabled(true);
+        } catch (SecurityException se) {
+
+        }
+
+        //Edit the following as per you needs
+        googleMap.setTrafficEnabled(false);
+        googleMap.setIndoorEnabled(true);
+        googleMap.setBuildingsEnabled(true);
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+        //
+
+        LatLng placeLocation = new LatLng(47.058558,15.460196); //Make them global
+        Marker placeMarker = googleMap.addMarker(new MarkerOptions().position(placeLocation)
+                .title("test"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(placeLocation));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 1000, null);
     }
 }

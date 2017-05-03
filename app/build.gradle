@@ -32,4 +32,6 @@ dependencies {
     testCompile 'org.json:json:20140107'
     testCompile 'junit:junit:4.12'
     androidTestCompile 'junit:junit:4.12'
+    compile 'com.google.android.gms:play-services:8.4.0'
+
 }

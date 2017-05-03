@@ -23,4 +23,9 @@
     <string-array name="releaseAdEinheit_arrays">
         <item>Kilogramm</item>
     </string-array>
+
+
+    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
+        AIzaSyBXSKri2utmkn80rG3ERLWM-it2DO29Z54
+</string>
 </resources>
