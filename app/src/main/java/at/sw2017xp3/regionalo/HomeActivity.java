@@ -51,9 +51,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-
-
-
+                
+                Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php?q=" + query);
+                new GetProductTask().execute(uri.toString());
                 return true;
             }
 
