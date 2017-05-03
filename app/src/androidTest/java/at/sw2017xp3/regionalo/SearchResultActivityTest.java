@@ -39,17 +39,13 @@ public class SearchResultActivityTest {
             new ActivityTestRule<>(SearchResultActivity.class, true, true);
 
 
-    @Test
-    public void testButtons() {
-        onView(withId(R.id.expand)).perform(scrollTo(),click());
-        onView(withId(R.id.Button_ID_ExtendedSearchStart)).perform(scrollTo(),click());
-        onView(withId(R.id.Button_ID_ResetFilterExtendedSearch)).perform(scrollTo(),click());
-    }
+
 
     @Test
-    public void testFields() {
+    public void testButtons() {
         onView(withId(R.id.expand)).perform(click());
-        onView(withId(R.id.Spinner_ID_ExtendedSearch)).perform(scrollTo(), click());
+
+        onView(withId(R.id.Spinner_ID_ExtendedSearch)).perform(click());
         onView(withText("Alphabetisch")).perform(click());
 
         onView(withId(R.id.checkBox_ID_BiologischerAnbau)).perform(scrollTo(),click());
@@ -124,8 +120,12 @@ public class SearchResultActivityTest {
         onView(withId(R.id.checkBox_ID_BereitsGeerntet)).check(matches(isNotChecked()));
         onView(withId(R.id.checkBox_ID_SelbstErnten)).perform(scrollTo());
         onView(withId(R.id.checkBox_ID_SelbstErnten)).check(matches(isNotChecked()));
-    }
 
+        onView(withId(R.id.Button_ID_ExtendedSearchStart)).perform(scrollTo(), click());
+        onView(withId(R.id.Button_ID_ResetFilterExtendedSearch)).perform(scrollTo(), click());
+
+
+    }
 
     @Test
     public void testSearchFunction() {
@@ -135,12 +135,12 @@ public class SearchResultActivityTest {
 
     @Test
     public void testRecommendedPictures (){
-        onView(withId(R.id.imgButtonRnd1)).perform(scrollTo(), click());
-        onView(withId(R.id.imgButtonRnd2)).perform(scrollTo(), click());
+        onView(withId(R.id.imgButtonRnd6)).perform(scrollTo(), click());
+        onView(withId(R.id.imgButtonRnd5)).perform(scrollTo(), click());
         onView(withId(R.id.imgButtonRnd3)).perform(scrollTo(), click());
         onView(withId(R.id.imgButtonRnd4)).perform(scrollTo(), click());
-        onView(withId(R.id.imgButtonRnd5)).perform(scrollTo(), click());
-        onView(withId(R.id.imgButtonRnd6)).perform(scrollTo(), click());
+        onView(withId(R.id.imgButtonRnd2)).perform(scrollTo(), click());
+        onView(withId(R.id.imgButtonRnd1)).perform(scrollTo(), click());
     }
 
     @Test
@@ -154,6 +154,9 @@ public class SearchResultActivityTest {
         onView(withId(R.id.textViewEmail)).perform(typeText("Hallo Welt!"));
         onView(withId(R.id.textViewEmail)).check(matches(withText("Hallo Welt!")));
     }
+
+
+
 
 
 
