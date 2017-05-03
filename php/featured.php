@@ -7,8 +7,9 @@
  */
 //header('Content-Type: application/json');
 require "config.php";
+header('Content-type: text/html; charset=utf-8');
 
-$sql = "SELECT * FROM Product";
+$sql = "SELECT * FROM Product limit 10";
 $result = mysqli_query($con, $sql);
 
 $rows = array();

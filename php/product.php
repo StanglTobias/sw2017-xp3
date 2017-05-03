@@ -1,5 +1,6 @@
 <?php
 require "config.php";
+header('Content-type: text/html; charset=utf-8');
 
 $id = $_GET['id'];
 $result = mysqli_query($con,"SELECT * FROM Product where id='$id'");

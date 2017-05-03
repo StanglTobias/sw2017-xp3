@@ -6,6 +6,7 @@
  * Time: 13:22
  */
 require "config.php";
+header('Content-type: text/html; charset=utf-8');
 
 $id = $_GET["id"];
 $result = mysqli_query($con,"SELECT * FROM Type where id='$id'");
