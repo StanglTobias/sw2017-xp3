@@ -109,7 +109,7 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Weizen"));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
-        onView(withId(1)).perform(click());
+        onView(withId(20)).perform(click());
     }
 
 

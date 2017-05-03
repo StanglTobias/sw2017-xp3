@@ -47,15 +47,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 findViewById(R.id.buttonCereals),
                 findViewById(R.id.buttonMilk)));
 
-        SearchView sv = (SearchView)findViewById(R.id.searchViewHome);
+        SearchView sv = (SearchView) findViewById(R.id.searchViewHome);
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
 
                 Intent myIntent = new Intent(HomeActivity.this, SearchResultActivity.class);
-                if(!query.isEmpty())
-                {
+                if (!query.isEmpty()) {
                     Bundle bundle = new Bundle();
                     bundle.putString("query", query);
                     myIntent.putExtras(bundle);
@@ -80,7 +79,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-        private class GetProductTask extends AsyncTask<String, Void, ArrayList<Product>> implements View.OnClickListener {
+    private class GetProductTask extends AsyncTask<String, Void, ArrayList<Product>> implements View.OnClickListener {
 
         @Override
         protected ArrayList<Product> doInBackground(String... params) {
@@ -92,7 +91,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         @Override
-        protected void onPostExecute(ArrayList<Product>  result) {
+        protected void onPostExecute(ArrayList<Product> result) {
 
             Toast.makeText(HomeActivity.this, "Daten geladen", Toast.LENGTH_LONG).show();
 
@@ -101,7 +100,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                 LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayout_Home_Activity);
                 for (Product p : result
-                     ) {
+                        ) {
                     System.out.println("GetProductTask.onPostExecute name of product: " + p.getName());
 
                     LayoutInflater inflater = getLayoutInflater();
@@ -118,7 +117,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText("Preis: " + String.valueOf(p.getPrice()));
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct5)).setText("Typ: " + String.valueOf(p.getType()));
                 }
-                }
+                
 
             } catch (Exception ex) {
                 System.out.println("GetProductTask.onPostExecute" + "exception");
