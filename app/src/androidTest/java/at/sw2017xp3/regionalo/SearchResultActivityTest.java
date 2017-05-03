@@ -45,8 +45,14 @@ public class SearchResultActivityTest {
     @Test
     public void testButtons() {
         onView(withId(R.id.expand)).perform(doubleClick());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         onView(withId(R.id.Spinner_ID_ExtendedSearch)).perform(click());
+
         onView(withText("Alphabetisch")).perform(click());
 
         onView(withId(R.id.checkBox_ID_BiologischerAnbau)).perform(scrollTo(),click());
