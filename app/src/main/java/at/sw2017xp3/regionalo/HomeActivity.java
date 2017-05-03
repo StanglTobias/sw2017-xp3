@@ -118,6 +118,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText("Preis: " + String.valueOf(p.getPrice()));
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct5)).setText("Typ: " + String.valueOf(p.getType()));
                 }
+                }
 
             } catch (Exception ex) {
                 System.out.println("GetProductTask.onPostExecute" + "exception");
