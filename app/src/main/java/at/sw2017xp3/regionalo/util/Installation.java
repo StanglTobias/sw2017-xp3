@@ -1,4 +1,4 @@
-package at.sw2017xp3.regionalo.model;
+package at.sw2017xp3.regionalo.util;
 
 import android.content.Context;
 

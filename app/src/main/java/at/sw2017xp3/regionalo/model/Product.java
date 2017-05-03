@@ -8,7 +8,7 @@ import android.net.Uri;
  */
 
 public class Product {
-    public Product(int id, String name, boolean isBio, double price, int producerId, int typeID, String unitType) {
+    public Product(int id, String name, boolean isBio, double price, int producerId, int typeID, String unitType, int likes) {
         id_ = id;
         name_ = name;
         isBio_ = isBio;
@@ -16,6 +16,7 @@ public class Product {
         producerId_ = producerId;
         typeID_ = typeID;
         unitType_ = unitType;
+        likes_ = likes;
     }
 
     public String getName() {
@@ -49,6 +50,15 @@ public class Product {
     {
         return Core.getInstance().getUsers().getUser(id_);
     }
+
+    public int getLikes() {
+        return likes_;
+    }
+
+    public void incrementLikes()
+    {
+        likes_++;
+    }
     
 
     int id_;
@@ -58,4 +68,5 @@ public class Product {
     double price_;
     int producerId_;
     int typeID_;
+    int likes_;
 }

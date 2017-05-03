@@ -1,8 +1,11 @@
 package at.sw2017xp3.regionalo.util;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -26,6 +29,18 @@ public class HttpUtils {
         return conn;
     }
 
+    public static HttpURLConnection httpPost(String myurl)  throws IOException {
+        URL url = new URL(myurl);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "applicaiton/json; charset=utf-8");
+        conn.setRequestProperty("Accept", "applicaiton/json");
+        conn.setDoOutput(true);
+        conn.setDoInput(true);
+
+        return conn;
+    }
+
     public static String convertInputStreamToString(InputStream stream, int length) throws IOException, UnsupportedEncodingException {
         Reader reader = null;
         reader = new InputStreamReader(stream, "UTF-8");
@@ -43,6 +58,7 @@ public class HttpUtils {
 
             return  HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
         } catch (Exception ex) {
+
             return "";
         } finally {
             if (is != null) {

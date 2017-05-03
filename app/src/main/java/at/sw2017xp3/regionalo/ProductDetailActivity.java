@@ -21,7 +21,9 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.Product;
+import at.sw2017xp3.regionalo.model.ProductManager;
 import at.sw2017xp3.regionalo.model.User;
 import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
@@ -120,7 +122,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 ((TextView)findViewById(R.id.textViewName)).setText(p.getFullName());
                 ((TextView)findViewById(R.id.textViewAdress)).setText(p.getPostalCode() + " " + p.getCity() + "\n" + p.getAddress());
                 ((TextView)findViewById(R.id.textViewNumber)).setText(p.getPhoneNumber());
-                ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(p.getLikes()));
+              //  ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(p.getLikes()));
             } catch(Exception e){
                 System.out.println("Halt Stop");
             }
@@ -175,14 +177,39 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         switch (clickedButton.getId()){
             case R.id.buttonLike:
+                new LikeTask().execute(1);
+                /*
               like_button_counter_ =  Integer.valueOf((String)(((TextView)findViewById(R.id.textViewLikeCount)).getText()));
               like_button_counter_++;
-              ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(like_button_counter_));
+              ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(like_button_counter_));*/
               break;
 
             case R.id.ButtonContact:
                 //onClick moveTo Website or show contact data
                 break;
+        }
+    }
+
+    private class LikeTask extends AsyncTask<Integer, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Integer... params) {
+            try {
+                return Core.getInstance().getProducts().like(params[0]);
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            try {
+                if(result)
+                {
+                    Toast.makeText(ProductDetailActivity.this, "GELIKED", Toast.LENGTH_LONG).show();
+                }
+            } catch(Exception e){
+                System.out.println("Halt Stop");
+            }
         }
     }
 

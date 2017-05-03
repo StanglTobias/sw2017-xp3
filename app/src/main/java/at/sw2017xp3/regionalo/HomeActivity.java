@@ -30,7 +30,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 
 import at.sw2017xp3.regionalo.model.CurrentUser;
-import at.sw2017xp3.regionalo.model.Installation;
+import at.sw2017xp3.regionalo.util.Installation;
 import at.sw2017xp3.regionalo.model.Product;
 import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
@@ -50,7 +50,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         //get User Identification
-        CurrentUser.setCurrentUserId(Installation.id(this));
+        CurrentUser.Init(this);
 
         list_of_elements.addAll(Arrays.asList(
                 findViewById(R.id.buttonMeat),
