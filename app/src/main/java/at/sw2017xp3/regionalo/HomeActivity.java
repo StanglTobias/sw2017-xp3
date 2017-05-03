@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
+import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.Product;
 import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
@@ -51,10 +52,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                
-                Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php?q=" + query);
-                new GetProductTask().execute(uri.toString());
-                return true;
+
+                Intent myIntent = new Intent(HomeActivity.this, SearchResultActivity.class);
+                if(!query.isEmpty())
+                {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("query", query);
+                    myIntent.putExtras(bundle);
+
+                    startActivity(myIntent);
+                }
+
+                return false;
             }
 
             @Override
@@ -64,45 +73,35 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         });
 
 
-
-        Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/featured.php");
-        // .buildUpon()
-        // .appendQueryParameter("id", "1").build();
-
-        new GetProductTask().execute(uri.toString());
+        new GetProductTask().execute();
 
         for (int i = 0; i < list_of_elements.size(); i++) {
             list_of_elements.get(i).setOnClickListener(this);
         }
     }
 
-        private class GetProductTask extends AsyncTask<String, Void, String> implements View.OnClickListener {
+        private class GetProductTask extends AsyncTask<String, Void, ArrayList<Product>> implements View.OnClickListener {
 
         @Override
-        protected String doInBackground(String... params) {
+        protected ArrayList<Product> doInBackground(String... params) {
             try {
-                return downloadContent(params[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve data. URL may be invalid.";
+                return Core.getInstance().getProducts().getFeaturedProducts();
+            } catch (Exception e) {
+                return null;
             }
         }
 
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(ArrayList<Product>  result) {
 
             Toast.makeText(HomeActivity.this, "Daten geladen", Toast.LENGTH_LONG).show();
 
 
             try {
-                JSONArray arr = new JSONArray(result); //featured products
 
                 LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayout_Home_Activity);
-                for (int productCnt = 0; productCnt < arr.length(); productCnt++) {
-                    System.out.println("GetProductTask.onPostExecute array laenge " + arr.length());
-
-                    JSONObject mJsonObject = arr.getJSONObject(productCnt);
-                    Product p = JsonObjectMapper.CreateProduct(mJsonObject);
-
+                for (Product p : result
+                     ) {
                     System.out.println("GetProductTask.onPostExecute name of product: " + p.getName());
 
                     LayoutInflater inflater = getLayoutInflater();
@@ -140,25 +139,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(myIntent);
         }
     }
-
-    private String downloadContent(String myurl) throws IOException {
-        InputStream is = null;
-        int length = 10000;
-
-        try {
-            HttpURLConnection conn = HttpUtils.httpGet(myurl);
-
-            return HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
-
-        } catch (Exception ex) {
-            return "";
-        } finally {
-            if (is != null) {
-                is.close();
-            }
-        }
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
