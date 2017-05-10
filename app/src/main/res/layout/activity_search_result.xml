@@ -175,7 +175,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Biologisch" />
+                                    android:text="Biologisch"
+                                    app:buttonTint="@android:color/background_light" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -201,42 +202,48 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Obst" />
+                                    android:text="Obst"
+                                    app:buttonTint="@android:color/background_light" />
 
                                 <CheckBox
                                     android:id="@+id/checkBox_ID_KategorieGemüse"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Gemüse" />
+                                    android:text="Gemüse"
+                                    app:buttonTint="@android:color/background_light" />
 
                                 <CheckBox
                                     android:id="@+id/checkBox_ID_KategoriePilze"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Pilze" />
+                                    android:text="Pilze"
+                                    app:buttonTint="@android:color/background_light" />
 
                                 <CheckBox
                                     android:id="@+id/checkBox_ID_KategoriePlanzenUndSamen"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Pflanzen und Samen" />
+                                    android:text="Pflanzen und Samen"
+                                    app:buttonTint="@android:color/background_light" />
 
                                 <CheckBox
                                     android:id="@+id/checkBox_ID_KategorieHolz"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Holz" />
+                                    android:text="Holz"
+                                    app:buttonTint="@android:color/background_light" />
 
                                 <CheckBox
                                     android:id="@+id/checkBox_ID_WeitereGartenprodukte"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Weitere Gartenprodukte" />
+                                    android:text="Weitere Gartenprodukte"
+                                    app:buttonTint="@android:color/background_light" />
 
                             </LinearLayout>
 
@@ -262,55 +269,64 @@
                                     android:id="@+id/checkBox_ID_Burgenland"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Burgenland" />
+                                    android:text="Burgenland"
+                                    app:buttonTint="@android:color/background_light" />
 
                                 <CheckBox
                                     android:id="@+id/checkBox_ID_Kaernten"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Kärnten" />
+                                    android:text="Kärnten"
+                                    app:buttonTint="@android:color/background_light" />
 
                                 <CheckBox
                                     android:id="@+id/checkBox_ID_Niederoesterreich"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Niederösterreich" />
+                                    android:text="Niederösterreich"
+                                    app:buttonTint="@android:color/background_light" />
 
                                 <CheckBox
                                     android:id="@+id/checkBox_ID_Oberoesterreich"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Oberösterreich" />
+                                    android:text="Oberösterreich"
+                                    app:buttonTint="@android:color/background_light" />
 
                                 <CheckBox
                                     android:id="@+id/checkBox_ID_Salzburg"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Salzburg" />
+                                    android:text="Salzburg"
+                                    app:buttonTint="@android:color/background_light" />
 
                                 <CheckBox
                                     android:id="@+id/checkBox_ID_Steiermark"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Steiermark" />
+                                    android:text="Steiermark"
+                                    app:buttonTint="@android:color/background_light" />
 
                                 <CheckBox
                                     android:id="@+id/checkBox_ID_Tirol"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Tirol" />
+                                    android:text="Tirol"
+                                    app:buttonTint="@android:color/background_light" />
 
                                 <CheckBox
                                     android:id="@+id/checkBox_ID_Vorarlberg"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Vorarlberg" />
+                                    android:text="Vorarlberg"
+                                    app:buttonTint="@android:color/background_light" />
 
                                 <CheckBox
                                     android:id="@+id/checkBox_ID_Wien"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Wien" />
+                                    android:text="Wien"
+                                    app:buttonTint="@android:color/background_light" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -335,13 +351,15 @@
                                     android:id="@+id/checkBox_ID_Privat"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Privat" />
+                                    android:text="Privat"
+                                    app:buttonTint="@android:color/background_light" />
 
                                 <CheckBox
                                     android:id="@+id/checkBox_ID_Firma"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Firma" />
+                                    android:text="Firma"
+                                    app:buttonTint="@android:color/background_light" />
 
                             </LinearLayout>
 
@@ -367,13 +385,15 @@
                                     android:id="@+id/checkBox_ID_Zustellung"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Zustellung" />
+                                    android:text="Zustellung"
+                                    app:buttonTint="@android:color/background_light" />
 
                                 <CheckBox
                                     android:id="@+id/checkBox_ID_Selbstabholung"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Selbstabholung" />
+                                    android:text="Selbstabholung"
+                                    app:buttonTint="@android:color/background_light" />
 
                             </LinearLayout>
 
@@ -399,7 +419,8 @@
                                     android:id="@+id/checkBox_ID_NichtBenoetigt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Nicht benötigt" />
+                                    android:text="Nicht benötigt"
+                                    app:buttonTint="@android:color/background_light" />
 
                             </LinearLayout>
 
@@ -425,13 +446,15 @@
                                     android:id="@+id/checkBox_ID_BereitsGeerntet"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Bereits geerntet" />
+                                    android:text="Bereits geerntet"
+                                    app:buttonTint="@android:color/background_light" />
 
                                 <CheckBox
                                     android:id="@+id/checkBox_ID_SelbstErnten"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Selbst ernten" />
+                                    android:text="Selbst ernten"
+                                    app:buttonTint="@android:color/background_light" />
 
                             </LinearLayout>
 
@@ -465,7 +488,6 @@
         </LinearLayout>
 
 
-
-</ScrollView>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

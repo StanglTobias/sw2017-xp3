@@ -80,7 +80,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             ((TextView) findViewById(R.id.textViewCategroy)).setText("Kategorie: " + productCategorieName(p.getType()));
 
             User user = p.getUser();
-            
+
             ((TextView) findViewById(R.id.textViewName)).setText(user.getFullName());
             ((TextView) findViewById(R.id.textViewAdress)).setText(user.getPostalCode() + " " + user.getCity() + "\n" + user.getAddress());
             ((TextView) findViewById(R.id.textViewNumber)).setText(user.getPhoneNumber());
