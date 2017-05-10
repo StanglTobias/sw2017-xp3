@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -23,8 +25,8 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 public class ProductManager {
 
     ConcurrentHashMap<Integer, Product> cache_ = new ConcurrentHashMap<Integer, Product>();
-
-    ConcurrentHashMap<Integer, Integer> like_cache_ = new ConcurrentHashMap<Integer, Integer>();
+    public static final  String PRODUCT_URI = "http://sw-ma-xp3.bplaced.net/MySQLadmin/product.php";
+    public static final String PRODUCT_IMAGE_URI="http://sw-ma-xp3.bplaced.net/MySQLadmin/image.php";
 
     public ProductManager() {
     }
@@ -35,20 +37,28 @@ public class ProductManager {
         }
     }
 
+    public String getProductUri(int id){
+        Uri uri = Uri.parse(PRODUCT_URI)
+                .buildUpon()
+                .appendQueryParameter("id", Integer.toString(id)).build();
+        return uri.toString();
+    }
+
+    public String getImageUri(int id){
+        Uri uri = Uri.parse(PRODUCT_IMAGE_URI)
+                .buildUpon()
+                .appendQueryParameter("id", Integer.toString(id)).build();
+        return uri.toString();
+    }
+
     public Product getProduct(int id) {
         Product p = cache_.get(id);
 
         if (p != null)
             return p;
 
-
-        Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/product.php")
-                .buildUpon()
-                .appendQueryParameter("id", Integer.toString(id)).build();
-
         try {
-            String content =  HttpUtils.downloadContent(uri.toString());
-            System.out.println("content feature product " + content);
+            String content =  HttpUtils.downloadContent(getProductUri(id));
             JSONArray arr = new JSONArray(content); //featured products
             JSONObject mJsonObject = arr.getJSONObject(0);//one product
 
