@@ -67,9 +67,12 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         Bundle b = getIntent().getExtras();
         String query = null; // or other values
         if (b != null)
+        {
             query = b.getString("query");
+            setFilter(b);
+        }
 
-        setFilter(b);
+
 
         expandableLayout
                 = (ExpandableRelativeLayout) findViewById(R.id.expandableLayout);

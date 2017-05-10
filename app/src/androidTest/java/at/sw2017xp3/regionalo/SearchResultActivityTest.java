@@ -137,17 +137,7 @@ public class SearchResultActivityTest {
     }
 
 
-    @Test
-    public void testLoginButton(){
-        onView(withId(R.id.buttonLogin)).perform(click());
-    }
 
-    @Test
-    public void onClick(){
-        onView(withId(R.id.buttonLogin)).perform(click());
-        onView(withId(R.id.textViewEmail)).perform(typeText("Hallo Welt!"));
-        onView(withId(R.id.textViewEmail)).check(matches(withText("Hallo Welt!")));
-    }
 
 
 
