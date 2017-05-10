@@ -24,7 +24,6 @@ public class ProductDetailActivityInstrumentedTest {
 
     @Test
     public void checkButtonClicks() {
-        onView(withId(R.id.ButtonContact)).perform(scrollTo(),click());
         onView(withId(R.id.buttonLike)).perform(click());
     }
 

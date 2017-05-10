@@ -140,6 +140,7 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.searchViewHome)).perform(typeText("Speck"));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(1)).perform(click());
+        onView(withId(R.id.ButtonContact)).perform(scrollTo(), click());
 
     }
 

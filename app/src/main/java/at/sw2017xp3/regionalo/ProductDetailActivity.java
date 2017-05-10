@@ -84,7 +84,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 ((TextView)findViewById(R.id.textViewName)).setText(u.getFullName());
                 ((TextView)findViewById(R.id.textViewAdress)).setText(u.getPostalCode() + " " + u.getCity() + "\n" + u.getAddress());
                 ((TextView)findViewById(R.id.textViewNumber)).setText(u.getPhoneNumber());
-                ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(u.getLikes()));
+                ((TextView)findViewById(R.id.textViewEmail)).setText(u.getEmail());
 
 
             } catch(Exception e){
@@ -128,7 +128,11 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
               break;
 
             case R.id.ButtonContact:
-                //onClick moveTo Website or show contact data
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:" + ((TextView)findViewById(R.id.textViewEmail)).getText().toString())); // only email apps should handle this
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
                 break;
         }
     }
