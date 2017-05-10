@@ -63,7 +63,7 @@ public class JsonObjectMapperTest {
         String email = "Reci1@gmail.com";
         String phone = "066453245234";
         int isBio = 1;
-
+        int likes = 51;
 
         obj.put("id", id);
         obj.put("first_name", firstName);
@@ -74,7 +74,7 @@ public class JsonObjectMapperTest {
         obj.put("email", email);
         obj.put("phone_number", phone);
         obj.put("is_bio", isBio);
-
+        obj.put("likes", likes);
 
         User u = JsonObjectMapper.CreateUser(obj);
 

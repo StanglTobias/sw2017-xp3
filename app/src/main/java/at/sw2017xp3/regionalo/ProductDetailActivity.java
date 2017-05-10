@@ -36,7 +36,7 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
  * Created by Christof on 05.04.2017.
  */
 
-public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener{
+public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
     private Product product_;
     private int like_button_counter_;
@@ -49,7 +49,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         Bundle b = getIntent().getExtras();
         int id = 1; // or other values
-        if(b != null)
+        if (b != null)
             id = b.getInt(getString(R.string.id));
 
         findViewById(R.id.buttonLike).setEnabled(false);
@@ -71,6 +71,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
     private class GetProductTask extends AsyncTask<Integer, Void, Product> {
 
+
         @Override
         protected Product doInBackground(Integer... params) {
             try {
@@ -82,30 +83,24 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         @Override
         protected void onPostExecute(Product result) {
-            try {
+            Product p = product_ = result;
 
-                Product p = product_= result;
+            ((TextView) findViewById(R.id.textViewProductName)).setText(p.getName());
+            ((TextView) findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()) + "/" + p.getUnit());
+            ((TextView) findViewById(R.id.textViewQuality)).setText("Biologisch: " + isBio(p.isBio()));
+            ((TextView) findViewById(R.id.textViewCategroy)).setText("Kategorie: " + productCategorieName(p.getType()));
 
-                ((TextView)findViewById(R.id.textViewProductName)).setText(p.getName());
-                ((TextView)findViewById(R.id.textViewPrice)).setText(getString(R.string.euro) + Double.toString(p.getPrice()) + getString(R.string.slash) + p.getUnit());
-                ((TextView)findViewById(R.id.textViewQuality)).setText(getString(R.string.biologisch)  + isBio(p.isBio()));
-                ((TextView)findViewById(R.id.textViewCategroy)).setText(getString(R.string.kategorie) + productCategorieName(p.getType()));
+            User user = p.getUser();
+            ((TextView) findViewById(R.id.textViewName)).setText(user.getFullName());
+            ((TextView) findViewById(R.id.textViewAdress)).setText(user.getPostalCode() + " " + user.getCity() + "\n" + user.getAddress());
+            ((TextView) findViewById(R.id.textViewNumber)).setText(user.getPhoneNumber());
+            ((TextView) findViewById(R.id.textViewEmail)).setText(user.getEmail());
+            ((TextView) findViewById(R.id.textViewLikeCount)).setText(Integer.toString(p.getLikes()));
 
-                User u = p.getUser();
-
-                ((TextView)findViewById(R.id.textViewName)).setText(u.getFullName());
-                ((TextView)findViewById(R.id.textViewAdress)).setText(u.getPostalCode() + " " + u.getCity() + "\n" + u.getAddress());
-                ((TextView)findViewById(R.id.textViewNumber)).setText(u.getPhoneNumber());
-                ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(p.getLikes()));
-
-
-                findViewById(R.id.buttonLike).setEnabled(!p.CurrentUserHasLiked());
-
-
-            } catch(Exception e){
-                System.out.println(getString(R.string.stop));
-            }
+            findViewById(R.id.buttonLike).setEnabled(!p.CurrentUserHasLiked());
         }
+
+
     }
 
     @Override
@@ -123,7 +118,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.buttonLogin) {
+        if (id == R.id.buttonMenuLogin) {
             Intent myIntent = new Intent(this, LoginActivity.class);
             startActivity(myIntent);
         }
@@ -133,17 +128,20 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        Button clickedButton = (Button)v;
+        Button clickedButton = (Button) v;
 
-        switch (clickedButton.getId()){
+        switch (clickedButton.getId()) {
             case R.id.buttonLike:
                 if(product_ != null && !product_.CurrentUserHasLiked())
                     new LikeTask().execute(product_.getId());
-
-              break;
+                break;
 
             case R.id.ButtonContact:
-                //onClick moveTo Website or show contact data
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:" + ((TextView) findViewById(R.id.textViewEmail)).getText().toString())); // only email apps should handle this
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
                 break;
         }
     }
@@ -161,28 +159,27 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         @Override
         protected void onPostExecute(Boolean result) {
             try {
-                if(result)
-                {
-                    if(product_!= null) {
+                if (result) {
+                    if (product_ != null) {
 
-                        ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(product_.getLikes()));
+                        ((TextView) findViewById(R.id.textViewLikeCount)).setText(Integer.toString(product_.getLikes()));
                         ((Button) findViewById(R.id.buttonLike)).setEnabled(false);
                     }
                 }
-            } catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Halt Stop");
             }
         }
     }
 
     public String isBio(boolean yes_or_no) {
-        if(yes_or_no == true)
+        if (yes_or_no == true)
             return getString(R.string.yes);
         else
             return getString(R.string.no);
     }
 
-    public String productCategorieName (int type_id) {
+    public String productCategorieName(int type_id) {
         switch (type_id) {
             case 1:
                 return getString(R.string.meat);

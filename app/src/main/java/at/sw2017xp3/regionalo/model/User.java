@@ -16,7 +16,6 @@ public class User {
     String phone_;
     boolean isBio_;
 
-
     public User(int id, String firstName, String lastName, String address, String city, String postalCode, String email, String phone_number, boolean isBio) {
         id_ = id;
         firstName_ = firstName;
@@ -60,4 +59,6 @@ public class User {
     public Boolean isBio() {
         return isBio_;
     }
+
+
 }

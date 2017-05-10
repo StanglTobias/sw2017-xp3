@@ -286,6 +286,22 @@
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
+                <TextView
+                    android:id="@+id/textViewEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="0dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="christof.jahn@gmail.com"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
                 <Button
                     android:id="@+id/ButtonContact"
                     android:layout_width="match_parent"
