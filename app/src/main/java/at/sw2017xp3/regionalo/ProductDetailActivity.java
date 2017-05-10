@@ -31,7 +31,7 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
  * Created by Christof on 05.04.2017.
  */
 
-public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener{
     private ArrayList<View> list_of_elements = new ArrayList<>();
     private int like_button_counter_;
 
@@ -41,7 +41,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         Bundle b = getIntent().getExtras();
         int id = 1; // or other values
-        if (b != null)
+        if(b != null)
             id = b.getInt("id");
 
         setContentView(R.layout.activity_product_detailes);
@@ -63,8 +63,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         @Override
         protected Product doInBackground(Integer... params) {
             try {
-                Product p = Core.getInstance().getProducts().getProduct(params[0]);
-                return p;
+                return Core.getInstance().getProducts().getProduct(params[0]);
             } catch (Exception e) {
                 return null;
             }
@@ -80,10 +79,10 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             ((TextView) findViewById(R.id.textViewCategroy)).setText("Kategorie: " + productCategorieName(p.getType()));
 
             User user = p.getUser();
-
-            ((TextView) findViewById(R.id.textViewName)).setText(user.getFullName());
-            ((TextView) findViewById(R.id.textViewAdress)).setText(user.getPostalCode() + " " + user.getCity() + "\n" + user.getAddress());
-            ((TextView) findViewById(R.id.textViewNumber)).setText(user.getPhoneNumber());
+                ((TextView)findViewById(R.id.textViewName)).setText(user.getFullName());
+                ((TextView)findViewById(R.id.textViewAdress)).setText(user.getPostalCode() + " " + user.getCity() + "\n" + user.getAddress());
+                ((TextView)findViewById(R.id.textViewNumber)).setText(user.getPhoneNumber());
+                ((TextView)findViewById(R.id.textViewEmail)).setText(user.getEmail());
 
         }
     }
@@ -103,27 +102,30 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.buttonLogin) {
+        if (id == R.id.buttonMenuLogin) {
             Intent myIntent = new Intent(this, LoginActivity.class);
             startActivity(myIntent);
         }
 
-        return super.onOptionsItemSelected(item);
+        return false;
     }
 
     @Override
     public void onClick(View v) {
-        Button clickedButton = (Button) v;
 
-        switch (clickedButton.getId()) {
+        switch (v.getId()){
             case R.id.buttonLike:
-                like_button_counter_ = Integer.valueOf((String) (((TextView) findViewById(R.id.textViewLikeCount)).getText()));
-                like_button_counter_++;
-                ((TextView) findViewById(R.id.textViewLikeCount)).setText(Integer.toString(like_button_counter_));
-                break;
+              like_button_counter_ =  Integer.valueOf((String)(((TextView)findViewById(R.id.textViewLikeCount)).getText()));
+              like_button_counter_++;
+              ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(like_button_counter_));
+              break;
 
             case R.id.ButtonContact:
-                //onClick moveTo Website or show contact data
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:" + ((TextView)findViewById(R.id.textViewEmail)).getText().toString())); // only email apps should handle this
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
                 break;
         }
     }

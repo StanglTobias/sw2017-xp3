@@ -59,4 +59,6 @@ public class User {
     public Boolean isBio() {
         return isBio_;
     }
+
+
 }

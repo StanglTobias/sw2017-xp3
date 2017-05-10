@@ -124,12 +124,12 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testLoginButton(){
-        onView(withId(R.id.buttonLogin)).perform(click());
+        onView(withId(R.id.buttonMenuLogin)).perform(click());
     }
 
     @Test
     public void onClick(){
-        onView(withId(R.id.buttonLogin)).perform(click());
+        onView(withId(R.id.buttonMenuLogin)).perform(click());
         onView(withId(R.id.textViewEmail)).perform(typeText("Hallo Welt!"));
         onView(withId(R.id.textViewEmail)).check(matches(withText("Hallo Welt!")));
     }
@@ -141,6 +141,7 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.searchViewHome)).perform(typeText("Speck"));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(1)).perform(click());
+        //onView(withId(R.id.ButtonContact)).perform(scrollTo(), click());
 
     }
 
@@ -149,6 +150,17 @@ public class ExampleInstrumentedTest {
     public void testSpeckDetail(){
         onView(withId(1)).perform(click());
         onView(withId(R.id.textViewProductName)).check(matches(withText("Speck")));
+
+    }
+
+    @Test
+    public void testSearchSpeckDetailLogin(){
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewHome)).perform(typeText("Speck"));
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(1)).perform(click());
+        //onView(withId(R.id.ButtonContact)).perform(scrollTo(), click());
 
     }
 }

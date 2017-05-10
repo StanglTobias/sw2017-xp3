@@ -155,7 +155,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.buttonLogin) {
+        if (id == R.id.buttonMenuLogin) {
             Intent myIntent = new Intent(this, LoginActivity.class);
             startActivity(myIntent);
         }

@@ -83,6 +83,5 @@ public class JsonObjectMapperTest {
         assertTrue(email.equals(u.getEmail()));
         assertTrue(phone.equals(u.getPhoneNumber()));
         assertTrue((isBio == 1) == u.isBio());
-        assertTrue(likes == u.getLikes());
     }
 }
