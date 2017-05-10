@@ -22,10 +22,10 @@ public class ProductDetailActivityInstrumentedTest {
     public ActivityTestRule<ProductDetailActivity> mActivityRule = new
             ActivityTestRule<>(ProductDetailActivity.class);
 
-    @Test
+   @Test
     public void checkButtonClicks() {
-        onView(withId(R.id.ButtonContact)).perform(scrollTo(),click());
-        onView(withId(R.id.buttonLike)).perform(click());
+        onView(withId(R.id.textViewLikeCount)).perform(scrollTo(),click());
+
     }
 
 
