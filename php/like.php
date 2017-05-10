@@ -12,11 +12,8 @@ require "config.php";
 //echo $rawdata;
 
 //App must send multipart/formdata encoded data
-$pid = $_POST['pid'];
-$uuid = $_POST['uuid'];
-
-echo "pid: " .$pid;
-echo "uuid: " . $uuid;
+$pid = $_GET['pid'];
+$uuid = $_GET['uuid'];
 
 mysqli_query($con,
     "INSERT INTO Likes (unique_user_id, product_id)VALUES ('$uuid', '$pid')");
