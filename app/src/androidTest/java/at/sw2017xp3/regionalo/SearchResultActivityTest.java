@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.KeyEvent;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.doubleClick;
 import static android.support.test.espresso.action.ViewActions.longClick;
+import static android.support.test.espresso.action.ViewActions.pressKey;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -148,6 +150,20 @@ public class SearchResultActivityTest {
         onView(withId(R.id.textViewEmail)).check(matches(withText("Hallo Welt!")));
     }
 
+    @Test
+    public void testSearchSpeckDetail(){
+        onView(withId(R.id.searchViewResult)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewResult)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewResult)).perform(typeText("Speck"));
+        onView(withId(R.id.searchViewResult)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewResult)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewResult)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewResult)).perform(typeText("Speck"));
+        onView(withId(R.id.searchViewResult)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+
+
+
+    }
 
 
 

@@ -118,9 +118,8 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        Button clickedButton = (Button)v;
 
-        switch (clickedButton.getId()){
+        switch (v.getId()){
             case R.id.buttonLike:
               like_button_counter_ =  Integer.valueOf((String)(((TextView)findViewById(R.id.textViewLikeCount)).getText()));
               like_button_counter_++;
