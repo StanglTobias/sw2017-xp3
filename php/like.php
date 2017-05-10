@@ -15,11 +15,19 @@ require "config.php";
 $pid = $_GET['pid'];
 $uuid = $_GET['uuid'];
 
-mysqli_query($con,
-    "INSERT INTO Likes (unique_user_id, product_id)VALUES ('$uuid', '$pid')");
+$result = mysqli_query($con, "SELECT * FROM Likes WHERE unique_user_id = '$uuid'");
 
-mysqli_query($con,
-    "UPDATE Product SET likes = likes + 1 WHERE id='$pid'");
+if($row = mysqli_fetch_array($result)) {
+    echo 0;
+}
+else{
+    echo 1;
+    mysqli_query($con,
+        "INSERT INTO Likes (unique_user_id, product_id) VALUES ('$uuid', '$pid')");
+
+    mysqli_query($con,
+        "UPDATE Product SET likes = likes + 1 WHERE id='$pid'");
+}
 
 mysqli_close($con);
 ?>
