@@ -31,7 +31,7 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
  * Created by Christof on 05.04.2017.
  */
 
-public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener{
+public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
     private int like_button_counter_;
 
@@ -41,7 +41,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         Bundle b = getIntent().getExtras();
         int id = 1; // or other values
-        if(b != null)
+        if (b != null)
             id = b.getInt("id");
 
         setContentView(R.layout.activity_product_detailes);
@@ -59,10 +59,12 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
     private class GetProductTask extends AsyncTask<Integer, Void, Product> {
 
+
         @Override
         protected Product doInBackground(Integer... params) {
             try {
-                return Core.getInstance().getProducts().getProduct(params[0]);
+                Product p = Core.getInstance().getProducts().getProduct(params[0]);
+                return p;
             } catch (Exception e) {
                 return null;
             }
@@ -70,26 +72,19 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         @Override
         protected void onPostExecute(Product result) {
-            try {
+            Product p = result;
 
-                Product p = result;
+            ((TextView) findViewById(R.id.textViewProductName)).setText(p.getName());
+            ((TextView) findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()) + "/" + p.getUnit());
+            ((TextView) findViewById(R.id.textViewQuality)).setText("Biologisch: " + isBio(p.isBio()));
+            ((TextView) findViewById(R.id.textViewCategroy)).setText("Kategorie: " + productCategorieName(p.getType()));
 
-                ((TextView)findViewById(R.id.textViewProductName)).setText(p.getName());
-                ((TextView)findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()) + "/" + p.getUnit());
-                ((TextView)findViewById(R.id.textViewQuality)).setText("Biologisch: "  + isBio(p.isBio()));
-                ((TextView)findViewById(R.id.textViewCategroy)).setText("Kategorie: " + productCategorieName(p.getType()));
+            User user = p.getUser();
+            
+            ((TextView) findViewById(R.id.textViewName)).setText(user.getFullName());
+            ((TextView) findViewById(R.id.textViewAdress)).setText(user.getPostalCode() + " " + user.getCity() + "\n" + user.getAddress());
+            ((TextView) findViewById(R.id.textViewNumber)).setText(user.getPhoneNumber());
 
-                User u = p.getUser();
-
-                ((TextView)findViewById(R.id.textViewName)).setText(u.getFullName());
-                ((TextView)findViewById(R.id.textViewAdress)).setText(u.getPostalCode() + " " + u.getCity() + "\n" + u.getAddress());
-                ((TextView)findViewById(R.id.textViewNumber)).setText(u.getPhoneNumber());
-                ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(u.getLikes()));
-
-
-            } catch(Exception e){
-                System.out.println("Halt Stop");
-            }
         }
     }
 
@@ -118,14 +113,14 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        Button clickedButton = (Button)v;
+        Button clickedButton = (Button) v;
 
-        switch (clickedButton.getId()){
+        switch (clickedButton.getId()) {
             case R.id.buttonLike:
-              like_button_counter_ =  Integer.valueOf((String)(((TextView)findViewById(R.id.textViewLikeCount)).getText()));
-              like_button_counter_++;
-              ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(like_button_counter_));
-              break;
+                like_button_counter_ = Integer.valueOf((String) (((TextView) findViewById(R.id.textViewLikeCount)).getText()));
+                like_button_counter_++;
+                ((TextView) findViewById(R.id.textViewLikeCount)).setText(Integer.toString(like_button_counter_));
+                break;
 
             case R.id.ButtonContact:
                 //onClick moveTo Website or show contact data
@@ -134,20 +129,20 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     }
 
     public static String isBio(boolean yes_or_no) {
-        if(yes_or_no == true)
+        if (yes_or_no == true)
             return "Ja";
         else
             return "Nein";
     }
 
-    public static String productCategorieName (int type_id) {
+    public static String productCategorieName(int type_id) {
         switch (type_id) {
             case 1:
                 return "Fleisch";
             case 2:
                 return "Obst";
             case 3:
-                return"Gemüse";
+                return "Gemüse";
             case 4:
                 return "Milchprodukte";
             case 5:

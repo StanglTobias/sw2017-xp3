@@ -15,9 +15,8 @@ public class User {
     String email_;
     String phone_;
     boolean isBio_;
-    int likes_;
 
-    public User(int id, String firstName, String lastName, String address, String city, String postalCode, String email, String phone_number, boolean isBio, int likes) {
+    public User(int id, String firstName, String lastName, String address, String city, String postalCode, String email, String phone_number, boolean isBio) {
         id_ = id;
         firstName_ = firstName;
         lastName_ = lastName;
@@ -27,7 +26,6 @@ public class User {
         email_ = email;
         phone_ = phone_number;
         isBio_ = isBio;
-        likes_ = likes;
     }
 
     public int getId() {
@@ -60,9 +58,5 @@ public class User {
 
     public Boolean isBio() {
         return isBio_;
-    }
-
-    public int getLikes() {
-        return likes_;
     }
 }
