@@ -15,7 +15,7 @@ require "config.php";
 $pid = $_GET['pid'];
 $uuid = $_GET['uuid'];
 
-$result = mysqli_query($con, "SELECT * FROM Likes WHERE unique_user_id = '$uuid'");
+$result = mysqli_query($con, "SELECT * FROM Likes WHERE unique_user_id = '$uuid' and product_id='$pid'");
 
 if($row = mysqli_fetch_array($result)) {
     echo 0;

@@ -19,7 +19,6 @@ while($row = mysqli_fetch_array($result))
         'type_id' => $row['type_id'],
         'quantity' => $row['quantity'],
         'unit_type' => $row['unit_type'],
-        'image_id' => $row['image_id'],
         'transfer' => $row['transfer'],
         'likes' => $row['likes2'],
         'description' => $row['description']
