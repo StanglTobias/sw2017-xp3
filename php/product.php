@@ -1,8 +1,11 @@
 <?php
 require "config.php";
+header('Content-type: text/html; charset=utf-8');
 
 $id = $_GET['id'];
-$result = mysqli_query($con,"SELECT * FROM Product where id='$id'");
+
+$result = mysqli_query($con,"select p.*, coalesce(p.likes, 0) likes2 FROM Product p where id='$id'");
+
 $json = array();
 
 while($row = mysqli_fetch_array($result))
@@ -16,7 +19,10 @@ while($row = mysqli_fetch_array($result))
         'type_id' => $row['type_id'],
         'quantity' => $row['quantity'],
         'unit_type' => $row['unit_type'],
-        'image_id' => $row['image_id']
+        'image_id' => $row['image_id'],
+        'transfer' => $row['transfer'],
+        'likes' => $row['likes2'],
+        'description' => $row['description']
     );
 }
 

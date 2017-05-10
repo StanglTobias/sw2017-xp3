@@ -1,5 +1,6 @@
 <?php
 require "config.php";
+header('Content-type: text/html; charset=utf-8');
 
 $id = $_GET["id"];
 $result = mysqli_query($con,"SELECT * FROM User where id='$id'");
@@ -14,13 +15,13 @@ while($row = mysqli_fetch_array($result))
         'company_name' => $row['company_name'],
         'address' => $row['address'],
         'city' => $row['city'],
+        'lon' => $row['lon'],
+        'lat' => $row['lat'],
         'address' => $row['address'],
         'postal_code' => $row['postal_code'],
         'email' => $row['email'],
         'phone_number' => $row['phone_number'],
-        'password' => $row['password'],
         'is_bio' => $row['is_bio'],
-        'likes' => $row['likes']
     );
 }
 
