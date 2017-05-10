@@ -40,6 +40,7 @@ import java.util.List;
 import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.Product;
 import at.sw2017xp3.regionalo.model.User;
+import at.sw2017xp3.regionalo.util.GeoUtils;
 import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 import at.sw2017xp3.regionalo.util.OnTaskCompleted;
@@ -110,7 +111,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onTaskCompleted() {
-        LatLng placeLocation = getLocationFromAddress(this, p.getUser().getAddress());
+        LatLng placeLocation = GeoUtils.getLocationFromAddress(this, p.getUser().getAddress());
         Marker placeMarker = googleMap.addMarker(new MarkerOptions().position(placeLocation)
                 .title("test"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(placeLocation));
@@ -250,29 +251,5 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    public LatLng getLocationFromAddress(Context context, String strAddress) {
 
-        Geocoder coder = new Geocoder(context);
-        List<Address> address;
-        LatLng p1 = null;
-
-        try {
-            // May throw an IOException
-            address = coder.getFromLocationName(strAddress, 5);
-            if (address == null) {
-                return null;
-            }
-            Address location = address.get(0);
-            location.getLatitude();
-            location.getLongitude();
-
-            p1 = new LatLng(location.getLatitude(), location.getLongitude() );
-
-        } catch (IOException ex) {
-
-            ex.printStackTrace();
-        }
-
-        return p1;
-    }
 }
