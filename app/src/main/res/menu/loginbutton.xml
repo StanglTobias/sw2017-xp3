@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/buttonLogin"
+        android:id="@+id/buttonMenuLogin"
+        android:orderInCategory="0"
         android:title="Login"
-        app:showAsAction="always"
-        android:orderInCategory="0"/>
+        app:showAsAction="always" />
 
 </menu>

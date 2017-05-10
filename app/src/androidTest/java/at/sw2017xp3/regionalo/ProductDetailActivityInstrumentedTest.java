@@ -44,4 +44,9 @@ public class ProductDetailActivityInstrumentedTest{
             onView(withId(R.id.buttonLike)).check(matches(not(isEnabled())));
         }
     }
+
+    @Test
+    public void pressLoginButton(){
+        onView(withId(R.id.buttonMenuLogin)).perform(click());
+    }
 }
