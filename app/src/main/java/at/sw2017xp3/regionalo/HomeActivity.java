@@ -52,7 +52,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 findViewById(R.id.buttonOthers),
                 findViewById(R.id.buttonMilk),
                 findViewById(R.id.buttonCereals),
-                findViewById(R.id.searchView),
                 findViewById(R.id.buttonMilk)));
 
         SearchView sv = (SearchView) findViewById(R.id.searchViewHome);
@@ -63,14 +62,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                 Intent myIntent = new Intent(HomeActivity.this, SearchResultActivity.class);
 
-                return fal                if (!query.isEmpty()) {
+                if (!query.isEmpty()) {
                     Bundle bundle = new Bundle();
                     bundle.putString(getString(R.string.query), query);
                     myIntent.putExtras(bundle);
 
                     startActivity(myIntent);
                 }
-                se;
+                return false;
             }
 
             @Override
@@ -114,19 +113,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     LinearLayout productLayout = (LinearLayout) inflatedView.findViewById(R.id.linearLayout_product);
                     (inflatedView.findViewById(R.id.linearLayout_product)).setId(productLayoutId);
 
-                        ImageButton image_load = (ImageButton) productLayout.findViewById(R.id.imageButtonProduct);
-                        image_load.setOnClickListener(this);
-                        Glide.with(getApplicationContext()).load(Core.getInstance().getProducts().getImageUri(p.getId())).into(image_load);
-                        //Glide.with(this).load("http://goo.gl/gEgYUd").into(image_load);
+                    ImageButton image_load = (ImageButton) productLayout.findViewById(R.id.imageButtonProduct);
+                    image_load.setOnClickListener(this);
+                    Glide.with(getApplicationContext()).load(Core.getInstance().getProducts().getImageUri(p.getId())).into(image_load);
+                    //Glide.with(this).load("http://goo.gl/gEgYUd").into(image_load);
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct1)).setText(p.getName());
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText(getString(R.string.productID) + String.valueOf(p.getId()));
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText(getString(R.string.producerID) + String.valueOf(p.getProducerId()));
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText(getString(R.string.productPrice) + String.valueOf(p.getPrice()));
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct5)).setText(getString(R.string.productType) + String.valueOf(p.getType()));
-                    }
                 }
-
-
             } catch (Exception ex) {
                 System.out.println(getString(R.string.productTaskException));
                 ex.printStackTrace();
