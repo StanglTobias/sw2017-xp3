@@ -24,7 +24,9 @@ public class UserManager {
     }
 
     public User getUser(int id) {
-        User p = cache_.get(id);
+        User p = null;
+        if(!cache_.isEmpty())
+            p = cache_.get(id);
 
         if (p != null)
             return p;
@@ -33,6 +35,9 @@ public class UserManager {
         Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/user.php")
                 .buildUpon()
                 .appendQueryParameter("id", Integer.toString(id)).build();
+
+        System.out.println("id" + id);
+        System.out.println("uri" + uri.toString());
 
         try {
             JSONArray arr = new JSONArray(HttpUtils.downloadContent(uri.toString()));

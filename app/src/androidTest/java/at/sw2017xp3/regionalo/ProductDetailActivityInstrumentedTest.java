@@ -44,5 +44,4 @@ public class ProductDetailActivityInstrumentedTest{
             onView(withId(R.id.buttonLike)).check(matches(not(isEnabled())));
         }
     }
-
 }

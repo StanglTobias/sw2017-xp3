@@ -6,16 +6,13 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +31,6 @@ import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Arrays;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -54,25 +50,44 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 findViewById(R.id.buttonOthers),
                 findViewById(R.id.buttonMilk),
                 findViewById(R.id.buttonCereals),
-                findViewById(R.id.searchView),
                 findViewById(R.id.buttonMilk)));
 
+        SearchView sv = (SearchView) findViewById(R.id.searchViewHome);
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
 
-        Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/featured.php");
-        // .buildUpon()
-        // .appendQueryParameter("id", "1").build();
 
-        new GetProductTask().execute(uri.toString());
+                Intent myIntent = new Intent(HomeActivity.this, SearchResultActivity.class);
+                if (!query.isEmpty()) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(getString(R.string.query), query);
+                    myIntent.putExtras(bundle);
+
+                    startActivity(myIntent);
+                }
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+
+        new GetProductTask().execute();
 
         for (int i = 0; i < list_of_elements.size(); i++) {
             list_of_elements.get(i).setOnClickListener(this);
         }
     }
 
-    private class GetProductTask extends AsyncTask<String, Void, ArrayList<Product> >  implements View.OnClickListener{
+    private class GetProductTask extends AsyncTask<String, Void, ArrayList<Product>> implements View.OnClickListener {
 
         @Override
-        protected ArrayList<Product>  doInBackground(String... params) {
+        protected ArrayList<Product> doInBackground(String... params) {
             try {
                 return Core.getInstance().getProducts().getFeaturedProducts();
             } catch (Exception e) {
@@ -81,38 +96,36 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         @Override
-        protected void onPostExecute(ArrayList<Product>  result) {
+        protected void onPostExecute(ArrayList<Product> result) {
+
+            Toast.makeText(HomeActivity.this, getString(R.string.loadData), Toast.LENGTH_LONG).show();
+
 
             try {
+
                 LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayout_Home_Activity);
-                for (int productCnt = 0; productCnt < result.size(); productCnt++) {
-                    System.out.println("GetProductTask.onPostExecute array laenge " + result.size());
+                for (Product p : result
+                        ) {
+                    System.out.println(getString(R.string.nameofProduct) + p.getName());
 
+                    LayoutInflater inflater = getLayoutInflater();
+                    LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, linearLayoutHome);
 
-                    Product p = result.get(productCnt);
+                    int productLayoutId = p.getId();
+                    LinearLayout productLayout = (LinearLayout) inflatedView.findViewById(R.id.linearLayout_product);
+                    (inflatedView.findViewById(R.id.linearLayout_product)).setId(productLayoutId);
 
-                    if(p != null) {
-
-                        System.out.println("GetProductTask.onPostExecute name of product: " + p.getName());
-
-                        LayoutInflater inflater = getLayoutInflater();
-                        LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, linearLayoutHome);
-
-                        int productLayoutId = p.getId();
-                        LinearLayout productLayout = (LinearLayout) inflatedView.findViewById(R.id.linearLayout_product);
-                        (inflatedView.findViewById(R.id.linearLayout_product)).setId(productLayoutId);
-
-                        (productLayout.findViewById(R.id.imageButtonProduct)).setOnClickListener(this);
-                        ((TextView) productLayout.findViewById(R.id.textViewRndProduct1)).setText(p.getName());
-                        ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText("Id: " + String.valueOf(p.getId()));
-                        ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText("Erzeuger Id: " + String.valueOf(p.getProducerId()));
-                        ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText("Preis: " + String.valueOf(p.getPrice()));
-                        ((TextView) productLayout.findViewById(R.id.textViewRndProduct5)).setText("Typ: " + String.valueOf(p.getType()));
-                    }
+                    (productLayout.findViewById(R.id.imageButtonProduct)).setOnClickListener(this);
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct1)).setText(p.getName());
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText(getString(R.string.productID) + String.valueOf(p.getId()));
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText(getString(R.string.producerID) + String.valueOf(p.getProducerId()));
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText(getString(R.string.productPrice) + String.valueOf(p.getPrice()));
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct5)).setText(getString(R.string.productType) + String.valueOf(p.getType()));
                 }
+                
 
             } catch (Exception ex) {
-                System.out.println("GetProductTask.onPostExecute" + "exception");
+                System.out.println(getString(R.string.productTaskException));
                 ex.printStackTrace();
             }
         }
@@ -121,17 +134,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         public void onClick(View v) {
 
             ImageButton imageButton = (ImageButton) v;
-            LinearLayout productLayout = (LinearLayout)imageButton.getParent();
+            LinearLayout productLayout = (LinearLayout) imageButton.getParent();
             int productId = productLayout.getId();
 
             Intent myIntent = new Intent(HomeActivity.this, ProductDetailActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putInt("id", productId);
+            bundle.putInt(getString(R.string.id), productId);
             myIntent.putExtras(bundle);
             startActivity(myIntent);
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

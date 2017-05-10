@@ -36,6 +36,7 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener{
     private ArrayList<View> list_of_elements = new ArrayList<>();
     private Product product_;
+    private int like_button_counter_;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         Bundle b = getIntent().getExtras();
         int id = 1; // or other values
         if(b != null)
-            id = b.getInt("id");
+            id = b.getInt(getString(R.string.id));
 
         findViewById(R.id.buttonLike).setEnabled(false);
 
@@ -80,9 +81,9 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 Product p = product_= result;
 
                 ((TextView)findViewById(R.id.textViewProductName)).setText(p.getName());
-                ((TextView)findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()) + "/" + p.getUnit());
-                ((TextView)findViewById(R.id.textViewQuality)).setText("Biologisch: "  + isBio(p.isBio()));
-                ((TextView)findViewById(R.id.textViewCategroy)).setText("Kategorie: " + productCategorieName(p.getType()));
+                ((TextView)findViewById(R.id.textViewPrice)).setText(getString(R.string.euro) + Double.toString(p.getPrice()) + getString(R.string.slash) + p.getUnit());
+                ((TextView)findViewById(R.id.textViewQuality)).setText(getString(R.string.biologisch)  + isBio(p.isBio()));
+                ((TextView)findViewById(R.id.textViewCategroy)).setText(getString(R.string.kategorie) + productCategorieName(p.getType()));
 
                 User u = p.getUser();
 
@@ -96,7 +97,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
 
             } catch(Exception e){
-                System.out.println("Halt Stop");
+                System.out.println(getString(R.string.stop));
             }
         }
     }
@@ -168,27 +169,27 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    public static String isBio(boolean yes_or_no) {
+    public String isBio(boolean yes_or_no) {
         if(yes_or_no == true)
-            return "Ja";
+            return getString(R.string.yes);
         else
-            return "Nein";
+            return getString(R.string.no);
     }
 
-    public static String productCategorieName (int type_id) {
+    public String productCategorieName (int type_id) {
         switch (type_id) {
             case 1:
-                return "Fleisch";
+                return getString(R.string.meat);
             case 2:
-                return "Obst";
+                return getString(R.string.fruits);
             case 3:
-                return"Gemüse";
+                return getString(R.string.vegetables);
             case 4:
-                return "Milchprodukte";
+                return getString(R.string.dairy);
             case 5:
-                return "Getreide";
+                return getString(R.string.wheat);
             case 6:
-                return "Sonstiges";
+                return getString(R.string.other);
         }
         return "";
     }

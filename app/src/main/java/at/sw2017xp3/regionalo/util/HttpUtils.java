@@ -41,7 +41,7 @@ public class HttpUtils {
         return conn;
     }*/
 
-    public static String convertInputStreamToString(InputStream stream, int length) throws IOException, UnsupportedEncodingException {
+    public static String convertInputStreamToString(InputStream stream, int length) throws IOException {
         Reader reader = null;
         reader = new InputStreamReader(stream, "UTF-8");
         char[] buffer = new char[length];
@@ -55,13 +55,14 @@ public class HttpUtils {
     }
     public static String downloadContent(String myurl, int length) throws IOException {
         InputStream is = null;
-
+        HttpURLConnection conn = null;
         try {
-            HttpURLConnection conn = HttpUtils.httpGet(myurl);
+            conn = HttpUtils.httpGet(myurl);
 
             return  HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
         } catch (Exception ex) {
-
+            if (conn != null)
+            conn.disconnect();
             return "";
         } finally {
             if (is != null) {

@@ -3,10 +3,6 @@ package at.sw2017xp3.regionalo.model;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
-/**
- * Created by jo on 05.04.17.
- */
-
 public class Product {
     public Product(int id, String name, boolean isBio, double price, int producerId, int typeID, String unitType, int likes) {
         id_ = id;
@@ -22,7 +18,6 @@ public class Product {
     public String getName() {
         return name_;
     }
-
 
     public int getId() {
         return id_;

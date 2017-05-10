@@ -47,7 +47,8 @@ public class ProductManager {
                 .appendQueryParameter("id", Integer.toString(id)).build();
 
         try {
-           String content =  HttpUtils.downloadContent(uri.toString());
+            String content =  HttpUtils.downloadContent(uri.toString());
+            System.out.println("content feature product " + content);
             JSONArray arr = new JSONArray(content); //featured products
             JSONObject mJsonObject = arr.getJSONObject(0);//one product
 
@@ -140,6 +141,36 @@ public class ProductManager {
             products.add(p);
         }
 
+
+        return products;
+    }
+
+    public ArrayList<Product> getSearchedProducts(String searchString) {
+
+        System.out.println("searchstring " +  searchString);
+
+        ArrayList<Product> products = new ArrayList<Product>();
+
+        Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php")
+                .buildUpon()
+                .appendQueryParameter("q", searchString).build();
+
+        try {
+            String content =  HttpUtils.downloadContent(uri.toString());
+            System.out.println("content search product " + content);
+            JSONArray arr = new JSONArray(content); //featured products
+
+            for (int i = 0; i < arr.length(); i++)
+            {
+                JSONObject mJsonObject = arr.getJSONObject(i);
+                Product p = JsonObjectMapper.CreateProduct(mJsonObject);
+                products.add(p);
+            }
+
+        } catch (Exception ex) {
+
+            Log.e("MYAPP", "exception", ex);
+        }
 
         return products;
     }
