@@ -26,6 +26,7 @@ public class JsonObjectMapperTest {
         int producerId = 4;
         int typeID = 1;
         String unit = "Kg";
+        int likes = 51;
 
         obj.put("id", id);
         obj.put("name", name);
@@ -34,6 +35,7 @@ public class JsonObjectMapperTest {
         obj.put("user_id", producerId);
         obj.put("type_id", typeID);
         obj.put("unit_type", unit);
+        obj.put("likes", likes);
 
         Product p = JsonObjectMapper.CreateProduct(obj);
 
@@ -44,6 +46,7 @@ public class JsonObjectMapperTest {
         assertTrue(typeID == p.getType());
         assertTrue(producerId == p.getProducerId());
         assertTrue(unit == p.getUnit());
+        assertTrue(likes == p.getLikes());
     }
 
     @Test
@@ -60,7 +63,7 @@ public class JsonObjectMapperTest {
         String email = "Reci1@gmail.com";
         String phone = "066453245234";
         int isBio = 1;
-        int likes = 51;
+
 
         obj.put("id", id);
         obj.put("first_name", firstName);
@@ -71,7 +74,7 @@ public class JsonObjectMapperTest {
         obj.put("email", email);
         obj.put("phone_number", phone);
         obj.put("is_bio", isBio);
-        obj.put("likes", likes);
+
 
         User u = JsonObjectMapper.CreateUser(obj);
 
@@ -83,6 +86,6 @@ public class JsonObjectMapperTest {
         assertTrue(email.equals(u.getEmail()));
         assertTrue(phone.equals(u.getPhoneNumber()));
         assertTrue((isBio == 1) == u.isBio());
-        assertTrue(likes == u.getLikes());
+
     }
 }

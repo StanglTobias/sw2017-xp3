@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="at.sw2017xp3.regionalo.SearchResultActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#F5F5DC"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="0dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutSearchResult"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+            tools:layout_editor_absoluteX="8dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:background="#8c9e63">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <SearchView
+                            android:id="@+id/searchViewResult"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="30dp"
+                            android:background="#ffffff"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:layout_constraintLeft_creator="1"
+                            tools:layout_constraintRight_creator="1"
+                            tools:layout_constraintTop_creator="1" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/expand"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:text="Filter" />
+                    </LinearLayout>
+
+                    <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                        android:id="@+id/expandableLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        app:ael_duration="500"
+                        app:ael_expanded="false"
+                        app:ael_interpolator="linearOutSlowIn"
+                        app:ael_orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:layout_marginTop="20dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <Button
+                                    android:id="@+id/Button_ID_ExtendedSearchStart"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@color/colorPrimary"
+                                    android:text="Suchen"
+                                    android:textSize="15sp" />
+
+                                <Button
+                                    android:id="@+id/Button_ID_ResetFilterExtendedSearch"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_weight="1"
+                                    android:text="Filter zurücksetzen"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="20dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/Text_ID_SortierenNachExtendedSearch"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:contextClickable="false"
+                                    android:cursorVisible="false"
+                                    android:editable="false"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:inputType="textPersonName"
+                                    android:text="Sortieren nach"
+                                    android:textColor="@android:color/black" />
+
+                                <Spinner
+                                    android:id="@+id/Spinner_ID_ExtendedSearch"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:entries="@array/sort_arrays"
+                                    android:prompt="@string/sort_prompt" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="20dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/Text_ID_ArtDesAnbaus"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:inputType="textPersonName"
+                                    android:text="Art des Anbaus"
+                                    android:textColor="@android:color/black" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_BiologischerAnbau"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Biologisch" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="20dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/Text_ID_Kategorien"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:inputType="textPersonName"
+                                    android:text="Kategorien"
+                                    android:textColor="@android:color/black" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_KategorieObst"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Obst" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_KategorieGemüse"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Gemüse" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_KategoriePilze"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Pilze" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_KategoriePlanzenUndSamen"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Pflanzen und Samen" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_KategorieHolz"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Holz" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_WeitereGartenprodukte"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Weitere Gartenprodukte" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="20dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/Text_ID_OrtRegion"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:inputType="textPersonName"
+                                    android:text="Ort / Region"
+                                    android:textColor="@android:color/black" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_Burgenland"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Burgenland" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_Kaernten"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Kärnten" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_Niederoesterreich"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Niederösterreich" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_Oberoesterreich"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Oberösterreich" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_Salzburg"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Salzburg" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_Steiermark"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Steiermark" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_Tirol"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Tirol" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_Vorarlberg"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Vorarlberg" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_Wien"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Wien" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="20dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/Text_ID_Verkaeufer"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:inputType="textPersonName"
+                                    android:text="Verkäufer"
+                                    android:textColor="@android:color/black" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_Privat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Privat" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_Firma"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Firma" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="20dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/Text_ID_ArtderUebergabe"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:inputType="textPersonName"
+                                    android:text="Art der Übergabe"
+                                    android:textColor="@android:color/black" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_Zustellung"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Zustellung" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_Selbstabholung"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Selbstabholung" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="20dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/Text_ID_TransportBehaeltnis"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:inputType="textPersonName"
+                                    android:text="Transport Behältnis"
+                                    android:textColor="@android:color/black" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_NichtBenoetigt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Nicht benötigt" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="20dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/Text_ID_ArtDerErnte"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ems="10"
+                                    android:enabled="false"
+                                    android:inputType="textPersonName"
+                                    android:text="Art der Ernte"
+                                    android:textColor="@android:color/black" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_BereitsGeerntet"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Bereits geerntet" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox_ID_SelbstErnten"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Selbst ernten" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <Button
+                                    android:id="@+id/Button_ID_ExtendedSearchStart2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@color/colorPrimary"
+                                    android:text="Suchen"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+
+
+</ScrollView>
+
+</android.support.constraint.ConstraintLayout>

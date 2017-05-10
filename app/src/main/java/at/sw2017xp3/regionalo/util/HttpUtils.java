@@ -1,8 +1,11 @@
 package at.sw2017xp3.regionalo.util;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -25,8 +28,20 @@ public class HttpUtils {
 
         return conn;
     }
+/*
+    public static HttpURLConnection httpPost(String myurl)  throws IOException {
+        URL url = new URL(myurl);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+        conn.setRequestProperty("Accept", "application/json");
+        conn.setDoOutput(true);
+        conn.setDoInput(true);
 
-    public static String convertInputStreamToString(InputStream stream, int length) throws IOException, UnsupportedEncodingException {
+        return conn;
+    }*/
+
+    public static String convertInputStreamToString(InputStream stream, int length) throws IOException {
         Reader reader = null;
         reader = new InputStreamReader(stream, "UTF-8");
         char[] buffer = new char[length];
@@ -34,15 +49,20 @@ public class HttpUtils {
         return new String(buffer);
     }
 
-    public static String downloadContent(String myurl) throws IOException {
+    public static String downloadContent(String myurl) throws IOException
+    {
+        return downloadContent(myurl, 10000);
+    }
+    public static String downloadContent(String myurl, int length) throws IOException {
         InputStream is = null;
-        int length = 10000;
-
+        HttpURLConnection conn = null;
         try {
-            HttpURLConnection conn = HttpUtils.httpGet(myurl);
+            conn = HttpUtils.httpGet(myurl);
 
             return  HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
         } catch (Exception ex) {
+            if (conn != null)
+            conn.disconnect();
             return "";
         } finally {
             if (is != null) {

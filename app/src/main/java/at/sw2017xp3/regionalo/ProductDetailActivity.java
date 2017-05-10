@@ -27,6 +27,7 @@ import java.util.Arrays;
 
 import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.Product;
+import at.sw2017xp3.regionalo.model.ProductManager;
 import at.sw2017xp3.regionalo.model.User;
 import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
@@ -37,18 +38,22 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 
 public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener{
     private ArrayList<View> list_of_elements = new ArrayList<>();
+    private Product product_;
     private int like_button_counter_;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_product_detailes);
+
         Bundle b = getIntent().getExtras();
         int id = 1; // or other values
         if(b != null)
-            id = b.getInt("id");
+            id = b.getInt(getString(R.string.id));
 
-        setContentView(R.layout.activity_product_detailes);
+        findViewById(R.id.buttonLike).setEnabled(false);
+
 
         list_of_elements.addAll(Arrays.asList(
                 findViewById(R.id.buttonLike),
@@ -79,23 +84,26 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         protected void onPostExecute(Product result) {
             try {
 
-                Product p = result;
+                Product p = product_= result;
 
                 ((TextView)findViewById(R.id.textViewProductName)).setText(p.getName());
-                ((TextView)findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()) + "/" + p.getUnit());
-                ((TextView)findViewById(R.id.textViewQuality)).setText("Biologisch: "  + isBio(p.isBio()));
-                ((TextView)findViewById(R.id.textViewCategroy)).setText("Kategorie: " + productCategorieName(p.getType()));
+                ((TextView)findViewById(R.id.textViewPrice)).setText(getString(R.string.euro) + Double.toString(p.getPrice()) + getString(R.string.slash) + p.getUnit());
+                ((TextView)findViewById(R.id.textViewQuality)).setText(getString(R.string.biologisch)  + isBio(p.isBio()));
+                ((TextView)findViewById(R.id.textViewCategroy)).setText(getString(R.string.kategorie) + productCategorieName(p.getType()));
 
                 User u = p.getUser();
 
                 ((TextView)findViewById(R.id.textViewName)).setText(u.getFullName());
                 ((TextView)findViewById(R.id.textViewAdress)).setText(u.getPostalCode() + " " + u.getCity() + "\n" + u.getAddress());
                 ((TextView)findViewById(R.id.textViewNumber)).setText(u.getPhoneNumber());
-                ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(u.getLikes()));
+                ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(p.getLikes()));
+
+
+                findViewById(R.id.buttonLike).setEnabled(!p.CurrentUserHasLiked());
 
 
             } catch(Exception e){
-                System.out.println("Halt Stop");
+                System.out.println(getString(R.string.stop));
             }
         }
     }
@@ -129,9 +137,9 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         switch (clickedButton.getId()){
             case R.id.buttonLike:
-              like_button_counter_ =  Integer.valueOf((String)(((TextView)findViewById(R.id.textViewLikeCount)).getText()));
-              like_button_counter_++;
-              ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(like_button_counter_));
+                if(product_ != null && !product_.CurrentUserHasLiked())
+                    new LikeTask().execute(product_.getId());
+
               break;
 
             case R.id.ButtonContact:
@@ -140,27 +148,54 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    public static String isBio(boolean yes_or_no) {
-        if(yes_or_no == true)
-            return "Ja";
-        else
-            return "Nein";
+    private class LikeTask extends AsyncTask<Integer, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Integer... params) {
+            try {
+                return Core.getInstance().getProducts().like(params[0]);
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            try {
+                if(result)
+                {
+                    if(product_!= null) {
+
+                        ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(product_.getLikes()));
+                        ((Button) findViewById(R.id.buttonLike)).setEnabled(false);
+                    }
+                }
+            } catch(Exception e){
+                System.out.println("Halt Stop");
+            }
+        }
     }
 
-    public static String productCategorieName (int type_id) {
+    public String isBio(boolean yes_or_no) {
+        if(yes_or_no == true)
+            return getString(R.string.yes);
+        else
+            return getString(R.string.no);
+    }
+
+    public String productCategorieName (int type_id) {
         switch (type_id) {
             case 1:
-                return "Fleisch";
+                return getString(R.string.meat);
             case 2:
-                return "Obst";
+                return getString(R.string.fruits);
             case 3:
-                return"Gemüse";
+                return getString(R.string.vegetables);
             case 4:
-                return "Milchprodukte";
+                return getString(R.string.dairy);
             case 5:
-                return "Getreide";
+                return getString(R.string.wheat);
             case 6:
-                return "Sonstiges";
+                return getString(R.string.other);
         }
         return "";
     }

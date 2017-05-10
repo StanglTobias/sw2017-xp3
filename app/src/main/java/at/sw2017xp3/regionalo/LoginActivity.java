@@ -35,15 +35,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.buttonLogin:
                 if (((TextView) findViewById(R.id.textViewEmail)).getText().toString().isEmpty() &&
                         ((TextView) findViewById(R.id.textViewPassword)).getText().toString().isEmpty()) {
-                    ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText("Bitte Email und Passwort eingeben!");
+                    ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText(getString(R.string.missingPW_Email));
                 } else if (((TextView) findViewById(R.id.textViewEmail)).getText().toString().isEmpty() &&
                         !((TextView) findViewById(R.id.textViewPassword)).getText().toString().isEmpty()) {
-                    ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText("Bitte E-Mail eingeben!");
+                    ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText(getString(R.string.missingEmail));
                 } else if (!((TextView) findViewById(R.id.textViewEmail)).getText().toString().isEmpty() &&
                         ((TextView) findViewById(R.id.textViewPassword)).getText().toString().isEmpty()) {
-                    ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText("Bitte Passwort eingeben!");
+                    ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText(getString(R.string.missingPW));
                 } else {
-                    ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText("LOGIN USER CONTENT ÖFFNEN");
+                    ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText(getString(R.string.openUserContent));
                 }
                 break;
 
