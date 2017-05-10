@@ -28,18 +28,18 @@ public class HttpUtils {
 
         return conn;
     }
-
+/*
     public static HttpURLConnection httpPost(String myurl)  throws IOException {
         URL url = new URL(myurl);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
-        conn.setRequestProperty("Content-Type", "applicaiton/json; charset=utf-8");
-        conn.setRequestProperty("Accept", "applicaiton/json");
+        conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+        conn.setRequestProperty("Accept", "application/json");
         conn.setDoOutput(true);
         conn.setDoInput(true);
 
         return conn;
-    }
+    }*/
 
     public static String convertInputStreamToString(InputStream stream, int length) throws IOException, UnsupportedEncodingException {
         Reader reader = null;
@@ -49,9 +49,12 @@ public class HttpUtils {
         return new String(buffer);
     }
 
-    public static String downloadContent(String myurl) throws IOException {
+    public static String downloadContent(String myurl) throws IOException
+    {
+        return downloadContent(myurl, 10000);
+    }
+    public static String downloadContent(String myurl, int length) throws IOException {
         InputStream is = null;
-        int length = 10000;
 
         try {
             HttpURLConnection conn = HttpUtils.httpGet(myurl);
