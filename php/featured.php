@@ -9,7 +9,7 @@ header('Content-Type: application/json');
 require "config.php";
 header('Content-type: text/html; charset=utf-8');
 
-$sql = "SELECT * FROM Product limit 10";
+$sql = "select * from Product order by likes desc limit 10";
 $result = mysqli_query($con, $sql);
 
 $rows = array();
