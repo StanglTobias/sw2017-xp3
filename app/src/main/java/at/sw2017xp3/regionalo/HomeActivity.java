@@ -56,7 +56,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 Intent myIntent = new Intent(HomeActivity.this, SearchResultActivity.class);
                 if (!query.isEmpty()) {
                     Bundle bundle = new Bundle();
-                    bundle.putString("query", query);
+                    bundle.putString(getString(R.string.query), query);
                     myIntent.putExtras(bundle);
 
                     startActivity(myIntent);
@@ -93,7 +93,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPostExecute(ArrayList<Product> result) {
 
-            Toast.makeText(HomeActivity.this, "Daten geladen", Toast.LENGTH_LONG).show();
+            Toast.makeText(HomeActivity.this, getString(R.string.loadData), Toast.LENGTH_LONG).show();
 
 
             try {
@@ -101,7 +101,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayout_Home_Activity);
                 for (Product p : result
                         ) {
-                    System.out.println("GetProductTask.onPostExecute name of product: " + p.getName());
+                    System.out.println(getString(R.string.nameofProduct) + p.getName());
 
                     LayoutInflater inflater = getLayoutInflater();
                     LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, linearLayoutHome);
@@ -112,15 +112,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     (productLayout.findViewById(R.id.imageButtonProduct)).setOnClickListener(this);
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct1)).setText(p.getName());
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText("Id: " + String.valueOf(p.getId()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText("Erzeuger Id: " + String.valueOf(p.getProducerId()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText("Preis: " + String.valueOf(p.getPrice()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct5)).setText("Typ: " + String.valueOf(p.getType()));
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText(getString(R.string.productID) + String.valueOf(p.getId()));
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText(getString(R.string.producerID) + String.valueOf(p.getProducerId()));
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText(getString(R.string.productPrice) + String.valueOf(p.getPrice()));
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct5)).setText(getString(R.string.productType) + String.valueOf(p.getType()));
                 }
                 
 
             } catch (Exception ex) {
-                System.out.println("GetProductTask.onPostExecute" + "exception");
+                System.out.println(getString(R.string.productTaskException));
                 ex.printStackTrace();
             }
         }
@@ -134,7 +134,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             Intent myIntent = new Intent(HomeActivity.this, ProductDetailActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putInt("id", productId);
+            bundle.putInt(getString(R.string.id), productId);
             myIntent.putExtras(bundle);
             startActivity(myIntent);
         }
