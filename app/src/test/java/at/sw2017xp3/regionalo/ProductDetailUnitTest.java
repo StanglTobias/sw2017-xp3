@@ -51,4 +51,9 @@ public class ProductDetailUnitTest {
     public void testCategorieSonstiges() {
         assertEquals("Sonstiges", ProductDetailActivity.productCategorieName(6));
     }
+
+    @Test
+    public void testLike() {
+
+    }
 }

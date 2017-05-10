@@ -54,8 +54,9 @@ public class ProductManager {
             p = JsonObjectMapper.CreateProduct(mJsonObject);
             p.getUser();
 
-
             addProduct(p);
+
+            p.SetCurrentUserHasLiked(Core.getInstance().getProducts().hasUserLiked(p.getId()));
         } catch (Exception ex) {
 
             Log.e("MYAPP", "exception", ex);
@@ -64,20 +65,20 @@ public class ProductManager {
         return p;
     }
 
-    public boolean hasLikes(int id) {
+    public boolean hasUserLiked(int pid) {
 
-        Product p = getProduct(id);
+        Product p = getProduct(pid);
 
         if (p != null) {
 
             Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/userliked.php")
                     .buildUpon()
-                    .appendQueryParameter("id", Integer.toString(p.getId()))
+                    .appendQueryParameter("pid", Integer.toString(p.getId()))
                     .appendQueryParameter("uuid", CurrentUser.getId()).build();
 
             try {
-                String val = HttpUtils.downloadContent(uri.toString());
-                return val.equals(1);
+                String val = HttpUtils.downloadContent(uri.toString(), 1);
+                return val.equals("1");
 
             } catch (Exception ex) {
                 return false;
@@ -92,23 +93,19 @@ public class ProductManager {
 
         if (p != null) {
 
-            Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/like.php");
+            Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/like.php")
+             .buildUpon()
+                    .appendQueryParameter("pid", Integer.toString(p.getId()))
+                    .appendQueryParameter("uuid", CurrentUser.getId()).build();
 
             try {
-                HttpURLConnection urlConn = HttpUtils.httpPost(uri.toString());
-
-
-
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(urlConn.getOutputStream()));
-                writer.write("request=" + GetLikePostJson(1, CurrentUser.getId()).toString());
-                writer.flush();
-                writer.close();
-
+                HttpURLConnection urlConn = HttpUtils.httpGet(uri.toString());
                 urlConn.connect();
 
                if(urlConn.getResponseCode() == HttpURLConnection.HTTP_OK)
                {
                    p.incrementLikes();
+
                    return  true;
                }
 

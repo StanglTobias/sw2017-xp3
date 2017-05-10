@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,18 +35,21 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 
 public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener{
     private ArrayList<View> list_of_elements = new ArrayList<>();
-    private int like_button_counter_;
+    private Product product_;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_product_detailes);
 
         Bundle b = getIntent().getExtras();
         int id = 1; // or other values
         if(b != null)
             id = b.getInt("id");
 
-        setContentView(R.layout.activity_product_detailes);
+        findViewById(R.id.buttonLike).setEnabled(false);
+
 
         list_of_elements.addAll(Arrays.asList(
                 findViewById(R.id.buttonLike),
@@ -73,7 +77,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         protected void onPostExecute(Product result) {
             try {
 
-                Product p = result;
+                Product p = product_= result;
 
                 ((TextView)findViewById(R.id.textViewProductName)).setText(p.getName());
                 ((TextView)findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()) + "/" + p.getUnit());
@@ -85,7 +89,10 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 ((TextView)findViewById(R.id.textViewName)).setText(u.getFullName());
                 ((TextView)findViewById(R.id.textViewAdress)).setText(u.getPostalCode() + " " + u.getCity() + "\n" + u.getAddress());
                 ((TextView)findViewById(R.id.textViewNumber)).setText(u.getPhoneNumber());
-             //   ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(u.getLikes()));
+                ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(p.getLikes()));
+
+
+                findViewById(R.id.buttonLike).setEnabled(!p.CurrentUserHasLiked());
 
 
             } catch(Exception e){
@@ -123,7 +130,9 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         switch (clickedButton.getId()){
             case R.id.buttonLike:
-                new LikeTask().execute(1);
+                if(product_ != null && !product_.CurrentUserHasLiked())
+                    new LikeTask().execute(product_.getId());
+
               break;
 
             case R.id.ButtonContact:
@@ -147,7 +156,11 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             try {
                 if(result)
                 {
-                    Toast.makeText(ProductDetailActivity.this, "GELIKED", Toast.LENGTH_LONG).show();
+                    if(product_!= null) {
+
+                        ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(product_.getLikes()));
+                        ((Button) findViewById(R.id.buttonLike)).setEnabled(false);
+                    }
                 }
             } catch(Exception e){
                 System.out.println("Halt Stop");
