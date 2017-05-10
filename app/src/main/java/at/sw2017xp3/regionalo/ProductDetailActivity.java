@@ -1,7 +1,10 @@
 package at.sw2017xp3.regionalo;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,6 +25,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.vision.barcode.Barcode;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,23 +35,28 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.Product;
 import at.sw2017xp3.regionalo.model.User;
 import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
+import at.sw2017xp3.regionalo.util.OnTaskCompleted;
 
 /**
  * Created by Christof on 05.04.2017.
  */
 
-public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback{
+public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener, OnTaskCompleted, OnMapReadyCallback{
     private ArrayList<View> list_of_elements = new ArrayList<>();
     private int like_button_counter_;
 
+    Product p;
     GoogleMap googleMap;
     MapFragment mapFragment;
+
+
 
     public boolean googlServicesAvailable(){
         GoogleApiAvailability api = GoogleApiAvailability.getInstance();
@@ -96,10 +105,21 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
 
 
-        new GetProductTask().execute(id);
+        new GetProductTask(this).execute(id);
     }
 
+    @Override
+    public void onTaskCompleted() {
+        LatLng placeLocation = getLocationFromAddress(this, p.getUser().getAddress());
+        Marker placeMarker = googleMap.addMarker(new MarkerOptions().position(placeLocation)
+                .title("test"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(placeLocation));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15), 1000, null);
+    }
+
+
     private class GetProductTask extends AsyncTask<Integer, Void, Product> {
+        private OnTaskCompleted listener;
 
         @Override
         protected Product doInBackground(Integer... params) {
@@ -110,11 +130,17 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             }
         }
 
+        public  GetProductTask(OnTaskCompleted listener){
+            this.listener=listener;
+
+        }
+
         @Override
         protected void onPostExecute(Product result) {
             try {
 
-                Product p = result;
+
+                p = result;
 
                 ((TextView)findViewById(R.id.textViewProductName)).setText(p.getName());
                 ((TextView)findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()) + "/" + p.getUnit());
@@ -126,7 +152,11 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 ((TextView)findViewById(R.id.textViewName)).setText(u.getFullName());
                 ((TextView)findViewById(R.id.textViewAdress)).setText(u.getPostalCode() + " " + u.getCity() + "\n" + u.getAddress());
                 ((TextView)findViewById(R.id.textViewNumber)).setText(u.getPhoneNumber());
-                ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(u.getLikes()));
+                //((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(u.getLikes()));
+
+
+                listener.onTaskCompleted();
+
 
 
             } catch(Exception e){
@@ -217,10 +247,32 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         googleMap.getUiSettings().setZoomControlsEnabled(true);
         //
 
-        LatLng placeLocation = new LatLng(47.058558,15.460196); //Make them global
-        Marker placeMarker = googleMap.addMarker(new MarkerOptions().position(placeLocation)
-                .title("test"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(placeLocation));
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 1000, null);
+
+    }
+
+    public LatLng getLocationFromAddress(Context context, String strAddress) {
+
+        Geocoder coder = new Geocoder(context);
+        List<Address> address;
+        LatLng p1 = null;
+
+        try {
+            // May throw an IOException
+            address = coder.getFromLocationName(strAddress, 5);
+            if (address == null) {
+                return null;
+            }
+            Address location = address.get(0);
+            location.getLatitude();
+            location.getLongitude();
+
+            p1 = new LatLng(location.getLatitude(), location.getLongitude() );
+
+        } catch (IOException ex) {
+
+            ex.printStackTrace();
+        }
+
+        return p1;
     }
 }

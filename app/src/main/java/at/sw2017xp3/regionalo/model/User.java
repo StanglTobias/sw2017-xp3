@@ -12,17 +12,21 @@ public class User {
     String address_;
     String city_;
     String postalCode_;
+    double lat_;
+    double lon_;
     String email_;
     String phone_;
     boolean isBio_;
     int likes_;
 
-    public User(int id, String firstName, String lastName, String address, String city, String postalCode, String email, String phone_number, boolean isBio, int likes) {
+    public User(int id, String firstName, String lastName, String address,  String city,  String postalCode, String email, String phone_number, boolean isBio, int likes) {
         id_ = id;
         firstName_ = firstName;
         lastName_ = lastName;
         address_ = address;
         city_ = city;
+        //lat_ = lat;
+        //lon_ = lon;
         postalCode_ = postalCode;
         email_ = email;
         phone_ = phone_number;
@@ -46,9 +50,13 @@ public class User {
         return city_;
     }
 
-    public String getPostalCode() {
-        return postalCode_;
-    }
+
+
+    public String getPostalCode() {return postalCode_;}
+
+    public double getLon() {return lon_;}
+
+    public double getLat() {return lat_;}
 
     public String getEmail() {
         return email_;

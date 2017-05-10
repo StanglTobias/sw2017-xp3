@@ -36,11 +36,13 @@ public class JsonObjectMapper {
         String address = object.getString("address");
         String city = object.getString("city");
         String postalCode = object.getString("postal_code");
+        //double lat = object.getDouble("lat");
+        //double lon = object.getDouble("lon");
         String email = object.getString("email");
         String phone = object.getString("phone_number");
         boolean isBio = object.getInt("is_bio") == 1;
-        int likes = object.getInt("likes");
+       // int likes = object.getInt("likes");
 
-        return new User(id, firstName, lastName, address, city, postalCode, email, phone, isBio, likes);
+        return new User(id, firstName, lastName, address, city,  postalCode, email, phone, isBio, 0);
     }
 }

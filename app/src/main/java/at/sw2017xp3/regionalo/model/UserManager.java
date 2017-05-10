@@ -1,6 +1,7 @@
 package at.sw2017xp3.regionalo.model;
 
 import android.net.Uri;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,6 +42,7 @@ public class UserManager {
 
             addUser(p);
         } catch (Exception ex) {
+            Log.e("Databas", "exception", ex);
         }
         return p;
     }
