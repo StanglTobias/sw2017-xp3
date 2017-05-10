@@ -134,12 +134,6 @@ public class SearchResultActivityTest {
 
     }
 
-    @Test
-    public void testSearchFunction() {
-        onView(withId(R.id.searchView)).perform(click());
-        onView(withId(R.id.searchView)).perform(typeText("Hallo"), click());
-    }
-
 
     @Test
     public void testLoginButton(){
