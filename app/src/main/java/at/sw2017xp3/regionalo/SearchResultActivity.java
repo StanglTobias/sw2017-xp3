@@ -12,19 +12,24 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import at.sw2017xp3.regionalo.model.Core;
+import at.sw2017xp3.regionalo.model.Filter;
 import at.sw2017xp3.regionalo.model.Product;
+import at.sw2017xp3.regionalo.model.enums.Categories;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SearchResultActivity extends AppCompatActivity implements View.OnClickListener {
@@ -36,28 +41,19 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     Button button_reset_filter;
 
     private CheckBox checkBox_ID_BiologischerAnbau_;
-    private CheckBox checkBox_ID_KategorieObst_;
-    private CheckBox checkBox_ID_KategorieGemüse_;
-    private CheckBox checkBox_ID_KategoriePilze_;
-    private CheckBox checkBox_ID_KategoriePlanzenUndSamen_;
-    private CheckBox checkBox_ID_KategorieHolz_;
-    private CheckBox checkBox_ID_WeitereGartenprodukte_;
-    private CheckBox checkBox_ID_Burgenland_;
-    private CheckBox checkBox_ID_Kaernten_;
-    private CheckBox checkBox_ID_Niederoesterreich_;
-    private CheckBox checkBox_ID_Oberoesterreich_;
-    private CheckBox checkBox_ID_Salzburg_;
-    private CheckBox checkBox_ID_Steiermark_;
-    private CheckBox checkBox_ID_Tirol_;
-    private CheckBox checkBox_ID_Vorarlberg_;
-    private CheckBox checkBox_ID_Wien_;
+    private CheckBox cb_category_0_;
+    private CheckBox cb_category_1_;
+    private CheckBox cb_category_2_;
+    private CheckBox cb_category_3_;
+    private CheckBox cb_category_4_;
+    private CheckBox cb_category_5_;
     private CheckBox checkBox_ID_Privat_;
     private CheckBox checkBox_ID_Firma_;
     private CheckBox checkBox_ID_Zustellung_;
     private CheckBox checkBox_ID_Selbstabholung_;
-    private CheckBox checkBox_ID_NichtBenoetigt_;
-    private CheckBox checkBox_ID_BereitsGeerntet_;
     private CheckBox checkBox_ID_SelbstErnten_;
+    private SeekBar seekBar_ID_Entfernung_;
+    private EditText text_ID_Entfernung_;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +62,10 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
         Bundle b = getIntent().getExtras();
         String query = null; // or other values
-        if(b != null)
-        {
+        if (b != null) {
             query = b.getString(getString(R.string.query));
             setFilter(b);
         }
-
 
 
         expandableLayout
@@ -92,28 +86,20 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         button_reset_filter.setOnClickListener(this);
 
         checkBox_ID_BiologischerAnbau_ = (CheckBox) findViewById(R.id.checkBox_ID_BiologischerAnbau);
-        checkBox_ID_KategorieObst_ = (CheckBox) findViewById(R.id.checkBox_ID_KategorieObst);
-        checkBox_ID_KategorieGemüse_ = (CheckBox) findViewById(R.id.checkBox_ID_KategorieGemüse);
-        checkBox_ID_KategoriePilze_ = (CheckBox) findViewById(R.id.checkBox_ID_KategoriePilze);
-        checkBox_ID_KategoriePlanzenUndSamen_ = (CheckBox) findViewById(R.id.checkBox_ID_KategoriePlanzenUndSamen);
-        checkBox_ID_KategorieHolz_ = (CheckBox) findViewById(R.id.checkBox_ID_KategorieHolz);
-        checkBox_ID_WeitereGartenprodukte_ = (CheckBox) findViewById(R.id.checkBox_ID_WeitereGartenprodukte);
-        checkBox_ID_Burgenland_ = (CheckBox) findViewById(R.id.checkBox_ID_Burgenland);
-        checkBox_ID_Kaernten_ = (CheckBox) findViewById(R.id.checkBox_ID_Kaernten);
-        checkBox_ID_Niederoesterreich_ = (CheckBox) findViewById(R.id.checkBox_ID_Niederoesterreich);
-        checkBox_ID_Oberoesterreich_ = (CheckBox) findViewById(R.id.checkBox_ID_Oberoesterreich);
-        checkBox_ID_Salzburg_ = (CheckBox) findViewById(R.id.checkBox_ID_Salzburg);
-        checkBox_ID_Steiermark_ = (CheckBox) findViewById(R.id.checkBox_ID_Steiermark);
-        checkBox_ID_Tirol_ = (CheckBox) findViewById(R.id.checkBox_ID_Tirol);
-        checkBox_ID_Vorarlberg_ = (CheckBox) findViewById(R.id.checkBox_ID_Vorarlberg);
-        checkBox_ID_Wien_ = (CheckBox) findViewById(R.id.checkBox_ID_Wien);
+        cb_category_0_ = (CheckBox) findViewById(R.id.cb_category_0);
+        cb_category_1_ = (CheckBox) findViewById(R.id.cb_category_1);
+        cb_category_2_ = (CheckBox) findViewById(R.id.cb_category_2);
+        cb_category_3_ = (CheckBox) findViewById(R.id.cb_category_3);
+        cb_category_4_ = (CheckBox) findViewById(R.id.cb_category_4);
+        cb_category_5_ = (CheckBox) findViewById(R.id.cb_category_5);
         checkBox_ID_Privat_ = (CheckBox) findViewById(R.id.checkBox_ID_Privat);
         checkBox_ID_Firma_ = (CheckBox) findViewById(R.id.checkBox_ID_Firma);
         checkBox_ID_Zustellung_ = (CheckBox) findViewById(R.id.checkBox_ID_Zustellung);
         checkBox_ID_Selbstabholung_ = (CheckBox) findViewById(R.id.checkBox_ID_Selbstabholung);
-        checkBox_ID_NichtBenoetigt_ = (CheckBox) findViewById(R.id.checkBox_ID_NichtBenoetigt);
-        checkBox_ID_BereitsGeerntet_ = (CheckBox) findViewById(R.id.checkBox_ID_BereitsGeerntet);
         checkBox_ID_SelbstErnten_ = (CheckBox) findViewById(R.id.checkBox_ID_SelbstErnten);
+
+
+        text_ID_Entfernung_ = (EditText) findViewById(R.id.text_ID_Entfernung);
 
 
         SearchView sv = (SearchView) findViewById(R.id.searchViewResult);
@@ -140,8 +126,23 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             }
         });
 
-        Uri uri = Uri.parse(getString(R.string.phpLink) + query);
+        seekBar_ID_Entfernung_ = (SeekBar) findViewById(R.id.seekBar_ID_Entfernung);
+        seekBar_ID_Entfernung_.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                text_ID_Entfernung_.setText("Entfernung: " + String.valueOf(progress) + " km");
+            }
 
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
         new GetProductTask().execute(query);
 
     }
@@ -150,36 +151,18 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
         ((CheckBox) findViewById(R.id.checkBox_ID_BiologischerAnbau)).setChecked(
                 bundle.getBoolean("checkBox_ID_BiologischerAnbau", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_KategorieObst)).setChecked(
-                bundle.getBoolean("checkBox_ID_KategorieObst", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_KategorieGemüse)).setChecked(
-                bundle.getBoolean("checkBox_ID_KategorieGemüse", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_KategoriePilze)).setChecked(
-                bundle.getBoolean("checkBox_ID_KategoriePilze", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_KategoriePlanzenUndSamen)).setChecked(
-                bundle.getBoolean("checkBox_ID_KategoriePlanzenUndSamen", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_WeitereGartenprodukte)).setChecked(
-                bundle.getBoolean("checkBox_ID_WeitereGartenprodukte", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_KategorieHolz)).setChecked(
-                bundle.getBoolean("checkBox_ID_KategorieHolz", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Burgenland)).setChecked(
-                bundle.getBoolean("checkBox_ID_Burgenland", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Kaernten)).setChecked(
-                bundle.getBoolean("checkBox_ID_Kaernten", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Niederoesterreich)).setChecked(
-                bundle.getBoolean("checkBox_ID_Niederoesterreich", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Oberoesterreich)).setChecked(
-                bundle.getBoolean("checkBox_ID_Oberoesterreich", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Salzburg)).setChecked(
-                bundle.getBoolean("checkBox_ID_Salzburg", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Steiermark)).setChecked(
-                bundle.getBoolean("checkBox_ID_Steiermark", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Tirol)).setChecked(
-                bundle.getBoolean("checkBox_ID_Tirol", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Vorarlberg)).setChecked(
-                bundle.getBoolean("checkBox_ID_Vorarlberg", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Wien)).setChecked(
-                bundle.getBoolean("checkBox_ID_Wien", false));
+        ((CheckBox) findViewById(R.id.cb_category_0)).setChecked(
+                bundle.getBoolean("cb_category_0", false));
+        ((CheckBox) findViewById(R.id.cb_category_1)).setChecked(
+                bundle.getBoolean("cb_category_1", false));
+        ((CheckBox) findViewById(R.id.cb_category_2)).setChecked(
+                bundle.getBoolean("cb_category_2", false));
+        ((CheckBox) findViewById(R.id.cb_category_3)).setChecked(
+                bundle.getBoolean("cb_category_3", false));
+        ((CheckBox) findViewById(R.id.cb_category_5)).setChecked(
+                bundle.getBoolean("cb_category_5", false));
+        ((CheckBox) findViewById(R.id.cb_category_4)).setChecked(
+                bundle.getBoolean("cb_category_4", false));
         ((CheckBox) findViewById(R.id.checkBox_ID_Privat)).setChecked(
                 bundle.getBoolean("checkBox_ID_Privat", false));
         ((CheckBox) findViewById(R.id.checkBox_ID_Firma)).setChecked(
@@ -188,10 +171,6 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 bundle.getBoolean("checkBox_ID_Zustellung", false));
         ((CheckBox) findViewById(R.id.checkBox_ID_Selbstabholung)).setChecked(
                 bundle.getBoolean("checkBox_ID_Selbstabholung", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_NichtBenoetigt)).setChecked(
-                bundle.getBoolean("checkBox_ID_NichtBenoetigt", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_BereitsGeerntet)).setChecked(
-                bundle.getBoolean("checkBox_ID_BereitsGeerntet", false));
         ((CheckBox) findViewById(R.id.checkBox_ID_SelbstErnten)).setChecked(
                 bundle.getBoolean("checkBox_ID_SelbstErnten", false));
 
@@ -199,35 +178,34 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         ((Spinner) findViewById(R.id.Spinner_ID_ExtendedSearch)).setSelection(adapter.getPosition(
                 bundle.getString("Spinner_ID_ExtendedSearch", "")
         ));
+
+        ((SeekBar) findViewById(R.id.seekBar_ID_Entfernung)).setProgress(
+                bundle.getInt("seekBar_ID_Entfernung", 0)
+        );
+
+        ((EditText) findViewById(R.id.text_ID_Entfernung)).setText(
+                bundle.getString("text_ID_Entfernung", "Entfernung: 0 km")
+        );
     }
 
     private void saveFilterPreset(Bundle bundle) {
 
         bundle.putBoolean("checkBox_ID_BiologischerAnbau", ((CheckBox) findViewById(R.id.checkBox_ID_BiologischerAnbau)).isChecked());
-        bundle.putBoolean("checkBox_ID_KategorieObst", ((CheckBox) findViewById(R.id.checkBox_ID_KategorieObst)).isChecked());
-        bundle.putBoolean("checkBox_ID_KategorieGemüse", ((CheckBox) findViewById(R.id.checkBox_ID_KategorieGemüse)).isChecked());
-        bundle.putBoolean("checkBox_ID_KategoriePilze", ((CheckBox) findViewById(R.id.checkBox_ID_KategoriePilze)).isChecked());
-        bundle.putBoolean("checkBox_ID_KategoriePlanzenUndSamen", ((CheckBox) findViewById(R.id.checkBox_ID_KategoriePlanzenUndSamen)).isChecked());
-        bundle.putBoolean("checkBox_ID_KategorieHolz", ((CheckBox) findViewById(R.id.checkBox_ID_KategorieHolz)).isChecked());
-        bundle.putBoolean("checkBox_ID_WeitereGartenprodukte", ((CheckBox) findViewById(R.id.checkBox_ID_WeitereGartenprodukte)).isChecked());
-        bundle.putBoolean("checkBox_ID_Burgenland", ((CheckBox) findViewById(R.id.checkBox_ID_Burgenland)).isChecked());
-        bundle.putBoolean("checkBox_ID_Kaernten", ((CheckBox) findViewById(R.id.checkBox_ID_Kaernten)).isChecked());
-        bundle.putBoolean("checkBox_ID_Niederoesterreich", ((CheckBox) findViewById(R.id.checkBox_ID_Niederoesterreich)).isChecked());
-        bundle.putBoolean("checkBox_ID_Oberoesterreich", ((CheckBox) findViewById(R.id.checkBox_ID_Oberoesterreich)).isChecked());
-        bundle.putBoolean("checkBox_ID_Salzburg", ((CheckBox) findViewById(R.id.checkBox_ID_Salzburg)).isChecked());
-        bundle.putBoolean("checkBox_ID_Steiermark", ((CheckBox) findViewById(R.id.checkBox_ID_Steiermark)).isChecked());
-        bundle.putBoolean("checkBox_ID_Tirol", ((CheckBox) findViewById(R.id.checkBox_ID_Tirol)).isChecked());
-        bundle.putBoolean("checkBox_ID_Vorarlberg", ((CheckBox) findViewById(R.id.checkBox_ID_Vorarlberg)).isChecked());
-        bundle.putBoolean("checkBox_ID_Wien", ((CheckBox) findViewById(R.id.checkBox_ID_Wien)).isChecked());
+        bundle.putBoolean("cb_category_0", ((CheckBox) findViewById(R.id.cb_category_0)).isChecked());
+        bundle.putBoolean("cb_category_1", ((CheckBox) findViewById(R.id.cb_category_1)).isChecked());
+        bundle.putBoolean("cb_category_2", ((CheckBox) findViewById(R.id.cb_category_2)).isChecked());
+        bundle.putBoolean("cb_category_3", ((CheckBox) findViewById(R.id.cb_category_3)).isChecked());
+        bundle.putBoolean("cb_category_4", ((CheckBox) findViewById(R.id.cb_category_4)).isChecked());
+        bundle.putBoolean("cb_category_5", ((CheckBox) findViewById(R.id.cb_category_5)).isChecked());
         bundle.putBoolean("checkBox_ID_Privat", ((CheckBox) findViewById(R.id.checkBox_ID_Privat)).isChecked());
         bundle.putBoolean("checkBox_ID_Firma", ((CheckBox) findViewById(R.id.checkBox_ID_Firma)).isChecked());
         bundle.putBoolean("checkBox_ID_Zustellung", ((CheckBox) findViewById(R.id.checkBox_ID_Zustellung)).isChecked());
         bundle.putBoolean("checkBox_ID_Selbstabholung", ((CheckBox) findViewById(R.id.checkBox_ID_Selbstabholung)).isChecked());
-        bundle.putBoolean("checkBox_ID_NichtBenoetigt", ((CheckBox) findViewById(R.id.checkBox_ID_NichtBenoetigt)).isChecked());
-        bundle.putBoolean("checkBox_ID_BereitsGeerntet", ((CheckBox) findViewById(R.id.checkBox_ID_BereitsGeerntet)).isChecked());
         bundle.putBoolean("checkBox_ID_SelbstErnten", ((CheckBox) findViewById(R.id.checkBox_ID_SelbstErnten)).isChecked());
 
         bundle.putString("Spinner_ID_ExtendedSearch", ((Spinner) findViewById(R.id.Spinner_ID_ExtendedSearch)).getSelectedItem().toString());
+        bundle.putInt("seekBar_ID_Entfernung", ((SeekBar) findViewById(R.id.seekBar_ID_Entfernung)).getProgress());
+        bundle.putString("text_ID_Entfernung", ((EditText) findViewById(R.id.text_ID_Entfernung)).getText().toString());
     }
 
 
@@ -318,35 +296,44 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             case R.id.expand:
                 expandableLayout.toggle();
                 break;
+            case R.id.Button_ID_ExtendedSearchStart:
+            case R.id.Button_ID_ExtendedSearchStart2:
+                Filter filter = getFilter();
+                break;
             default:
                 break;
         }
 
         if (v.getId() == R.id.Button_ID_ResetFilterExtendedSearch) {
             checkBox_ID_BiologischerAnbau_.setChecked(false);
-            checkBox_ID_KategorieObst_.setChecked(false);
-            checkBox_ID_KategorieGemüse_.setChecked(false);
-            checkBox_ID_KategoriePilze_.setChecked(false);
-            checkBox_ID_KategoriePlanzenUndSamen_.setChecked(false);
-            checkBox_ID_KategorieHolz_.setChecked(false);
-            checkBox_ID_WeitereGartenprodukte_.setChecked(false);
-            checkBox_ID_Burgenland_.setChecked(false);
-            checkBox_ID_Kaernten_.setChecked(false);
-            checkBox_ID_Niederoesterreich_.setChecked(false);
-            checkBox_ID_Oberoesterreich_.setChecked(false);
-            checkBox_ID_Salzburg_.setChecked(false);
-            checkBox_ID_Steiermark_.setChecked(false);
-            checkBox_ID_Tirol_.setChecked(false);
-            checkBox_ID_Vorarlberg_.setChecked(false);
-            checkBox_ID_Wien_.setChecked(false);
+            cb_category_0_.setChecked(false);
+            cb_category_1_.setChecked(false);
+            cb_category_2_.setChecked(false);
+            cb_category_3_.setChecked(false);
+            cb_category_4_.setChecked(false);
+            cb_category_5_.setChecked(false);
             checkBox_ID_Privat_.setChecked(false);
             checkBox_ID_Firma_.setChecked(false);
             checkBox_ID_Zustellung_.setChecked(false);
             checkBox_ID_Selbstabholung_.setChecked(false);
-            checkBox_ID_NichtBenoetigt_.setChecked(false);
-            checkBox_ID_BereitsGeerntet_.setChecked(false);
             checkBox_ID_SelbstErnten_.setChecked(false);
         }
+    }
+
+    private Filter getFilter() {
+        Filter filter = new Filter(seekBar_ID_Entfernung_.getProgress());
+        filter.setBio_(checkBox_ID_BiologischerAnbau_.isChecked());
+
+        List<Categories> categories = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            int resID = getResources().getIdentifier("cb_category_" + i, "id", getPackageName());
+            if (((CheckBox) findViewById(resID)).isChecked()) {
+                categories.add(Categories.fromInt(i));
+            }
+        }
+
+        filter.setCategories_(categories);
+        return filter;
     }
 
 

@@ -3,8 +3,10 @@
 
     <string name="sort_prompt">Bitte eine Sortierung auswaehlen</string>
     <string-array name="sort_arrays">
-        <item>Standardsortierung</item>
+        <item>Entfernung</item>
         <item>Alphabetisch</item>
+        <item>Preis</item>
+        <item>Beliebtheit</item>
     </string-array>
 
     <string name="releaseAd_prompt">Bitte zuerst eine Kategorie waehlen</string>
