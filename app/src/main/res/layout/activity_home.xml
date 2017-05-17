@@ -112,7 +112,7 @@
                                     android:layout_height="50dp"
                                     android:layout_marginLeft="7dp"
                                     android:layout_marginRight="7dp"
-                                    android:background="@drawable/fruit"
+                                    android:background="@drawable/fruits"
                                     android:focusable="true"
                                     android:textSize="8sp" />
 

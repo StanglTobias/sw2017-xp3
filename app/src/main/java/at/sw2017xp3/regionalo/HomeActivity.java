@@ -157,11 +157,52 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        if(v == findViewById(R.id.buttonMeat)){
+            v.setSelected(!v.isSelected());
+
+            if(v.isSelected()){
+                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
+                view.setQuery(getString((R.string.meat)), true);
+            }
+        }
         if(v == findViewById(R.id.buttonVegetables)){
             v.setSelected(!v.isSelected());
+
             if(v.isSelected()){
                 SearchView view = (SearchView)findViewById(R.id.searchViewHome);
                 view.setQuery(getString((R.string.vegetables)), true);
+            }
+        }
+        if(v == findViewById(R.id.buttonFruit)){
+            v.setSelected(!v.isSelected());
+
+            if(v.isSelected()){
+                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
+                view.setQuery(getString((R.string.fruits)), true);
+            }
+        }
+        if(v == findViewById(R.id.buttonCereals)){
+            v.setSelected(!v.isSelected());
+
+            if(v.isSelected()){
+                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
+                view.setQuery(getString((R.string.wheat)), true);
+            }
+        }
+        if(v == findViewById(R.id.buttonMilk)){
+            v.setSelected(!v.isSelected());
+
+            if(v.isSelected()){
+                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
+                view.setQuery(getString((R.string.dairy)), true);
+            }
+        }
+        if(v == findViewById(R.id.buttonOthers)){
+            v.setSelected(!v.isSelected());
+
+            if(v.isSelected()){
+                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
+                view.setQuery(getString((R.string.other)), true);
             }
         }
 
