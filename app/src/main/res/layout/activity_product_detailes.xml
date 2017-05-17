@@ -165,7 +165,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="5dp"
-                        android:background="@android:drawable/btn_star_big_on"
+                        android:background="@drawable/my_selector"
                         android:padding="10dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
