@@ -54,7 +54,7 @@ public class Product {
     }
 
     public User getUser() {
-        return Core.getInstance().getUsers().getUser(id_);
+        return Core.getInstance().getUsers().getUser(producerId_);
     }
 
     public boolean CurrentUserHasLiked() {

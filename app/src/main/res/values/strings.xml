@@ -23,12 +23,14 @@
     <string-array name="releaseAdEinheit_arrays">
         <item>Kilogramm</item>
     </string-array>
+    <string name="category">Kategorie:  </string>
+    <string name="region">Region:  </string>
     <string name="loadData">Daten geladen</string>
     <string name="nameofProduct">GetProductTask.onPostExecute name of product:</string>
-    <string name="productID">Id:</string>
-    <string name="producerID">Erzeuger Id:</string>
-    <string name="productPrice">Preis:</string>
-    <string name="productType">Typ:</string>
+    <string name="productID">Id: </string>
+    <string name="producerID">Erzeuger Id: </string>
+    <string name="productPrice">Preis:  </string>
+    <string name="productType">Typ: </string>
     <string name="productTaskException">GetProductTask.onPostExecute exception</string>
     <string name="id">id</string>
     <string name="missingPW_Email">Bitte Email und Passwort eingeben!</string>
@@ -41,6 +43,7 @@
     <string name="biologisch">Biologisch:</string>
     <string name="kategorie">Kategorie:</string>
     <string name="stop">Halt Stop</string>
+    <string name="space">&#160;</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="meat">Fleisch</string>

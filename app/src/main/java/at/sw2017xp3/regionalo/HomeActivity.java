@@ -34,6 +34,11 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Currency;
+import java.util.Locale;
+
+import static at.sw2017xp3.regionalo.R.string.space;
+import static java.io.File.separator;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
@@ -101,9 +106,32 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         protected void onPostExecute(ArrayList<Product> result) {
 
             try {
+
                 LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayout_Home_Activity);
                 for (Product p : result
                         ) {
+                    String category;
+                    switch(p.getType())
+                    {
+                        case 1:
+                            category = getString(R.string.meat);
+                            break;
+                        case 2:
+                            category = getString(R.string.fruits);
+                            break;
+                        case 3:
+                            category = getString(R.string.vegetables);
+                            break;
+                        case 4:
+                            category = getString(R.string.dairy);
+                            break;
+                        case 5:
+                            category = getString(R.string.wheat);
+                            break;
+                        default:
+                            category = getString(R.string.other);
+                            break;
+                    }
                     System.out.println(getString(R.string.nameofProduct) + p.getName());
 
                     LayoutInflater inflater = getLayoutInflater();
@@ -118,11 +146,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     Glide.with(getApplicationContext()).load(Core.getInstance().getProducts().getImageUri(p.getId())).into(image_load);
                     //Glide.with(this).load("http://goo.gl/gEgYUd").into(image_load);
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct1)).setText(p.getName());
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText(getString(R.string.productID) + String.valueOf(p.getId()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText(getString(R.string.producerID) + String.valueOf(p.getProducerId()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText(getString(R.string.productPrice) + String.valueOf(p.getPrice()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct5)).setText(getString(R.string.productType) + String.valueOf(p.getType()));
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText(getString(R.string.category) +
+                            getString(R.string.space) + category);
+
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText(getString(R.string.productPrice) +
+                              getString(R.string.space) + String.valueOf(p.getPrice()) +
+                              getString(R.string.euro)  + getString(R.string.slash)   + p.getUnit());
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText(getString(R.string.region) +
+                            getString(R.string.space) + String.valueOf(p.getUser().getCity()));
+
                 }
+
             } catch (Exception ex) {
                 System.out.println(getString(R.string.productTaskException));
                 ex.printStackTrace();
