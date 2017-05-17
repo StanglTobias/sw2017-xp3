@@ -159,6 +159,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v == findViewById(R.id.buttonVegetables)){
             v.setSelected(!v.isSelected());
+            if(v.isSelected()){
+                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
+                view.setQuery(getString((R.string.vegetables)), true);
+            }
         }
 
         Intent myIntent = new Intent(getBaseContext(), ProductDetailActivity.class);
