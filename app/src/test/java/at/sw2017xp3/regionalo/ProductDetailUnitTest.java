@@ -10,7 +10,7 @@ import static junit.framework.Assert.assertEquals;
  */
 
 public class ProductDetailUnitTest {
-    @Test
+   /* @Test
     public void isBioTestForTrue() {
         String bio = ProductDetailActivity.isBio(true);
         assertEquals("Ja", bio);
@@ -51,4 +51,9 @@ public class ProductDetailUnitTest {
     public void testCategorieSonstiges() {
         assertEquals("Sonstiges", ProductDetailActivity.productCategorieName(6));
     }
+
+    @Test
+    public void testLike() {
+
+    } */
 }

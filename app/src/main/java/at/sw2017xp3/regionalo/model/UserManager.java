@@ -1,6 +1,7 @@
 package at.sw2017xp3.regionalo.model;
 
 import android.net.Uri;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,7 +13,8 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
  * Created by jo on 26.04.17.
  */
 
-public class UserManager {
+public class
+UserManager {
     ConcurrentHashMap<Integer, User> cache_ = new ConcurrentHashMap<Integer, User>();
     public UserManager() {
     }
@@ -24,7 +26,9 @@ public class UserManager {
     }
 
     public User getUser(int id) {
-        User p = cache_.get(id);
+        User p = null;
+        if(!cache_.isEmpty())
+            p = cache_.get(id);
 
         if (p != null)
             return p;
@@ -34,6 +38,9 @@ public class UserManager {
                 .buildUpon()
                 .appendQueryParameter("id", Integer.toString(id)).build();
 
+        System.out.println("id" + id);
+        System.out.println("uri" + uri.toString());
+
         try {
             JSONArray arr = new JSONArray(HttpUtils.downloadContent(uri.toString()));
             JSONObject mJsonObject = arr.getJSONObject(0);
@@ -41,6 +48,7 @@ public class UserManager {
 
             addUser(p);
         } catch (Exception ex) {
+            Log.e("Databas", "exception", ex);
         }
         return p;
     }

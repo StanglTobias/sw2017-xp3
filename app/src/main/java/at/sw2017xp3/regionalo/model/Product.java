@@ -3,12 +3,17 @@ package at.sw2017xp3.regionalo.model;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
+import static at.sw2017xp3.regionalo.model.ProductManager.PRODUCT_IMAGE_URI;
+import static at.sw2017xp3.regionalo.model.ProductManager.PRODUCT_URI;
+
 /**
  * Created by jo on 05.04.17.
  */
 
 public class Product {
-    public Product(int id, String name, boolean isBio, double price, int producerId, int typeID, String unitType) {
+    public Product(int id, String name, boolean isBio, double price, int producerId, int typeID, String unitType, int likes,
+                   String description)
+    {
         id_ = id;
         name_ = name;
         isBio_ = isBio;
@@ -16,12 +21,13 @@ public class Product {
         producerId_ = producerId;
         typeID_ = typeID;
         unitType_ = unitType;
+        likes_ = likes;
+        description_ = description;
     }
 
     public String getName() {
         return name_;
     }
-
 
     public int getId() {
         return id_;
@@ -43,13 +49,35 @@ public class Product {
         return typeID_;
     }
 
-    public String getUnit() { return unitType_;}
-
-    public User getUser()
-    {
-        return Core.getInstance().getUsers().getUser(id_);
+    public String getUnit() {
+        return unitType_;
     }
-    
+
+    public User getUser() {
+        return Core.getInstance().getUsers().getUser(producerId_);
+    }
+
+    public boolean CurrentUserHasLiked() {
+        return currentUserLiked_;
+    }
+
+    public void SetCurrentUserHasLiked(boolean val) {
+        currentUserLiked_ = val;
+    }
+
+    public int getLikes() {
+        return likes_;
+    }
+
+    public void incrementLikes() {
+        likes_++;
+        currentUserLiked_ = true;
+    }
+
+    public String getDescription(){
+        return description_;
+    }
+
 
     int id_;
     String unitType_;
@@ -58,4 +86,7 @@ public class Product {
     double price_;
     int producerId_;
     int typeID_;
+    int likes_;
+    boolean currentUserLiked_;
+    String description_;
 }

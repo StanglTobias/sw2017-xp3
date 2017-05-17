@@ -23,4 +23,41 @@
     <string-array name="releaseAdEinheit_arrays">
         <item>Kilogramm</item>
     </string-array>
+    <string name="category">Kategorie:  </string>
+    <string name="region">Region:  </string>
+    <string name="loadData">Daten geladen</string>
+    <string name="nameofProduct">GetProductTask.onPostExecute name of product:</string>
+    <string name="productID">Id: </string>
+    <string name="producerID">Erzeuger Id: </string>
+    <string name="productPrice">Preis:  </string>
+    <string name="productType">Typ: </string>
+    <string name="productTaskException">GetProductTask.onPostExecute exception</string>
+    <string name="id">id</string>
+    <string name="missingPW_Email">Bitte Email und Passwort eingeben!</string>
+    <string name="query">query</string>
+    <string name="missingEmail">Bitte E-Mail eingeben!</string>
+    <string name="missingPW">Bitte Passwort eingeben!</string>
+    <string name="openUserContent">LOGIN USER CONTENT ÖFFNEN</string>
+    <string name="euro">€</string>
+    <string name="slash">/</string>
+    <string name="biologisch">Biologisch:</string>
+    <string name="kategorie">Kategorie:</string>
+    <string name="stop">Halt Stop</string>
+    <string name="space">&#160;</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="meat">Fleisch</string>
+    <string name="fruits">Obst</string>
+    <string name="vegetables">Gemüse</string>
+    <string name="other">Sonstiges</string>
+    <string name="dairy">Milchprodukte</string>
+    <string name="wheat">Getreide</string>
+    <string name="a">http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php?q=</string>
+    <string name="phpLink">http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php?q=</string>
+    <string name="postExeNameProduct">GetProductTask.onPostExecute name of product:</string>
+
+
+    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
+        AIzaSyBXSKri2utmkn80rG3ERLWM-it2DO29Z54
+</string>
 </resources>

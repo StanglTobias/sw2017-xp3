@@ -1,6 +1,10 @@
 package at.sw2017xp3.regionalo;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,8 +13,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,30 +39,64 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.Product;
+import at.sw2017xp3.regionalo.model.ProductManager;
 import at.sw2017xp3.regionalo.model.User;
+import at.sw2017xp3.regionalo.util.GeoUtils;
 import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
+import at.sw2017xp3.regionalo.util.OnTaskCompleted;
 
 /**
  * Created by Christof on 05.04.2017.
  */
 
-public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener{
+public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener, OnTaskCompleted, OnMapReadyCallback{
     private ArrayList<View> list_of_elements = new ArrayList<>();
+    private Product product_;
     private int like_button_counter_;
+
+    Product p;
+    GoogleMap googleMap;
+    MapFragment mapFragment;
+
+
+
+    public boolean googlServicesAvailable(){
+        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+
+        int isAvailable = api.isGooglePlayServicesAvailable(this) ;
+
+        if(isAvailable == ConnectionResult.SUCCESS)
+        {
+            return true;
+        }
+        else if(api.isUserResolvableError(isAvailable))
+        {
+            Dialog dialog = api.getErrorDialog(this, isAvailable, 0);
+            dialog.show();
+        }
+
+        return false;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_product_detailes);
+
         Bundle b = getIntent().getExtras();
         int id = 1; // or other values
-        if(b != null)
-            id = b.getInt("id");
+        if (b != null)
+            id = b.getInt(getString(R.string.id));
 
-        setContentView(R.layout.activity_product_detailes);
+        findViewById(R.id.buttonLike).setEnabled(false);
+
 
         list_of_elements.addAll(Arrays.asList(
                 findViewById(R.id.buttonLike),
@@ -53,98 +106,84 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             list_of_elements.get(i).setOnClickListener(this);
         }
 
-        Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/product.php")
-                .buildUpon()
-                .appendQueryParameter("id", Integer.toString(id)).build();
+        ImageView product_image = (ImageView) findViewById(R.id.iv_product);
+        Glide.with(getApplicationContext()).load(Core.getInstance().getProducts().getImageUri(id)).into(product_image);
 
-        new GetProductTask().execute(uri.toString());
+        new GetProductTask(this).execute(id);
+        if(googlServicesAvailable())
+        {
+            Toast.makeText(this, "YAY", Toast.LENGTH_LONG).show();
+            mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
+        }
+
+
+
+        new GetProductTask(this).execute(id);
     }
 
-    private class GetProductTask extends AsyncTask<String, Void, String> {
+    @Override
+    public void onTaskCompleted() {
+        LatLng placeLocation = GeoUtils.getLocationFromAddress(this, p.getUser().getAddress());
+        Marker placeMarker = googleMap.addMarker(new MarkerOptions().position(placeLocation)
+                .title("test"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(placeLocation));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15), 1000, null);
+    }
+
+
+    private class GetProductTask extends AsyncTask<Integer, Void, Product> {
+        private OnTaskCompleted listener;
 
         @Override
-        protected String doInBackground(String... params) {
+        protected Product doInBackground(Integer... params) {
             try {
-                return downloadContent(params[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve data. URL may be invalid.";
+                return Core.getInstance().getProducts().getProduct(params[0]);
+            } catch (Exception e) {
+                return null;
             }
         }
 
+        public  GetProductTask(OnTaskCompleted listener){
+            this.listener=listener;
+
+        }
+
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(Product result) {
             try {
-                JSONArray arr = new JSONArray(result); //featured products
-                JSONObject mJsonObject = arr.getJSONObject(0);//one product
 
-                String allProductNames;
+                 p = product_ = result;
+            ((TextView) findViewById(R.id.textViewDescripton)).setText(p.getDescription());
+            ((TextView) findViewById(R.id.textViewProductName)).setText(p.getName());
+            ((TextView) findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()) + "/" + p.getUnit());
 
-                Product p = JsonObjectMapper.CreateProduct(mJsonObject);
+                ImageView isItBioView = (ImageView)findViewById(R.id.isItBio);
+                if (p.isBio() == false)
+                {isItBioView.setVisibility(View.INVISIBLE);}
+                else if (p.isBio()== true)
+                { isItBioView.setVisibility(View.VISIBLE);}
 
-                ((TextView)findViewById(R.id.textViewProductName)).setText(p.getName());
-                ((TextView)findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()) + "/" + p.getUnit());
-                ((TextView)findViewById(R.id.textViewQuality)).setText("Biologisch: "  + isBio(p.isBio()));
-                ((TextView)findViewById(R.id.textViewCategroy)).setText("Kategorie: " + productCategorieName(p.getType()));
+            ((TextView) findViewById(R.id.textViewCategroy)).setText("Kategorie: " + productCategorieName(p.getType()));
 
-                Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/user.php")
-                        .buildUpon()
-                        .appendQueryParameter("id", Integer.toString(p.getProducerId())).build();
+            User user = p.getUser();
+            ((TextView) findViewById(R.id.textViewName)).setText(user.getFullName());
+            ((TextView) findViewById(R.id.textViewAdress)).setText(user.getPostalCode() + " " + user.getCity() + "\n" + user.getAddress());
+            ((TextView) findViewById(R.id.textViewNumber)).setText(user.getPhoneNumber());
+            ((TextView) findViewById(R.id.textViewEmail)).setText(user.getEmail());
+            ((TextView) findViewById(R.id.textViewLikeCount)).setText(Integer.toString(p.getLikes()));
 
-                new GetUserTask().execute(uri.toString());
+            findViewById(R.id.buttonLike).setEnabled(!p.CurrentUserHasLiked());
+
+
+                listener.onTaskCompleted();
+
             } catch(Exception e){
                 System.out.println("Halt Stop");
             }
         }
     }
 
-    private class GetUserTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-                return downloadContent(params[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve data. URL may be invalid.";
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            try {
-                JSONArray arr = new JSONArray(result); //featured products
-                JSONObject mJsonObject = arr.getJSONObject(0);//one product
-
-                String allProductNames;
-
-                User p = JsonObjectMapper.CreateUser(mJsonObject);
-
-                ((TextView)findViewById(R.id.textViewName)).setText(p.getFullName());
-                ((TextView)findViewById(R.id.textViewAdress)).setText(p.getPostalCode() + " " + p.getCity() + "\n" + p.getAddress());
-                ((TextView)findViewById(R.id.textViewNumber)).setText(p.getPhoneNumber());
-                ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(p.getLikes()));
-            } catch(Exception e){
-                System.out.println("Halt Stop");
-            }
-        }
-    }
-
-    private String downloadContent(String myurl) throws IOException {
-        InputStream is = null;
-        int length = 10000;
-
-        try {
-            HttpURLConnection conn = HttpUtils.httpGet(myurl);
-
-            String contentAsString = HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
-
-            return contentAsString;
-        } catch (Exception ex) {
-            return "";
-        } finally {
-            if (is != null) {
-                is.close();
-            }
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -175,39 +214,90 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         switch (clickedButton.getId()){
             case R.id.buttonLike:
-              like_button_counter_ =  Integer.valueOf((String)(((TextView)findViewById(R.id.textViewLikeCount)).getText()));
-              like_button_counter_++;
-              ((TextView)findViewById(R.id.textViewLikeCount)).setText(Integer.toString(like_button_counter_));
-              break;
+                if(product_ != null && !product_.CurrentUserHasLiked())
+                    new LikeTask().execute(product_.getId());
+                break;
 
             case R.id.ButtonContact:
-                //onClick moveTo Website or show contact data
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:" + ((TextView) findViewById(R.id.textViewEmail)).getText().toString())); // only email apps should handle this
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
                 break;
         }
     }
 
-    public static String isBio(boolean yes_or_no) {
-        if(yes_or_no == true)
-            return "Ja";
-        else
-            return "Nein";
+    private class LikeTask extends AsyncTask<Integer, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Integer... params) {
+            try {
+                return Core.getInstance().getProducts().like(params[0]);
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            try {
+                if (result) {
+                    if (product_ != null) {
+
+                        ((TextView) findViewById(R.id.textViewLikeCount)).setText(Integer.toString(product_.getLikes()));
+                        ((Button) findViewById(R.id.buttonLike)).setEnabled(false);
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Halt Stop");
+            }
+        }
     }
 
-    public static String productCategorieName (int type_id) {
+   /* public String isBio(boolean yes_or_no) {
+        if (yes_or_no == true)
+            return getString(R.string.yes);
+        else
+            return getString(R.string.no);
+    }*/
+
+    public String productCategorieName(int type_id) {
         switch (type_id) {
             case 1:
-                return "Fleisch";
+                return getString(R.string.meat);
             case 2:
-                return "Obst";
+                return getString(R.string.fruits);
             case 3:
-                return"Gemüse";
+                return getString(R.string.vegetables);
             case 4:
-                return "Milchprodukte";
+                return getString(R.string.dairy);
             case 5:
-                return "Getreide";
+                return getString(R.string.wheat);
             case 6:
-                return "Sonstiges";
+                return getString(R.string.other);
         }
         return "";
     }
+
+    @Override
+    public void onMapReady(GoogleMap gMap) {
+        googleMap = gMap;
+       googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        try {
+            googleMap.setMyLocationEnabled(true);
+        } catch (SecurityException se) {
+
+        }
+
+        //Edit the following as per you needs
+        googleMap.setTrafficEnabled(false);
+        googleMap.setIndoorEnabled(true);
+        googleMap.setBuildingsEnabled(true);
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+        //
+
+
+    }
+
+
 }

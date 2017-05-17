@@ -24,8 +24,10 @@ public class JsonObjectMapper {
         double price = object.getDouble("price");
         int producerId = object.getInt("user_id");
         int typeID = object.getInt("type_id");
+        int likes = object.getInt("likes");
+        String description = object.getString("description");
 
-        return new Product(id, name, isBio, price, producerId, typeID, unitType);
+        return new Product(id, name, isBio, price, producerId, typeID, unitType, likes, description);
     }
 
     public static User CreateUser(JSONObject object) throws JSONException {
@@ -39,8 +41,7 @@ public class JsonObjectMapper {
         String email = object.getString("email");
         String phone = object.getString("phone_number");
         boolean isBio = object.getInt("is_bio") == 1;
-        int likes = object.getInt("likes");
 
-        return new User(id, firstName, lastName, address, city, postalCode, email, phone, isBio, likes);
+        return new User(id, firstName, lastName, address, city, postalCode, email, phone, isBio);
     }
 }

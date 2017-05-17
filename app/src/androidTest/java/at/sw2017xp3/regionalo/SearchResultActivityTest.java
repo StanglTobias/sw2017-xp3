@@ -1,57 +1,71 @@
 package at.sw2017xp3.regionalo;
 
-
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.KeyEvent;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.doubleClick;
+import static android.support.test.espresso.action.ViewActions.longClick;
+import static android.support.test.espresso.action.ViewActions.pressKey;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isNotChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.junit.Assert.assertEquals;
+import static junit.framework.Assert.assertEquals;
 
+/**
+ * Instrumentation test, which will execute on an Android device.
+ *
+ * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ */
 @RunWith(AndroidJUnit4.class)
-public class ExtendedSearchActivityTest {
-    @Rule
-    public ActivityTestRule<ExtendedSearchActivity> extendedSearchActivityActivityTestRule =
-            new ActivityTestRule<>(ExtendedSearchActivity.class);
-
+public class SearchResultActivityTest {
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
+
         assertEquals("at.sw2017xp3.regionalo", appContext.getPackageName());
     }
 
+    @Rule
+    public ActivityTestRule<SearchResultActivity> menuActivityTestRule =
+            new ActivityTestRule<>(SearchResultActivity.class, true, true);
+
+
+
+
     @Test
     public void testButtons() {
-        onView(withId(R.id.Button_ID_ExtendedSearchStart)).perform(click());
-        onView(withId(R.id.Button_ID_ResetFilterExtendedSearch)).perform(click());
-    }
+        onView(withId(R.id.expand)).perform(longClick());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-    @Test
-    public void testFields() {
         onView(withId(R.id.Spinner_ID_ExtendedSearch)).perform(click());
+
         onView(withText("Alphabetisch")).perform(click());
 
-        onView(withId(R.id.checkBox_ID_BiologischerAnbau)).perform(click());
-        onView(withId(R.id.checkBox_ID_KategorieObst)).perform(click());
-        onView(withId(R.id.checkBox_ID_KategorieGemüse)).perform(click());
-        onView(withId(R.id.checkBox_ID_KategoriePilze)).perform(click());
-        onView(withId(R.id.checkBox_ID_KategoriePlanzenUndSamen)).perform(click());
-        onView(withId(R.id.checkBox_ID_KategorieHolz)).perform(click());
-        onView(withId(R.id.checkBox_ID_WeitereGartenprodukte)).perform(click());
+        onView(withId(R.id.checkBox_ID_BiologischerAnbau)).perform(scrollTo(),click());
+        onView(withId(R.id.checkBox_ID_KategorieObst)).perform(scrollTo(),click());
+        onView(withId(R.id.checkBox_ID_KategorieGemüse)).perform(scrollTo(),click());
+        onView(withId(R.id.checkBox_ID_KategoriePilze)).perform(scrollTo(),click());
+        onView(withId(R.id.checkBox_ID_KategoriePlanzenUndSamen)).perform(scrollTo(),click());
+        onView(withId(R.id.checkBox_ID_KategorieHolz)).perform(scrollTo(),click());
+        onView(withId(R.id.checkBox_ID_WeitereGartenprodukte)).perform(scrollTo(),click());
         onView(withId(R.id.checkBox_ID_Burgenland)).perform(scrollTo(), click());
         onView(withId(R.id.checkBox_ID_Kaernten)).perform(scrollTo(), click());
         onView(withId(R.id.checkBox_ID_Niederoesterreich)).perform(scrollTo(), click());
@@ -117,12 +131,32 @@ public class ExtendedSearchActivityTest {
         onView(withId(R.id.checkBox_ID_BereitsGeerntet)).check(matches(isNotChecked()));
         onView(withId(R.id.checkBox_ID_SelbstErnten)).perform(scrollTo());
         onView(withId(R.id.checkBox_ID_SelbstErnten)).check(matches(isNotChecked()));
+
+        onView(withId(R.id.Button_ID_ExtendedSearchStart)).perform(scrollTo(), click());
+        onView(withId(R.id.Button_ID_ResetFilterExtendedSearch)).perform(scrollTo(), click());
+
+
     }
 
 
-    //not implemented yet
+
+
     @Test
-    public void testSearchFunction(){
+    public void testSearchSpeckDetailLogin(){
+        onView(withId(R.id.searchViewResult)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewResult)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewResult)).perform(typeText("Speck"));
+        onView(withId(R.id.searchViewResult)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewResult)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewResult)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewResult)).perform(typeText("Speck"));
+        onView(withId(R.id.searchViewResult)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
 
+        onView(withId(R.id.buttonMenuLogin)).perform(click());
     }
+
+
+
+
+
 }
