@@ -4,5 +4,5 @@
         android:state_selected="true"
         android:drawable="@drawable/carrot_circle" />
     <item
-        android:drawable="@drawable/carrot" />
+        android:drawable="@drawable/carrot_gray" />
 </selector>
