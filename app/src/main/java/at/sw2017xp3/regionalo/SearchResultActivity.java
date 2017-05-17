@@ -250,7 +250,28 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 for (Product p : result
                         ) {
                     System.out.println(getString(R.string.postExeNameProduct) + p.getName());
-
+                    String category;
+                    switch(p.getType())
+                    {
+                        case 1:
+                            category = getString(R.string.meat);
+                            break;
+                        case 2:
+                            category = getString(R.string.fruits);
+                            break;
+                        case 3:
+                            category = getString(R.string.vegetables);
+                            break;
+                        case 4:
+                            category = getString(R.string.dairy);
+                            break;
+                        case 5:
+                            category = getString(R.string.wheat);
+                            break;
+                        default:
+                            category = getString(R.string.other);
+                            break;
+                    }
                     LayoutInflater inflater = getLayoutInflater();
                     LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, linearLayoutHome);
 
@@ -262,10 +283,15 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                     Glide.with(getApplicationContext()).load(Core.getInstance().getProducts().getImageUri(p.getId())).into(image_load);
                     (productLayout.findViewById(R.id.imageButtonProduct)).setOnClickListener(this);
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct1)).setText(p.getName());
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText(getString(R.string.producerID) + String.valueOf(p.getId()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText(getString(R.string.producerID) + String.valueOf(p.getProducerId()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText(getString(R.string.productPrice) + String.valueOf(p.getPrice()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct5)).setText(getString(R.string.productType) + String.valueOf(p.getType()));
+
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText(getString(R.string.category) +
+                            getString(R.string.space) + category);
+
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText(getString(R.string.productPrice) +
+                            getString(R.string.space) + String.valueOf(p.getPrice()) + (getString(R.string.euro) + getString(R.string.slash) +  String.valueOf(p.getUnit())));
+                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText(getString(R.string.region) +
+                            getString(R.string.space) +  String.valueOf(p.getUser().getCity()));
+
                 }
 
             } catch (Exception ex) {

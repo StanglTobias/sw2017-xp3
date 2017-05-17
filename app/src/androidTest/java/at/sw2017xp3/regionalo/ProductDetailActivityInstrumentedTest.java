@@ -29,10 +29,10 @@ public class ProductDetailActivityInstrumentedTest {
     public ActivityTestRule<ProductDetailActivity> mActivityRule = new
             ActivityTestRule<>(ProductDetailActivity.class);
 
-    @Test
+  /*  @Test
     public void checkButtonContact() {
         onView(withId(R.id.ButtonContact)).perform(scrollTo(),click());
-    }
+    }*/
 
     @Test
     public void testLikeButton() {
