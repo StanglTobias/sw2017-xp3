@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -156,7 +157,13 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             ((TextView) findViewById(R.id.textViewDescripton)).setText(p.getDescription());
             ((TextView) findViewById(R.id.textViewProductName)).setText(p.getName());
             ((TextView) findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()) + "/" + p.getUnit());
-            ((TextView) findViewById(R.id.textViewQuality)).setText("Biologisch: " + isBio(p.isBio()));
+
+                ImageView isItBioView = (ImageView)findViewById(R.id.isItBio);
+                if (p.isBio() == false)
+                {isItBioView.setVisibility(View.INVISIBLE);}
+                else if (p.isBio()== true)
+                { isItBioView.setVisibility(View.VISIBLE);}
+
             ((TextView) findViewById(R.id.textViewCategroy)).setText("Kategorie: " + productCategorieName(p.getType()));
 
             User user = p.getUser();
