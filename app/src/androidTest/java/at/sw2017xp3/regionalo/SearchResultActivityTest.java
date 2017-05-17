@@ -66,11 +66,11 @@ public class SearchResultActivityTest {
         onView(withId(R.id.cb_category_3)).perform(scrollTo(),click());
         onView(withId(R.id.cb_category_4)).perform(scrollTo(),click());
         onView(withId(R.id.cb_category_5)).perform(scrollTo(),click());
-        onView(withId(R.id.checkBox_ID_Privat)).perform(scrollTo(), click());
-        onView(withId(R.id.checkBox_ID_Firma)).perform(scrollTo(), click());
-        onView(withId(R.id.checkBox_ID_Zustellung)).perform(scrollTo(), click());
-        onView(withId(R.id.checkBox_ID_Selbstabholung)).perform(scrollTo(), click());
-        onView(withId(R.id.checkBox_ID_SelbstErnten)).perform(scrollTo(), click());
+        onView(withId(R.id.cb_seller_0)).perform(scrollTo(), click());
+        onView(withId(R.id.cb_seller_1)).perform(scrollTo(), click());
+        onView(withId(R.id.cb_transfer_0)).perform(scrollTo(), click());
+        onView(withId(R.id.cb_transfer_1)).perform(scrollTo(), click());
+        onView(withId(R.id.cb_transfer_2)).perform(scrollTo(), click());
         onView(withId(R.id.Button_ID_ResetFilterExtendedSearch)).perform(scrollTo(), click());
 
 
@@ -88,16 +88,16 @@ public class SearchResultActivityTest {
         onView(withId(R.id.cb_category_4)).check(matches(isNotChecked()));
         onView(withId(R.id.cb_category_5)).perform(scrollTo());
         onView(withId(R.id.cb_category_5)).check(matches(isNotChecked()));
-        onView(withId(R.id.checkBox_ID_Privat)).perform(scrollTo());
-        onView(withId(R.id.checkBox_ID_Privat)).check(matches(isNotChecked()));
-        onView(withId(R.id.checkBox_ID_Firma)).perform(scrollTo());
-        onView(withId(R.id.checkBox_ID_Firma)).check(matches(isNotChecked()));
-        onView(withId(R.id.checkBox_ID_Zustellung)).perform(scrollTo());
-        onView(withId(R.id.checkBox_ID_Zustellung)).check(matches(isNotChecked()));
-        onView(withId(R.id.checkBox_ID_Selbstabholung)).perform(scrollTo());
-        onView(withId(R.id.checkBox_ID_Selbstabholung)).check(matches(isNotChecked()));
-        onView(withId(R.id.checkBox_ID_SelbstErnten)).perform(scrollTo());
-        onView(withId(R.id.checkBox_ID_SelbstErnten)).check(matches(isNotChecked()));
+        onView(withId(R.id.cb_seller_0)).perform(scrollTo());
+        onView(withId(R.id.cb_seller_0)).check(matches(isNotChecked()));
+        onView(withId(R.id.cb_seller_1)).perform(scrollTo());
+        onView(withId(R.id.cb_seller_1)).check(matches(isNotChecked()));
+        onView(withId(R.id.cb_transfer_0)).perform(scrollTo());
+        onView(withId(R.id.cb_transfer_0)).check(matches(isNotChecked()));
+        onView(withId(R.id.cb_transfer_1)).perform(scrollTo());
+        onView(withId(R.id.cb_transfer_1)).check(matches(isNotChecked()));
+        onView(withId(R.id.cb_transfer_2)).perform(scrollTo());
+        onView(withId(R.id.cb_transfer_2)).check(matches(isNotChecked()));
 
         onView(withId(R.id.Button_ID_ExtendedSearchStart)).perform(scrollTo(), click());
         onView(withId(R.id.Button_ID_ResetFilterExtendedSearch)).perform(scrollTo(), click());

@@ -26,6 +26,8 @@ import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.Filter;
 import at.sw2017xp3.regionalo.model.Product;
 import at.sw2017xp3.regionalo.model.enums.Categories;
+import at.sw2017xp3.regionalo.model.enums.Seller;
+import at.sw2017xp3.regionalo.model.enums.Transfer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,17 +43,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     Button button_reset_filter;
 
     private CheckBox checkBox_ID_BiologischerAnbau_;
-    private CheckBox cb_category_0_;
-    private CheckBox cb_category_1_;
-    private CheckBox cb_category_2_;
-    private CheckBox cb_category_3_;
-    private CheckBox cb_category_4_;
-    private CheckBox cb_category_5_;
-    private CheckBox checkBox_ID_Privat_;
-    private CheckBox checkBox_ID_Firma_;
-    private CheckBox checkBox_ID_Zustellung_;
-    private CheckBox checkBox_ID_Selbstabholung_;
-    private CheckBox checkBox_ID_SelbstErnten_;
+
     private SeekBar seekBar_ID_Entfernung_;
     private EditText text_ID_Entfernung_;
 
@@ -86,18 +78,6 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         button_reset_filter.setOnClickListener(this);
 
         checkBox_ID_BiologischerAnbau_ = (CheckBox) findViewById(R.id.checkBox_ID_BiologischerAnbau);
-        cb_category_0_ = (CheckBox) findViewById(R.id.cb_category_0);
-        cb_category_1_ = (CheckBox) findViewById(R.id.cb_category_1);
-        cb_category_2_ = (CheckBox) findViewById(R.id.cb_category_2);
-        cb_category_3_ = (CheckBox) findViewById(R.id.cb_category_3);
-        cb_category_4_ = (CheckBox) findViewById(R.id.cb_category_4);
-        cb_category_5_ = (CheckBox) findViewById(R.id.cb_category_5);
-        checkBox_ID_Privat_ = (CheckBox) findViewById(R.id.checkBox_ID_Privat);
-        checkBox_ID_Firma_ = (CheckBox) findViewById(R.id.checkBox_ID_Firma);
-        checkBox_ID_Zustellung_ = (CheckBox) findViewById(R.id.checkBox_ID_Zustellung);
-        checkBox_ID_Selbstabholung_ = (CheckBox) findViewById(R.id.checkBox_ID_Selbstabholung);
-        checkBox_ID_SelbstErnten_ = (CheckBox) findViewById(R.id.checkBox_ID_SelbstErnten);
-
 
         text_ID_Entfernung_ = (EditText) findViewById(R.id.text_ID_Entfernung);
 
@@ -163,16 +143,16 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 bundle.getBoolean("cb_category_5", false));
         ((CheckBox) findViewById(R.id.cb_category_4)).setChecked(
                 bundle.getBoolean("cb_category_4", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Privat)).setChecked(
-                bundle.getBoolean("checkBox_ID_Privat", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Firma)).setChecked(
-                bundle.getBoolean("checkBox_ID_Firma", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Zustellung)).setChecked(
-                bundle.getBoolean("checkBox_ID_Zustellung", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Selbstabholung)).setChecked(
-                bundle.getBoolean("checkBox_ID_Selbstabholung", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_SelbstErnten)).setChecked(
-                bundle.getBoolean("checkBox_ID_SelbstErnten", false));
+        ((CheckBox) findViewById(R.id.cb_seller_0)).setChecked(
+                bundle.getBoolean("cb_seller_0", false));
+        ((CheckBox) findViewById(R.id.cb_seller_1)).setChecked(
+                bundle.getBoolean("cb_seller_1", false));
+        ((CheckBox) findViewById(R.id.cb_transfer_0)).setChecked(
+                bundle.getBoolean("cb_transfer_0", false));
+        ((CheckBox) findViewById(R.id.cb_transfer_1)).setChecked(
+                bundle.getBoolean("cb_transfer_1", false));
+        ((CheckBox) findViewById(R.id.cb_transfer_2)).setChecked(
+                bundle.getBoolean("cb_transfer_2", false));
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sort_arrays, R.layout.activity_search_result);
         ((Spinner) findViewById(R.id.Spinner_ID_ExtendedSearch)).setSelection(adapter.getPosition(
@@ -190,6 +170,8 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
     private void saveFilterPreset(Bundle bundle) {
 
+
+
         bundle.putBoolean("checkBox_ID_BiologischerAnbau", ((CheckBox) findViewById(R.id.checkBox_ID_BiologischerAnbau)).isChecked());
         bundle.putBoolean("cb_category_0", ((CheckBox) findViewById(R.id.cb_category_0)).isChecked());
         bundle.putBoolean("cb_category_1", ((CheckBox) findViewById(R.id.cb_category_1)).isChecked());
@@ -197,11 +179,11 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         bundle.putBoolean("cb_category_3", ((CheckBox) findViewById(R.id.cb_category_3)).isChecked());
         bundle.putBoolean("cb_category_4", ((CheckBox) findViewById(R.id.cb_category_4)).isChecked());
         bundle.putBoolean("cb_category_5", ((CheckBox) findViewById(R.id.cb_category_5)).isChecked());
-        bundle.putBoolean("checkBox_ID_Privat", ((CheckBox) findViewById(R.id.checkBox_ID_Privat)).isChecked());
-        bundle.putBoolean("checkBox_ID_Firma", ((CheckBox) findViewById(R.id.checkBox_ID_Firma)).isChecked());
-        bundle.putBoolean("checkBox_ID_Zustellung", ((CheckBox) findViewById(R.id.checkBox_ID_Zustellung)).isChecked());
-        bundle.putBoolean("checkBox_ID_Selbstabholung", ((CheckBox) findViewById(R.id.checkBox_ID_Selbstabholung)).isChecked());
-        bundle.putBoolean("checkBox_ID_SelbstErnten", ((CheckBox) findViewById(R.id.checkBox_ID_SelbstErnten)).isChecked());
+        bundle.putBoolean("cb_seller_0", ((CheckBox) findViewById(R.id.cb_seller_0)).isChecked());
+        bundle.putBoolean("cb_seller_1", ((CheckBox) findViewById(R.id.cb_seller_1)).isChecked());
+        bundle.putBoolean("cb_transfer_0", ((CheckBox) findViewById(R.id.cb_transfer_0)).isChecked());
+        bundle.putBoolean("cb_transfer_1", ((CheckBox) findViewById(R.id.cb_transfer_1)).isChecked());
+        bundle.putBoolean("cb_transfer_2", ((CheckBox) findViewById(R.id.cb_transfer_2)).isChecked());
 
         bundle.putString("Spinner_ID_ExtendedSearch", ((Spinner) findViewById(R.id.Spinner_ID_ExtendedSearch)).getSelectedItem().toString());
         bundle.putInt("seekBar_ID_Entfernung", ((SeekBar) findViewById(R.id.seekBar_ID_Entfernung)).getProgress());
@@ -306,17 +288,13 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
         if (v.getId() == R.id.Button_ID_ResetFilterExtendedSearch) {
             checkBox_ID_BiologischerAnbau_.setChecked(false);
-            cb_category_0_.setChecked(false);
-            cb_category_1_.setChecked(false);
-            cb_category_2_.setChecked(false);
-            cb_category_3_.setChecked(false);
-            cb_category_4_.setChecked(false);
-            cb_category_5_.setChecked(false);
-            checkBox_ID_Privat_.setChecked(false);
-            checkBox_ID_Firma_.setChecked(false);
-            checkBox_ID_Zustellung_.setChecked(false);
-            checkBox_ID_Selbstabholung_.setChecked(false);
-            checkBox_ID_SelbstErnten_.setChecked(false);
+
+            LinearLayout searchResultLayout = ((LinearLayout) findViewById(R.id.linearLayoutSearchResult));
+            for (int i = 0; i < searchResultLayout.getChildCount(); i++) {
+                if (searchResultLayout.getChildAt(i) instanceof CheckBox) {
+                    ((CheckBox) searchResultLayout.getChildAt(i)).setChecked(false);
+                }
+            }
         }
     }
 
@@ -332,7 +310,25 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             }
         }
 
+        List<Seller> seller = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            int resID = getResources().getIdentifier("cb_seller_" + i, "id", getPackageName());
+            if (((CheckBox) findViewById(resID)).isChecked()) {
+                categories.add(Categories.fromInt(i));
+            }
+        }
+
+        List<Transfer> transfer = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            int resID = getResources().getIdentifier("cb_transfer_" + i, "id", getPackageName());
+            if (((CheckBox) findViewById(resID)).isChecked()) {
+                categories.add(Categories.fromInt(i));
+            }
+        }
+
         filter.setCategories_(categories);
+        filter.setSeller_(seller);
+        filter.setTransfer_(transfer);
         return filter;
     }
 

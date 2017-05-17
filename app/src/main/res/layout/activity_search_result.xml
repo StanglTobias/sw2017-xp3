@@ -297,14 +297,14 @@
                                     android:textColor="@android:color/black" />
 
                                 <CheckBox
-                                    android:id="@+id/checkBox_ID_Privat"
+                                    android:id="@+id/cb_seller_0"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Privat"
                                     app:buttonTint="?attr/colorButtonNormal" />
 
                                 <CheckBox
-                                    android:id="@+id/checkBox_ID_Firma"
+                                    android:id="@+id/cb_seller_1"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Firma"
@@ -331,21 +331,21 @@
                                     android:textColor="@android:color/black" />
 
                                 <CheckBox
-                                    android:id="@+id/checkBox_ID_Zustellung"
+                                    android:id="@+id/cb_transfer_0"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Zustellung"
                                     app:buttonTint="?attr/colorButtonNormal" />
 
                                 <CheckBox
-                                    android:id="@+id/checkBox_ID_Selbstabholung"
+                                    android:id="@+id/cb_transfer_1"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Selbstabholung"
                                     app:buttonTint="?attr/colorButtonNormal" />
 
                                 <CheckBox
-                                    android:id="@+id/checkBox_ID_SelbstErnten"
+                                    android:id="@+id/cb_transfer_2"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
