@@ -3,8 +3,8 @@ package at.sw2017xp3.regionalo;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,14 +18,13 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+
+import java.util.ArrayList;
 
 import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.Product;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class SearchResultActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
@@ -258,7 +257,9 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                     int productLayoutId = p.getId();
                     LinearLayout productLayout = (LinearLayout) inflatedView.findViewById(R.id.linearLayout_product);
                     (inflatedView.findViewById(R.id.linearLayout_product)).setId(productLayoutId);
-
+                    ImageButton image_load = (ImageButton) productLayout.findViewById(R.id.imageButtonProduct);
+                    image_load.setOnClickListener(this);
+                    Glide.with(getApplicationContext()).load(Core.getInstance().getProducts().getImageUri(p.getId())).into(image_load);
                     (productLayout.findViewById(R.id.imageButtonProduct)).setOnClickListener(this);
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct1)).setText(p.getName());
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText(getString(R.string.producerID) + String.valueOf(p.getId()));
