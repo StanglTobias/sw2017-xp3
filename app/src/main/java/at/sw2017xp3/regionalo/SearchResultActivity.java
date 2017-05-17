@@ -287,7 +287,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                             getString(R.string.space) + category);
 
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText(getString(R.string.productPrice) +
-                             getString(R.string.euro) + getString(R.string.slash) +  String.valueOf(p.getUnit()));
+                            getString(R.string.space) + String.valueOf(p.getPrice()) + (getString(R.string.euro) + getString(R.string.slash) +  String.valueOf(p.getUnit())));
                     ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText(getString(R.string.region) +
                             getString(R.string.space) +  String.valueOf(p.getUser().getCity()));
 
