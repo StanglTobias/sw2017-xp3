@@ -100,7 +100,8 @@
                                     android:layout_height="50dp"
                                     android:layout_marginLeft="7dp"
                                     android:layout_marginRight="7dp"
-                                    android:background="@drawable/Carrot"
+                                    android:clickable="true"
+                                    android:background="@drawable/carrot_button"
                                     android:textSize="8sp" />
 
                                 <Button
@@ -109,7 +110,8 @@
                                     android:layout_height="50dp"
                                     android:layout_marginLeft="7dp"
                                     android:layout_marginRight="7dp"
-                                    android:background="@drawable/fruits"
+                                    android:background="@drawable/fruit"
+                                    android:focusable="true"
                                     android:textSize="8sp" />
 
                                 <Button
