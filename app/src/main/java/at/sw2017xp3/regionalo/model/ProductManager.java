@@ -3,6 +3,8 @@ package at.sw2017xp3.regionalo.model;
 import android.net.Uri;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,6 +17,8 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
+import at.sw2017xp3.regionalo.Regionalo;
+import at.sw2017xp3.regionalo.util.GeoUtils;
 import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 
@@ -25,8 +29,8 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 public class ProductManager {
 
     ConcurrentHashMap<Integer, Product> cache_ = new ConcurrentHashMap<Integer, Product>();
-    public static final  String PRODUCT_URI = "http://sw-ma-xp3.bplaced.net/MySQLadmin/product.php";
-    public static final String PRODUCT_IMAGE_URI="http://sw-ma-xp3.bplaced.net/MySQLadmin/image.php";
+    public static final String PRODUCT_URI = "http://sw-ma-xp3.bplaced.net/MySQLadmin/product.php";
+    public static final String PRODUCT_IMAGE_URI = "http://sw-ma-xp3.bplaced.net/MySQLadmin/image.php";
 
     public ProductManager() {
     }
@@ -37,14 +41,14 @@ public class ProductManager {
         }
     }
 
-    public String getProductUri(int id){
+    public String getProductUri(int id) {
         Uri uri = Uri.parse(PRODUCT_URI)
                 .buildUpon()
                 .appendQueryParameter("id", Integer.toString(id)).build();
         return uri.toString();
     }
 
-    public String getImageUri(int id){
+    public String getImageUri(int id) {
         Uri uri = Uri.parse(PRODUCT_IMAGE_URI)
                 .buildUpon()
                 .appendQueryParameter("id", Integer.toString(id)).build();
@@ -58,12 +62,15 @@ public class ProductManager {
             return p;
 
         try {
-            String content =  HttpUtils.downloadContent(getProductUri(id));
+            String content = HttpUtils.downloadContent(getProductUri(id));
             JSONArray arr = new JSONArray(content); //featured products
             JSONObject mJsonObject = arr.getJSONObject(0);//one product
 
             p = JsonObjectMapper.CreateProduct(mJsonObject);
-            p.getUser();
+
+            if (p.getUser().getLatitude() == 0d) {
+                Core.getInstance().getUsers().WriteLongLat(p.getUser());
+            }
 
             addProduct(p);
 
@@ -105,7 +112,7 @@ public class ProductManager {
         if (p != null) {
 
             Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/like.php")
-             .buildUpon()
+                    .buildUpon()
                     .appendQueryParameter("pid", Integer.toString(p.getId()))
                     .appendQueryParameter("uuid", CurrentUser.getId()).build();
 
@@ -113,12 +120,11 @@ public class ProductManager {
                 HttpURLConnection urlConn = HttpUtils.httpGet(uri.toString());
                 urlConn.connect();
 
-               if(urlConn.getResponseCode() == HttpURLConnection.HTTP_OK)
-               {
-                   p.incrementLikes();
+                if (urlConn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    p.incrementLikes();
 
-                   return  true;
-               }
+                    return true;
+                }
 
             } catch (Exception ex) {
                 return false;
@@ -127,23 +133,10 @@ public class ProductManager {
         return false;
     }
 
-    public JSONObject GetLikePostJson(int productId, String Uuid) {
-        JSONObject obj = new JSONObject();
-        try {
-            obj.put("pid", Integer.toString(productId));
-            obj.put("uuid", Uuid);
-
-        } catch (JSONException e) {
-        }
-
-        return obj;
-    }
-
 
     public ArrayList<Product> getFeaturedProducts() {
 
         ArrayList<Product> products = new ArrayList<Product>();
-
 
         for (int j = 1; j < 6; j++) {
             Product p = getProduct(j);
@@ -151,13 +144,12 @@ public class ProductManager {
             products.add(p);
         }
 
-
         return products;
     }
 
     public ArrayList<Product> getSearchedProducts(String searchString) {
 
-        System.out.println("searchstring " +  searchString);
+        System.out.println("searchstring " + searchString);
 
         ArrayList<Product> products = new ArrayList<Product>();
 
@@ -166,12 +158,11 @@ public class ProductManager {
                 .appendQueryParameter("q", searchString).build();
 
         try {
-            String content =  HttpUtils.downloadContent(uri.toString());
+            String content = HttpUtils.downloadContent(uri.toString());
             System.out.println("content search product " + content);
             JSONArray arr = new JSONArray(content); //featured products
 
-            for (int i = 0; i < arr.length(); i++)
-            {
+            for (int i = 0; i < arr.length(); i++) {
                 JSONObject mJsonObject = arr.getJSONObject(i);
                 Product p = JsonObjectMapper.CreateProduct(mJsonObject);
                 products.add(p);

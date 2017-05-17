@@ -20,11 +20,15 @@ public class User {
     boolean delivery_;
     boolean yardSale_;
     boolean selfHarvest_;
+    boolean commercial_;
+
+
+
 
     public User(int id, String firstName, String lastName, String address, String city,
                 String postalCode, String email, String phone_number,
                 boolean isBio, double longitude, double latitude, boolean delivery,
-                boolean yardSale, boolean selfHarvest) {
+                boolean yardSale, boolean selfHarvest, boolean commercial) {
         id_ = id;
         firstName_ = firstName;
         lastName_ = lastName;
@@ -39,6 +43,7 @@ public class User {
         delivery_ = delivery;
         yardSale_ = yardSale;
         selfHarvest_ = selfHarvest;
+        commercial_ = commercial;
     }
 
     public int getId() {
@@ -77,7 +82,7 @@ public class User {
         return longitude_;
     }
 
-    public double getLatitude_() {
+    public double getLatitude() {
         return latitude_;
     }
 
@@ -93,5 +98,16 @@ public class User {
         return selfHarvest_;
     }
 
+    public boolean isCommercial() {
+        return commercial_;
+    }
+
+    public void setLongitude_(double longitude) {
+        this.longitude_ = longitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude_ = latitude;
+    }
 
 }

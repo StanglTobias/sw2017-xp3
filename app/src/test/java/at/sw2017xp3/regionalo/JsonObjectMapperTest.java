@@ -70,6 +70,7 @@ public class JsonObjectMapperTest {
         int delivery = 1;
         int yardSale = 1;
         int selfHarvest = 0;
+        int commercial = 1;
 
         obj.put("id", id);
         obj.put("first_name", firstName);
@@ -86,7 +87,7 @@ public class JsonObjectMapperTest {
         obj.put("delivery", delivery);
         obj.put("yard_sale", yardSale);
         obj.put("self_harvest", selfHarvest);
-
+        obj.put("commercial", commercial);
 
         User u = JsonObjectMapper.CreateUser(obj);
 
@@ -99,9 +100,9 @@ public class JsonObjectMapperTest {
         assertTrue(phone.equals(u.getPhoneNumber()));
         assertTrue((isBio == 1) == u.isBio());
         assertTrue((delivery == 1) == u.isDelivery());
-        assertTrue((selfHarvest == 1) == u.isDelivery());
-        assertTrue((yardSale == 1) == u.isSelfHarvest());
-
+        assertTrue((selfHarvest == 1) == u.isSelfHarvest());
+        assertTrue((yardSale == 1) == u.isYardSale());
+        assertTrue((commercial == 1) == u.isCommercial());
 
     }
 }
