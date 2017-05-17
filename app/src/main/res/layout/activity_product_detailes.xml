@@ -192,6 +192,7 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:paddingTop="5dp"
+                        app:srcCompat="@drawable/bio"
  />
 
                     <Space
