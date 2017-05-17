@@ -13,7 +13,8 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
  * Created by jo on 26.04.17.
  */
 
-public class UserManager {
+public class
+UserManager {
     ConcurrentHashMap<Integer, User> cache_ = new ConcurrentHashMap<Integer, User>();
     public UserManager() {
     }

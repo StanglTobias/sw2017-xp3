@@ -29,7 +29,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.vision.barcode.Barcode;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -109,7 +108,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         ImageView product_image = (ImageView) findViewById(R.id.iv_product);
         Glide.with(getApplicationContext()).load(Core.getInstance().getProducts().getImageUri(id)).into(product_image);
 
-        new GetProductTask().execute(id);
+        new GetProductTask(this).execute(id);
         if(googlServicesAvailable())
         {
             Toast.makeText(this, "YAY", Toast.LENGTH_LONG).show();
@@ -168,7 +167,8 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             ((TextView) findViewById(R.id.textViewLikeCount)).setText(Integer.toString(p.getLikes()));
 
             findViewById(R.id.buttonLike).setEnabled(!p.CurrentUserHasLiked());
-        }
+
+
                 listener.onTaskCompleted();
 
             } catch(Exception e){
@@ -176,6 +176,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             }
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

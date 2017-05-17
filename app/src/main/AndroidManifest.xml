@@ -62,7 +62,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
         </activity>
-        <activity android:name=".ExtendedSearchActivity"
+        <activity android:name=".SearchResultActivity"
             android:parentActivityName=".HomeActivity">
             <!-- to support API level 15 and lower -->
             <meta-data
