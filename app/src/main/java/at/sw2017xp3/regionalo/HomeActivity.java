@@ -111,7 +111,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 for (Product p : result
                         ) {
                     String category;
-                    switch(p.getType())
+                    category = getString(R.string.meat);
+                   /* switch(p.getType())
                     {
                         case 1:
                             category = getString(R.string.meat);
@@ -131,7 +132,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         default:
                             category = getString(R.string.other);
                             break;
-                    }
+                    } */
                     System.out.println(getString(R.string.nameofProduct) + p.getName());
 
                     LayoutInflater inflater = getLayoutInflater();

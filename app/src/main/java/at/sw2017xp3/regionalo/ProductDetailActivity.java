@@ -254,12 +254,12 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    public String isBio(boolean yes_or_no) {
+   /* public String isBio(boolean yes_or_no) {
         if (yes_or_no == true)
             return getString(R.string.yes);
         else
             return getString(R.string.no);
-    }
+    }*/
 
     public String productCategorieName(int type_id) {
         switch (type_id) {
