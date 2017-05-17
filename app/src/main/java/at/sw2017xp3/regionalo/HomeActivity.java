@@ -1,11 +1,9 @@
 package at.sw2017xp3.regionalo;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,26 +12,15 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.CurrentUser;
-import at.sw2017xp3.regionalo.util.Installation;
 import at.sw2017xp3.regionalo.model.Product;
-import at.sw2017xp3.regionalo.util.HttpUtils;
-import at.sw2017xp3.regionalo.util.JsonObjectMapper;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
@@ -131,8 +118,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public void onClick(View v) {
-
             ImageButton imageButton = (ImageButton) v;
+
             LinearLayout productLayout = (LinearLayout) imageButton.getParent();
             int productId = productLayout.getId();
 
@@ -170,6 +157,55 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        if(v == findViewById(R.id.buttonMeat)){
+            v.setSelected(!v.isSelected());
+
+            if(v.isSelected()){
+                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
+                view.setQuery(getString((R.string.meat)), true);
+            }
+        }
+        if(v == findViewById(R.id.buttonVegetables)){
+            v.setSelected(!v.isSelected());
+
+            if(v.isSelected()){
+                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
+                view.setQuery(getString((R.string.vegetables)), true);
+            }
+        }
+        if(v == findViewById(R.id.buttonFruit)){
+            v.setSelected(!v.isSelected());
+
+            if(v.isSelected()){
+                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
+                view.setQuery(getString((R.string.fruits)), true);
+            }
+        }
+        if(v == findViewById(R.id.buttonCereals)){
+            v.setSelected(!v.isSelected());
+
+            if(v.isSelected()){
+                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
+                view.setQuery(getString((R.string.wheat)), true);
+            }
+        }
+        if(v == findViewById(R.id.buttonMilk)){
+            v.setSelected(!v.isSelected());
+
+            if(v.isSelected()){
+                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
+                view.setQuery(getString((R.string.dairy)), true);
+            }
+        }
+        if(v == findViewById(R.id.buttonOthers)){
+            v.setSelected(!v.isSelected());
+
+            if(v.isSelected()){
+                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
+                view.setQuery(getString((R.string.other)), true);
+            }
+        }
+
         Intent myIntent = new Intent(getBaseContext(), ProductDetailActivity.class);
     }
 }

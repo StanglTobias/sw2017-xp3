@@ -1,8 +1,6 @@
 package at.sw2017xp3.regionalo;
 
-import android.accessibilityservice.AccessibilityService;
 import android.content.Context;
-import android.inputmethodservice.KeyboardView;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -14,16 +12,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static android.support.test.espresso.action.ViewActions.doubleClick;
-import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
 import static android.support.test.espresso.action.ViewActions.pressKey;
-import static android.support.test.espresso.action.ViewActions.replaceText;
-import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static junit.framework.Assert.assertEquals;
@@ -47,15 +40,19 @@ public class ExampleInstrumentedTest {
     public ActivityTestRule<HomeActivity> menuActivityTestRule =
             new ActivityTestRule<>(HomeActivity.class, true, true);
 
-    @Ignore
     @Test
-    public void testMenuButtonsFirstScreen () throws Exception {
-        onView(withText("Fleisch")).perform(scrollTo(), click());
-        onView(withText("Gemüse")).perform(click());
-        onView(withText("Getreide")).perform(click());
-        onView(withText("Obst")).perform(click());
-        onView(withText("Milch")).perform(scrollTo(), click());
-        onView(withId(R.id.buttonOthers)).perform(scrollTo(), click());
+    public void testMenuButtonsFirstScreen (){
+        onView(withId(R.id.buttonMeat)).perform( click());
+        pressBack();
+        onView(withId(R.id.buttonVegetables)).perform( click());
+        pressBack();
+        onView(withId(R.id.buttonFruit)).perform( click());
+        pressBack();
+        onView(withId(R.id.buttonMilk)).perform( click());
+        pressBack();
+        onView(withId(R.id.buttonCereals)).perform( click());
+        pressBack();
+        onView(withId(R.id.buttonOthers)).perform( click());
     }
 
 
