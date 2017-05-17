@@ -11,7 +11,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#F5F5DC"
+        android:background="#F1F1F1"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -44,7 +44,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingBottom="25dp">
 
                         <SearchView
                             android:id="@+id/searchViewHome"
@@ -66,11 +67,15 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="#F1F1F1"
                         android:orientation="horizontal">
 
-                        <HorizontalScrollView android:id="@+id/horizontalScrollView"
-                            android:layout_width="match_parent" android:layout_height="match_parent"
-                            android:layout_marginBottom="10dp" android:layout_marginTop="10dp"
+                        <HorizontalScrollView
+                            android:id="@+id/horizontalScrollView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="0dp"
+                            android:layout_marginTop="20dp"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/searchViewHome"
@@ -78,43 +83,64 @@
                             tools:layout_constraintRight_creator="1"
                             tools:layout_constraintTop_creator="1">
 
-                            <LinearLayout android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:orientation="horizontal">
 
 
-                                <Button android:id="@+id/buttonMeat" android:layout_width="50dp"
-                                    android:layout_height="50dp" android:layout_marginRight="7dp"
+                                <Button
+                                    android:id="@+id/buttonMeat"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginRight="7dp"
                                     android:background="@drawable/meat_button"
                                     android:textSize="8sp" />
 
-                                <Button android:id="@+id/buttonVegetables"
-                                    android:layout_width="50dp" android:layout_height="50dp"
-                                    android:layout_marginLeft="7dp" android:layout_marginRight="7dp"
+                                <Button
+                                    android:id="@+id/buttonVegetables"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginLeft="7dp"
+                                    android:layout_marginRight="7dp"
                                     android:background="@drawable/carrot_button"
-                                    android:clickable="true" android:textSize="8sp" />
+                                    android:clickable="true"
+                                    android:textSize="8sp" />
 
-                                <Button android:id="@+id/buttonFruit" android:layout_width="50dp"
-                                    android:layout_height="50dp" android:layout_marginLeft="7dp"
+                                <Button
+                                    android:id="@+id/buttonFruit"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginLeft="7dp"
                                     android:layout_marginRight="7dp"
                                     android:background="@drawable/fruit_button"
-                                    android:focusable="true" android:textSize="8sp" />
+                                    android:focusable="true"
+                                    android:textSize="8sp" />
 
-                                <Button android:id="@+id/buttonMilk" android:layout_width="50dp"
-                                    android:layout_height="50dp" android:layout_marginLeft="7dp"
+                                <Button
+                                    android:id="@+id/buttonMilk"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginLeft="7dp"
                                     android:layout_marginRight="7dp"
                                     android:background="@drawable/dairy_button"
                                     android:textSize="8sp" />
 
-                                <Button android:id="@+id/buttonCereals" android:layout_width="50dp"
-                                    android:layout_height="50dp" android:layout_marginLeft="7dp"
+                                <Button
+                                    android:id="@+id/buttonCereals"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginLeft="7dp"
                                     android:layout_marginRight="7dp"
                                     android:background="@drawable/wheat_button"
                                     android:textSize="8sp" />
 
-                                <Button android:id="@+id/buttonOthers" android:layout_width="50dp"
-                                    android:layout_height="50dp" android:layout_marginLeft="7dp"
+                                <Button
+                                    android:id="@+id/buttonOthers"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginLeft="7dp"
                                     android:background="@drawable/other_button"
                                     android:textSize="8sp" />
 
