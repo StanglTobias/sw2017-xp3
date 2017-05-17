@@ -93,7 +93,7 @@
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
                                     android:layout_marginRight="7dp"
-                                    android:background="@drawable/meat"
+                                    android:background="@drawable/meat_button"
                                     android:textSize="8sp" />
 
                                 <Button
@@ -112,7 +112,7 @@
                                     android:layout_height="50dp"
                                     android:layout_marginLeft="7dp"
                                     android:layout_marginRight="7dp"
-                                    android:background="@drawable/fruits"
+                                    android:background="@drawable/fruit_button"
                                     android:focusable="true"
                                     android:textSize="8sp" />
 
@@ -122,7 +122,7 @@
                                     android:layout_height="50dp"
                                     android:layout_marginLeft="7dp"
                                     android:layout_marginRight="7dp"
-                                    android:background="@drawable/milk"
+                                    android:background="@drawable/dairy_button"
                                     android:textSize="8sp" />
 
                                 <Button
@@ -131,7 +131,7 @@
                                     android:layout_height="50dp"
                                     android:layout_marginLeft="7dp"
                                     android:layout_marginRight="7dp"
-                                    android:background="@drawable/wheat"
+                                    android:background="@drawable/wheat_button"
                                     android:textSize="8sp" />
 
                                 <Button
@@ -139,7 +139,7 @@
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
                                     android:layout_marginLeft="7dp"
-                                    android:background="@drawable/other"
+                                    android:background="@drawable/other_button"
                                     android:textSize="8sp" />
 
 
