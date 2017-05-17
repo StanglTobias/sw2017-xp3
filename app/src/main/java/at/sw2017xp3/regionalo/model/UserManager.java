@@ -1,6 +1,7 @@
 package at.sw2017xp3.regionalo.model;
 
 import android.net.Uri;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,7 +13,8 @@ import at.sw2017xp3.regionalo.util.JsonObjectMapper;
  * Created by jo on 26.04.17.
  */
 
-public class UserManager {
+public class
+UserManager {
     ConcurrentHashMap<Integer, User> cache_ = new ConcurrentHashMap<Integer, User>();
     public UserManager() {
     }
@@ -46,6 +48,7 @@ public class UserManager {
 
             addUser(p);
         } catch (Exception ex) {
+            Log.e("Databas", "exception", ex);
         }
         return p;
     }

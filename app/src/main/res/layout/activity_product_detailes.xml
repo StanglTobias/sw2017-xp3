@@ -8,7 +8,8 @@
     <ScrollView
         android:id="@+id/Productname"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -164,7 +165,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/my_selector"
+                        android:background="@android:drawable/btn_star_big_on"
                         android:padding="10dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
@@ -301,6 +302,14 @@
                     android:text="christof.jahn@gmail.com"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
+
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.MapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp" />
+
+
 
                 <Button
                     android:id="@+id/ButtonContact"

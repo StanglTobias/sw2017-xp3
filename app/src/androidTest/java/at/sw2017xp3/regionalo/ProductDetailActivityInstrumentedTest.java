@@ -24,7 +24,7 @@ import static org.hamcrest.core.IsNot.not;
  * Created by lukas on 05.04.2017.
  */
 
-public class ProductDetailActivityInstrumentedTest{
+public class ProductDetailActivityInstrumentedTest {
 
     @Rule
     public ActivityTestRule<ProductDetailActivity> mActivityRule = new

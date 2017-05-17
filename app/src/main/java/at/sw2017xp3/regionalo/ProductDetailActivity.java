@@ -1,6 +1,10 @@
 package at.sw2017xp3.regionalo;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +20,16 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -24,22 +38,50 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.Product;
 import at.sw2017xp3.regionalo.model.ProductManager;
 import at.sw2017xp3.regionalo.model.User;
+import at.sw2017xp3.regionalo.util.GeoUtils;
 import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
+import at.sw2017xp3.regionalo.util.OnTaskCompleted;
 
 /**
  * Created by Christof on 05.04.2017.
  */
 
-public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener, OnTaskCompleted, OnMapReadyCallback{
     private ArrayList<View> list_of_elements = new ArrayList<>();
     private Product product_;
     private int like_button_counter_;
+
+    Product p;
+    GoogleMap googleMap;
+    MapFragment mapFragment;
+
+
+
+    public boolean googlServicesAvailable(){
+        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+
+        int isAvailable = api.isGooglePlayServicesAvailable(this) ;
+
+        if(isAvailable == ConnectionResult.SUCCESS)
+        {
+            return true;
+        }
+        else if(api.isUserResolvableError(isAvailable))
+        {
+            Dialog dialog = api.getErrorDialog(this, isAvailable, 0);
+            dialog.show();
+        }
+
+        return false;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +108,31 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         ImageView product_image = (ImageView) findViewById(R.id.iv_product);
         Glide.with(getApplicationContext()).load(Core.getInstance().getProducts().getImageUri(id)).into(product_image);
 
-        new GetProductTask().execute(id);
+        new GetProductTask(this).execute(id);
+        if(googlServicesAvailable())
+        {
+            Toast.makeText(this, "YAY", Toast.LENGTH_LONG).show();
+            mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
+        }
+
+
+
+        new GetProductTask(this).execute(id);
     }
 
-    private class GetProductTask extends AsyncTask<Integer, Void, Product> {
+    @Override
+    public void onTaskCompleted() {
+        LatLng placeLocation = GeoUtils.getLocationFromAddress(this, p.getUser().getAddress());
+        Marker placeMarker = googleMap.addMarker(new MarkerOptions().position(placeLocation)
+                .title("test"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(placeLocation));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15), 1000, null);
+    }
 
+
+    private class GetProductTask extends AsyncTask<Integer, Void, Product> {
+        private OnTaskCompleted listener;
 
         @Override
         protected Product doInBackground(Integer... params) {
@@ -81,9 +143,16 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             }
         }
 
+        public  GetProductTask(OnTaskCompleted listener){
+            this.listener=listener;
+
+        }
+
         @Override
         protected void onPostExecute(Product result) {
-            Product p = product_ = result;
+            try {
+
+                 p = product_ = result;
 
             ((TextView) findViewById(R.id.textViewProductName)).setText(p.getName());
             ((TextView) findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()) + "/" + p.getUnit());
@@ -98,10 +167,16 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             ((TextView) findViewById(R.id.textViewLikeCount)).setText(Integer.toString(p.getLikes()));
 
             findViewById(R.id.buttonLike).setEnabled(!p.CurrentUserHasLiked());
+
+
+                listener.onTaskCompleted();
+
+            } catch(Exception e){
+                System.out.println("Halt Stop");
+            }
         }
-
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -118,7 +193,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.buttonMenuLogin) {
+        if (id == R.id.buttonLogin) {
             Intent myIntent = new Intent(this, LoginActivity.class);
             startActivity(myIntent);
         }
@@ -128,9 +203,9 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        Button clickedButton = (Button) v;
+        Button clickedButton = (Button)v;
 
-        switch (clickedButton.getId()) {
+        switch (clickedButton.getId()){
             case R.id.buttonLike:
                 if(product_ != null && !product_.CurrentUserHasLiked())
                     new LikeTask().execute(product_.getId());
@@ -199,4 +274,26 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 return "";
         }
     }
+
+    @Override
+    public void onMapReady(GoogleMap gMap) {
+        googleMap = gMap;
+       googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        try {
+            googleMap.setMyLocationEnabled(true);
+        } catch (SecurityException se) {
+
+        }
+
+        //Edit the following as per you needs
+        googleMap.setTrafficEnabled(false);
+        googleMap.setIndoorEnabled(true);
+        googleMap.setBuildingsEnabled(true);
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+        //
+
+
+    }
+
+
 }
