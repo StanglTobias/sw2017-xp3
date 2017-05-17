@@ -2,6 +2,29 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="at.sw2017xp3.regionalo">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-library android:name="com.google.android.maps" />
+
+    <permission
+        android:name="at.sw2017xp3.regionalo.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="at.sw2017xp3.regionalo.permission.MAPS_RECEIVE"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permissions.READ_GSERVICES"/>
+
+
+    <uses-feature android:glEsVersion="0x00020000"
+        android:required="true"/>
+
+
+    <meta-data android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version"/>
+
+
+
+
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <application
         android:allowBackup="true"
@@ -37,14 +60,20 @@
             <!-- to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity"/>
+                android:value=".HomeActivity" />
         </activity>
-        <activity android:name=".SearchResultActivity"
-            android:parentActivityName="HomeActivity">
+        <activity android:name=".ExtendedSearchActivity"
+            android:parentActivityName=".HomeActivity">
             <!-- to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
         </activity>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="@string/google_maps_key" />
+
+
     </application>
 </manifest>
