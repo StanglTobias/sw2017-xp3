@@ -153,7 +153,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             try {
 
                  p = product_ = result;
-
+            ((TextView) findViewById(R.id.textViewDescripton)).setText(p.getDescription());
             ((TextView) findViewById(R.id.textViewProductName)).setText(p.getName());
             ((TextView) findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()) + "/" + p.getUnit());
             ((TextView) findViewById(R.id.textViewQuality)).setText("Biologisch: " + isBio(p.isBio()));

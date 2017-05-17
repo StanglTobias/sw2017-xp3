@@ -25,8 +25,9 @@ public class JsonObjectMapper {
         int producerId = object.getInt("user_id");
         int typeID = object.getInt("type_id");
         int likes = object.getInt("likes");
+        String description = object.getString("description");
 
-        return new Product(id, name, isBio, price, producerId, typeID, unitType, likes);
+        return new Product(id, name, isBio, price, producerId, typeID, unitType, likes, description);
     }
 
     public static User CreateUser(JSONObject object) throws JSONException {
