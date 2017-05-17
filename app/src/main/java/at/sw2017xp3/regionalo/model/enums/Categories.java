@@ -21,6 +21,7 @@ public enum Categories{
             if(category.intValue == i)
                 return category;
         }
+        return  null;
     }
 
     @Override

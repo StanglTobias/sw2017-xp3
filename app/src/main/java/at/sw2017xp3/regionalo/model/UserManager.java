@@ -33,7 +33,6 @@ UserManager {
         if (p != null)
             return p;
 
-
         Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/user.php")
                 .buildUpon()
                 .appendQueryParameter("id", Integer.toString(id)).build();
