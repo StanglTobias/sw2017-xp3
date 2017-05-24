@@ -283,13 +283,13 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 Filter filter = getFilter();
                 break;
             case R.id.Button_ID_ResetFilterExtendedSearch: {
-                LinearLayout searchResultLayout = ((LinearLayout) findViewById(R.id.linearLayoutSearchResult));
+              /*  LinearLayout searchResultLayout = ((LinearLayout) findViewById(R.id.linearLayoutSearchResult));
                 for (int i = 0; i < searchResultLayout.getChildCount(); i++) {
                     if (searchResultLayout.getChildAt(i) instanceof CheckBox) {
                         ((CheckBox) searchResultLayout.getChildAt(i)).setChecked(false);
                     }
-                }
-
+                }*/
+                LinearLayout ll_bio = ((LinearLayout) findViewById(R.id.ll_bio));
                 LinearLayout ll_category = ((LinearLayout) findViewById(R.id.ll_category));
                 LinearLayout ll_seller = ((LinearLayout) findViewById(R.id.ll_seller));
                 LinearLayout ll_transfer = ((LinearLayout) findViewById(R.id.ll_transfer));
@@ -306,6 +306,12 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 for (int i = 0; i < ll_transfer.getChildCount(); i++) {
                     if (ll_transfer.getChildAt(i) instanceof CheckBox) {
                         ((CheckBox) ll_transfer.getChildAt(i)).setChecked(false);
+                    }
+                }
+
+                for (int i = 0; i < ll_bio.getChildCount(); i++) {
+                    if (ll_transfer.getChildAt(i) instanceof CheckBox) {
+                        ((CheckBox) ll_bio.getChildAt(i)).setChecked(false);
                     }
                 }
             }

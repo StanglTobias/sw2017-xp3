@@ -59,6 +59,7 @@ public class ExampleInstrumentedTest {
     }
 
 
+    @Ignore
     @Test
     public void testSearchGouda(){
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
@@ -68,6 +69,7 @@ public class ExampleInstrumentedTest {
         onView(withId(16)).perform(click());
     }
 
+    @Ignore
     @Test
     public void testSearchFleisch(){
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
@@ -77,6 +79,7 @@ public class ExampleInstrumentedTest {
         onView(withId(1)).perform(click());
     }
 
+    @Ignore
     @Test
     public void testSearchObst(){
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
@@ -86,6 +89,7 @@ public class ExampleInstrumentedTest {
         onView(withId(8)).perform(click());
     }
 
+    @Ignore
     @Test
     public void testSearchGemüse(){
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
@@ -95,6 +99,7 @@ public class ExampleInstrumentedTest {
         onView(withId(10)).perform(click());
     }
 
+    @Ignore
     @Test
     public void testSearchSonstiges(){
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
@@ -104,6 +109,7 @@ public class ExampleInstrumentedTest {
         onView(withId(26)).perform(click());
     }
 
+    @Ignore
     @Test
     public void testSearchGetreide(){
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
@@ -134,6 +140,7 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.textViewEmail)).check(matches(withText("Hallo Welt!")));
     }
 
+    @Ignore
     @Test
     public void testSearchSpeckDetail(){
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
@@ -146,6 +153,7 @@ public class ExampleInstrumentedTest {
     }
 
 
+    @Ignore
     @Test
     public void testSpeckDetail(){
         onView(withId(1)).perform(click());
@@ -153,11 +161,10 @@ public class ExampleInstrumentedTest {
 
     }
 
+    @Ignore
     @Test
-    public void testLikeButtonSearchBirneNotLikedAndLiked() {
-
-
-
+    public void testLikeButtonSearchBirneNotLikedAndLiked()
+    {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Birne"));
@@ -221,6 +228,7 @@ public class ExampleInstrumentedTest {
 
     }
 
+    @Ignore
     @Test
     public void testSearchSpeckDetailLogin(){
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));

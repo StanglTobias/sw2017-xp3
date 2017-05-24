@@ -6,6 +6,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.KeyEvent;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -99,15 +100,42 @@ public class SearchResultActivityTest {
         onView(withId(R.id.cb_transfer_2)).perform(scrollTo());
         onView(withId(R.id.cb_transfer_2)).check(matches(isNotChecked()));
 
-        onView(withId(R.id.Button_ID_ExtendedSearchStart)).perform(scrollTo(), click());
+
         onView(withId(R.id.Button_ID_ResetFilterExtendedSearch)).perform(scrollTo(), click());
+        onView(withId(R.id.Button_ID_ExtendedSearchStart)).perform(scrollTo(), click());
 
 
 
 
     }
 
+    @Test
+    public void testProgressBar()
+    {
+        onView(withId(R.id.expand)).perform(longClick());
+        onView(withId(R.id.seekBar_ID_Entfernung)).perform(click());
+    }
 
+    @Test
+    public void testFilterSearch()
+    {
+        onView(withId(R.id.expand)).perform(longClick());
+        onView(withId(R.id.seekBar_ID_Entfernung)).perform(click());
+        onView(withId(R.id.checkBox_ID_BiologischerAnbau)).perform(scrollTo(),click());
+        onView(withId(R.id.cb_category_0)).perform(scrollTo(),click());
+        onView(withId(R.id.cb_category_1)).perform(scrollTo(),click());
+        onView(withId(R.id.cb_category_2)).perform(scrollTo(),click());
+        onView(withId(R.id.cb_category_3)).perform(scrollTo(),click());
+        onView(withId(R.id.cb_category_4)).perform(scrollTo(),click());
+        onView(withId(R.id.cb_category_5)).perform(scrollTo(),click());
+        onView(withId(R.id.cb_seller_0)).perform(scrollTo(), click());
+        onView(withId(R.id.cb_seller_1)).perform(scrollTo(), click());
+        onView(withId(R.id.cb_transfer_0)).perform(scrollTo(), click());
+        onView(withId(R.id.cb_transfer_1)).perform(scrollTo(), click());
+        onView(withId(R.id.cb_transfer_2)).perform(scrollTo(), click());
+        onView(withId(R.id.Button_ID_ExtendedSearchStart2)).perform(scrollTo(),click());
+
+    }
 
 
     @Test
@@ -129,3 +157,5 @@ public class SearchResultActivityTest {
 
 
 }
+
+
