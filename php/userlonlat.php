@@ -13,8 +13,10 @@
   $lat = $_GET["lat"];
 
   mysqli_query($con,
-    "INSERT INTO User (longitude, latitude) VALUES ('$lon', '$lat') 
-            where id='$id'");
+    "UPDATE User SET longitude = '$lon' WHERE id='$id'");
+
+  mysqli_query($con,
+    "UPDATE User SET latitude = '$lat' WHERE id='$id'");
 ?>
 
 
