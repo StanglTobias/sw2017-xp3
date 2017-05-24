@@ -141,7 +141,8 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 ((EditText) findViewById(R.id.text_ID_Entfernung))
-                        .setText("Entfernung: " + String.valueOf(progress + 20)  + " km");
+                        .setText(getString(R.string.distance) + String.valueOf(progress + 20)  +
+                                getString(R.string.km));
             }
 
             @Override
@@ -154,14 +155,14 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         });
 
         Bundle b = getIntent().getExtras();
-        String query = "";
+        String query = getString(R.string.empty);
         if (b != null) {
             if (b.containsKey(getString(R.string.query))) {
                 query = b.getString(getString(R.string.query));
 
             }
-            if (b.containsKey("category")) {
-                Categories c = Categories.fromInt(b.getInt("category"));
+            if (b.containsKey(getString(R.string.category))) {
+                Categories c = Categories.fromInt(b.getInt(getString(R.string.category)));
 
                 switch (c) {
                     case CEREALS:
@@ -211,8 +212,8 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
             try {
 
-                if (result == null || result.isEmpty()) {
-                    CharSequence text = "Nichts gefunden!";
+                if (result == null ||result.isEmpty()) {
+                    CharSequence text = getString(R.string.nothingFound);
                     Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
                     toast.show();
                 }
@@ -241,7 +242,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
             Intent myIntent = new Intent(SearchResultActivity.this, ProductDetailActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putInt("id", productId);
+            bundle.putInt(getString(R.string.id), productId);
             myIntent.putExtras(bundle);
             startActivity(myIntent);
         }
@@ -274,22 +275,29 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
+        Filter filter;
         switch (v.getId()) {
             case R.id.expand:
                 ((ExpandableRelativeLayout) findViewById(R.id.expandableLayout)).toggle();
                 break;
             case R.id.Button_ID_ExtendedSearchStart:
+                filter = getFilter();
+                ((ExpandableRelativeLayout) findViewById(R.id.expandableLayout)).collapse();
+                new GetProductTask().execute(getFilter());
+                break;
             case R.id.Button_ID_ExtendedSearchStart2:
+                filter = getFilter();
+                ((ExpandableRelativeLayout) findViewById(R.id.expandableLayout)).toggle();
                 new GetProductTask().execute(getFilter());
                 break;
             case R.id.Button_ID_ResetFilterExtendedSearch: {
-                LinearLayout searchResultLayout = ((LinearLayout) findViewById(R.id.linearLayoutSearchResult));
+              /*  LinearLayout searchResultLayout = ((LinearLayout) findViewById(R.id.linearLayoutSearchResult));
                 for (int i = 0; i < searchResultLayout.getChildCount(); i++) {
                     if (searchResultLayout.getChildAt(i) instanceof CheckBox) {
                         ((CheckBox) searchResultLayout.getChildAt(i)).setChecked(false);
                     }
-                }
-
+                }*/
+                LinearLayout ll_bio = ((LinearLayout) findViewById(R.id.ll_bio));
                 LinearLayout ll_category = ((LinearLayout) findViewById(R.id.ll_category));
                 LinearLayout ll_seller = ((LinearLayout) findViewById(R.id.ll_seller));
                 LinearLayout ll_transfer = ((LinearLayout) findViewById(R.id.ll_transfer));
@@ -308,6 +316,12 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                         ((CheckBox) ll_transfer.getChildAt(i)).setChecked(false);
                     }
                 }
+
+                for (int i = 0; i < ll_bio.getChildCount(); i++) {
+                    if (ll_transfer.getChildAt(i) instanceof CheckBox) {
+                        ((CheckBox) ll_bio.getChildAt(i)).setChecked(false);
+                    }
+                }
             }
             break;
             default:
@@ -323,7 +337,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
         List<Categories> categories = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            int resID = getResources().getIdentifier("cb_category_" + i, "id", getPackageName());
+            int resID = getResources().getIdentifier(getString(R.string.cb_category_) + i, getString(R.string.id), getPackageName());
             if (((CheckBox) findViewById(resID)).isChecked()) {
                 categories.add(Categories.fromInt(i));
             }
@@ -331,7 +345,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
         List<Seller> seller = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
-            int resID = getResources().getIdentifier("cb_seller_" + i, "id", getPackageName());
+            int resID = getResources().getIdentifier(getString(R.string.cb_seller_) + i, getString(R.string.id), getPackageName());
             if (((CheckBox) findViewById(resID)).isChecked()) {
                 categories.add(Categories.fromInt(i));
             }
@@ -339,7 +353,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
         List<Transfer> transfer = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            int resID = getResources().getIdentifier("cb_transfer_" + i, "id", getPackageName());
+            int resID = getResources().getIdentifier(getString(R.string.cb_transfer_) + i, getString(R.string.id), getPackageName());
             if (((CheckBox) findViewById(resID)).isChecked()) {
                 categories.add(Categories.fromInt(i));
             }

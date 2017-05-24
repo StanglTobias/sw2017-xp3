@@ -20,11 +20,19 @@
         <item>Unterkategorie 1</item>
         <item>Unterkategorie 2</item>
     </string-array>
-
+    <string name="nothingFound">Nichts gefunden!</string>
+    <string name="category">category</string>
+    <string name="km"> km</string>
+    <string name="distance">Entfernung:</string>
     <string name="releaseAdEinheit_prompt">Bitte eine Einheit waehlen</string>
     <string-array name="releaseAdEinheit_arrays">
         <item>Kilogramm</item>
     </string-array>
+
+    <string name="cb_seller_">cb_seller_</string>
+    <string name="cb_category_">cb_category_</string>
+    <string name="cb_transfer_">cb_transfer_</string>
+
     <string name="loadData">Daten geladen</string>
     <string name="nameofProduct">GetProductTask.onPostExecute name of product:</string>
     <string name="productID">Id:</string>
@@ -44,6 +52,7 @@
     <string name="kategorie">Kategorie:</string>
     <string name="stop">Halt Stop</string>
     <string name="yes">Ja</string>
+    <string name="empty"></string>
     <string name="no">Nein</string>
     <string name="meat">Fleisch</string>
     <string name="fruits">Obst</string>
