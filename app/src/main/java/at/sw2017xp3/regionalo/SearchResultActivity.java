@@ -275,13 +275,18 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
+        Filter filter;
         switch (v.getId()) {
             case R.id.expand:
                 ((ExpandableRelativeLayout) findViewById(R.id.expandableLayout)).toggle();
                 break;
             case R.id.Button_ID_ExtendedSearchStart:
+                filter = getFilter();
+                ((ExpandableRelativeLayout) findViewById(R.id.expandableLayout)).collapse();
+                break;
             case R.id.Button_ID_ExtendedSearchStart2:
-                Filter filter = getFilter();
+                filter = getFilter();
+                ((ExpandableRelativeLayout) findViewById(R.id.expandableLayout)).toggle();
                 break;
             case R.id.Button_ID_ResetFilterExtendedSearch: {
               /*  LinearLayout searchResultLayout = ((LinearLayout) findViewById(R.id.linearLayoutSearchResult));
