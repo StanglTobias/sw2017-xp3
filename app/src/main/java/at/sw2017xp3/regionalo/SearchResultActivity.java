@@ -318,8 +318,24 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.loginbutton, menu);
+        // Inflate the overflow_menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.overflow_menu, menu);
+        return true;
+    }
+
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        if(LoginActivity.loggedIn_) {
+            menu.findItem(R.id.buttonProducerRegistration).setVisible(false);
+            menu.findItem(R.id.buttonMenuLogin).setVisible(false);
+            menu.findItem(R.id.buttonMenuLogout).setVisible(true);
+            menu.findItem(R.id.buttonAddProduct).setVisible(true);}
+        else {
+            menu.findItem(R.id.buttonProducerRegistration).setVisible(true);
+            menu.findItem(R.id.buttonMenuLogin).setVisible(true);
+            menu.findItem(R.id.buttonMenuLogout).setVisible(false);
+            menu.findItem(R.id.buttonAddProduct).setVisible(false);}
+
         return true;
     }
 
@@ -333,8 +349,20 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         //noinspection SimplifiableIfStatement
         if (id == R.id.buttonMenuLogin) {
             Intent myIntent = new Intent(this, LoginActivity.class);
-            startActivity(myIntent);
-        }
+            startActivity(myIntent);}
+        if (id == R.id.buttonMenuLogout) {
+            LoginActivity.loggedIn_ = false;
+            Intent myIntent = new Intent(this, HomeActivity.class);
+            startActivity(myIntent);}
+        if (id == R.id.buttonHome) {
+            Intent myIntent = new Intent(this, HomeActivity.class);
+            startActivity(myIntent);}
+        if (id == R.id.buttonProducerRegistration) {
+            Intent myIntent = new Intent(this, RegisterActivity.class);
+            startActivity(myIntent);}
+        if (id == R.id.buttonAddProduct) {
+           /* Intent myIntent = new Intent(this, RegisterActivity.class);
+            startActivity(myIntent);*/}
 
         return super.onOptionsItemSelected(item);
     }

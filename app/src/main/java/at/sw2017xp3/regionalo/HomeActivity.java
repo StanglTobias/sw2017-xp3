@@ -1,8 +1,6 @@
 package at.sw2017xp3.regionalo;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,37 +12,21 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.CurrentUser;
-import at.sw2017xp3.regionalo.util.Installation;
 import at.sw2017xp3.regionalo.model.Product;
-import at.sw2017xp3.regionalo.util.HttpUtils;
-import at.sw2017xp3.regionalo.util.JsonObjectMapper;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Currency;
-import java.util.Locale;
-
-import static at.sw2017xp3.regionalo.R.string.space;
-import static java.io.File.separator;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +34,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home);
         //get User Identification
         CurrentUser.Init(this);
+
+
+
 
         list_of_elements.addAll(Arrays.asList(
                 findViewById(R.id.buttonMeat),
@@ -183,8 +168,24 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.loginbutton, menu);
+        // Inflate the overflow_menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.overflow_menu, menu);
+        return true;
+    }
+
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        if(LoginActivity.loggedIn_) {
+            menu.findItem(R.id.buttonProducerRegistration).setVisible(false);
+            menu.findItem(R.id.buttonMenuLogin).setVisible(false);
+            menu.findItem(R.id.buttonMenuLogout).setVisible(true);
+            menu.findItem(R.id.buttonAddProduct).setVisible(true);}
+        else {
+            menu.findItem(R.id.buttonProducerRegistration).setVisible(true);
+            menu.findItem(R.id.buttonMenuLogin).setVisible(true);
+            menu.findItem(R.id.buttonMenuLogout).setVisible(false);
+            menu.findItem(R.id.buttonAddProduct).setVisible(false);}
+
         return true;
     }
 
@@ -198,8 +199,20 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         //noinspection SimplifiableIfStatement
         if (id == R.id.buttonMenuLogin) {
             Intent myIntent = new Intent(this, LoginActivity.class);
-            startActivity(myIntent);
-        }
+            startActivity(myIntent);}
+        if (id == R.id.buttonMenuLogout) {
+            LoginActivity.loggedIn_ = false;
+            Intent myIntent = new Intent(this, HomeActivity.class);
+            startActivity(myIntent);}
+        if (id == R.id.buttonHome) {
+            Intent myIntent = new Intent(this, HomeActivity.class);
+            startActivity(myIntent);}
+        if (id == R.id.buttonProducerRegistration) {
+            Intent myIntent = new Intent(this, RegisterActivity.class);
+            startActivity(myIntent);}
+        if (id == R.id.buttonAddProduct) {
+           /* Intent myIntent = new Intent(this, RegisterActivity.class);
+            startActivity(myIntent);*/}
 
         return super.onOptionsItemSelected(item);
     }
