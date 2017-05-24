@@ -211,7 +211,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
             try {
 
-                if (result.isEmpty()) {
+                if (result == null || result.isEmpty()) {
                     CharSequence text = "Nichts gefunden!";
                     Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
                     toast.show();
@@ -280,7 +280,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.Button_ID_ExtendedSearchStart:
             case R.id.Button_ID_ExtendedSearchStart2:
-                Filter filter = getFilter();
+                new GetProductTask().execute(getFilter());
                 break;
             case R.id.Button_ID_ResetFilterExtendedSearch: {
                 LinearLayout searchResultLayout = ((LinearLayout) findViewById(R.id.linearLayoutSearchResult));

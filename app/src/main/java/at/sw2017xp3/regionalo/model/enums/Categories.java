@@ -1,12 +1,12 @@
 package at.sw2017xp3.regionalo.model.enums;
 
 public enum Categories{
-    MEAT("Fleisch", 0),
-    VEGETABLE("Gemüse", 1),
-    FRUIT("Obst", 2),
-    MILKPRODUCTS("Milchprodukte", 3),
-    CEREALS("Getreide", 4),
-    OTHERS("Sonstiges", 5);
+    MEAT("Fleisch", 1),
+    VEGETABLE("Gemüse", 2),
+    FRUIT("Obst", 3),
+    MILKPRODUCTS("Milchprodukte", 4),
+    CEREALS("Getreide", 5),
+    OTHERS("Sonstiges", 6);
 
     private String stringValue;
     private int intValue;

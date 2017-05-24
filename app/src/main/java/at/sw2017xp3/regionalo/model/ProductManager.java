@@ -150,7 +150,6 @@ public class ProductManager {
 
     public ArrayList<Product> getSearchedProducts(Filter filter) {
 
-
         ArrayList<Product> products = new ArrayList<Product>();
 
         // http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php?query=&isbio=1&cat0=1&cat1=2&cat2=3&cat3=4&cat4=5&cat5=6&lon=15.439790&lat=47.073383&dist=
@@ -168,15 +167,14 @@ public class ProductManager {
             if (filter.getCategories().size() - 1 >= i)
                 value = Integer.toString(filter.getCategories().get(i).GetInt());
             else
-                value = "-1";
+                value = "";
 
             builder.appendQueryParameter("cat" + Integer.toString(i), value);
         }
 
-        builder.appendQueryParameter("lon", Double.toString(Regionalo.getInstance().getLastKnownLocation().getLatitude()));
         builder.appendQueryParameter("lat", Double.toString(Regionalo.getInstance().getLastKnownLocation().getLatitude()));
-        builder.appendQueryParameter("dist",
-                Integer.toString(filter.getDistance_() == 0 ? 50 : filter.getDistance_()));
+        builder.appendQueryParameter("lon", Double.toString(Regionalo.getInstance().getLastKnownLocation().getLongitude()));
+        builder.appendQueryParameter("dist", Integer.toString(filter.getDistance_() == 0 ? 50 : filter.getDistance_()));
 
         /*
         for (int i = 0; i < 2; i++) {
