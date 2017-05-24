@@ -211,6 +211,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ll_category"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="20dp"
@@ -279,6 +280,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ll_seller"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="20dp"
@@ -313,6 +315,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ll_transfer"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="20dp"
