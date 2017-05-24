@@ -31,6 +31,7 @@ import at.sw2017xp3.regionalo.model.Product;
 import at.sw2017xp3.regionalo.model.enums.Categories;
 import at.sw2017xp3.regionalo.model.enums.Seller;
 import at.sw2017xp3.regionalo.model.enums.Transfer;
+import at.sw2017xp3.regionalo.util.CommonUi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -97,12 +98,10 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
     }
@@ -125,28 +124,12 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             try {
 
                 LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayoutSearchResult);
-
-                for (Product p : result
-                        ) {
-                    System.out.println(getString(R.string.postExeNameProduct) + p.getName());
-
+                linearLayoutHome.removeAllViews();
+                for (Product p : result)
+                {
                     LayoutInflater inflater = getLayoutInflater();
-
                     LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, linearLayoutHome);
-
-
-                    int productLayoutId = p.getId();
-                    LinearLayout productLayout = (LinearLayout) inflatedView.findViewById(R.id.linearLayout_product);
-                    (inflatedView.findViewById(R.id.linearLayout_product)).setId(productLayoutId);
-                    ImageButton image_load = (ImageButton) productLayout.findViewById(R.id.imageButtonProduct);
-                    image_load.setOnClickListener(this);
-                    Glide.with(getApplicationContext()).load(Core.getInstance().getProducts().getImageUri(p.getId())).into(image_load);
-                    (productLayout.findViewById(R.id.imageButtonProduct)).setOnClickListener(this);
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct1)).setText(p.getName());
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText(getString(R.string.producerID) + String.valueOf(p.getId()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText(getString(R.string.producerID) + String.valueOf(p.getProducerId()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText(getString(R.string.productPrice) + String.valueOf(p.getPrice()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct5)).setText(getString(R.string.productType) + String.valueOf(p.getType()));
+                    CommonUi.fillProductPresentation(p, inflatedView , this);
                 }
 
             } catch (Exception ex) {
@@ -209,6 +192,25 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 for (int i = 0; i < searchResultLayout.getChildCount(); i++) {
                     if (searchResultLayout.getChildAt(i) instanceof CheckBox) {
                         ((CheckBox) searchResultLayout.getChildAt(i)).setChecked(false);
+                    }
+                }
+
+                LinearLayout ll_category = ((LinearLayout) findViewById(R.id.ll_category));
+                LinearLayout ll_seller = ((LinearLayout) findViewById(R.id.ll_seller));
+                LinearLayout ll_transfer = ((LinearLayout) findViewById(R.id.ll_transfer));
+                for (int i = 0; i < ll_category.getChildCount(); i++) {
+                    if (ll_category.getChildAt(i) instanceof CheckBox) {
+                        ((CheckBox) ll_category.getChildAt(i)).setChecked(false);
+                    }
+                }
+                for (int i = 0; i < ll_seller.getChildCount(); i++) {
+                    if (ll_seller.getChildAt(i) instanceof CheckBox) {
+                        ((CheckBox) ll_seller.getChildAt(i)).setChecked(false);
+                    }
+                }
+                for (int i = 0; i < ll_transfer.getChildCount(); i++) {
+                    if (ll_transfer.getChildAt(i) instanceof CheckBox) {
+                        ((CheckBox) ll_transfer.getChildAt(i)).setChecked(false);
                     }
                 }
             }
