@@ -16,6 +16,11 @@ public enum Categories{
         this.intValue = i;
     }
 
+    public int GetInt()
+    {
+        return  intValue;
+    }
+
     public static Categories fromInt(int i){
         for (Categories category : Categories.values()){
             if(category.intValue == i)

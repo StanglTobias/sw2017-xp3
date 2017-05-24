@@ -33,6 +33,7 @@ import at.sw2017xp3.regionalo.model.enums.Seller;
 import at.sw2017xp3.regionalo.model.enums.Transfer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,63 +42,42 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     private ArrayList<View> list_of_elements = new ArrayList<>();
     ExpandableRelativeLayout expandableLayout;
 
-    Button button_extended_search_start;
-    Button button_extended_search_start2;
-    Button button_reset_filter;
+ /*   Button button_reset_filter;
 
     private CheckBox checkBox_ID_BiologischerAnbau_;
 
     private SeekBar seekBar_ID_Entfernung_;
-    private EditText text_ID_Entfernung_;
+    private EditText text_ID_Entfernung_;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
 
-        Bundle b = getIntent().getExtras();
-        String query = null; // or other values
-        if (b != null) {
-            query = b.getString(getString(R.string.query));
-            setFilter(b);
-        }
-
-        expandableLayout
-                = (ExpandableRelativeLayout) findViewById(R.id.expandableLayout);
         Button expandButton
                 = (Button) findViewById(R.id.expand);
         expandButton.setOnClickListener(this);
 
         expandButton.performClick();
 
-        button_extended_search_start = (Button) findViewById(R.id.Button_ID_ExtendedSearchStart);
-        button_extended_search_start.setOnClickListener(this);
+        ArrayList<View> buttons = new ArrayList<>();
+        buttons.addAll(Arrays.asList(
+                findViewById(R.id.Button_ID_ExtendedSearchStart),
+                findViewById(R.id.Button_ID_ExtendedSearchStart2),
+                findViewById(R.id.Button_ID_ResetFilterExtendedSearch)));
 
-        button_extended_search_start2 = (Button) findViewById(R.id.Button_ID_ExtendedSearchStart2);
-        button_extended_search_start2.setOnClickListener(this);
-
-        button_reset_filter = (Button) findViewById(R.id.Button_ID_ResetFilterExtendedSearch);
-        button_reset_filter.setOnClickListener(this);
-
-        checkBox_ID_BiologischerAnbau_ = (CheckBox) findViewById(R.id.checkBox_ID_BiologischerAnbau);
-
-        text_ID_Entfernung_ = (EditText) findViewById(R.id.text_ID_Entfernung);
-
+        for (int i = 0; i < buttons.size(); i++) {
+            buttons.get(i).setOnClickListener(this);
+        }
 
         SearchView sv = (SearchView) findViewById(R.id.searchViewResult);
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-
-                Intent myIntent = new Intent(SearchResultActivity.this, SearchResultActivity.class);
                 if (!query.isEmpty()) {
 
-                    Bundle bundle = new Bundle();
-                    saveFilterPreset(bundle);
-                    bundle.putString(getString(R.string.query), query);
-                    myIntent.putExtras(bundle);
-                    startActivity(myIntent);
+                    new GetProductTask().execute(getFilter());
                 }
                 return false;
             }
@@ -108,11 +88,11 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             }
         });
 
-        seekBar_ID_Entfernung_ = (SeekBar) findViewById(R.id.seekBar_ID_Entfernung);
-        seekBar_ID_Entfernung_.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        ((SeekBar) findViewById(R.id.seekBar_ID_Entfernung)).setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                text_ID_Entfernung_.setText("Entfernung: " + String.valueOf(progress) + " km");
+                ((EditText) findViewById(R.id.text_ID_Entfernung))
+                        .setText("Entfernung: " + String.valueOf(progress) + " km");
             }
 
             @Override
@@ -125,78 +105,13 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
             }
         });
-        new GetProductTask().execute(query);
-
     }
 
-    private void setFilter(Bundle bundle) {
-
-        ((CheckBox) findViewById(R.id.checkBox_ID_BiologischerAnbau)).setChecked(
-                bundle.getBoolean("checkBox_ID_BiologischerAnbau", false));
-        ((CheckBox) findViewById(R.id.cb_category_0)).setChecked(
-                bundle.getBoolean("cb_category_0", false));
-        ((CheckBox) findViewById(R.id.cb_category_1)).setChecked(
-                bundle.getBoolean("cb_category_1", false));
-        ((CheckBox) findViewById(R.id.cb_category_2)).setChecked(
-                bundle.getBoolean("cb_category_2", false));
-        ((CheckBox) findViewById(R.id.cb_category_3)).setChecked(
-                bundle.getBoolean("cb_category_3", false));
-        ((CheckBox) findViewById(R.id.cb_category_5)).setChecked(
-                bundle.getBoolean("cb_category_5", false));
-        ((CheckBox) findViewById(R.id.cb_category_4)).setChecked(
-                bundle.getBoolean("cb_category_4", false));
-        ((CheckBox) findViewById(R.id.cb_seller_0)).setChecked(
-                bundle.getBoolean("cb_seller_0", false));
-        ((CheckBox) findViewById(R.id.cb_seller_1)).setChecked(
-                bundle.getBoolean("cb_seller_1", false));
-        ((CheckBox) findViewById(R.id.cb_transfer_0)).setChecked(
-                bundle.getBoolean("cb_transfer_0", false));
-        ((CheckBox) findViewById(R.id.cb_transfer_1)).setChecked(
-                bundle.getBoolean("cb_transfer_1", false));
-        ((CheckBox) findViewById(R.id.cb_transfer_2)).setChecked(
-                bundle.getBoolean("cb_transfer_2", false));
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sort_arrays, R.layout.activity_search_result);
-        ((Spinner) findViewById(R.id.Spinner_ID_ExtendedSearch)).setSelection(adapter.getPosition(
-                bundle.getString("Spinner_ID_ExtendedSearch", "")
-        ));
-
-        ((SeekBar) findViewById(R.id.seekBar_ID_Entfernung)).setProgress(
-                bundle.getInt("seekBar_ID_Entfernung", 0)
-        );
-
-        ((EditText) findViewById(R.id.text_ID_Entfernung)).setText(
-                bundle.getString("text_ID_Entfernung", "Entfernung: 0 km")
-        );
-    }
-
-    private void saveFilterPreset(Bundle bundle) {
-
-
-
-        bundle.putBoolean("checkBox_ID_BiologischerAnbau", ((CheckBox) findViewById(R.id.checkBox_ID_BiologischerAnbau)).isChecked());
-        bundle.putBoolean("cb_category_0", ((CheckBox) findViewById(R.id.cb_category_0)).isChecked());
-        bundle.putBoolean("cb_category_1", ((CheckBox) findViewById(R.id.cb_category_1)).isChecked());
-        bundle.putBoolean("cb_category_2", ((CheckBox) findViewById(R.id.cb_category_2)).isChecked());
-        bundle.putBoolean("cb_category_3", ((CheckBox) findViewById(R.id.cb_category_3)).isChecked());
-        bundle.putBoolean("cb_category_4", ((CheckBox) findViewById(R.id.cb_category_4)).isChecked());
-        bundle.putBoolean("cb_category_5", ((CheckBox) findViewById(R.id.cb_category_5)).isChecked());
-        bundle.putBoolean("cb_seller_0", ((CheckBox) findViewById(R.id.cb_seller_0)).isChecked());
-        bundle.putBoolean("cb_seller_1", ((CheckBox) findViewById(R.id.cb_seller_1)).isChecked());
-        bundle.putBoolean("cb_transfer_0", ((CheckBox) findViewById(R.id.cb_transfer_0)).isChecked());
-        bundle.putBoolean("cb_transfer_1", ((CheckBox) findViewById(R.id.cb_transfer_1)).isChecked());
-        bundle.putBoolean("cb_transfer_2", ((CheckBox) findViewById(R.id.cb_transfer_2)).isChecked());
-
-        bundle.putString("Spinner_ID_ExtendedSearch", ((Spinner) findViewById(R.id.Spinner_ID_ExtendedSearch)).getSelectedItem().toString());
-        bundle.putInt("seekBar_ID_Entfernung", ((SeekBar) findViewById(R.id.seekBar_ID_Entfernung)).getProgress());
-        bundle.putString("text_ID_Entfernung", ((EditText) findViewById(R.id.text_ID_Entfernung)).getText().toString());
-    }
-
-
-    private class GetProductTask extends AsyncTask<String, Void, ArrayList<Product>> implements View.OnClickListener {
+    private class GetProductTask extends AsyncTask<Filter, Void, ArrayList<Product>>
+            implements View.OnClickListener {
 
         @Override
-        protected ArrayList<Product> doInBackground(String... params) {
+        protected ArrayList<Product> doInBackground(Filter... params) {
             try {
                 return Core.getInstance().getProducts().getSearchedProducts(params[0]);
             } catch (Exception e) {
@@ -210,12 +125,15 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             try {
 
                 LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayoutSearchResult);
+
                 for (Product p : result
                         ) {
                     System.out.println(getString(R.string.postExeNameProduct) + p.getName());
 
                     LayoutInflater inflater = getLayoutInflater();
+
                     LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, linearLayoutHome);
+
 
                     int productLayoutId = p.getId();
                     LinearLayout productLayout = (LinearLayout) inflatedView.findViewById(R.id.linearLayout_product);
@@ -280,31 +198,29 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.expand:
-                expandableLayout.toggle();
+                ((ExpandableRelativeLayout) findViewById(R.id.expandableLayout)).toggle();
                 break;
             case R.id.Button_ID_ExtendedSearchStart:
             case R.id.Button_ID_ExtendedSearchStart2:
                 Filter filter = getFilter();
                 break;
-            default:
-                break;
-        }
-
-        if (v.getId() == R.id.Button_ID_ResetFilterExtendedSearch) {
-            checkBox_ID_BiologischerAnbau_.setChecked(false);
-
-            LinearLayout searchResultLayout = ((LinearLayout) findViewById(R.id.linearLayoutSearchResult));
-            for (int i = 0; i < searchResultLayout.getChildCount(); i++) {
-                if (searchResultLayout.getChildAt(i) instanceof CheckBox) {
-                    ((CheckBox) searchResultLayout.getChildAt(i)).setChecked(false);
+            case R.id.Button_ID_ResetFilterExtendedSearch: {
+                LinearLayout searchResultLayout = ((LinearLayout) findViewById(R.id.linearLayoutSearchResult));
+                for (int i = 0; i < searchResultLayout.getChildCount(); i++) {
+                    if (searchResultLayout.getChildAt(i) instanceof CheckBox) {
+                        ((CheckBox) searchResultLayout.getChildAt(i)).setChecked(false);
+                    }
                 }
             }
+            break;
+            default:
+                break;
         }
     }
 
     private Filter getFilter() {
-        Filter filter = new Filter(seekBar_ID_Entfernung_.getProgress());
-        filter.setBio_(checkBox_ID_BiologischerAnbau_.isChecked());
+        Filter filter = new Filter(((SeekBar) findViewById(R.id.seekBar_ID_Entfernung)).getProgress());
+        filter.setBio(((CheckBox) findViewById(R.id.checkBox_ID_BiologischerAnbau)).isChecked());
 
         List<Categories> categories = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
@@ -330,8 +246,8 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             }
         }
 
-        filter.setCategories_(categories);
-        filter.setSeller_(seller);
+        filter.setCategories(categories);
+        filter.setSeller(seller);
         filter.setTransfer_(transfer);
         return filter;
     }

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 import at.sw2017xp3.regionalo.Regionalo;
+import at.sw2017xp3.regionalo.model.enums.Categories;
 import at.sw2017xp3.regionalo.util.GeoUtils;
 import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
@@ -147,15 +148,46 @@ public class ProductManager {
         return products;
     }
 
-    public ArrayList<Product> getSearchedProducts(String searchString) {
+    public ArrayList<Product> getSearchedProducts(Filter filter) {
 
-        System.out.println("searchstring " + searchString);
 
         ArrayList<Product> products = new ArrayList<Product>();
 
-        Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php")
-                .buildUpon()
-                .appendQueryParameter("q", searchString).build();
+        Uri.Builder builder = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php")
+                .buildUpon();
+
+        builder = builder.appendQueryParameter("q", filter.getQuery());
+
+        builder = builder.appendQueryParameter("isbio", filter.isBio() ? "1" : "0");
+
+        builder = builder.appendQueryParameter("dist", Integer.toString(filter.getDistance_()));
+
+
+        String value = "";
+        for (int i = 0; i < 6; i++) {
+            if (filter.getCategories().size() - 1 >= i)
+                value = Integer.toString(filter.getCategories().get(i).GetInt());
+
+            builder.appendQueryParameter("cat" + Integer.toString(i), value);
+        }
+
+        /*
+        for (int i = 0; i < 2; i++) {
+            if (filter.getTransfer().size() - 1 >= i)
+                value = Integer.toString(filter.getTransfer().get(i).GetInt());
+
+            builder.appendQueryParameter("transfer_" + Integer.toString(i), value);
+
+        }
+        for (int i = 0; i < 3; i++) {
+            if (filter.getSeller().size() - 1 >= i)
+                value = Integer.toString(filter.getSeller().get(i).GetInt());
+
+            builder.appendQueryParameter("seller_" + Integer.toString(i), value);
+        }*/
+
+
+        Uri uri = builder.build();
 
         try {
             String content = HttpUtils.downloadContent(uri.toString());

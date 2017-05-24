@@ -12,6 +12,12 @@ public enum Seller{
         this.intValue = i;
     }
 
+
+    public int GetInt()
+    {
+        return  intValue;
+    }
+
     @Override
     public String toString(){
         return stringValue;

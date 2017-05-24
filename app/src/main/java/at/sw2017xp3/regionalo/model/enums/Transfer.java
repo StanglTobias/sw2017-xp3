@@ -13,6 +13,11 @@ public enum Transfer{
         this.intValue = i;
     }
 
+    public int GetInt()
+    {
+        return  intValue;
+    }
+
     @Override
     public String toString(){
         return stringValue;
