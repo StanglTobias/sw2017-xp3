@@ -27,6 +27,7 @@ public class ReleaseAdInstrumentedTest {
     public ActivityTestRule<LoginActivity> mActivityRule = new
             ActivityTestRule<>(LoginActivity.class);
 
+
     @Test
     public void checkTextClicks() {
         moveToRightAcitivity();

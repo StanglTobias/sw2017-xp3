@@ -86,4 +86,18 @@ public class LoginInstrumentedTest {
         onView(withId(R.id.textViewEmail)).perform(typeText("Hallo Welt!"));
         onView(withId(R.id.textViewEmail)).check(matches(withText("Hallo Welt!")));
     }
+
+    @Test
+    public void WrongUsernameOrpassWord(){
+        onView(withId(R.id.textViewEmail)).perform(typeText("asd@asd.at"));
+        onView(withId(R.id.textViewPassword)).perform(typeText("passwort1234"));
+        closeSoftKeyboard();
+        onView(withId(R.id.buttonLogin)).perform(click());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withId(R.id.textView_ID_LoginErrors)).check(matches(withText("Bitte Email und Passwort eingeben!")));
+    }
 }
