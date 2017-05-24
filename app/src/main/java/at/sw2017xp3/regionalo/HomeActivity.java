@@ -21,6 +21,7 @@ import java.util.Arrays;
 import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.CurrentUser;
 import at.sw2017xp3.regionalo.model.Product;
+import at.sw2017xp3.regionalo.util.CommonUi;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
@@ -89,26 +90,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             try {
                 LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayout_Home_Activity);
-                for (Product p : result
-                        ) {
-                    System.out.println(getString(R.string.nameofProduct) + p.getName());
-
+                for (Product p : result)
+                {
                     LayoutInflater inflater = getLayoutInflater();
                     LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, linearLayoutHome);
-
-                    int productLayoutId = p.getId();
-                    LinearLayout productLayout = (LinearLayout) inflatedView.findViewById(R.id.linearLayout_product);
-                    (inflatedView.findViewById(R.id.linearLayout_product)).setId(productLayoutId);
-
-                    ImageButton image_load = (ImageButton) productLayout.findViewById(R.id.imageButtonProduct);
-                    image_load.setOnClickListener(this);
-                    Glide.with(getApplicationContext()).load(Core.getInstance().getProducts().getImageUri(p.getId())).into(image_load);
-                    //Glide.with(this).load("http://goo.gl/gEgYUd").into(image_load);
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct1)).setText(p.getName());
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText(getString(R.string.productID) + String.valueOf(p.getId()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText(getString(R.string.producerID) + String.valueOf(p.getProducerId()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText(getString(R.string.productPrice) + String.valueOf(p.getPrice()));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct5)).setText(getString(R.string.productType) + String.valueOf(p.getType()));
+                    CommonUi.fillProductPresentation(p, inflatedView , this);
                 }
             } catch (Exception ex) {
                 System.out.println(getString(R.string.productTaskException));
