@@ -58,7 +58,7 @@ public class LoginInstrumentedTest {
         onView(withId(R.id.textViewEmail)).perform(typeText("max.mustermann@gmusterx.at"));
         closeSoftKeyboard();
         onView(withId(R.id.buttonLogin)).perform(click());
-        onView(withId(R.id.textView_ID_LoginErrors)).check(matches(withText("Bitte Passwort eingeben!")));
+        onView(withId(R.id.textView_ID_LoginErrors)).check(matches(withText("Bitte Email und Passwort eingeben!")));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class LoginInstrumentedTest {
         onView(withId(R.id.textViewPassword)).perform(typeText("max.mustermann@gmusterx.at"));
         closeSoftKeyboard();
         onView(withId(R.id.buttonLogin)).perform(click());
-        onView(withId(R.id.textView_ID_LoginErrors)).check(matches(withText("Bitte E-Mail eingeben!")));
+        onView(withId(R.id.textView_ID_LoginErrors)).check(matches(withText("Bitte Email und Passwort eingeben!")));
     }
 
     @Test
