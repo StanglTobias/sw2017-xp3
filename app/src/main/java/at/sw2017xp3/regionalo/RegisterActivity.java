@@ -28,6 +28,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.NoSuchAlgorithmException;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +40,7 @@ import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.CurrentUser;
 import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.OnTaskCompleted;
+import at.sw2017xp3.regionalo.util.Security;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -76,12 +78,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         registerFields.put("city", ((EditText) findViewById(R.id.et_register_ID_5)).getText().toString());
         registerFields.put("postal_code", ((EditText) findViewById(R.id.et_register_ID_6)).getText().toString());
         registerFields.put("address", ((EditText) findViewById(R.id.et_register_ID_7)).getText().toString());
-        registerFields.put("password", ((EditText) findViewById(R.id.et_register_ID_9)).getText().toString());
+
+        String passHashed = null;
+        try {
+            passHashed = Security.SHA1(((EditText) findViewById(R.id.et_register_ID_9)).getText().toString());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        registerFields.put("password", passHashed);
 
         // TODO Fields are missing according to database - enter new fields in UI and here
 
         new RegisterUser().execute(registerFields);
     }
+
+
 
     private class RegisterUser extends AsyncTask<HashMap<String, String>, Void, JSONObject> {
 
@@ -130,7 +143,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
 
     }
-
 
     private boolean areRequiredFieldsNotEmpty() {
         boolean fieldsNotEmpty = false;
