@@ -285,10 +285,22 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         if (v.getId() == R.id.Button_ID_ResetFilterExtendedSearch) {
             checkBox_ID_BiologischerAnbau_.setChecked(false);
 
-            LinearLayout searchResultLayout = ((LinearLayout) findViewById(R.id.linearLayoutSearchResult));
-            for (int i = 0; i < searchResultLayout.getChildCount(); i++) {
-                if (searchResultLayout.getChildAt(i) instanceof CheckBox) {
-                    ((CheckBox) searchResultLayout.getChildAt(i)).setChecked(false);
+            LinearLayout ll_category = ((LinearLayout) findViewById(R.id.ll_category));
+            LinearLayout ll_seller = ((LinearLayout) findViewById(R.id.ll_seller));
+            LinearLayout ll_transfer = ((LinearLayout) findViewById(R.id.ll_transfer));
+            for (int i = 0; i < ll_category.getChildCount(); i++) {
+                if (ll_category.getChildAt(i) instanceof CheckBox) {
+                    ((CheckBox) ll_category.getChildAt(i)).setChecked(false);
+                }
+            }
+            for (int i = 0; i < ll_seller.getChildCount(); i++) {
+                if (ll_seller.getChildAt(i) instanceof CheckBox) {
+                    ((CheckBox) ll_seller.getChildAt(i)).setChecked(false);
+                }
+            }
+            for (int i = 0; i < ll_transfer.getChildCount(); i++) {
+                if (ll_transfer.getChildAt(i) instanceof CheckBox) {
+                    ((CheckBox) ll_transfer.getChildAt(i)).setChecked(false);
                 }
             }
         }
