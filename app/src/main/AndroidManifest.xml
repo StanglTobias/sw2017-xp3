@@ -69,6 +69,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
         </activity>
+        <activity android:name=".ReleaseAdActivity"
+            android:parentActivityName=".HomeActivity">
+            <!-- to support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
