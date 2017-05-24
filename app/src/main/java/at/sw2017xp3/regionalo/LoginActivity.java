@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void checkLogin() {
-        if (((TextView) findViewById(R.id.textViewEmail)).getText().toString().isEmpty() &&
+        if (((TextView) findViewById(R.id.textViewEmail)).getText().toString().isEmpty() ||
                 ((TextView) findViewById(R.id.textViewPassword)).getText().toString().isEmpty()) {
             ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText(getString(R.string.missingPW_Email));
             return;
@@ -161,6 +161,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         protected void onPostExecute(String result) {
             pdLoading.dismiss();
 
+            if(logged_user_id.equals("false")) {
+                setWrongUsernamePasswordTextView();
+                return;
+            }
+
             if(result.equalsIgnoreCase(logged_user_id)) {
                 Intent intent = new Intent(LoginActivity.this, ReleaseAdActivity.class);
                 intent.putExtra("logged_user_id", logged_user_id);
@@ -180,5 +185,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void setLoggedUserId(String value) {
         logged_user_id = value;
+    }
+
+    public void setWrongUsernamePasswordTextView() {
+        ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText(getString(R.string.missingPW_Email));
     }
 }
