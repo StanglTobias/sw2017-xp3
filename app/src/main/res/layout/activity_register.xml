@@ -17,7 +17,8 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/et_register_ID_Hofname"
+                android:background="@drawable/border_edit_text"
+                android:id="@+id/et_register_ID_0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -26,7 +27,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:height="50dp"
-                android:background="@android:color/background_light"
                 android:clickable="true"
                 android:contextClickable="true"
                 android:cursorVisible="true"
@@ -51,7 +51,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/et_register_ID_vorname"
+                    android:id="@+id/et_register_ID_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -60,7 +60,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:height="50dp"
-                    android:background="@android:color/background_light"
+                    android:background="@drawable/border_edit_text"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:cursorVisible="true"
@@ -79,7 +79,7 @@
                     android:textSize="25sp" />
 
                 <EditText
-                    android:id="@+id/et_register_ID_nachname"
+                    android:id="@+id/et_register_ID_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -88,7 +88,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:height="50dp"
-                    android:background="@android:color/background_light"
+                    android:background="@drawable/border_edit_text"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:cursorVisible="true"
@@ -115,7 +115,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/et_register_ID_email"
+                    android:id="@+id/et_register_ID_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -124,7 +124,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:height="50dp"
-                    android:background="@android:color/background_light"
+                    android:background="@drawable/border_edit_text"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:cursorVisible="true"
@@ -143,7 +143,7 @@
                     android:textSize="25sp" />
 
                 <EditText
-                    android:id="@+id/et_register_ID_Telefonnummer"
+                    android:id="@+id/et_register_ID_4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -152,7 +152,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:height="50dp"
-                    android:background="@android:color/background_light"
+                    android:background="@drawable/border_edit_text"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:cursorVisible="true"
@@ -179,7 +179,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/et_register_ID_ort"
+                    android:id="@+id/et_register_ID_5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -187,7 +187,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:height="50dp"
-                    android:background="@android:color/background_light"
+                    android:background="@drawable/border_edit_text"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:cursorVisible="true"
@@ -206,7 +206,7 @@
                     android:textSize="25sp" />
 
                 <EditText
-                    android:id="@+id/et_register_ID_plz"
+                    android:id="@+id/et_register_ID_6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -215,7 +215,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:height="50dp"
-                    android:background="@android:color/background_light"
+                    android:background="@drawable/border_edit_text"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:cursorVisible="true"
@@ -248,7 +248,7 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/et_register_ID_adresse"
+                        android:id="@+id/et_register_ID_7"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -257,7 +257,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
                         android:height="50dp"
-                        android:background="@android:color/background_light"
+                        android:background="@drawable/border_edit_text"
                         android:clickable="true"
                         android:contextClickable="true"
                         android:cursorVisible="true"
@@ -278,7 +278,7 @@
                 </LinearLayout>
 
                 <EditText
-                    android:id="@+id/et_register_ID_passwort"
+                    android:id="@+id/et_register_ID_8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -287,7 +287,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:height="50dp"
-                    android:background="@android:color/background_light"
+                    android:background="@drawable/border_edit_text"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:cursorVisible="true"
@@ -306,7 +306,7 @@
                     android:textSize="25sp" />
 
                 <EditText
-                    android:id="@+id/et_register_ID_passwortwiederholen"
+                    android:id="@+id/et_register_ID_9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -315,7 +315,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:height="50dp"
-                    android:background="@android:color/background_light"
+                    android:background="@drawable/border_edit_text"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:cursorVisible="true"
