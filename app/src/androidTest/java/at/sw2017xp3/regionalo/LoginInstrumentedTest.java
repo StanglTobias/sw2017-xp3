@@ -49,8 +49,8 @@ public class LoginInstrumentedTest {
     @Test
     public void checkGoToRegister(){
         onView(withId(R.id.buttonRegister)).perform(click());
-        onView(withId(R.id.textView_Register_ID_Hofname)).perform(typeText("Testhofname"));
-        onView(withId(R.id.textView_Register_ID_Hofname)).check(matches(withText("Testhofname")));
+        onView(withId(R.id.et_register_ID_Hofname)).perform(typeText("Testhofname"));
+        onView(withId(R.id.et_register_ID_Hofname)).check(matches(withText("Testhofname")));
     }
 
     @Test

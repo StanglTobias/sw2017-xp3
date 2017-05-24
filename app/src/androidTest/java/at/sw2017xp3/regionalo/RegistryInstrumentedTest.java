@@ -48,28 +48,26 @@ public class RegistryInstrumentedTest {
     @Test
     public void checkTextViews() {
 
-        onView(withId(R.id.textView_Register_ID_Hofname)).perform(scrollTo(), typeText("Testhofname"));
-        onView(withId(R.id.textView_Register_ID_Vorname)).perform(scrollTo(), typeText("Vorname1"));
-        onView(withId(R.id.textView_Register_ID_Nachname)).perform(scrollTo(), typeText("Nachname1"));
-        onView(withId(R.id.textView_Register_ID_Email)).perform(scrollTo(), typeText("test@testmail.com"));
-        onView(withId(R.id.textView_Register_ID_Telnr)).perform(scrollTo(), typeText("0900666666"));
-        onView(withId(R.id.textView_Register_ID_Ort)).perform(scrollTo(), typeText("Testort"));
-        onView(withId(R.id.textView_Register_ID_PLZ)).perform(scrollTo(), typeText("1234"));
-        onView(withId(R.id.textView_Register_ID_Adresse)).perform(scrollTo(), typeText("Testaddresse"));
-        onView(withId(R.id.textView_Register_ID_Passwort)).perform(scrollTo(), typeText("passwort1234"));
-        onView(withId(R.id.textView_Register_ID_Passwortwieder)).perform(scrollTo(), typeText("passwort1235"));
+        onView(withId(R.id.et_register_ID_Hofname)).perform(scrollTo(), typeText("Testhofname"));
+        onView(withId(R.id.et_register_ID_vorname)).perform(scrollTo(), typeText("Vorname1"));
+        onView(withId(R.id.et_register_ID_nachname)).perform(scrollTo(), typeText("Nachname1"));
+        onView(withId(R.id.et_register_ID_email)).perform(scrollTo(), typeText("test@testmail.com"));
+        onView(withId(R.id.et_register_ID_Telefonnummer)).perform(scrollTo(), typeText("0900666666"));
+        onView(withId(R.id.et_register_ID_ort)).perform(scrollTo(), typeText("Testort"));
+        onView(withId(R.id.et_register_ID_plz)).perform(scrollTo(), typeText("1234"));
+        onView(withId(R.id.et_register_ID_adresse)).perform(scrollTo(), typeText("Testaddresse"));
+        onView(withId(R.id.et_register_ID_passwort)).perform(scrollTo(), typeText("passwort1234"));
+        onView(withId(R.id.et_register_ID_passwortwiederholen)).perform(scrollTo(), typeText("passwort1235"));
 
-        onView(withId(R.id.textView_Register_ID_Hofname)).check(matches(withText("Testhofname")));
-        onView(withId(R.id.textView_Register_ID_Vorname)).check(matches(withText("Vorname1")));
-        onView(withId(R.id.textView_Register_ID_Nachname)).check(matches(withText("Nachname1")));
-        onView(withId(R.id.textView_Register_ID_Email)).check(matches(withText("test@testmail.com")));
-        onView(withId(R.id.textView_Register_ID_Telnr)).check(matches(withText("0900666666")));
-        onView(withId(R.id.textView_Register_ID_Ort)).check(matches(withText("Testort")));
-        onView(withId(R.id.textView_Register_ID_PLZ)).check(matches(withText("1234")));
-        onView(withId(R.id.textView_Register_ID_Adresse)).check(matches(withText("Testaddresse")));
-        onView(withId(R.id.textView_Register_ID_Passwort)).check(matches(withText("passwort1234")));
-        onView(withId(R.id.textView_Register_ID_Passwortwieder)).check(matches(withText("passwort1235")));
+        onView(withId(R.id.et_register_ID_Hofname)).check(matches(withText("Testhofname")));
+        onView(withId(R.id.et_register_ID_vorname)).check(matches(withText("Vorname1")));
+        onView(withId(R.id.et_register_ID_nachname)).check(matches(withText("Nachname1")));
+        onView(withId(R.id.et_register_ID_email)).check(matches(withText("test@testmail.com")));
+        onView(withId(R.id.et_register_ID_Telefonnummer)).check(matches(withText("0900666666")));
+        onView(withId(R.id.et_register_ID_ort)).check(matches(withText("Testort")));
+        onView(withId(R.id.et_register_ID_plz)).check(matches(withText("1234")));
+        onView(withId(R.id.et_register_ID_adresse)).check(matches(withText("Testaddresse")));
+        onView(withId(R.id.et_register_ID_passwort)).check(matches(withText("passwort1234")));
+        onView(withId(R.id.et_register_ID_passwortwiederholen)).check(matches(withText("passwort1235")));
     }
-
-
 }

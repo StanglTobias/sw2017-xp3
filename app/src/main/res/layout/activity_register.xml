@@ -16,8 +16,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView_Register_ID_Hofname"
+            <EditText
+                android:id="@+id/et_register_ID_Hofname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -30,10 +30,12 @@
                 android:clickable="true"
                 android:contextClickable="true"
                 android:cursorVisible="true"
+                android:ems="10"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:fontFamily="sans-serif"
                 android:hint="Hofname"
-                android:inputType="text"
+                android:inputType="textPersonName"
                 android:linksClickable="true"
                 android:paddingBottom="10dp"
                 android:paddingLeft="10dp"
@@ -48,23 +50,26 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView_Register_ID_Vorname"
+                <EditText
+                    android:id="@+id/et_register_ID_vorname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:height="50dp"
                     android:background="@android:color/background_light"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:cursorVisible="true"
+                    android:ems="10"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
+                    android:fontFamily="sans-serif"
                     android:hint="Vorname"
-                    android:inputType="text"
+                    android:inputType="textPersonName"
                     android:linksClickable="true"
                     android:paddingBottom="10dp"
                     android:paddingLeft="10dp"
@@ -73,23 +78,26 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/textView_Register_ID_Nachname"
+                <EditText
+                    android:id="@+id/et_register_ID_nachname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:height="50dp"
                     android:background="@android:color/background_light"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:cursorVisible="true"
+                    android:ems="10"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
+                    android:fontFamily="sans-serif"
                     android:hint="Nachname"
-                    android:inputType="text"
+                    android:inputType="textPersonName"
                     android:linksClickable="true"
                     android:paddingBottom="10dp"
                     android:paddingLeft="10dp"
@@ -97,6 +105,7 @@
                     android:textAlignment="textStart"
                     android:textColorHint="@android:color/darker_gray"
                     android:textSize="25sp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -105,21 +114,24 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView_Register_ID_Email"
+                <EditText
+                    android:id="@+id/et_register_ID_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:height="50dp"
                     android:background="@android:color/background_light"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:cursorVisible="true"
+                    android:ems="10"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
+                    android:fontFamily="sans-serif"
                     android:hint="E-Mail Adresse"
                     android:inputType="textEmailAddress"
                     android:linksClickable="true"
@@ -130,23 +142,26 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/textView_Register_ID_Telnr"
+                <EditText
+                    android:id="@+id/et_register_ID_Telefonnummer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:height="50dp"
                     android:background="@android:color/background_light"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:cursorVisible="true"
+                    android:ems="10"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
+                    android:fontFamily="sans-serif"
                     android:hint="Telefonnummer"
-                    android:inputType="phone"
+                    android:inputType="number"
                     android:linksClickable="true"
                     android:paddingBottom="10dp"
                     android:paddingLeft="10dp"
@@ -163,23 +178,25 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView_Register_ID_Ort"
+                <EditText
+                    android:id="@+id/et_register_ID_ort"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:height="50dp"
                     android:background="@android:color/background_light"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:cursorVisible="true"
+                    android:ems="10"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
+                    android:fontFamily="sans-serif"
                     android:hint="Ort"
-                    android:inputType="text|textPostalAddress"
+                    android:inputType="textPersonName"
                     android:linksClickable="true"
                     android:paddingBottom="10dp"
                     android:paddingLeft="10dp"
@@ -188,20 +205,24 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/textView_Register_ID_PLZ"
-                    android:layout_width="77dp"
+                <EditText
+                    android:id="@+id/et_register_ID_plz"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
                     android:height="50dp"
                     android:background="@android:color/background_light"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:cursorVisible="true"
+                    android:ems="10"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
+                    android:fontFamily="sans-serif"
                     android:hint="PLZ"
                     android:inputType="number"
                     android:linksClickable="true"
@@ -226,23 +247,26 @@
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/textView_Register_ID_Adresse"
+                    <EditText
+                        android:id="@+id/et_register_ID_adresse"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
                         android:layout_weight="1"
                         android:height="50dp"
                         android:background="@android:color/background_light"
                         android:clickable="true"
                         android:contextClickable="true"
                         android:cursorVisible="true"
+                        android:ems="10"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
+                        android:fontFamily="sans-serif"
                         android:hint="Adresse"
-                        android:inputType="text|textPostalAddress"
+                        android:inputType="textPersonName"
                         android:linksClickable="true"
                         android:paddingBottom="10dp"
                         android:paddingLeft="10dp"
@@ -253,21 +277,24 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textView_Register_ID_Passwort"
+                <EditText
+                    android:id="@+id/et_register_ID_passwort"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:height="50dp"
                     android:background="@android:color/background_light"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:cursorVisible="true"
+                    android:ems="10"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
+                    android:fontFamily="sans-serif"
                     android:hint="Passwort"
                     android:inputType="textPassword"
                     android:linksClickable="true"
@@ -278,21 +305,24 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/textView_Register_ID_Passwortwieder"
+                <EditText
+                    android:id="@+id/et_register_ID_passwortwiederholen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:height="50dp"
                     android:background="@android:color/background_light"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:cursorVisible="true"
+                    android:ems="10"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
+                    android:fontFamily="sans-serif"
                     android:hint="Passwort wiederholen"
                     android:inputType="textPassword"
                     android:linksClickable="true"
