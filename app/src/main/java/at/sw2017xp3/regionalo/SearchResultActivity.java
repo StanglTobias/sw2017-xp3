@@ -1,9 +1,11 @@
 package at.sw2017xp3.regionalo;
 
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,9 +21,13 @@ import android.widget.SearchView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
 
@@ -39,9 +45,40 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SearchResultActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchResultActivity extends AppCompatActivity implements View.OnClickListener,
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
     ExpandableRelativeLayout expandableLayout;
+
+    GoogleApiClient mGoogleApiClient;
+
+    @Override
+    public void onConnected(Bundle connectionHint) {
+
+        try {
+            Regionalo.getInstance().setLastKnownLocation(
+                    LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient));
+
+        } catch (SecurityException se) {
+            ;
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    protected void onStart() {
+        mGoogleApiClient.connect();
+        super.onStart();
+    }
+
+    protected void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+
 
  /*   Button button_reset_filter;
 
@@ -50,10 +87,20 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     private SeekBar seekBar_ID_Entfernung_;
     private EditText text_ID_Entfernung_;*/
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
+
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+
 
         Button expandButton
                 = (Button) findViewById(R.id.expand);
@@ -72,14 +119,14 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         }
 
         SearchView sv = (SearchView) findViewById(R.id.searchViewResult);
+
+
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                if (!query.isEmpty()) {
+                new GetProductTask().execute(getFilter());
 
-                    new GetProductTask().execute(getFilter());
-                }
                 return false;
             }
 
@@ -89,11 +136,12 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             }
         });
 
-        ((SeekBar) findViewById(R.id.seekBar_ID_Entfernung)).setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        ((SeekBar) findViewById(R.id.seekBar_ID_Entfernung))
+                .setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 ((EditText) findViewById(R.id.text_ID_Entfernung))
-                        .setText("Entfernung: " + String.valueOf(progress) + " km");
+                        .setText("Entfernung: " + String.valueOf(progress + 20)  + " km");
             }
 
             @Override
@@ -104,6 +152,46 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
+
+        Bundle b = getIntent().getExtras();
+        String query = "";
+        if (b != null) {
+            if (b.containsKey(getString(R.string.query))) {
+                query = b.getString(getString(R.string.query));
+
+            }
+            if (b.containsKey("category")) {
+                Categories c = Categories.fromInt(b.getInt("category"));
+
+                switch (c) {
+                    case CEREALS:
+                        ((CheckBox) findViewById(R.id.cb_category_0)).setChecked(true);
+                        break;
+                    case FRUIT:
+                        ((CheckBox) findViewById(R.id.cb_category_2)).setChecked(true);
+                        break;
+                    case MEAT:
+                        ((CheckBox) findViewById(R.id.cb_category_0)).setChecked(true);
+                        break;
+                    case MILKPRODUCTS:
+                        ((CheckBox) findViewById(R.id.cb_category_4)).setChecked(true);
+                        break;
+                    case OTHERS:
+                        ((CheckBox) findViewById(R.id.cb_category_5)).setChecked(true);
+                        break;
+                    case VEGETABLE:
+                        ((CheckBox) findViewById(R.id.cb_category_1)).setChecked(true);
+                        break;
+                }
+            }
+            sv.setQuery(query, true);
+        }
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 
     private class GetProductTask extends AsyncTask<Filter, Void, ArrayList<Product>>
@@ -123,14 +211,20 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
             try {
 
-                LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayoutSearchResult);
+                if (result.isEmpty()) {
+                    CharSequence text = "Nichts gefunden!";
+                    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+
+                LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayoutProductPresentation);
                 linearLayoutHome.removeAllViews();
-                for (Product p : result)
-                {
+                for (Product p : result) {
                     LayoutInflater inflater = getLayoutInflater();
                     LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, linearLayoutHome);
-                    CommonUi.fillProductPresentation(p, inflatedView , this);
+                    CommonUi.fillProductPresentation(p, inflatedView, this);
                 }
+
 
             } catch (Exception ex) {
                 System.out.println(getString(R.string.productTaskException));
@@ -151,6 +245,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             myIntent.putExtras(bundle);
             startActivity(myIntent);
         }
+
     }
 
 
@@ -221,8 +316,10 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     }
 
     private Filter getFilter() {
-        Filter filter = new Filter(((SeekBar) findViewById(R.id.seekBar_ID_Entfernung)).getProgress());
+
+        Filter filter = new Filter(((SeekBar) findViewById(R.id.seekBar_ID_Entfernung)).getProgress() + 20);
         filter.setBio(((CheckBox) findViewById(R.id.checkBox_ID_BiologischerAnbau)).isChecked());
+        filter.setQuery(((SearchView) findViewById(R.id.searchViewResult)).getQuery().toString());
 
         List<Categories> categories = new ArrayList<>();
         for (int i = 0; i < 6; i++) {

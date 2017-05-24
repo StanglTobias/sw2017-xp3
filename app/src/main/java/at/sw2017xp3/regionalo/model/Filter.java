@@ -50,7 +50,7 @@ public class Filter {
         this.seller_ = seller_;
     }
 
-    public void SetQuery(String text)
+    public void setQuery(String text)
     {
         query_ = text;
     }

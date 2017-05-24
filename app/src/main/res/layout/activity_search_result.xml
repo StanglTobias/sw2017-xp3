@@ -144,7 +144,7 @@
                                     android:ems="10"
                                     android:enabled="false"
                                     android:inputType="textPersonName"
-                                    android:text="Entfernung: 0 km"
+                                    android:text="Entfernung: 20 km"
                                     android:textColor="@android:color/black" />
 
                                 <SeekBar

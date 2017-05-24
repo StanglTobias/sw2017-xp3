@@ -153,23 +153,30 @@ public class ProductManager {
 
         ArrayList<Product> products = new ArrayList<Product>();
 
+        // http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php?query=&isbio=1&cat0=1&cat1=2&cat2=3&cat3=4&cat4=5&cat5=6&lon=15.439790&lat=47.073383&dist=
+
         Uri.Builder builder = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php")
                 .buildUpon();
 
-        builder = builder.appendQueryParameter("q", filter.getQuery());
+        builder.appendQueryParameter("query", filter.getQuery());
 
-        builder = builder.appendQueryParameter("isbio", filter.isBio() ? "1" : "0");
-
-        builder = builder.appendQueryParameter("dist", Integer.toString(filter.getDistance_()));
-
+        builder.appendQueryParameter("isbio", filter.isBio() ? "1" : "");
 
         String value = "";
+
         for (int i = 0; i < 6; i++) {
             if (filter.getCategories().size() - 1 >= i)
                 value = Integer.toString(filter.getCategories().get(i).GetInt());
+            else
+                value = "-1";
 
             builder.appendQueryParameter("cat" + Integer.toString(i), value);
         }
+
+        builder.appendQueryParameter("lon", Double.toString(Regionalo.getInstance().getLastKnownLocation().getLatitude()));
+        builder.appendQueryParameter("lat", Double.toString(Regionalo.getInstance().getLastKnownLocation().getLatitude()));
+        builder.appendQueryParameter("dist",
+                Integer.toString(filter.getDistance_() == 0 ? 50 : filter.getDistance_()));
 
         /*
         for (int i = 0; i < 2; i++) {
@@ -186,12 +193,11 @@ public class ProductManager {
             builder.appendQueryParameter("seller_" + Integer.toString(i), value);
         }*/
 
-
         Uri uri = builder.build();
 
         try {
-            String content = HttpUtils.downloadContent(uri.toString());
-            System.out.println("content search product " + content);
+            String uristring = uri.toString();
+            String content = HttpUtils.downloadContent(uristring);
             JSONArray arr = new JSONArray(content); //featured products
 
             for (int i = 0; i < arr.length(); i++) {
