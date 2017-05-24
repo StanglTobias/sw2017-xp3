@@ -141,7 +141,8 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 ((EditText) findViewById(R.id.text_ID_Entfernung))
-                        .setText("Entfernung: " + String.valueOf(progress + 20)  + " km");
+                        .setText(getString(R.string.distance) + String.valueOf(progress + 20)  +
+                                getString(R.string.km));
             }
 
             @Override
@@ -154,14 +155,14 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         });
 
         Bundle b = getIntent().getExtras();
-        String query = "";
+        String query = getString(R.string.empty);
         if (b != null) {
             if (b.containsKey(getString(R.string.query))) {
                 query = b.getString(getString(R.string.query));
 
             }
-            if (b.containsKey("category")) {
-                Categories c = Categories.fromInt(b.getInt("category"));
+            if (b.containsKey(getString(R.string.category))) {
+                Categories c = Categories.fromInt(b.getInt(getString(R.string.category)));
 
                 switch (c) {
                     case CEREALS:
@@ -212,7 +213,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             try {
 
                 if (result.isEmpty()) {
-                    CharSequence text = "Nichts gefunden!";
+                    CharSequence text = getString(R.string.nothingFound);
                     Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
                     toast.show();
                 }
@@ -241,7 +242,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
             Intent myIntent = new Intent(SearchResultActivity.this, ProductDetailActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putInt("id", productId);
+            bundle.putInt(getString(R.string.id), productId);
             myIntent.putExtras(bundle);
             startActivity(myIntent);
         }
@@ -329,7 +330,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
         List<Categories> categories = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            int resID = getResources().getIdentifier("cb_category_" + i, "id", getPackageName());
+            int resID = getResources().getIdentifier(getString(R.string.cb_category_) + i, getString(R.string.id), getPackageName());
             if (((CheckBox) findViewById(resID)).isChecked()) {
                 categories.add(Categories.fromInt(i));
             }
@@ -337,7 +338,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
         List<Seller> seller = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
-            int resID = getResources().getIdentifier("cb_seller_" + i, "id", getPackageName());
+            int resID = getResources().getIdentifier(getString(R.string.cb_seller_) + i, getString(R.string.id), getPackageName());
             if (((CheckBox) findViewById(resID)).isChecked()) {
                 categories.add(Categories.fromInt(i));
             }
@@ -345,7 +346,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
         List<Transfer> transfer = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            int resID = getResources().getIdentifier("cb_transfer_" + i, "id", getPackageName());
+            int resID = getResources().getIdentifier(getString(R.string.cb_transfer_) + i, getString(R.string.id), getPackageName());
             if (((CheckBox) findViewById(resID)).isChecked()) {
                 categories.add(Categories.fromInt(i));
             }

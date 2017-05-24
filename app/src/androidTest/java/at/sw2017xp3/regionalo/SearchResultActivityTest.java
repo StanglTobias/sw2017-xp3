@@ -100,9 +100,9 @@ public class SearchResultActivityTest {
         onView(withId(R.id.cb_transfer_2)).perform(scrollTo());
         onView(withId(R.id.cb_transfer_2)).check(matches(isNotChecked()));
 
-
+        onView(withId(R.id.Button_ID_ExtendedSearchStart2)).perform(scrollTo(), click());
         onView(withId(R.id.Button_ID_ResetFilterExtendedSearch)).perform(scrollTo(), click());
-        onView(withId(R.id.Button_ID_ExtendedSearchStart)).perform(scrollTo(), click());
+
 
 
 
