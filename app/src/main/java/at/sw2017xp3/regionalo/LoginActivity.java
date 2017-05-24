@@ -36,7 +36,7 @@ import java.util.Arrays;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
     private String phpurl = "http://sw-ma-xp3.bplaced.net/MySQLadmin/getLoginData.php";
-    private String logged_user;
+    private String logged_user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +50,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         for (int i = 0; i < list_of_elements.size(); i++) {
             list_of_elements.get(i).setOnClickListener(this);
         }
-
-        /*try to do httpPost*/
-
-
-
     }
 
     @Override
@@ -75,15 +70,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void checkLogin() {
         if (((TextView) findViewById(R.id.textViewEmail)).getText().toString().isEmpty() &&
-                ((TextView) findViewById(R.id.textViewPassword)).getText().toString().isEmpty())
+                ((TextView) findViewById(R.id.textViewPassword)).getText().toString().isEmpty()) {
             ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText(getString(R.string.missingPW_Email));
+            return;
+        }
 
         final String email      = ((TextView)findViewById(R.id.textViewEmail)).getText().toString();
         final String password   = ((TextView)findViewById(R.id.textViewPassword)).getText().toString();
 
-
         new AsyncLogin().execute(email, password);
-
     }
 
     private class AsyncLogin extends AsyncTask<String, String, String> {
@@ -149,8 +144,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         result.append(line);
                     }
 
-                    //RESULT HANDLING
-                    setLoggedUser(result.toString());
+                    setLoggedUserId(result.toString());
                     return (result.toString());
                 } else {
                     return "unsuccessful";
@@ -167,9 +161,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         protected void onPostExecute(String result) {
             pdLoading.dismiss();
 
-            if(result.equalsIgnoreCase("true")) {
-                Toast.makeText(LoginActivity.this, "Correct", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            if(result.equalsIgnoreCase(logged_user_id)) {
+                Intent intent = new Intent(LoginActivity.this, ReleaseAdActivity.class);
+                intent.putExtra("logged_user_id", logged_user_id);
                 startActivity(intent);
                 LoginActivity.this.finish();
             } else if (result.equalsIgnoreCase("false")) {
@@ -184,7 +178,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    public void setLoggedUser(String value) {
-        logged_user = value;
+    public void setLoggedUserId(String value) {
+        logged_user_id = value;
     }
 }
