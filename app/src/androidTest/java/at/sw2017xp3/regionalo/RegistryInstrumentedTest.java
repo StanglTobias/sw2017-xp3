@@ -1,11 +1,15 @@
 package at.sw2017xp3.regionalo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
+import android.support.test.espresso.core.deps.guava.collect.Iterables;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
+import android.support.test.runner.lifecycle.Stage;
 import android.widget.EditText;
 
 import org.junit.Ignore;
@@ -13,6 +17,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
@@ -20,8 +26,12 @@ import static android.support.test.espresso.action.ViewActions.swipeDown;
 import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 
 
@@ -47,7 +57,6 @@ public class RegistryInstrumentedTest {
 
     @Test
     public void checkTextViews() {
-
         onView(withId(R.id.et_register_ID_0)).perform(scrollTo(), typeText("Testhofname"));
         onView(withId(R.id.et_register_ID_1)).perform(scrollTo(), typeText("Vorname1"));
         onView(withId(R.id.et_register_ID_2)).perform(scrollTo(), typeText("Nachname1"));
@@ -69,5 +78,19 @@ public class RegistryInstrumentedTest {
         onView(withId(R.id.et_register_ID_7)).check(matches(withText("Testaddresse")));
         onView(withId(R.id.et_register_ID_8)).check(matches(withText("passwort1234")));
         onView(withId(R.id.et_register_ID_9)).check(matches(withText("passwort1235")));
+    }
+
+
+    @Test
+    public void checkEmptyFields() {
+
+        closeSoftKeyboard();
+        onView(withId(R.id.Button_ID_ConfirmRegistration)).perform(scrollTo(), click());
+        onView(withText(R.string.enterComulsoryFields)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+
+        checkTextViews();
+        closeSoftKeyboard();
+        onView(withId(R.id.Button_ID_ConfirmRegistration)).perform(scrollTo(), click());
+        onView(withText(R.string.passwordNotMatching)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
 }
