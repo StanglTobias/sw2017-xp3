@@ -110,7 +110,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                expandableLayout.collapse();
+                ((ExpandableRelativeLayout) findViewById(R.id.expandableLayout)).collapse();
                 new GetProductTask().execute(getFilter());
                 return false;
             }
