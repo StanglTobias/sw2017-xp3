@@ -29,8 +29,11 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import at.sw2017xp3.regionalo.util.Security;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -115,7 +118,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("username", params[0])
-                        .appendQueryParameter("password", params[1]);
+                        .appendQueryParameter("password", Security.SHA1(params[1]));
 
                 String query = builder.build().getEncodedQuery();
 
@@ -129,6 +132,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             } catch (IOException e1) {
                 e1.printStackTrace();
                 return "exception";
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
             }
 
             try {
