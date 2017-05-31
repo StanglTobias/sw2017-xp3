@@ -6,12 +6,19 @@ import java.security.NoSuchAlgorithmException;
 
 
 public class Security {
-    public static String SHA1(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        MessageDigest md = MessageDigest.getInstance("SHA-1");
+    public static String SHA1(String text)  {
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("SHA-1");
+
         byte[] textBytes = text.getBytes("UTF-8");
         md.update(textBytes, 0, textBytes.length);
         byte[] sha1hash = md.digest();
         return convertToHex(sha1hash);
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     private static String convertToHex(byte[] data) {
