@@ -51,7 +51,10 @@
     <string name="biologisch">Biologisch:</string>
     <string name="kategorie">Kategorie:</string>
     <string name="stop">Halt Stop</string>
+    <string name="city">Ort:</string>
     <string name="yes">Ja</string>
+    <string name="per"> per </string>
+    <string name="space">&#160;</string>
     <string name="empty"></string>
     <string name="no">Nein</string>
     <string name="meat">Fleisch</string>
@@ -63,8 +66,6 @@
     <string name="a">http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php?q=</string>
     <string name="phpLink">http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php?q=</string>
     <string name="postExeNameProduct">GetProductTask.onPostExecute name of product:</string>
-
-
     <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
         AIzaSyBXSKri2utmkn80rG3ERLWM-it2DO29Z54
 </string>
