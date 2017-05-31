@@ -57,6 +57,7 @@
     <string name="postExeNameProduct">GetProductTask.onPostExecute name of product:</string>
     <string name="enterComulsoryFields">Pflichtfelder bitte ausfüllen!</string>
     <string name="passwordNotMatching">Passwörter stimmen nicht überein</string>
+    <string name="userSucessfullyRegistered">Der User wurde erfolgreich erstellt</string>
 
 
     <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">

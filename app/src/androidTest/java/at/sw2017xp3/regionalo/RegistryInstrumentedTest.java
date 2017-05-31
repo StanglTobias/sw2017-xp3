@@ -17,6 +17,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Date;
+
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onView;
@@ -33,7 +35,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
-
 
 
 /**
@@ -86,11 +87,44 @@ public class RegistryInstrumentedTest {
 
         closeSoftKeyboard();
         onView(withId(R.id.Button_ID_ConfirmRegistration)).perform(scrollTo(), click());
-        onView(withText(R.string.enterComulsoryFields)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        // onView(withText(R.string.enterComulsoryFields)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
 
         checkTextViews();
         closeSoftKeyboard();
         onView(withId(R.id.Button_ID_ConfirmRegistration)).perform(scrollTo(), click());
         onView(withText(R.string.passwordNotMatching)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void checkCorrectRegister() {
+
+        closeSoftKeyboard();
+
+        onView(withId(R.id.et_register_ID_0)).perform(scrollTo(), typeText("Testhofname"));
+        onView(withId(R.id.et_register_ID_1)).perform(scrollTo(), typeText("Vorname1"));
+        onView(withId(R.id.et_register_ID_2)).perform(scrollTo(), typeText("Nachname1"));
+        long date = new Date().getTime();
+        onView(withId(R.id.et_register_ID_3)).perform(scrollTo(), typeText("testmail" + String.valueOf(date)));
+        onView(withId(R.id.et_register_ID_4)).perform(scrollTo(), typeText("0900666666"));
+        onView(withId(R.id.et_register_ID_5)).perform(scrollTo(), typeText("Testort"));
+        onView(withId(R.id.et_register_ID_6)).perform(scrollTo(), typeText("1234"));
+        onView(withId(R.id.et_register_ID_7)).perform(scrollTo(), typeText("Testaddresse"));
+        onView(withId(R.id.et_register_ID_8)).perform(scrollTo(), typeText("passwort1234"));
+        onView(withId(R.id.et_register_ID_9)).perform(scrollTo(), typeText("passwort1234"));
+
+        onView(withId(R.id.et_register_ID_0)).check(matches(withText("Testhofname")));
+        onView(withId(R.id.et_register_ID_1)).check(matches(withText("Vorname1")));
+        onView(withId(R.id.et_register_ID_2)).check(matches(withText("Nachname1")));
+        onView(withId(R.id.et_register_ID_3)).check(matches(withText("testmail" + String.valueOf(date))));
+        onView(withId(R.id.et_register_ID_4)).check(matches(withText("0900666666")));
+        onView(withId(R.id.et_register_ID_5)).check(matches(withText("Testort")));
+        onView(withId(R.id.et_register_ID_6)).check(matches(withText("1234")));
+        onView(withId(R.id.et_register_ID_7)).check(matches(withText("Testaddresse")));
+        onView(withId(R.id.et_register_ID_8)).check(matches(withText("passwort1234")));
+        onView(withId(R.id.et_register_ID_9)).check(matches(withText("passwort1234")));
+
+        onView(withId(R.id.Button_ID_ConfirmRegistration)).perform(scrollTo(), click());
+        onView(withText(R.string.userSucessfullyRegistered)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+
     }
 }
