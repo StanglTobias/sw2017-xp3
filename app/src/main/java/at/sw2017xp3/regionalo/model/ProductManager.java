@@ -163,9 +163,9 @@ public class ProductManager {
 
         String value = "";
 
-        for (int i = 0; i < 6; i++) {
-            if (filter.getCategories().size() - 1 >= i)
-                value = Integer.toString(filter.getCategories().get(i).GetInt());
+        for (int i = 1; i < 7; i++) {
+            if (filter.getCategories().size() >= i)
+                value = Integer.toString(filter.getCategories().get(i-1).GetInt());
             else
                 value = "";
 

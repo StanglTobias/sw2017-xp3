@@ -51,7 +51,7 @@ public class HttpUtils {
 
     public static String downloadContent(String myurl) throws IOException
     {
-        return downloadContent(myurl, 10000);
+        return downloadContent(myurl, 300000);
     }
     public static String downloadContent(String myurl, int length) throws IOException {
         InputStream is = null;

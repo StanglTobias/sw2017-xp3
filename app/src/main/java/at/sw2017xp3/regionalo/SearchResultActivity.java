@@ -35,12 +35,15 @@ import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.Filter;
 import at.sw2017xp3.regionalo.model.Product;
 import at.sw2017xp3.regionalo.model.enums.Categories;
+import at.sw2017xp3.regionalo.model.enums.ProductSorting;
 import at.sw2017xp3.regionalo.model.enums.Seller;
 import at.sw2017xp3.regionalo.model.enums.Transfer;
 import at.sw2017xp3.regionalo.util.CommonUi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,14 +81,6 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         mGoogleApiClient.disconnect();
         super.onStop();
     }
-
-
- /*   Button button_reset_filter;
-
-    private CheckBox checkBox_ID_BiologischerAnbau_;
-
-    private SeekBar seekBar_ID_Entfernung_;
-    private EditText text_ID_Entfernung_;*/
 
 
     @Override
@@ -138,21 +133,21 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
         ((SeekBar) findViewById(R.id.seekBar_ID_Entfernung))
                 .setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                ((EditText) findViewById(R.id.text_ID_Entfernung))
-                        .setText(getString(R.string.distance) + String.valueOf(progress + 20)  +
-                                getString(R.string.km));
-            }
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        ((EditText) findViewById(R.id.text_ID_Entfernung))
+                                .setText(getString(R.string.distance) + String.valueOf(progress + 20) +
+                                        getString(R.string.km));
+                    }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
 
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });
 
         Bundle b = getIntent().getExtras();
         String query = getString(R.string.empty);
@@ -166,26 +161,27 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
                 switch (c) {
                     case CEREALS:
-                        ((CheckBox) findViewById(R.id.cb_category_0)).setChecked(true);
+                        ((CheckBox) findViewById(R.id.cb_category_5)).setChecked(true);
                         break;
                     case FRUIT:
-                        ((CheckBox) findViewById(R.id.cb_category_2)).setChecked(true);
+                        ((CheckBox) findViewById(R.id.cb_category_3)).setChecked(true);
                         break;
                     case MEAT:
-                        ((CheckBox) findViewById(R.id.cb_category_0)).setChecked(true);
+                        ((CheckBox) findViewById(R.id.cb_category_1)).setChecked(true);
                         break;
                     case MILKPRODUCTS:
                         ((CheckBox) findViewById(R.id.cb_category_4)).setChecked(true);
                         break;
                     case OTHERS:
-                        ((CheckBox) findViewById(R.id.cb_category_5)).setChecked(true);
+                        ((CheckBox) findViewById(R.id.cb_category_6)).setChecked(true);
                         break;
                     case VEGETABLE:
-                        ((CheckBox) findViewById(R.id.cb_category_1)).setChecked(true);
+                        ((CheckBox) findViewById(R.id.cb_category_2)).setChecked(true);
                         break;
                 }
             }
-            sv.setQuery(query, true);
+            sv.setQuery(query, false);
+            new GetProductTask().execute(getFilter());
         }
 
     }
@@ -212,7 +208,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
             try {
 
-                if (result == null ||result.isEmpty()) {
+                if (result == null || result.isEmpty()) {
                     CharSequence text = getString(R.string.nothingFound);
                     Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
                     toast.show();
@@ -220,7 +216,14 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
                 LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayoutProductPresentation);
                 linearLayoutHome.removeAllViews();
-                for (Product p : result) {
+
+               int index = ( (Spinner) findViewById(R.id.Spinner_ID_ExtendedSearch)).getSelectedItemPosition();
+
+
+
+              ProductComperator pc =  new ProductComperator(index == 2 ? ProductSorting.PRICE : index == 3 ? ProductSorting.POPULARITY : ProductSorting.ALPHABETICAL);
+                Collections.sort(result, pc);
+                for (Product p :   result) {
                     LayoutInflater inflater = getLayoutInflater();
                     LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, linearLayoutHome);
                     CommonUi.fillProductPresentation(p, inflatedView, this);
@@ -336,7 +339,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         filter.setQuery(((SearchView) findViewById(R.id.searchViewResult)).getQuery().toString());
 
         List<Categories> categories = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 1; i < 7; i++) {
             int resID = getResources().getIdentifier(getString(R.string.cb_category_) + i, getString(R.string.id), getPackageName());
             if (((CheckBox) findViewById(resID)).isChecked()) {
                 categories.add(Categories.fromInt(i));
@@ -366,4 +369,25 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     }
 
 
+    public class ProductComperator implements Comparator<Product> {
+
+        ProductSorting sorting_;
+
+        ProductComperator(ProductSorting sorting) {
+            sorting_ = sorting;
+        }
+
+        @Override
+        public int compare(Product o1, Product o2) {
+
+            switch (sorting_) {
+                case POPULARITY:
+                    return o1.getLikes() - o2.getLikes();
+                case PRICE:
+                    return (int) (o1.getPrice() - o2.getPrice());
+                default:
+                    return o1.getName().compareTo(o2.getName());
+            }
+        }
+    }
 }

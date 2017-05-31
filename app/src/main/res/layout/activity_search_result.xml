@@ -230,7 +230,7 @@
                                     android:textColor="@android:color/black" />
 
                                 <CheckBox
-                                    android:id="@+id/cb_category_0"
+                                    android:id="@+id/cb_category_1"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -238,7 +238,7 @@
                                     app:buttonTint="?attr/colorButtonNormal" />
 
                                 <CheckBox
-                                    android:id="@+id/cb_category_1"
+                                    android:id="@+id/cb_category_2"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -246,7 +246,7 @@
                                     app:buttonTint="?attr/colorButtonNormal" />
 
                                 <CheckBox
-                                    android:id="@+id/cb_category_2"
+                                    android:id="@+id/cb_category_3"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -254,7 +254,7 @@
                                     app:buttonTint="?attr/colorButtonNormal" />
 
                                 <CheckBox
-                                    android:id="@+id/cb_category_3"
+                                    android:id="@+id/cb_category_4"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -262,7 +262,7 @@
                                     app:buttonTint="?attr/colorButtonNormal" />
 
                                 <CheckBox
-                                    android:id="@+id/cb_category_4"
+                                    android:id="@+id/cb_category_5"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -270,7 +270,7 @@
                                     app:buttonTint="?attr/colorButtonNormal" />
 
                                 <CheckBox
-                                    android:id="@+id/cb_category_5"
+                                    android:id="@+id/cb_category_6"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
