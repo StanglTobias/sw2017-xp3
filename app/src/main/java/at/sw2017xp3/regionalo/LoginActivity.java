@@ -1,24 +1,15 @@
 package at.sw2017xp3.regionalo;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -30,11 +21,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import at.sw2017xp3.regionalo.util.Security;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -75,6 +63,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void checkLogin() {
+
+
         if (((TextView) findViewById(R.id.textViewEmail)).getText().toString().isEmpty() ||
                 ((TextView) findViewById(R.id.textViewPassword)).getText().toString().isEmpty()) {
             ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText(getString(R.string.missingPW_Email));

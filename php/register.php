@@ -19,11 +19,20 @@ $commercial     = $_POST["commercial"];
 $delivery       = $_POST["delivery"];
 $yard_sale      = $_POST["yard_sale"];
 $self_harvest   = $_POST["self_harvest"];
+if(empty($last_name) or empty($email))
+{
+  echo '2';
+}
+else
+{
 
 
-$result = mysqli_query($con, "INSERT INTO User 
-(company_name, first_name, last_name, email, phone_number, city, postal_code, address, password, is_bio, longitude, latitude, commercial, delivery, yard_sale, self_harvest) 
-VALUES  ( '$company_name',   '$first_name',   '$last_name',  '$email',  '$phone_number',  '$city',  '$postal_code',  '$address',  '$password',   '0',   '15.439790',   '47.073383',  '0',  '0',  '0',   '0');"); 
 
-echo $result;
+	$result = mysqli_query($con, "INSERT INTO User 
+	(company_name, first_name, last_name, email, phone_number, city, postal_code, address, password, is_bio, longitude, latitude, commercial, delivery, yard_sale, self_harvest) 
+	VALUES  ( '$company_name',   '$first_name',   '$last_name',  '$email',  '$phone_number',  '$city',  '$postal_code',  '$address',  '$password',   '0',   '15.439790',   '47.073383',  '0',  '0',  '0',   '0');"); 
+
+	echo $result;
+}
+
 ?>

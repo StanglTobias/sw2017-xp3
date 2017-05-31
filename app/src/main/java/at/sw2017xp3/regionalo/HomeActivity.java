@@ -1,8 +1,6 @@
 package at.sw2017xp3.regionalo;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,38 +11,15 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.CurrentUser;
-import at.sw2017xp3.regionalo.model.Filter;
-import at.sw2017xp3.regionalo.util.Installation;
 import at.sw2017xp3.regionalo.model.Product;
 import at.sw2017xp3.regionalo.model.enums.Categories;
 import at.sw2017xp3.regionalo.util.CommonUi;
-import at.sw2017xp3.regionalo.util.HttpUtils;
-import at.sw2017xp3.regionalo.util.JsonObjectMapper;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Currency;
-import java.util.Locale;
-
-import static at.sw2017xp3.regionalo.R.string.space;
-import static java.io.File.separator;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
@@ -193,7 +168,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (hit) {
             Intent myIntent = new Intent(HomeActivity.this, SearchResultActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putInt("category", categorie.GetInt());
+            bundle.putInt(getString(R.string.category_), categorie.GetInt());
             myIntent.putExtras(bundle);
 
             startActivity(myIntent);

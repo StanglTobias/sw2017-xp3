@@ -33,6 +33,7 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -46,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
     Button button;
-    Toast mToast;
+    Toast mToast = null;
 
 
     @Override
@@ -54,7 +55,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         button = (Button) findViewById(R.id.Button_ID_ConfirmRegistration);
+        (findViewById(R.id.et_register_ID_0)).setOnClickListener(this);
         button.setOnClickListener(this);
+    }
+
+    public void createRegisterUser(HashMap<String, String> registerFields) {
+        try {
+            new RegisterUser().execute(registerFields).get();
+            System.out.println("Hallo");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -63,7 +76,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.Button_ID_ConfirmRegistration:
                 if (areRequiredFieldsNotEmpty() && arePasswordsIdentical())
                     register();
-                break;
+                return;
+
+            default:
+                return;
         }
     }
 
@@ -79,13 +95,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         registerFields.put(getString(R.string.address), ((EditText) findViewById(R.id.et_register_ID_7)).getText().toString());
 
         String passHashed = null;
-        try {
-            passHashed = Security.SHA1(((EditText) findViewById(R.id.et_register_ID_9)).getText().toString());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        passHashed = Security.SHA1(((EditText) findViewById(R.id.et_register_ID_9)).getText().toString());
+
         registerFields.put(getString(R.string.password), passHashed);
 
         // TODO Fields are missing according to database - enter new fields in UI and here
@@ -94,8 +105,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-
-    private class RegisterUser extends AsyncTask<HashMap<String, String>, Void, JSONObject> {
+    public class RegisterUser extends AsyncTask<HashMap<String, String>, Void, JSONObject> {
 
         @SafeVarargs
         @Override
@@ -125,20 +135,27 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             if (json != null) {
                 System.out.println(getString(R.string.result) + json.toString());
                 try {
+                    if (mToast != null) {
+                        mToast.cancel();
+                    }
+
                     if (json.getString(getString(R.string.result_)).equals("1")) //Inserting into database was ok
-                        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.userSucessfullyRegistered),
-                                Toast.LENGTH_LONG).show();
+                        mToast = Toast.makeText(RegisterActivity.this, getString(R.string.userSucessfullyRegistered),
+                                Toast.LENGTH_SHORT);
                     else
-                        Toast.makeText(RegisterActivity.this, getString(R.string.registerError),
-                                Toast.LENGTH_LONG).show();
+                        mToast = Toast.makeText(RegisterActivity.this, getString(R.string.registerError),
+                                Toast.LENGTH_SHORT);
+
+                    mToast.show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
+            } else {
+                mToast = Toast.makeText(RegisterActivity.this, getString(R.string.emailAlreadyUsed),
+                        Toast.LENGTH_SHORT);
+                mToast.show();
             }
-            else
-                Toast.makeText(RegisterActivity.this, getString(R.string.emailAlreadyUsed),
-                        Toast.LENGTH_LONG).show();
         }
 
     }
@@ -171,8 +188,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         EditText pass = (EditText) findViewById(R.id.et_register_ID_8);
         EditText pass2 = (EditText) findViewById(R.id.et_register_ID_9);
 
-        if (!pass.getText().toString().isEmpty() && !pass2.getText().toString().isEmpty() &&
-                (pass.getText().toString().equals(pass2.getText().toString()))) {
+        if (pass.getText().toString().equals(pass2.getText().toString())) {
             pass.setBackgroundResource(R.drawable.border_edit_text);
             pass2.setBackgroundResource(R.drawable.border_edit_text);
             return true;
@@ -181,6 +197,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if (mToast != null) {
             mToast.cancel();
         }
+
         mToast = Toast.makeText(this, getText(R.string.passwordNotMatching), Toast.LENGTH_SHORT);
         mToast.show();
         pass.setBackgroundResource(R.drawable.border_edit_text_empty);

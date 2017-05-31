@@ -52,8 +52,10 @@
     <string name="biologisch">Biologisch:</string>
     <string name="kategorie">Kategorie:</string>
     <string name="stop">Halt Stop</string>
-    <string name="space">&#160;</string>
+
     <string name="yes">Ja</string>
+    <string name="per"> per </string>
+    <string name="space">&#160;</string>
     <string name="empty"></string>
     <string name="no">Nein</string>
     <string name="meat">Fleisch</string>
@@ -109,5 +111,7 @@
     <string name="checkBox_ID_BiologischerAnbau">checkBox_ID_BiologischerAnbau</string>
     <string name="checkBox_ID_KategorieObst">checkBox_ID_KategorieObst</string>
     <string name="checkBox_ID_KategorieGemüse">checkBox_ID_KategorieGemüse</string>
-    <string name="checkBox_ID_KategoriePilze">checkBox_ID_KategoriePilze</string>
+    <string name="category_">category</string>
+    <string name="linkCurrentUser">http://sw-ma-xp3.bplaced.net/MySQLadmin/identification.php</string>
+    <string name="MYAPP">MYAPP</string>
 </resources>
