@@ -15,6 +15,7 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.pressKey;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -41,75 +42,74 @@ public class ExampleInstrumentedTest {
             new ActivityTestRule<>(HomeActivity.class, true, true);
 
     @Test
-    public void testMenuButtonsFirstScreen (){
-        onView(withId(R.id.buttonMeat)).perform( click());
+    public void testMenuButtonsFirstScreen() {
+        onView(withId(R.id.buttonMeat)).perform(click());
         pressBack();
-        onView(withId(R.id.buttonVegetables)).perform( click());
+        onView(withId(R.id.buttonVegetables)).perform(click());
         pressBack();
-        onView(withId(R.id.buttonFruit)).perform( click());
+        onView(withId(R.id.buttonFruit)).perform(click());
         pressBack();
-        onView(withId(R.id.buttonMilk)).perform( click());
+        onView(withId(R.id.buttonMilk)).perform(click());
         pressBack();
-        onView(withId(R.id.buttonCereals)).perform( click());
+        onView(withId(R.id.buttonCereals)).perform(click());
         pressBack();
-        onView(withId(R.id.buttonOthers)).perform( click());
+        onView(withId(R.id.buttonOthers)).perform(click());
     }
 
 
     @Test
-    public void testSearchGouda(){
+    public void testSearchGouda() {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Gouda"));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
-        onView(withId(16)).perform(click());
+        onView(withId(16)).perform(scrollTo(), click());
     }
 
     @Test
-    public void testSearchFleisch(){
+    public void testSearchFleisch() {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Spe"));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
-        onView(withId(1)).perform(click());
+        onView(withId(1)).perform(scrollTo(), click());
     }
 
     @Test
-    public void testSearchObst(){
+    public void testSearchObst() {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Birne"));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
-        onView(withId(8)).perform(click());
+        onView(withId(8)).perform(scrollTo(), click());
     }
 
     @Test
-    public void testSearchGemüse(){
+    public void testSearchGemüse() {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Tomaten"));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
-        onView(withId(10)).perform(click());
+        onView(withId(10)).perform(scrollTo(), click());
     }
 
     @Test
-    public void testSearchSonstiges(){
+    public void testSearchSonstiges() {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Honig"));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
-        onView(withId(26)).perform(click());
+        onView(withId(26)).perform(scrollTo(), click());
     }
 
     @Test
-    public void testSearchGetreide(){
+    public void testSearchGetreide() {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Weizen"));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
-        onView(withId(20)).perform(click());
+        onView(withId(20)).perform(scrollTo(), click());
     }
-
 
 
     @Ignore
@@ -120,43 +120,43 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void testLoginButton(){
+    public void testLoginButton() {
         onView(withId(R.id.buttonMenuLogin)).perform(click());
     }
 
     @Test
-    public void onClick(){
+    public void onClick() {
         onView(withId(R.id.buttonMenuLogin)).perform(click());
         onView(withId(R.id.textViewEmail)).perform(typeText("Hallo Welt!"));
         onView(withId(R.id.textViewEmail)).check(matches(withText("Hallo Welt!")));
     }
 
     @Test
-    public void testSearchSpeckDetail(){
+    public void testSearchSpeckDetail() {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Speck"));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
-        onView(withId(1)).perform(click());
+        onView(withId(1)).perform(scrollTo(), click());
         //onView(withId(R.id.ButtonContact)).perform(scrollTo(), click());
 
     }
 
 
     @Test
-    public void testSpeckDetail(){
-        onView(withId(1)).perform(click());
+    public void testSpeckDetail() {
+        onView(withId(1)).perform(scrollTo(), click());
         onView(withId(R.id.textViewProductName)).check(matches(withText("Speck")));
 
     }
 
     @Test
-    public void testSearchSpeckDetailLogin(){
+    public void testSearchSpeckDetailLogin() {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Speck"));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
-        onView(withId(1)).perform(click());
+        onView(withId(1)).perform(scrollTo(), click());
         //onView(withId(R.id.ButtonContact)).perform(scrollTo(), click());
 
     }

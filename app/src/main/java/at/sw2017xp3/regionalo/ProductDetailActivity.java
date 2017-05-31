@@ -1,10 +1,7 @@
 package at.sw2017xp3.regionalo;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,14 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,23 +25,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.Product;
-import at.sw2017xp3.regionalo.model.ProductManager;
 import at.sw2017xp3.regionalo.model.User;
 import at.sw2017xp3.regionalo.util.GeoUtils;
-import at.sw2017xp3.regionalo.util.HttpUtils;
-import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 import at.sw2017xp3.regionalo.util.OnTaskCompleted;
 
 /**
@@ -112,7 +96,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         new GetProductTask(this).execute(id);
         if(googlServicesAvailable())
         {
-            Toast.makeText(this, "YAY", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.YAY), Toast.LENGTH_LONG).show();
             mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);
         }
@@ -126,7 +110,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     public void onTaskCompleted() {
         LatLng placeLocation = GeoUtils.getLocationFromAddress(this, p.getUser().getAddress());
         Marker placeMarker = googleMap.addMarker(new MarkerOptions().position(placeLocation)
-                .title("test"));
+                .title(getString(R.string.test)));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(placeLocation));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(15), 1000, null);
     }
@@ -156,7 +140,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                  p = product_ = result;
             ((TextView) findViewById(R.id.textViewDescripton)).setText(p.getDescription());
             ((TextView) findViewById(R.id.textViewProductName)).setText(p.getName());
-            ((TextView) findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()) + "/" + p.getUnit());
+            ((TextView) findViewById(R.id.textViewPrice)).setText(getString(R.string.euro) + Double.toString(p.getPrice()) + getString(R.string.slash) + p.getUnit());
 
                 ImageView isItBioView = (ImageView)findViewById(R.id.isItBio);
                 if (p.isBio() == false)
@@ -164,11 +148,11 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 else if (p.isBio()== true)
                 { isItBioView.setVisibility(View.VISIBLE);}
 
-            ((TextView) findViewById(R.id.textViewCategroy)).setText("Kategorie: " + productCategorieName(p.getType()));
+            ((TextView) findViewById(R.id.textViewCategroy)).setText(getString(R.string.kategorie) + productCategorieName(p.getType()));
 
             User user = p.getUser();
             ((TextView) findViewById(R.id.textViewName)).setText(user.getFullName());
-            ((TextView) findViewById(R.id.textViewAdress)).setText(user.getPostalCode() + " " + user.getCity() + "\n" + user.getAddress());
+            ((TextView) findViewById(R.id.textViewAdress)).setText(user.getPostalCode() + getString(R.string.space) + user.getCity() + getString(R.string.enter) + user.getAddress());
             ((TextView) findViewById(R.id.textViewNumber)).setText(user.getPhoneNumber());
             ((TextView) findViewById(R.id.textViewEmail)).setText(user.getEmail());
             ((TextView) findViewById(R.id.textViewLikeCount)).setText(Integer.toString(p.getLikes()));
@@ -179,7 +163,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 listener.onTaskCompleted();
 
             } catch(Exception e){
-                System.out.println("Halt Stop");
+                System.out.println(getString(R.string.stop));
             }
         }
     }
@@ -200,7 +184,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.buttonLogin) {
+        if (id == R.id.buttonMenuLogin) {
             Intent myIntent = new Intent(this, LoginActivity.class);
             startActivity(myIntent);
         }
@@ -220,7 +204,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
             case R.id.ButtonContact:
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:" + ((TextView) findViewById(R.id.textViewEmail)).getText().toString())); // only email apps should handle this
+                intent.setData(Uri.parse(getString(R.string.mailto) + ((TextView) findViewById(R.id.textViewEmail)).getText().toString())); // only email apps should handle this
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 }
@@ -249,7 +233,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                     }
                 }
             } catch (Exception e) {
-                System.out.println("Halt Stop");
+                System.out.println(getString(R.string.stop));
             }
         }
     }
