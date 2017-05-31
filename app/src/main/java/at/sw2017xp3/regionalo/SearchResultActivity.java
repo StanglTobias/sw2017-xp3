@@ -1,8 +1,6 @@
 package at.sw2017xp3.regionalo;
 
 import android.content.Intent;
-import android.location.Location;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -20,16 +17,18 @@ import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.Filter;
@@ -39,14 +38,6 @@ import at.sw2017xp3.regionalo.model.enums.ProductSorting;
 import at.sw2017xp3.regionalo.model.enums.Seller;
 import at.sw2017xp3.regionalo.model.enums.Transfer;
 import at.sw2017xp3.regionalo.util.CommonUi;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class SearchResultActivity extends AppCompatActivity implements View.OnClickListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -156,7 +147,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 query = b.getString(getString(R.string.query));
 
             }
-            if (b.containsKey("category")) {
+            if (b.containsKey(getString(R.string.category_))) {
                 Categories c = Categories.fromInt(b.getInt("category"));
 
                 switch (c) {

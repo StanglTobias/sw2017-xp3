@@ -85,8 +85,7 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/tomato" />
+                    android:scaleType="centerCrop" />
             </LinearLayout>
 
             <LinearLayout

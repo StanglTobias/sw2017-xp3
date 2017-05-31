@@ -109,5 +109,7 @@
     <string name="checkBox_ID_BiologischerAnbau">checkBox_ID_BiologischerAnbau</string>
     <string name="checkBox_ID_KategorieObst">checkBox_ID_KategorieObst</string>
     <string name="checkBox_ID_KategorieGemüse">checkBox_ID_KategorieGemüse</string>
-    <string name="checkBox_ID_KategoriePilze">checkBox_ID_KategoriePilze</string>
+    <string name="category_">category</string>
+    <string name="linkCurrentUser">http://sw-ma-xp3.bplaced.net/MySQLadmin/identification.php</string>
+    <string name="MYAPP">MYAPP</string>
 </resources>
