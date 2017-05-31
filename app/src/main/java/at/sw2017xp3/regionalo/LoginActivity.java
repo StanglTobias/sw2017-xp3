@@ -39,13 +39,15 @@ import at.sw2017xp3.regionalo.util.Security;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
-    private String phpurl = getString(R.string.loginDataLink);
+    private String phpurl;
     private String logged_user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        phpurl = getString(R.string.loginDataLink);
 
         list_of_elements.addAll(Arrays.asList(
                 findViewById(R.id.buttonRegister),
@@ -124,7 +126,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String query = builder.build().getEncodedQuery();
 
                 OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, getString(R.string.UTF_8)));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, getString(R.string.UTF8)));
                 writer.write(query);
                 writer.flush();
                 writer.close();
@@ -133,8 +135,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             } catch (IOException e1) {
                 e1.printStackTrace();
                 return getString(R.string.exception);
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
             }
 
             try {

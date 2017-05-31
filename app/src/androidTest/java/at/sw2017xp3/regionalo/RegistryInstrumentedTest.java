@@ -53,6 +53,7 @@ public class RegistryInstrumentedTest {
 
     @Test
     public void checkButtonClicks() {
+        closeSoftKeyboard();
         onView(withText("Registrieren")).perform(scrollTo(), click());
     }
 
