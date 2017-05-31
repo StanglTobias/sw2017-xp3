@@ -3,9 +3,10 @@
 
     <string name="sort_prompt">Bitte eine Sortierung auswaehlen</string>
     <string-array name="sort_arrays">
-        <item>Entfernung</item>
-        <item>Alphabetisch</item>
-        <item>Preis</item>
+        <item>Alphabetisch A-Z</item>
+        <item>Alphabetisch Z-A</item>
+        <item>Preis aufsteigend</item>
+        <item>Preis absteigend</item>
         <item>Beliebtheit</item>
     </string-array>
 
