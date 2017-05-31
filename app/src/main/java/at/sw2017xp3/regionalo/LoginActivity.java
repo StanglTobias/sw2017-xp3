@@ -167,8 +167,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 intent.putExtra(getString(R.string.loggedUserId), logged_user_id);
                 startActivity(intent);
                 LoginActivity.this.finish();
-            } else if (result.equalsIgnoreCase(getString(R.string.falseStatement))) {
-                Toast.makeText(LoginActivity.this, getString(R.string.falsePwandEmail), Toast.LENGTH_LONG).show();
 
             } else if (result.equalsIgnoreCase(getString(R.string.exception)) || result.equalsIgnoreCase(getString(R.string.unsuccessful))) {
 
@@ -184,6 +182,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void setWrongUsernamePasswordTextView() {
-        ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText(getString(R.string.missingPW_Email));
+        Toast.makeText(LoginActivity.this, getString(R.string.falsePwandEmail), Toast.LENGTH_LONG).show();
     }
 }
