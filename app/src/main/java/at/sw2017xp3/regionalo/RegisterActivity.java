@@ -1,11 +1,9 @@
 package at.sw2017xp3.regionalo;
 
-import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,32 +12,12 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
-import java.util.AbstractMap;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import javax.net.ssl.HttpsURLConnection;
-
-import at.sw2017xp3.regionalo.model.Core;
-import at.sw2017xp3.regionalo.model.CurrentUser;
 import at.sw2017xp3.regionalo.util.HttpUtils;
-import at.sw2017xp3.regionalo.util.OnTaskCompleted;
 import at.sw2017xp3.regionalo.util.Security;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
@@ -47,7 +25,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     Button button;
     Toast mToast;
-    private static final String LOGIN_URL = "http://sw-ma-xp3.bplaced.net/MySQLadmin/register.php";
 
 
     @Override
@@ -70,14 +47,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void register() {
         HashMap<String, String> registerFields = new HashMap<>();
-        registerFields.put("company_name", ((EditText) findViewById(R.id.et_register_ID_0)).getText().toString());
-        registerFields.put("first_name", ((EditText) findViewById(R.id.et_register_ID_1)).getText().toString());
-        registerFields.put("last_name", ((EditText) findViewById(R.id.et_register_ID_2)).getText().toString());
-        registerFields.put("email", ((EditText) findViewById(R.id.et_register_ID_3)).getText().toString());
-        registerFields.put("phone_number", ((EditText) findViewById(R.id.et_register_ID_4)).getText().toString());
-        registerFields.put("city", ((EditText) findViewById(R.id.et_register_ID_5)).getText().toString());
-        registerFields.put("postal_code", ((EditText) findViewById(R.id.et_register_ID_6)).getText().toString());
-        registerFields.put("address", ((EditText) findViewById(R.id.et_register_ID_7)).getText().toString());
+        registerFields.put(getString(R.string.companyName), ((EditText) findViewById(R.id.et_register_ID_0)).getText().toString());
+        registerFields.put(getString(R.string.firstName), ((EditText) findViewById(R.id.et_register_ID_1)).getText().toString());
+        registerFields.put(getString(R.string.lastName), ((EditText) findViewById(R.id.et_register_ID_2)).getText().toString());
+        registerFields.put(getString(R.string.email), ((EditText) findViewById(R.id.et_register_ID_3)).getText().toString());
+        registerFields.put(getString(R.string.phoneNumber), ((EditText) findViewById(R.id.et_register_ID_4)).getText().toString());
+        registerFields.put(getString(R.string.city), ((EditText) findViewById(R.id.et_register_ID_5)).getText().toString());
+        registerFields.put(getString(R.string.postalCode), ((EditText) findViewById(R.id.et_register_ID_6)).getText().toString());
+        registerFields.put(getString(R.string.address), ((EditText) findViewById(R.id.et_register_ID_7)).getText().toString());
 
         String passHashed = null;
         try {
@@ -87,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        registerFields.put("password", passHashed);
+        registerFields.put(getString(R.string.password), passHashed);
 
         // TODO Fields are missing according to database - enter new fields in UI and here
 
@@ -102,9 +79,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected final JSONObject doInBackground(HashMap<String, String>... params) {
 
-            Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/userAlreadyInDatabase.php")
+            Uri uri = Uri.parse(getString(R.string.linkAlreadyInDatabase))
                     .buildUpon()
-                    .appendQueryParameter("email", params[0].get("email")).build();
+                    .appendQueryParameter(getString(R.string.email), params[0].get(getString(R.string.email))).build();
 
 
             String val = null;
@@ -114,8 +91,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 e.printStackTrace();
             }
 
-            if ("0".equals(val))//User is not in database (email)
-                return HttpUtils.postContent(LOGIN_URL, params[0]);
+            if (getString(R.string.zero).equals(val))//User is not in database (email)
+                return HttpUtils.postContent(getString(R.string.linkRegister), params[0]);
 
             return null;
         }
@@ -124,13 +101,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         protected void onPostExecute(JSONObject json) {
 
             if (json != null) {
-                System.out.println("Ergebnis : " + json.toString());
+                System.out.println(getString(R.string.result) + json.toString());
                 try {
-                    if (json.getString("result").equals("1")) //Inserting into database was ok
+                    if (json.getString(getString(R.string.result_)).equals("1")) //Inserting into database was ok
                         Toast.makeText(RegisterActivity.this, "Der User wurde erfolgreich erstellt!",
                                 Toast.LENGTH_LONG).show();
                     else
-                        Toast.makeText(RegisterActivity.this, "Es ist ein Fehler bei der Registrierung aufgetreten!",
+                        Toast.makeText(RegisterActivity.this, getString(R.string.registerError),
                                 Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -138,7 +115,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             }
             else
-                Toast.makeText(RegisterActivity.this, "Der User (EMAIL) ist bereits vorhanden - Registrierung fehlgeschlagen!",
+                Toast.makeText(RegisterActivity.this, getString(R.string.emailAlreadyUsed),
                         Toast.LENGTH_LONG).show();
         }
 
@@ -147,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private boolean areRequiredFieldsNotEmpty() {
         boolean fieldsNotEmpty = false;
         for (int i = 0; i <= 9; i++) {
-            int resID = getResources().getIdentifier("et_register_ID_" + i, "id", getPackageName());
+            int resID = getResources().getIdentifier(getString(R.string.et_register_ID_) + i, getString(R.string.id), getPackageName());
             EditText textField = ((EditText) findViewById(resID));
             if (textField.getText().toString().isEmpty()) {
                 textField.setBackgroundResource(R.drawable.border_edit_text_empty);

@@ -1,23 +1,15 @@
 package at.sw2017xp3.regionalo;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -35,7 +27,7 @@ import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
-    private String phpurl = "http://sw-ma-xp3.bplaced.net/MySQLadmin/getLoginData.php";
+    private String phpurl = getString(R.string.loginDataLink);
     private String logged_user_id;
 
     @Override
@@ -91,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         protected void onPreExecute() {
             super.onPreExecute();
 
-            pdLoading.setMessage("\tLoading...");
+            pdLoading.setMessage(getString(R.string.loading));
             pdLoading.setCancelable(false);
             pdLoading.show();
         }
@@ -102,25 +94,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 url = new URL(phpurl);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-                return "exception";
+                return getString(R.string.exception);
             }
             try {
                 conn = (HttpURLConnection)url.openConnection();
                 conn.setReadTimeout(10000); //10 sec
                 conn.setConnectTimeout(5000); //5sec
-                conn.setRequestMethod("POST");
+                conn.setRequestMethod(getString(R.string.POST));
 
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
 
                 Uri.Builder builder = new Uri.Builder()
-                        .appendQueryParameter("username", params[0])
-                        .appendQueryParameter("password", params[1]);
+                        .appendQueryParameter(getString(R.string.username), params[0])
+                        .appendQueryParameter(getString(R.string.password), params[1]);
 
                 String query = builder.build().getEncodedQuery();
 
                 OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, getString(R.string.UTF_8)));
                 writer.write(query);
                 writer.flush();
                 writer.close();
@@ -128,7 +120,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 conn.connect();
             } catch (IOException e1) {
                 e1.printStackTrace();
-                return "exception";
+                return getString(R.string.exception);
             }
 
             try {
@@ -147,11 +139,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     setLoggedUserId(result.toString());
                     return (result.toString());
                 } else {
-                    return "unsuccessful";
+                    return getString(R.string.unsuccessful);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                return "exception";
+                return getString(R.string.exception);
             } finally {
                 conn.disconnect();
             }
@@ -161,22 +153,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         protected void onPostExecute(String result) {
             pdLoading.dismiss();
 
-            if(logged_user_id.equals("false")) {
+            if(logged_user_id.equals(getString(R.string.falseStatement))) {
                 setWrongUsernamePasswordTextView();
                 return;
             }
 
             if(result.equalsIgnoreCase(logged_user_id)) {
                 Intent intent = new Intent(LoginActivity.this, ReleaseAdActivity.class);
-                intent.putExtra("logged_user_id", logged_user_id);
+                intent.putExtra(getString(R.string.loggedUserId), logged_user_id);
                 startActivity(intent);
                 LoginActivity.this.finish();
-            } else if (result.equalsIgnoreCase("false")) {
-                Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_LONG).show();
+            } else if (result.equalsIgnoreCase(getString(R.string.falseStatement))) {
+                Toast.makeText(LoginActivity.this, getString(R.string.falsePwandEmail), Toast.LENGTH_LONG).show();
 
-            } else if (result.equalsIgnoreCase("exception") || result.equalsIgnoreCase("unsuccessful")) {
+            } else if (result.equalsIgnoreCase(getString(R.string.exception)) || result.equalsIgnoreCase(getString(R.string.unsuccessful))) {
 
-                Toast.makeText(LoginActivity.this, "OOPs! Something went wrong. Connection Problem.", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, getString(R.string.oops), Toast.LENGTH_LONG).show();
 
             }
         }
