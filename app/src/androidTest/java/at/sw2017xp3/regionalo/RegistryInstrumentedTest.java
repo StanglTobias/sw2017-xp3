@@ -59,7 +59,9 @@ public class RegistryInstrumentedTest {
         closeSoftKeyboard();
         onView(withText("Registrieren")).perform(scrollTo(), click());
         onView(withText("Registrieren")).perform(scrollTo(), click());
+
         onView(withText(R.string.enterComulsoryFields)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+
 
     }
 
@@ -92,10 +94,11 @@ public class RegistryInstrumentedTest {
         onView(withId(R.id.et_register_ID_9)).perform(scrollTo(), typeText("passwort1235"));
         onView(withId(R.id.et_register_ID_8)).check(matches(withText("passwort1234")));
         onView(withId(R.id.et_register_ID_9)).check(matches(withText("passwort1235")));
+
+        onView(withText(R.string.passwordNotMatching)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+
     }
 
-
-    //   private static final RegisterActivity class2 = mock(RegisterActivity.class);
 
     @Test
     public void checkWrongDatabaseInsert() {
@@ -217,7 +220,7 @@ public class RegistryInstrumentedTest {
         onView(withId(R.id.et_register_ID_9)).check(matches(withText("passwort1234")));
 
         onView(withId(R.id.Button_ID_ConfirmRegistration)).perform(scrollTo(), click());
-        onView(withText(R.string.userSucessfullyRegistered)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
 
+        onView(withText(R.string.userSucessfullyRegistered)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
 }

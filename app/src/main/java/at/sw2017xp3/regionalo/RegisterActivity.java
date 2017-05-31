@@ -101,7 +101,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         // TODO Fields are missing according to database - enter new fields in UI and here
 
-        new RegisterUser().execute(registerFields);
+        try {
+            new RegisterUser().execute(registerFields).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -123,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 e.printStackTrace();
             }
 
-            if (getString(R.string.zero).equals(val))//User is not in database (email)
+            if (val.startsWith("0"))//User is not in database (email)
                 return HttpUtils.postContent(getString(R.string.linkRegister), params[0]);
 
             return null;
