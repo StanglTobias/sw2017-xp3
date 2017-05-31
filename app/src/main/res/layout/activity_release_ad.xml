@@ -241,32 +241,32 @@
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" >
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
 
-                            <RadioButton
-                                android:id="@+id/radioButton_ID_ReleaseAd_SelbstErnten"
-                                android:layout_width="match_parent"
+                            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                                android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:duplicateParentState="false"
-                                android:text="Selbst ernten" />
+                                android:orientation="vertical">
 
                             <RadioButton
-                                android:id="@+id/radioButton_ID_ReleaseAd_BereitsGeerntet"
-                                android:layout_width="match_parent"
+                                android:id="@+id/radioButton_ID_ReleaseAd_SelbstErnten"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Bereits geerntet" />
+                                android:text="Selbst ernten"
+                                android:onClick="onRadioButtonClicked"/>
+                            <RadioButton
+                                android:id="@+id/radioButton_ID_ReleaseAd_BereitsGeerntet"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Bereits geerntet"
+                                android:onClick="onRadioButtonClicked"/>
+
+                            </RadioGroup>
+
                         </LinearLayout>
-                    </RadioGroup>
 
                 </LinearLayout>
 
