@@ -57,8 +57,15 @@ public class SearchResultActivityTest {
         }
 
         onView(withId(R.id.Spinner_ID_ExtendedSearch)).perform(click());
-
-        onView(withText("Alphabetisch")).perform(click());
+        onView(withText("Alphabetisch A-Z")).perform(click());
+        onView(withId(R.id.Spinner_ID_ExtendedSearch)).perform(click());
+        onView(withText("Alphabetisch Z-A")).perform(click());
+        onView(withId(R.id.Spinner_ID_ExtendedSearch)).perform(click());
+        onView(withText("Preis aufsteigend")).perform(click());
+        onView(withId(R.id.Spinner_ID_ExtendedSearch)).perform(click());
+        onView(withText("Preis absteigend")).perform(click());
+        onView(withId(R.id.Spinner_ID_ExtendedSearch)).perform(click());
+        onView(withText("Beliebtheit")).perform(click());
 
         onView(withId(R.id.checkBox_ID_BiologischerAnbau)).perform(scrollTo(),click());
         onView(withId(R.id.cb_category_1)).perform(scrollTo(),click());
@@ -137,7 +144,7 @@ public class SearchResultActivityTest {
 
     }
 
-    @Ignore
+
     @Test
     public void testSearchSpeckDetailLogin(){
         onView(withId(R.id.searchViewResult)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
