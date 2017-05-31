@@ -127,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 System.out.println("Ergebnis : " + json.toString());
                 try {
                     if (json.getString("result").equals("1")) //Inserting into database was ok
-                        Toast.makeText(RegisterActivity.this, "Der User wurde erfolgreich erstellt!",
+                        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.userSucessfullyRegistered),
                                 Toast.LENGTH_LONG).show();
                     else
                         Toast.makeText(RegisterActivity.this, "Es ist ein Fehler bei der Registrierung aufgetreten!",
