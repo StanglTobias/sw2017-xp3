@@ -133,7 +133,7 @@ public class HttpUtils {
 
     public static String downloadContent(String myurl) throws IOException
     {
-        return downloadContent(myurl, 300000);
+        return downloadContent(myurl, 3000000);
     }
 
     public static String downloadContent(String myurl, int length) throws IOException {

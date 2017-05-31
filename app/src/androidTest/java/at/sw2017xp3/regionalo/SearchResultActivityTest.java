@@ -61,12 +61,12 @@ public class SearchResultActivityTest {
         onView(withText("Alphabetisch")).perform(click());
 
         onView(withId(R.id.checkBox_ID_BiologischerAnbau)).perform(scrollTo(),click());
-        onView(withId(R.id.cb_category_0)).perform(scrollTo(),click());
         onView(withId(R.id.cb_category_1)).perform(scrollTo(),click());
         onView(withId(R.id.cb_category_2)).perform(scrollTo(),click());
         onView(withId(R.id.cb_category_3)).perform(scrollTo(),click());
         onView(withId(R.id.cb_category_4)).perform(scrollTo(),click());
         onView(withId(R.id.cb_category_5)).perform(scrollTo(),click());
+        onView(withId(R.id.cb_category_6)).perform(scrollTo(),click());
         onView(withId(R.id.cb_seller_0)).perform(scrollTo(), click());
         onView(withId(R.id.cb_seller_1)).perform(scrollTo(), click());
         onView(withId(R.id.cb_transfer_0)).perform(scrollTo(), click());
@@ -77,8 +77,6 @@ public class SearchResultActivityTest {
 
         onView(withId(R.id.checkBox_ID_BiologischerAnbau)).perform(scrollTo());
         onView(withId(R.id.checkBox_ID_BiologischerAnbau)).check(matches(isNotChecked()));
-        onView(withId(R.id.cb_category_0)).perform(scrollTo());
-        onView(withId(R.id.cb_category_0)).check(matches(isNotChecked()));
         onView(withId(R.id.cb_category_1)).perform(scrollTo());
         onView(withId(R.id.cb_category_1)).check(matches(isNotChecked()));
         onView(withId(R.id.cb_category_2)).perform(scrollTo());
@@ -89,6 +87,8 @@ public class SearchResultActivityTest {
         onView(withId(R.id.cb_category_4)).check(matches(isNotChecked()));
         onView(withId(R.id.cb_category_5)).perform(scrollTo());
         onView(withId(R.id.cb_category_5)).check(matches(isNotChecked()));
+        onView(withId(R.id.cb_category_6)).perform(scrollTo());
+        onView(withId(R.id.cb_category_6)).check(matches(isNotChecked()));
         onView(withId(R.id.cb_seller_0)).perform(scrollTo());
         onView(withId(R.id.cb_seller_0)).check(matches(isNotChecked()));
         onView(withId(R.id.cb_seller_1)).perform(scrollTo());
@@ -122,12 +122,12 @@ public class SearchResultActivityTest {
         onView(withId(R.id.expand)).perform(longClick());
         onView(withId(R.id.seekBar_ID_Entfernung)).perform(click());
         onView(withId(R.id.checkBox_ID_BiologischerAnbau)).perform(scrollTo(),click());
-        onView(withId(R.id.cb_category_0)).perform(scrollTo(),click());
         onView(withId(R.id.cb_category_1)).perform(scrollTo(),click());
         onView(withId(R.id.cb_category_2)).perform(scrollTo(),click());
         onView(withId(R.id.cb_category_3)).perform(scrollTo(),click());
         onView(withId(R.id.cb_category_4)).perform(scrollTo(),click());
         onView(withId(R.id.cb_category_5)).perform(scrollTo(),click());
+        onView(withId(R.id.cb_category_6)).perform(scrollTo(),click());
         onView(withId(R.id.cb_seller_0)).perform(scrollTo(), click());
         onView(withId(R.id.cb_seller_1)).perform(scrollTo(), click());
         onView(withId(R.id.cb_transfer_0)).perform(scrollTo(), click());

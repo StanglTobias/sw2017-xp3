@@ -156,8 +156,8 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 query = b.getString(getString(R.string.query));
 
             }
-            if (b.containsKey(getString(R.string.category))) {
-                Categories c = Categories.fromInt(b.getInt(getString(R.string.category)));
+            if (b.containsKey("category")) {
+                Categories c = Categories.fromInt(b.getInt("category"));
 
                 switch (c) {
                     case CEREALS:

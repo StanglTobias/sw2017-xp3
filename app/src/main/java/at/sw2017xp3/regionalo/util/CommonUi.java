@@ -32,7 +32,7 @@ public class CommonUi
         ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText(Regionalo.getContext().getString(R.string.producerID) + String.valueOf(p.getId()));
         ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText(Regionalo.getContext().getString(R.string.producerID) + String.valueOf(p.getProducerId()));
         ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText(Regionalo.getContext().getString(R.string.productPrice) + String.valueOf(p.getPrice()));
-        ((TextView) productLayout.findViewById(R.id.textViewRndProduct5)).setText(Regionalo.getContext().getString(R.string.productType) + String.valueOf(p.getType()));
+        //((TextView) productLayout.findViewById(R.id.textViewRndProduct5)).setText(Regionalo.getContext().getString(R.string.productType) + String.valueOf(p.getType()));
     }
 
 }
