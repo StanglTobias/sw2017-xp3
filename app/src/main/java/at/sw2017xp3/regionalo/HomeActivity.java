@@ -30,8 +30,11 @@ import java.util.Arrays;
 
 import at.sw2017xp3.regionalo.model.Core;
 import at.sw2017xp3.regionalo.model.CurrentUser;
+import at.sw2017xp3.regionalo.model.Filter;
 import at.sw2017xp3.regionalo.util.Installation;
 import at.sw2017xp3.regionalo.model.Product;
+import at.sw2017xp3.regionalo.model.enums.Categories;
+import at.sw2017xp3.regionalo.util.CommonUi;
 import at.sw2017xp3.regionalo.util.HttpUtils;
 import at.sw2017xp3.regionalo.util.JsonObjectMapper;
 
@@ -67,10 +70,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-
-                Intent myIntent = new Intent(HomeActivity.this, SearchResultActivity.class);
-
                 if (!query.isEmpty()) {
+                    Intent myIntent = new Intent(HomeActivity.this, SearchResultActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString(getString(R.string.query), query);
                     myIntent.putExtras(bundle);
@@ -110,54 +111,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             try {
                 LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayout_Home_Activity);
-                for (Product p : result
-                        ) {
-                    String category;
-                    category = getString(R.string.meat);
-                   /* switch(p.getType())
-                    {
-                        case 1:
-                            category = getString(R.string.meat);
-                            break;
-                        case 2:
-                            category = getString(R.string.fruits);
-                            break;
-                        case 3:
-                            category = getString(R.string.vegetables);
-                            break;
-                        case 4:
-                            category = getString(R.string.dairy);
-                            break;
-                        case 5:
-                            category = getString(R.string.wheat);
-                            break;
-                        default:
-                            category = getString(R.string.other);
-                            break;
-                    } */
-                    System.out.println(getString(R.string.nameofProduct) + p.getName());
-
+                for (Product p : result) {
                     LayoutInflater inflater = getLayoutInflater();
                     LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, linearLayoutHome);
-
-                    int productLayoutId = p.getId();
-                    LinearLayout productLayout = (LinearLayout) inflatedView.findViewById(R.id.linearLayout_product);
-                    (inflatedView.findViewById(R.id.linearLayout_product)).setId(productLayoutId);
-
-                    ImageButton image_load = (ImageButton) productLayout.findViewById(R.id.imageButtonProduct);
-                    image_load.setOnClickListener(this);
-                    Glide.with(getApplicationContext()).load(Core.getInstance().getProducts().getImageUri(p.getId())).into(image_load);
-                    //Glide.with(this).load("http://goo.gl/gEgYUd").into(image_load);
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct1)).setText(p.getName());
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText(getString(R.string.category) +
-                            getString(R.string.space) + category);
-
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText(getString(R.string.productPrice) +
-                              getString(R.string.space) + String.valueOf(p.getPrice()) +
-                              getString(R.string.euro)  + getString(R.string.slash)   + p.getUnit());
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText(getString(R.string.region) +
-                            getString(R.string.space) + String.valueOf(p.getUser().getCity()));
-
+                    CommonUi.fillProductPresentation(p, inflatedView, this);
                 }
             } catch (Exception ex) {
                 System.out.println(getString(R.string.productTaskException));
@@ -167,8 +124,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public void onClick(View v) {
-
             ImageButton imageButton = (ImageButton) v;
+
             LinearLayout productLayout = (LinearLayout) imageButton.getParent();
             int productId = productLayout.getId();
 
@@ -206,55 +163,40 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if(v == findViewById(R.id.buttonMeat)){
-            v.setSelected(!v.isSelected());
 
-            if(v.isSelected()){
-                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
-                view.setQuery(getString((R.string.meat)), true);
-            }
+        Categories categorie = Categories.FRUIT;
+        boolean hit = true;
+
+        switch (v.getId()) {
+            case R.id.buttonMeat:
+                categorie = Categories.MEAT;
+                break;
+            case R.id.buttonVegetables:
+                categorie = Categories.VEGETABLE;
+                break;
+            case R.id.buttonFruit:
+                categorie = Categories.FRUIT;
+                break;
+            case R.id.buttonCereals:
+                categorie = Categories.CEREALS;
+                break;
+            case R.id.buttonMilk:
+                categorie = Categories.MILKPRODUCTS;
+                break;
+            case R.id.buttonOthers:
+                categorie = Categories.OTHERS;
+                break;
+            default:
+                hit = false;
+                break;
         }
-        if(v == findViewById(R.id.buttonVegetables)){
-            v.setSelected(!v.isSelected());
+        if (hit) {
+            Intent myIntent = new Intent(HomeActivity.this, SearchResultActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("category", categorie.GetInt());
+            myIntent.putExtras(bundle);
 
-            if(v.isSelected()){
-                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
-                view.setQuery(getString((R.string.vegetables)), true);
-            }
+            startActivity(myIntent);
         }
-        if(v == findViewById(R.id.buttonFruit)){
-            v.setSelected(!v.isSelected());
-
-            if(v.isSelected()){
-                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
-                view.setQuery(getString((R.string.fruits)), true);
-            }
-        }
-        if(v == findViewById(R.id.buttonCereals)){
-            v.setSelected(!v.isSelected());
-
-            if(v.isSelected()){
-                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
-                view.setQuery(getString((R.string.wheat)), true);
-            }
-        }
-        if(v == findViewById(R.id.buttonMilk)){
-            v.setSelected(!v.isSelected());
-
-            if(v.isSelected()){
-                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
-                view.setQuery(getString((R.string.dairy)), true);
-            }
-        }
-        if(v == findViewById(R.id.buttonOthers)){
-            v.setSelected(!v.isSelected());
-
-            if(v.isSelected()){
-                SearchView view = (SearchView)findViewById(R.id.searchViewHome);
-                view.setQuery(getString((R.string.other)), true);
-            }
-        }
-
-        Intent myIntent = new Intent(getBaseContext(), ProductDetailActivity.class);
     }
 }

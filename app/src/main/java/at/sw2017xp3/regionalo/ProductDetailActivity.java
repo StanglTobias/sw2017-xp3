@@ -209,6 +209,8 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                     startActivity(intent);
                 }
                 break;
+            default:
+                break;
         }
     }
 
@@ -259,8 +261,9 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 return getString(R.string.wheat);
             case 6:
                 return getString(R.string.other);
+            default:
+                return "";
         }
-        return "";
     }
 
     @Override

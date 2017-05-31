@@ -3,8 +3,10 @@
 
     <string name="sort_prompt">Bitte eine Sortierung auswaehlen</string>
     <string-array name="sort_arrays">
-        <item>Standardsortierung</item>
+        <item>Entfernung</item>
         <item>Alphabetisch</item>
+        <item>Preis</item>
+        <item>Beliebtheit</item>
     </string-array>
 
     <string name="releaseAd_prompt">Bitte zuerst eine Kategorie waehlen</string>
@@ -18,13 +20,20 @@
         <item>Unterkategorie 1</item>
         <item>Unterkategorie 2</item>
     </string-array>
-
+    <string name="nothingFound">Nichts gefunden!</string>
+    <string name="km"> km</string>
+    <string name="distance">Entfernung:</string>
     <string name="releaseAdEinheit_prompt">Bitte eine Einheit waehlen</string>
     <string-array name="releaseAdEinheit_arrays">
         <item>Kilogramm</item>
     </string-array>
     <string name="category">Kategorie:  </string>
     <string name="region">Region:  </string>
+
+    <string name="cb_seller_">cb_seller_</string>
+    <string name="cb_category_">cb_category_</string>
+    <string name="cb_transfer_">cb_transfer_</string>
+
     <string name="loadData">Daten geladen</string>
     <string name="nameofProduct">GetProductTask.onPostExecute name of product:</string>
     <string name="productID">Id: </string>
@@ -45,6 +54,7 @@
     <string name="stop">Halt Stop</string>
     <string name="space">&#160;</string>
     <string name="yes">Ja</string>
+    <string name="empty"></string>
     <string name="no">Nein</string>
     <string name="meat">Fleisch</string>
     <string name="fruits">Obst</string>

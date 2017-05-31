@@ -41,7 +41,15 @@ public class JsonObjectMapper {
         String email = object.getString("email");
         String phone = object.getString("phone_number");
         boolean isBio = object.getInt("is_bio") == 1;
+        double longitutde = object.getDouble("longitude");
+        double latitude = object.getDouble("latitude");
+        boolean delivery = object.getInt("delivery") == 1;
+        boolean yardSale = object.getInt("yard_sale") == 1;
+        boolean selfHarvest = object.getInt("self_harvest") == 1;
+        boolean commercial = object.getInt("commercial") == 1;
 
-        return new User(id, firstName, lastName, address, city, postalCode, email, phone, isBio);
+
+        return new User(id, firstName, lastName, address, city, postalCode, email,
+                phone, isBio, longitutde, latitude, delivery, yardSale, selfHarvest, commercial);
     }
 }
