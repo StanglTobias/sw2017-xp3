@@ -91,7 +91,6 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         new GetProductTask(this).execute(id);
         if (googlServicesAvailable()) {
-            Toast.makeText(this, getString(R.string.YAY), Toast.LENGTH_LONG).show();
             mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);
         }
