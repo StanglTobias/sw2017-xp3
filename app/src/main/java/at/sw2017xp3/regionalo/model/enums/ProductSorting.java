@@ -1,9 +1,11 @@
 package at.sw2017xp3.regionalo.model.enums;
 
 public enum ProductSorting {
-    ALPHABETICAL("Alphabetisch", 0),
-    PRICE("Preis", 1),
-    POPULARITY("Beliebtheit", 2);
+    ALPHABETICAL_ASC("Alphabetisch", 0),
+    ALPHATEICAL_DESC("Aplhabetisch", 1),
+    PRICE_ASC("Preis", 2),
+    PRICE_DESC("Preis", 3),
+    POPULARITY("Beliebtheit", 4);
 
     private String stringValue;
     private int intValue;

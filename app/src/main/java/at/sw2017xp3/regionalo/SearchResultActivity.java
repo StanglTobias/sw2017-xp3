@@ -211,7 +211,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
 
 
-              ProductComperator pc =  new ProductComperator(index == 2 ? ProductSorting.PRICE : index == 3 ? ProductSorting.POPULARITY : ProductSorting.ALPHABETICAL);
+              ProductComperator pc =  new ProductComperator(ProductSorting.fromInt(index));
                 Collections.sort(result, pc);
                 for (Product p :   result) {
                     LayoutInflater inflater = getLayoutInflater();
@@ -373,8 +373,12 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             switch (sorting_) {
                 case POPULARITY:
                     return o1.getLikes() - o2.getLikes();
-                case PRICE:
+                case PRICE_ASC:
                     return (int) (o1.getPrice() - o2.getPrice());
+                case PRICE_DESC:
+                    return (int) (o2.getPrice() - o1.getPrice());
+                case ALPHATEICAL_DESC:
+                    return o2.getName().compareTo(o1.getName());
                 default:
                     return o1.getName().compareTo(o2.getName());
             }
