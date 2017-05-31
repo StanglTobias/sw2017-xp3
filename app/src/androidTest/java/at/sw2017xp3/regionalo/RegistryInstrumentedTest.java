@@ -38,7 +38,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
 
 
 /**
