@@ -171,13 +171,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 intent.putExtra("logged_user_id", logged_user_id);
                 startActivity(intent);
                 LoginActivity.this.finish();
-            } else if (result.equalsIgnoreCase("false")) {
-                Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_LONG).show();
-
-            } else if (result.equalsIgnoreCase("exception") || result.equalsIgnoreCase("unsuccessful")) {
-
-                Toast.makeText(LoginActivity.this, "OOPs! Something went wrong. Connection Problem.", Toast.LENGTH_LONG).show();
-
             }
         }
 
