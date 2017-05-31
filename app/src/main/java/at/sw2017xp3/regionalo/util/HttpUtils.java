@@ -124,12 +124,13 @@ public class HttpUtils {
     }
 
     public static String convertInputStreamToString(InputStream stream, int length) throws IOException {
-        Reader reader = null;
-        reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[length];
-
-        reader.read(buffer);
-        return new String(buffer);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+        StringBuilder sb = new StringBuilder();
+        String line = "";
+        while((line = reader.readLine()) != null){
+            sb.append(line + "\n");
+        }
+        return sb.toString();
     }
 
     public static String downloadContent(String myurl) throws IOException
