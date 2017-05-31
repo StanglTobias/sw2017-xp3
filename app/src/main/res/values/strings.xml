@@ -63,4 +63,41 @@
     <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
         AIzaSyBXSKri2utmkn80rG3ERLWM-it2DO29Z54
 </string>
+    <string name="loginDataLink">http://sw-ma-xp3.bplaced.net/MySQLadmin/getLoginData.php</string>
+    <string name="loading">\\tLoading...</string>
+    <string name="POST">POST</string>
+    <string name="UTF-8">UTF-8</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="exception">exception</string>
+    <string name="unsuccessful">unsuccessful</string>
+    <string name="falseStatement">false</string>
+    <string name="loggedUserId">logged_user_id</string>
+    <string name="falsePwandEmail">Invalid email or password</string>
+    <string name="oops">OOPs! Something went wrong. Connection Problem.</string>
+    <string name="YAY">YAY</string>
+    <string name="test">test</string>
+    <string name="enter">\\n</string>
+    <string name="mailto">mailto:</string>
+    <string name="linkRegister">http://sw-ma-xp3.bplaced.net/MySQLadmin/register.php</string>
+    <string name="companyName">company_name</string>
+    <string name="firstName">first_name</string>
+    <string name="lastName">last_name</string>
+    <string name="email">email</string>
+    <string name="phoneNumber">phone_number</string>
+    <string name="city">city</string>
+    <string name="postalCode">postal_code</string>
+    <string name="address">address</string>
+    <string name="linkAlreadyInDatabase">http://sw-ma-xp3.bplaced.net/MySQLadmin/userAlreadyInDatabase.php</string>
+    <string name="zero">0</string>
+    <string name="result">Ergebnis :</string>
+    <string name="result_">result</string>
+    <string name="registerError">Es ist ein Fehler bei der Registrierung aufgetreten!</string>
+    <string name="emailAlreadyUsed">Der User (EMAIL) ist bereits vorhanden - Registrierung fehlgeschlagen!</string>
+    <string name="et_register_ID_">et_register_ID_</string>
+    <string name="logged_user_id">logged_user_id</string>
+    <string name="checkBox_ID_BiologischerAnbau">checkBox_ID_BiologischerAnbau</string>
+    <string name="checkBox_ID_KategorieObst">checkBox_ID_KategorieObst</string>
+    <string name="checkBox_ID_KategorieGemüse">checkBox_ID_KategorieGemüse</string>
+    <string name="checkBox_ID_KategoriePilze">checkBox_ID_KategoriePilze</string>
 </resources>
