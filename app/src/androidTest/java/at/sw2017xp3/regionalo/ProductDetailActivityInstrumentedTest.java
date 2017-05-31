@@ -4,6 +4,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -29,10 +30,11 @@ public class ProductDetailActivityInstrumentedTest {
     public ActivityTestRule<ProductDetailActivity> mActivityRule = new
             ActivityTestRule<>(ProductDetailActivity.class);
 
-  /*  @Test
+    @Ignore
+    @Test
     public void checkButtonContact() {
         onView(withId(R.id.ButtonContact)).perform(scrollTo(),click());
-    }*/
+    }
 
     @Test
     public void testLikeButton() {

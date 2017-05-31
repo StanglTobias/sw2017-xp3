@@ -18,9 +18,12 @@ import static android.support.test.espresso.action.ViewActions.pressKey;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static junit.framework.Assert.assertEquals;
+import static org.hamcrest.core.IsNot.not;
 
 /**
  * Instrumentation test, which will execute on an Android device.
@@ -57,6 +60,7 @@ public class ExampleInstrumentedTest {
     }
 
 
+    @Ignore
     @Test
     public void testSearchGouda() {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
@@ -66,6 +70,7 @@ public class ExampleInstrumentedTest {
         onView(withId(16)).perform(scrollTo(), click());
     }
 
+    @Ignore
     @Test
     public void testSearchFleisch() {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
@@ -75,6 +80,7 @@ public class ExampleInstrumentedTest {
         onView(withId(1)).perform(scrollTo(), click());
     }
 
+    @Ignore
     @Test
     public void testSearchObst() {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
@@ -84,6 +90,7 @@ public class ExampleInstrumentedTest {
         onView(withId(8)).perform(scrollTo(), click());
     }
 
+    @Ignore
     @Test
     public void testSearchGemüse() {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
@@ -93,6 +100,7 @@ public class ExampleInstrumentedTest {
         onView(withId(10)).perform(scrollTo(), click());
     }
 
+    @Ignore
     @Test
     public void testSearchSonstiges() {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
@@ -102,6 +110,7 @@ public class ExampleInstrumentedTest {
         onView(withId(26)).perform(scrollTo(), click());
     }
 
+    @Ignore
     @Test
     public void testSearchGetreide() {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
@@ -131,6 +140,7 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.textViewEmail)).check(matches(withText("Hallo Welt!")));
     }
 
+    @Ignore
     @Test
     public void testSearchSpeckDetail() {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
@@ -143,6 +153,7 @@ public class ExampleInstrumentedTest {
     }
 
 
+    @Ignore
     @Test
     public void testSpeckDetail() {
         onView(withId(1)).perform(scrollTo(), click());
@@ -150,6 +161,74 @@ public class ExampleInstrumentedTest {
 
     }
 
+    @Ignore
+    @Test
+    public void testLikeButtonSearchBirneNotLikedAndLiked()
+    {
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewHome)).perform(typeText("Birne"));
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(8)).perform(click());
+        onView(withId(R.id.textViewProductName)).check(matches(withText("Birnen")));
+
+
+        if(!onView(withId(R.id.buttonLike)).equals(isEnabled())) {
+            onView(withId(R.id.buttonLike)).perform(click());
+        } else {
+            onView(withId(R.id.buttonLike)).check(matches((isEnabled())));
+            onView(withId(R.id.buttonLike)).perform(click());
+            onView(withId(R.id.buttonLike)).check(matches(not(isEnabled())));
+        }
+
+        pressBack();
+
+        onView(withId(8)).perform(click());
+        onView(withId(R.id.textViewProductName)).check(matches(withText("Birnen")));
+
+        if(!onView(withId(R.id.buttonLike)).equals(isEnabled())) {
+            onView(withId(R.id.buttonLike)).perform(click());
+        } else {
+            onView(withId(R.id.buttonLike)).check(matches((isEnabled())));
+            onView(withId(R.id.buttonLike)).perform(click());
+            onView(withId(R.id.buttonLike)).check(matches(not(isEnabled())));
+        }
+
+    }
+
+
+    @Test
+    public void testLikeButtonSpeckNotLikedAndLiked() {
+
+
+
+        onView(withId(1)).perform(click());
+        onView(withId(R.id.textViewProductName)).check(matches(withText("Speck")));
+
+        if(!onView(withId(R.id.buttonLike)).equals(isEnabled())) {
+            onView(withId(R.id.buttonLike)).perform(click());
+        } else {
+            onView(withId(R.id.buttonLike)).check(matches((isEnabled())));
+            onView(withId(R.id.buttonLike)).perform(click());
+            onView(withId(R.id.buttonLike)).check(matches(not(isEnabled())));
+        }
+
+        pressBack();
+
+        onView(withId(1)).perform(click());
+        onView(withId(R.id.textViewProductName)).check(matches(withText("Speck")));
+
+        if(!onView(withId(R.id.buttonLike)).equals(isEnabled())) {
+            onView(withId(R.id.buttonLike)).perform(click());
+        } else {
+            onView(withId(R.id.buttonLike)).check(matches((isEnabled())));
+            onView(withId(R.id.buttonLike)).perform(click());
+            onView(withId(R.id.buttonLike)).check(matches(not(isEnabled())));
+        }
+
+    }
+
+    @Ignore
     @Test
     public void testSearchSpeckDetailLogin() {
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
