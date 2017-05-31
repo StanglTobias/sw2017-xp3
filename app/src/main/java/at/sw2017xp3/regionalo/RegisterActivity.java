@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
     Button button;
-    Toast mToast;
+    Toast mToast = null;
 
 
     @Override
@@ -54,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         button = (Button) findViewById(R.id.Button_ID_ConfirmRegistration);
+        ((EditText) findViewById(R.id.et_register_ID_0)).setOnClickListener(this);
         button.setOnClickListener(this);
     }
 
@@ -63,7 +64,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.Button_ID_ConfirmRegistration:
                 if (areRequiredFieldsNotEmpty() && arePasswordsIdentical())
                     register();
-                break;
+                return;
+
+            default:
+                return;
         }
     }
 
@@ -79,20 +83,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         registerFields.put(getString(R.string.address), ((EditText) findViewById(R.id.et_register_ID_7)).getText().toString());
 
         String passHashed = null;
-        try {
-            passHashed = Security.SHA1(((EditText) findViewById(R.id.et_register_ID_9)).getText().toString());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        passHashed = Security.SHA1(((EditText) findViewById(R.id.et_register_ID_9)).getText().toString());
+
         registerFields.put(getString(R.string.password), passHashed);
 
         // TODO Fields are missing according to database - enter new fields in UI and here
 
         new RegisterUser().execute(registerFields);
     }
-
 
 
     private class RegisterUser extends AsyncTask<HashMap<String, String>, Void, JSONObject> {
@@ -135,8 +133,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     e.printStackTrace();
                 }
 
-            }
-            else
+            } else
                 Toast.makeText(RegisterActivity.this, getString(R.string.emailAlreadyUsed),
                         Toast.LENGTH_LONG).show();
         }
@@ -171,8 +168,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         EditText pass = (EditText) findViewById(R.id.et_register_ID_8);
         EditText pass2 = (EditText) findViewById(R.id.et_register_ID_9);
 
-        if (!pass.getText().toString().isEmpty() && !pass2.getText().toString().isEmpty() &&
-                (pass.getText().toString().equals(pass2.getText().toString()))) {
+        if (pass.getText().toString().equals(pass2.getText().toString())) {
             pass.setBackgroundResource(R.drawable.border_edit_text);
             pass2.setBackgroundResource(R.drawable.border_edit_text);
             return true;
@@ -181,6 +177,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if (mToast != null) {
             mToast.cancel();
         }
+
         mToast = Toast.makeText(this, getText(R.string.passwordNotMatching), Toast.LENGTH_SHORT);
         mToast.show();
         pass.setBackgroundResource(R.drawable.border_edit_text_empty);

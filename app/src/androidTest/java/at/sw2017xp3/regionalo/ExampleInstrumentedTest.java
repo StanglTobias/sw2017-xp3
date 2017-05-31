@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -159,5 +160,13 @@ public class ExampleInstrumentedTest {
         onView(withId(1)).perform(scrollTo(), click());
         //onView(withId(R.id.ButtonContact)).perform(scrollTo(), click());
 
+    }
+
+    @Test
+    public void checkBackButtonRegistry() {
+        closeSoftKeyboard();
+        onView(withId(R.id.buttonMenuLogin)).perform(click());
+        onView(withId(R.id.buttonRegister)).perform(click());
+        pressBack();
     }
 }

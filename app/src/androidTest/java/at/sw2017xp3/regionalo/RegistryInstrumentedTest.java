@@ -22,6 +22,7 @@ import java.util.Date;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.swipeDown;
@@ -55,10 +56,12 @@ public class RegistryInstrumentedTest {
     public void checkButtonClicks() {
         closeSoftKeyboard();
         onView(withText("Registrieren")).perform(scrollTo(), click());
+        onView(withText("Registrieren")).perform(scrollTo(), click());
+        onView(withText(R.string.enterComulsoryFields)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+
     }
 
-    @Test
-    public void checkTextViews() {
+    private void enterEverythingWithoutPasswordsAndCheck() {
         onView(withId(R.id.et_register_ID_0)).perform(scrollTo(), typeText("Testhofname"));
         onView(withId(R.id.et_register_ID_1)).perform(scrollTo(), typeText("Vorname1"));
         onView(withId(R.id.et_register_ID_2)).perform(scrollTo(), typeText("Nachname1"));
@@ -67,8 +70,6 @@ public class RegistryInstrumentedTest {
         onView(withId(R.id.et_register_ID_5)).perform(scrollTo(), typeText("Testort"));
         onView(withId(R.id.et_register_ID_6)).perform(scrollTo(), typeText("1234"));
         onView(withId(R.id.et_register_ID_7)).perform(scrollTo(), typeText("Testaddresse"));
-        onView(withId(R.id.et_register_ID_8)).perform(scrollTo(), typeText("passwort1234"));
-        onView(withId(R.id.et_register_ID_9)).perform(scrollTo(), typeText("passwort1235"));
 
         onView(withId(R.id.et_register_ID_0)).check(matches(withText("Testhofname")));
         onView(withId(R.id.et_register_ID_1)).check(matches(withText("Vorname1")));
@@ -78,6 +79,15 @@ public class RegistryInstrumentedTest {
         onView(withId(R.id.et_register_ID_5)).check(matches(withText("Testort")));
         onView(withId(R.id.et_register_ID_6)).check(matches(withText("1234")));
         onView(withId(R.id.et_register_ID_7)).check(matches(withText("Testaddresse")));
+    }
+
+    @Test
+    public void checkTextViews() {
+        closeSoftKeyboard();
+        enterEverythingWithoutPasswordsAndCheck();
+
+        onView(withId(R.id.et_register_ID_8)).perform(scrollTo(), typeText("passwort1234"));
+        onView(withId(R.id.et_register_ID_9)).perform(scrollTo(), typeText("passwort1235"));
         onView(withId(R.id.et_register_ID_8)).check(matches(withText("passwort1234")));
         onView(withId(R.id.et_register_ID_9)).check(matches(withText("passwort1235")));
     }
@@ -94,6 +104,31 @@ public class RegistryInstrumentedTest {
         closeSoftKeyboard();
         onView(withId(R.id.Button_ID_ConfirmRegistration)).perform(scrollTo(), click());
         onView(withText(R.string.passwordNotMatching)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void checkPasswordFields() {
+
+        closeSoftKeyboard();
+        enterEverythingWithoutPasswordsAndCheck();
+
+        onView(withId(R.id.et_register_ID_8)).perform(scrollTo(), typeText("passwort1234"));
+        onView(withId(R.id.et_register_ID_9)).perform(scrollTo(), typeText("passwort1235"));
+        onView(withId(R.id.et_register_ID_8)).check(matches(withText("passwort1234")));
+        onView(withId(R.id.et_register_ID_9)).check(matches(withText("passwort1235")));
+
+        closeSoftKeyboard();
+        onView(withId(R.id.Button_ID_ConfirmRegistration)).perform(scrollTo(), click());
+        onView(withId(R.id.Button_ID_ConfirmRegistration)).perform(scrollTo(), click());
+        onView(withText(R.string.passwordNotMatching)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void checkFieldClick() {
+
+        closeSoftKeyboard();
+        onView(withId(R.id.et_register_ID_0)).perform(scrollTo(), click());
+
     }
 
     @Test
