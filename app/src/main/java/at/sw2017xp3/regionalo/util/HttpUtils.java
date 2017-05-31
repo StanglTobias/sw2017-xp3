@@ -127,6 +127,7 @@ public class HttpUtils {
         Reader reader = null;
         reader = new InputStreamReader(stream, "UTF-8");
         char[] buffer = new char[length];
+
         reader.read(buffer);
         return new String(buffer);
     }
