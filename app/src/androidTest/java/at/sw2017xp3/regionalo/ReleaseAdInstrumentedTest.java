@@ -37,7 +37,7 @@ public class ReleaseAdInstrumentedTest {
         pressBack();
         //onView(withId(R.id.button_ID_Bildauswaehlen)).perform(scrollTo(),click());
         onView(withId(R.id.textView_ID_Preis)).perform(scrollTo(), typeText("1000"));
-        onView(withId(R.id.editText3)).perform(scrollTo(),click());
+        onView(withId(R.id.textView_ID_Einheit)).perform(scrollTo(),typeText("Kg"));
         pressBack();
         onView(withId(R.id.checkBox_ID_ReleaseAd_BiologischerAnbau)).perform(scrollTo(),click());
         onView(withId(R.id.radioButton_ID_ReleaseAd_SelbstErnten)).perform(scrollTo(),click());
