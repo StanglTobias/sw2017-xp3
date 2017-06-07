@@ -35,8 +35,6 @@ import at.sw2017xp3.regionalo.model.Filter;
 import at.sw2017xp3.regionalo.model.Product;
 import at.sw2017xp3.regionalo.model.enums.Categories;
 import at.sw2017xp3.regionalo.model.enums.ProductSorting;
-import at.sw2017xp3.regionalo.model.enums.Seller;
-import at.sw2017xp3.regionalo.model.enums.Transfer;
 import at.sw2017xp3.regionalo.util.CommonUi;
 
 public class SearchResultActivity extends AppCompatActivity implements View.OnClickListener,
@@ -336,7 +334,6 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             }
         }
 
-        List<Seller> seller = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
             int resID = getResources().getIdentifier(getString(R.string.cb_seller_) + i, getString(R.string.id), getPackageName());
             if (((CheckBox) findViewById(resID)).isChecked()) {
@@ -344,7 +341,6 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             }
         }
 
-        List<Transfer> transfer = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             int resID = getResources().getIdentifier(getString(R.string.cb_transfer_) + i, getString(R.string.id), getPackageName());
             if (((CheckBox) findViewById(resID)).isChecked()) {
@@ -353,8 +349,6 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         }
 
         filter.setCategories(categories);
-        filter.setSeller(seller);
-        filter.setTransfer_(transfer);
         return filter;
     }
 

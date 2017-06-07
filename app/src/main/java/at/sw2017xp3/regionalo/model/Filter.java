@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import at.sw2017xp3.regionalo.model.enums.Categories;
-import at.sw2017xp3.regionalo.model.enums.Seller;
-import at.sw2017xp3.regionalo.model.enums.Transfer;
 
 public class Filter {
 
@@ -14,8 +12,6 @@ public class Filter {
     private boolean isBio_;
 
     private List<Categories> categories_ = new ArrayList<>();
-    private List<Seller> seller_ = new ArrayList<>();
-    private List<Transfer> transfer_ = new ArrayList<>();
     private String sort_;
 
     public int getDistance_() {
@@ -42,28 +38,12 @@ public class Filter {
         this.categories_ = categories_;
     }
 
-    public List<Seller> getSeller() {
-        return seller_;
-    }
-
-    public void setSeller(List<Seller> seller_) {
-        this.seller_ = seller_;
-    }
-
     public void setQuery(String text)
     {
         query_ = text;
     }
 
     public String getQuery(){return query_;}
-
-    public List<Transfer> getTransfer() {
-        return transfer_;
-    }
-
-    public void setTransfer_(List<Transfer> transfer_) {
-        this.transfer_ = transfer_;
-    }
 
     public Filter(int distance)
     {
