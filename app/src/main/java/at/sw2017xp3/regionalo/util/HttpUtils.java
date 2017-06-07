@@ -145,8 +145,6 @@ public class HttpUtils {
 
             return HttpUtils.convertInputStreamToString(conn.getInputStream(), length);
         } catch (Exception ex) {
-            if (conn != null)
-                conn.disconnect();
             return "";
         }
     }

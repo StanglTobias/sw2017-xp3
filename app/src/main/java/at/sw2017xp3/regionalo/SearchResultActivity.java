@@ -58,7 +58,6 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onConnectionSuspended(int i) {
-
     }
 
     protected void onStart() {
@@ -176,7 +175,6 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
     }
 
     private class GetProductTask extends AsyncTask<Filter, Void, ArrayList<Product>>

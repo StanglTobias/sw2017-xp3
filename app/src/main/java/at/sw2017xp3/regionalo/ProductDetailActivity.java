@@ -224,13 +224,13 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                     new LikeTask().execute(product_.getId());
                 break;
 
-            case R.id.ButtonContact:
+ /*           case R.id.ButtonContact:
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
                 intent.setData(Uri.parse(getString(R.string.mailto) + ((TextView) findViewById(R.id.textViewEmail)).getText().toString())); // only email apps should handle this
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 }
-                break;
+                break;*/
             default:
                 break;
         }
