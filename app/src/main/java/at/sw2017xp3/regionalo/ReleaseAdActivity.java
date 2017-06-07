@@ -55,25 +55,5 @@ public class ReleaseAdActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        Button clickedButton = (Button) v;
-
-        switch (clickedButton.getId()) {
-            case R.id.button_ID_Bildauswaehlen:
-                Intent intent = new Intent()
-                        .setType("*/*")
-                        .setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select a file"), 123);
-                break;
         }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==123 && resultCode==RESULT_OK) {
-            Uri selectedfile = data.getData(); //The uri with the location of the file
-            ImageView view = (ImageView)findViewById(R.id.imageView1);
-            view.setImageURI(selectedfile);
-        }
-    }
 }
