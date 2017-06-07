@@ -20,7 +20,12 @@ import at.sw2017xp3.regionalo.model.Core;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
-    private String logged_user_id;
+    private String phpurl;
+    private static String logged_user_id;
+
+    public static Boolean loggedIn_ = false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +110,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 return;
             }
 
-            if (result.equalsIgnoreCase(logged_user_id)) {
+            if(result.equalsIgnoreCase(logged_user_id)) {
+                loggedIn_ = true;
                 Intent intent = new Intent(LoginActivity.this, ReleaseAdActivity.class);
                 intent.putExtra(getString(R.string.loggedUserId), logged_user_id);
                 startActivity(intent);
@@ -117,6 +123,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void setLoggedUserId(String value) {
         logged_user_id = value;
+    }
+
+    public static String getLoggedUserId() {
+        return logged_user_id;
     }
 
     public void setWrongUsernamePasswordTextView() {
