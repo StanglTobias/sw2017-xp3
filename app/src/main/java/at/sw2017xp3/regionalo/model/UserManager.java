@@ -68,7 +68,27 @@ UserManager {
         return p;
     }
 
-   public String LogInUser(String userName, String password) {
+    public void WriteLongLat(User u) {
+        try {
+            LatLng latLng = GeoUtils.getLocationFromAddress(Regionalo.getContext(), u.getAddress());
+            u.setLatitude(latLng.latitude);
+            u.setLongitude_(latLng.latitude);
+
+            Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/userlonlat.php")
+                    .buildUpon()
+                    .appendQueryParameter("id", Integer.toString(u.getId()))
+                    .appendQueryParameter("lon", Double.toString(u.getLongitude()))
+                    .appendQueryParameter("lat", Double.toString(u.getLatitude())).build();
+
+
+            HttpUtils.downloadContent(uri.toString());
+        } catch (Exception ex) {
+            Log.e("Databas", "exception", ex);
+        }
+
+    }
+
+    public String LogInUser(String userName, String password) {
         try {
 
             Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/getLoginData.php")

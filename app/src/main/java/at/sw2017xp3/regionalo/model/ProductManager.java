@@ -69,6 +69,9 @@ public class ProductManager {
 
             p = JsonObjectMapper.CreateProduct(mJsonObject);
 
+            if (p.getUser().getLatitude() == 0d) {
+                Core.getInstance().getUsers().WriteLongLat(p.getUser());
+            }
 
             addProduct(p);
 
