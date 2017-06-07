@@ -154,39 +154,89 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/Text_ID_Preis"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:inputType="textPersonName"
-                    android:text="Preis in €"
-                    android:textColor="@android:color/black" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView_ID_Preis"
+                    <EditText
+                        android:id="@+id/Text_ID_Preis"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:enabled="false"
+                        android:inputType="textPersonName"
+                        android:text="Preis in €"
+                        android:textColor="@android:color/black" />
+
+                    <EditText
+                        android:id="@+id/Text_ID_Einheit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:enabled="false"
+                        android:inputType="textPersonName"
+                        android:text="Einheit"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:height="50dp"
-                    android:background="@android:color/background_light"
-                    android:clickable="true"
-                    android:contextClickable="true"
-                    android:cursorVisible="true"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:inputType="text"
-                    android:linksClickable="true"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:textAlignment="textStart"
-                    android:textColorHint="@android:color/darker_gray"
-                    android:textSize="25sp" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView_ID_Preis"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:height="50dp"
+                        android:background="@android:color/background_light"
+                        android:clickable="true"
+                        android:contextClickable="true"
+                        android:cursorVisible="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="text"
+                        android:linksClickable="true"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:textAlignment="textStart"
+                        android:textColorHint="@android:color/darker_gray"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/textView_ID_Einheit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:height="50dp"
+                        android:background="@android:color/background_light"
+                        android:clickable="true"
+                        android:contextClickable="true"
+                        android:cursorVisible="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="text"
+                        android:linksClickable="true"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:textAlignment="textStart"
+                        android:textColorHint="@android:color/darker_gray"
+                        android:textSize="25sp" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -196,27 +246,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/Text_ID_Einheit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:inputType="textPersonName"
-                    android:text="Pro Einheit"
-                    android:textColor="@android:color/black" />
-
-                <EditText
-                    android:id="@+id/editText3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border_recommended_image"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textSize="25sp" />
 
                 <CheckBox
                     android:id="@+id/checkBox_ID_ReleaseAd_BiologischerAnbau"
