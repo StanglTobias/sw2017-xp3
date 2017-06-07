@@ -137,20 +137,12 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.searchViewHome)).perform(typeText("Hallo"), click());
     }
 
-    @Test
-    public void testLoginButton() {
-        closeSoftKeyboard();
-        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
-        onView(withText("Login")).perform(click());
-    }
 
     @Test
     public void onClick() {
         closeSoftKeyboard();
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(withText("Login")).perform(click());
-        onView(withId(R.id.textViewEmail)).perform(typeText("Hallo Welt!"));
-        onView(withId(R.id.textViewEmail)).check(matches(withText("Hallo Welt!")));
     }
 
 
@@ -308,6 +300,12 @@ public class ExampleInstrumentedTest {
 
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(withText("Produkt hinzufügen")).perform(click());
+
+        closeSoftKeyboard();
+        pressBack();
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Logout")).perform(click());
     }
 
     @Test
@@ -385,6 +383,12 @@ public class ExampleInstrumentedTest {
 
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(withText("Produkt hinzufügen")).perform(click());
+
+        closeSoftKeyboard();
+        pressBack();
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Logout")).perform(click());
     }
 
     @Test
