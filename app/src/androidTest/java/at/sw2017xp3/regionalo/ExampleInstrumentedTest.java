@@ -284,6 +284,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void checkLoginDetailPageProductAdd() {
         closeSoftKeyboard();
+        onView(withId(1)).perform(scrollTo(), click());
 
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(withText("Login")).perform(click());
@@ -412,6 +413,69 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.searchViewHome)).perform(typeText("Weizen"));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
 
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("als Produzent registrieren")).perform(click());
+    }
+
+
+
+    // Home Activity Menu Items
+    
+    @Test
+    public void checkLoginHomeLogout() {
+        closeSoftKeyboard();
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Login")).perform(click());
+
+        onView(withId(R.id.textViewEmail)).perform(typeText("test@gmx.at"));
+        onView(withId(R.id.textViewPassword)).perform(typeText("test"));
+        closeSoftKeyboard();
+        onView(withId(R.id.buttonLogin)).perform(click());
+
+        closeSoftKeyboard();
+        pressBack();
+        closeSoftKeyboard();
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Logout")).perform(click());
+    }
+
+    @Test
+    public void checkLoginHomeProductAdd() {
+        closeSoftKeyboard();
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Login")).perform(click());
+
+        onView(withId(R.id.textViewEmail)).perform(typeText("test@gmx.at"));
+        onView(withId(R.id.textViewPassword)).perform(typeText("test"));
+        closeSoftKeyboard();
+        onView(withId(R.id.buttonLogin)).perform(click());
+
+        closeSoftKeyboard();
+        pressBack();
+        closeSoftKeyboard();
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Produkt hinzufügen")).perform(click());
+
+        closeSoftKeyboard();
+        pressBack();
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Logout")).perform(click());
+    }
+
+    @Test
+    public void checkHomeLogo() {
+        closeSoftKeyboard();
+        onView(withId(R.id.logo)).perform(click());
+    }
+
+    @Test
+    public void checkHomeProducerRegistration() {
+        closeSoftKeyboard();
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(withText("als Produzent registrieren")).perform(click());
     }
