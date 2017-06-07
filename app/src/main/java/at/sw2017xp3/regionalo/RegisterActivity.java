@@ -147,10 +147,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                     if (json.getString(getString(R.string.result_)).equals("1")) //Inserting into database was ok
                         mToast = Toast.makeText(RegisterActivity.this, getString(R.string.userSucessfullyRegistered),
-                                Toast.LENGTH_SHORT);
+                                Toast.LENGTH_LONG);
                     else
                         mToast = Toast.makeText(RegisterActivity.this, getString(R.string.registerError),
-                                Toast.LENGTH_SHORT);
+                                Toast.LENGTH_LONG);
 
                     mToast.show();
                 } catch (JSONException e) {
@@ -159,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             } else {
                 mToast = Toast.makeText(RegisterActivity.this, getString(R.string.emailAlreadyUsed),
-                        Toast.LENGTH_SHORT);
+                        Toast.LENGTH_LONG);
                 mToast.show();
             }
         }
@@ -183,7 +183,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             if (mToast != null) {
                 mToast.cancel();
             }
-            mToast = Toast.makeText(this, getText(R.string.enterComulsoryFields), Toast.LENGTH_SHORT);
+            mToast = Toast.makeText(this, getText(R.string.enterComulsoryFields), Toast.LENGTH_LONG);
             mToast.show();
             return false;
         }
@@ -204,7 +204,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             mToast.cancel();
         }
 
-        mToast = Toast.makeText(this, getText(R.string.passwordNotMatching), Toast.LENGTH_SHORT);
+        mToast = Toast.makeText(this, getText(R.string.passwordNotMatching), Toast.LENGTH_LONG);
         mToast.show();
         pass.setBackgroundResource(R.drawable.border_edit_text_empty);
         pass2.setBackgroundResource(R.drawable.border_edit_text_empty);
