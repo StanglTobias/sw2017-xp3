@@ -31,18 +31,17 @@ public class ReleaseAdInstrumentedTest {
     @Test
     public void checkTextClicks() {
         moveToRightAcitivity();
-        onView(withId(R.id.TextView_ID_Angebotstitel)).perform(scrollTo(), typeText("Supertomaten"));
+        onView(withId(R.id.editText1)).perform(scrollTo(), typeText("Supertomaten"));
         onView(withId(R.id.editText2)).perform(scrollTo(), typeText("Diese Tomaten sind super mega toll!!!"));
         onView(withId(R.id.spinner_ID_ReleaseAdKategorie)).perform(scrollTo(),click());
         pressBack();
-        onView(withId(R.id.button_ID_Bildauswaehlen)).perform(scrollTo(),click());
+        //onView(withId(R.id.button_ID_Bildauswaehlen)).perform(scrollTo(),click());
         onView(withId(R.id.textView_ID_Preis)).perform(scrollTo(), typeText("1000"));
-        onView(withId(R.id.spinner_ID_Einheit)).perform(scrollTo(),click());
+        onView(withId(R.id.editText3)).perform(scrollTo(),click());
         pressBack();
         onView(withId(R.id.checkBox_ID_ReleaseAd_BiologischerAnbau)).perform(scrollTo(),click());
         onView(withId(R.id.radioButton_ID_ReleaseAd_SelbstErnten)).perform(scrollTo(),click());
         onView(withId(R.id.radioButton_ID_ReleaseAd_BereitsGeerntet)).perform(scrollTo(),click());
-        onView(withId(R.id.button_ID_ReleaseAd_Abbrechen)).perform(scrollTo(),click());
         onView(withId(R.id.button_ID_ReleaseAdSpeichern)).perform(scrollTo(),click());
     }
 
