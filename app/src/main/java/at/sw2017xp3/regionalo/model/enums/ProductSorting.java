@@ -17,11 +17,14 @@ public enum ProductSorting {
 
 
     public static ProductSorting fromInt(int i){
+        ProductSorting p = ProductSorting.ALPHABETICAL_ASC;
         for (ProductSorting category : ProductSorting.values()){
-            if(category.intValue == i)
-                return category;
+            if(category.intValue == i){
+                category.intValue = i;
+                p = category;
+            }
         }
-        return  null;
+        return p;
     }
 
     @Override

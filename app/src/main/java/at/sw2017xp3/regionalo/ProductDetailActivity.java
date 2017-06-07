@@ -281,10 +281,8 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 return getString(R.string.dairy);
             case 5:
                 return getString(R.string.wheat);
-            case 6:
-                return getString(R.string.other);
             default:
-                return "";
+                return getString(R.string.other);
         }
     }
 
