@@ -78,14 +78,6 @@ public class User {
         return isBio_;
     }
 
-    public double getLongitude() {
-        return longitude_;
-    }
-
-    public double getLatitude() {
-        return latitude_;
-    }
-
     public boolean isDelivery() {
         return delivery_;
     }
@@ -100,14 +92,6 @@ public class User {
 
     public boolean isCommercial() {
         return commercial_;
-    }
-
-    public void setLongitude_(double longitude) {
-        this.longitude_ = longitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude_ = latitude;
     }
 
 }
