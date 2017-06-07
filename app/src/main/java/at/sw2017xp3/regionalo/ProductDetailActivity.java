@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.ConnectionResult;
@@ -246,9 +245,9 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             case 1:
                 return getString(R.string.meat);
             case 2:
-                return getString(R.string.fruits);
-            case 3:
                 return getString(R.string.vegetables);
+            case 3:
+                return getString(R.string.fruits);
             case 4:
                 return getString(R.string.dairy);
             case 5:
