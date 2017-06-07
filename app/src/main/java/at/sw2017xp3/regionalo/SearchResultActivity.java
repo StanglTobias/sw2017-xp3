@@ -1,135 +1,115 @@
 package at.sw2017xp3.regionalo;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.SeekBar;
 import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import at.sw2017xp3.regionalo.model.Core;
+import at.sw2017xp3.regionalo.model.Filter;
 import at.sw2017xp3.regionalo.model.Product;
+import at.sw2017xp3.regionalo.model.enums.Categories;
+import at.sw2017xp3.regionalo.model.enums.ProductSorting;
+import at.sw2017xp3.regionalo.util.CommonUi;
 
-public class SearchResultActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchResultActivity extends AppCompatActivity implements View.OnClickListener,
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
     ExpandableRelativeLayout expandableLayout;
 
-    Button button_extended_search_start;
-    Button button_extended_search_start2;
-    Button button_reset_filter;
+    GoogleApiClient mGoogleApiClient;
 
-    private CheckBox checkBox_ID_BiologischerAnbau_;
-    private CheckBox checkBox_ID_KategorieObst_;
-    private CheckBox checkBox_ID_KategorieGemüse_;
-    private CheckBox checkBox_ID_KategoriePilze_;
-    private CheckBox checkBox_ID_KategoriePlanzenUndSamen_;
-    private CheckBox checkBox_ID_KategorieHolz_;
-    private CheckBox checkBox_ID_WeitereGartenprodukte_;
-    private CheckBox checkBox_ID_Burgenland_;
-    private CheckBox checkBox_ID_Kaernten_;
-    private CheckBox checkBox_ID_Niederoesterreich_;
-    private CheckBox checkBox_ID_Oberoesterreich_;
-    private CheckBox checkBox_ID_Salzburg_;
-    private CheckBox checkBox_ID_Steiermark_;
-    private CheckBox checkBox_ID_Tirol_;
-    private CheckBox checkBox_ID_Vorarlberg_;
-    private CheckBox checkBox_ID_Wien_;
-    private CheckBox checkBox_ID_Privat_;
-    private CheckBox checkBox_ID_Firma_;
-    private CheckBox checkBox_ID_Zustellung_;
-    private CheckBox checkBox_ID_Selbstabholung_;
-    private CheckBox checkBox_ID_NichtBenoetigt_;
-    private CheckBox checkBox_ID_BereitsGeerntet_;
-    private CheckBox checkBox_ID_SelbstErnten_;
+    @Override
+    public void onConnected(Bundle connectionHint) {
+
+        try {
+            Regionalo.getInstance().setLastKnownLocation(
+                    LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient));
+
+        } catch (SecurityException se) {
+            ;
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    protected void onStart() {
+        mGoogleApiClient.connect();
+        super.onStart();
+    }
+
+    protected void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
 
-        Bundle b = getIntent().getExtras();
-        String query = null; // or other values
-        if(b != null)
-        {
-            query = b.getString(getString(R.string.query));
-            setFilter(b);
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
         }
 
 
-
-        expandableLayout
-                = (ExpandableRelativeLayout) findViewById(R.id.expandableLayout);
         Button expandButton
                 = (Button) findViewById(R.id.expand);
         expandButton.setOnClickListener(this);
 
         expandButton.performClick();
 
-        button_extended_search_start = (Button) findViewById(R.id.Button_ID_ExtendedSearchStart);
-        button_extended_search_start.setOnClickListener(this);
+        ArrayList<View> buttons = new ArrayList<>();
+        buttons.addAll(Arrays.asList(
+                findViewById(R.id.Button_ID_ExtendedSearchStart),
+                findViewById(R.id.Button_ID_ExtendedSearchStart2),
+                findViewById(R.id.Button_ID_ResetFilterExtendedSearch)));
 
-        button_extended_search_start2 = (Button) findViewById(R.id.Button_ID_ExtendedSearchStart2);
-        button_extended_search_start2.setOnClickListener(this);
-
-        button_reset_filter = (Button) findViewById(R.id.Button_ID_ResetFilterExtendedSearch);
-        button_reset_filter.setOnClickListener(this);
-
-        checkBox_ID_BiologischerAnbau_ = (CheckBox) findViewById(R.id.checkBox_ID_BiologischerAnbau);
-        checkBox_ID_KategorieObst_ = (CheckBox) findViewById(R.id.checkBox_ID_KategorieObst);
-        checkBox_ID_KategorieGemüse_ = (CheckBox) findViewById(R.id.checkBox_ID_KategorieGemüse);
-        checkBox_ID_KategoriePilze_ = (CheckBox) findViewById(R.id.checkBox_ID_KategoriePilze);
-        checkBox_ID_KategoriePlanzenUndSamen_ = (CheckBox) findViewById(R.id.checkBox_ID_KategoriePlanzenUndSamen);
-        checkBox_ID_KategorieHolz_ = (CheckBox) findViewById(R.id.checkBox_ID_KategorieHolz);
-        checkBox_ID_WeitereGartenprodukte_ = (CheckBox) findViewById(R.id.checkBox_ID_WeitereGartenprodukte);
-        checkBox_ID_Burgenland_ = (CheckBox) findViewById(R.id.checkBox_ID_Burgenland);
-        checkBox_ID_Kaernten_ = (CheckBox) findViewById(R.id.checkBox_ID_Kaernten);
-        checkBox_ID_Niederoesterreich_ = (CheckBox) findViewById(R.id.checkBox_ID_Niederoesterreich);
-        checkBox_ID_Oberoesterreich_ = (CheckBox) findViewById(R.id.checkBox_ID_Oberoesterreich);
-        checkBox_ID_Salzburg_ = (CheckBox) findViewById(R.id.checkBox_ID_Salzburg);
-        checkBox_ID_Steiermark_ = (CheckBox) findViewById(R.id.checkBox_ID_Steiermark);
-        checkBox_ID_Tirol_ = (CheckBox) findViewById(R.id.checkBox_ID_Tirol);
-        checkBox_ID_Vorarlberg_ = (CheckBox) findViewById(R.id.checkBox_ID_Vorarlberg);
-        checkBox_ID_Wien_ = (CheckBox) findViewById(R.id.checkBox_ID_Wien);
-        checkBox_ID_Privat_ = (CheckBox) findViewById(R.id.checkBox_ID_Privat);
-        checkBox_ID_Firma_ = (CheckBox) findViewById(R.id.checkBox_ID_Firma);
-        checkBox_ID_Zustellung_ = (CheckBox) findViewById(R.id.checkBox_ID_Zustellung);
-        checkBox_ID_Selbstabholung_ = (CheckBox) findViewById(R.id.checkBox_ID_Selbstabholung);
-        checkBox_ID_NichtBenoetigt_ = (CheckBox) findViewById(R.id.checkBox_ID_NichtBenoetigt);
-        checkBox_ID_BereitsGeerntet_ = (CheckBox) findViewById(R.id.checkBox_ID_BereitsGeerntet);
-        checkBox_ID_SelbstErnten_ = (CheckBox) findViewById(R.id.checkBox_ID_SelbstErnten);
-
+        for (int i = 0; i < buttons.size(); i++) {
+            buttons.get(i).setOnClickListener(this);
+        }
 
         SearchView sv = (SearchView) findViewById(R.id.searchViewResult);
+
+
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
-
-                Intent myIntent = new Intent(SearchResultActivity.this, SearchResultActivity.class);
-                if (!query.isEmpty()) {
-
-                    Bundle bundle = new Bundle();
-                    saveFilterPreset(bundle);
-                    bundle.putString(getString(R.string.query), query);
-                    myIntent.putExtras(bundle);
-                    startActivity(myIntent);
-                }
+                ((ExpandableRelativeLayout) findViewById(R.id.expandableLayout)).collapse();
+                new GetProductTask().execute(getFilter());
                 return false;
             }
 
@@ -139,101 +119,71 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             }
         });
 
-        Uri uri = Uri.parse(getString(R.string.phpLink) + query);
+        ((SeekBar) findViewById(R.id.seekBar_ID_Entfernung))
+                .setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        ((EditText) findViewById(R.id.text_ID_Entfernung))
+                                .setText(getString(R.string.distance) + String.valueOf(progress + 20) +
+                                        getString(R.string.km));
+                    }
 
-        new GetProductTask().execute(query);
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });
+
+        Bundle b = getIntent().getExtras();
+        String query = getString(R.string.empty);
+        if (b != null) {
+            if (b.containsKey(getString(R.string.query))) {
+                query = b.getString(getString(R.string.query));
+
+            }
+            if (b.containsKey(getString(R.string.category_))) {
+                Categories c = Categories.fromInt(b.getInt("category"));
+
+                switch (c) {
+                    case CEREALS:
+                        ((CheckBox) findViewById(R.id.cb_category_5)).setChecked(true);
+                        break;
+                    case FRUIT:
+                        ((CheckBox) findViewById(R.id.cb_category_3)).setChecked(true);
+                        break;
+                    case MEAT:
+                        ((CheckBox) findViewById(R.id.cb_category_1)).setChecked(true);
+                        break;
+                    case MILKPRODUCTS:
+                        ((CheckBox) findViewById(R.id.cb_category_4)).setChecked(true);
+                        break;
+                    case OTHERS:
+                        ((CheckBox) findViewById(R.id.cb_category_6)).setChecked(true);
+                        break;
+                    case VEGETABLE:
+                        ((CheckBox) findViewById(R.id.cb_category_2)).setChecked(true);
+                        break;
+                }
+            }
+            sv.setQuery(query, false);
+            new GetProductTask().execute(getFilter());
+        }
 
     }
 
-    private void setFilter(Bundle bundle) {
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
-        ((CheckBox) findViewById(R.id.checkBox_ID_BiologischerAnbau)).setChecked(
-                bundle.getBoolean("checkBox_ID_BiologischerAnbau", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_KategorieObst)).setChecked(
-                bundle.getBoolean("checkBox_ID_KategorieObst", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_KategorieGemüse)).setChecked(
-                bundle.getBoolean("checkBox_ID_KategorieGemüse", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_KategoriePilze)).setChecked(
-                bundle.getBoolean("checkBox_ID_KategoriePilze", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_KategoriePlanzenUndSamen)).setChecked(
-                bundle.getBoolean("checkBox_ID_KategoriePlanzenUndSamen", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_WeitereGartenprodukte)).setChecked(
-                bundle.getBoolean("checkBox_ID_WeitereGartenprodukte", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_KategorieHolz)).setChecked(
-                bundle.getBoolean("checkBox_ID_KategorieHolz", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Burgenland)).setChecked(
-                bundle.getBoolean("checkBox_ID_Burgenland", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Kaernten)).setChecked(
-                bundle.getBoolean("checkBox_ID_Kaernten", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Niederoesterreich)).setChecked(
-                bundle.getBoolean("checkBox_ID_Niederoesterreich", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Oberoesterreich)).setChecked(
-                bundle.getBoolean("checkBox_ID_Oberoesterreich", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Salzburg)).setChecked(
-                bundle.getBoolean("checkBox_ID_Salzburg", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Steiermark)).setChecked(
-                bundle.getBoolean("checkBox_ID_Steiermark", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Tirol)).setChecked(
-                bundle.getBoolean("checkBox_ID_Tirol", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Vorarlberg)).setChecked(
-                bundle.getBoolean("checkBox_ID_Vorarlberg", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Wien)).setChecked(
-                bundle.getBoolean("checkBox_ID_Wien", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Privat)).setChecked(
-                bundle.getBoolean("checkBox_ID_Privat", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Firma)).setChecked(
-                bundle.getBoolean("checkBox_ID_Firma", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Zustellung)).setChecked(
-                bundle.getBoolean("checkBox_ID_Zustellung", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_Selbstabholung)).setChecked(
-                bundle.getBoolean("checkBox_ID_Selbstabholung", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_NichtBenoetigt)).setChecked(
-                bundle.getBoolean("checkBox_ID_NichtBenoetigt", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_BereitsGeerntet)).setChecked(
-                bundle.getBoolean("checkBox_ID_BereitsGeerntet", false));
-        ((CheckBox) findViewById(R.id.checkBox_ID_SelbstErnten)).setChecked(
-                bundle.getBoolean("checkBox_ID_SelbstErnten", false));
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sort_arrays, R.layout.activity_search_result);
-        ((Spinner) findViewById(R.id.Spinner_ID_ExtendedSearch)).setSelection(adapter.getPosition(
-                bundle.getString("Spinner_ID_ExtendedSearch", "")
-        ));
     }
 
-    private void saveFilterPreset(Bundle bundle) {
-
-        bundle.putBoolean("checkBox_ID_BiologischerAnbau", ((CheckBox) findViewById(R.id.checkBox_ID_BiologischerAnbau)).isChecked());
-        bundle.putBoolean("checkBox_ID_KategorieObst", ((CheckBox) findViewById(R.id.checkBox_ID_KategorieObst)).isChecked());
-        bundle.putBoolean("checkBox_ID_KategorieGemüse", ((CheckBox) findViewById(R.id.checkBox_ID_KategorieGemüse)).isChecked());
-        bundle.putBoolean("checkBox_ID_KategoriePilze", ((CheckBox) findViewById(R.id.checkBox_ID_KategoriePilze)).isChecked());
-        bundle.putBoolean("checkBox_ID_KategoriePlanzenUndSamen", ((CheckBox) findViewById(R.id.checkBox_ID_KategoriePlanzenUndSamen)).isChecked());
-        bundle.putBoolean("checkBox_ID_KategorieHolz", ((CheckBox) findViewById(R.id.checkBox_ID_KategorieHolz)).isChecked());
-        bundle.putBoolean("checkBox_ID_WeitereGartenprodukte", ((CheckBox) findViewById(R.id.checkBox_ID_WeitereGartenprodukte)).isChecked());
-        bundle.putBoolean("checkBox_ID_Burgenland", ((CheckBox) findViewById(R.id.checkBox_ID_Burgenland)).isChecked());
-        bundle.putBoolean("checkBox_ID_Kaernten", ((CheckBox) findViewById(R.id.checkBox_ID_Kaernten)).isChecked());
-        bundle.putBoolean("checkBox_ID_Niederoesterreich", ((CheckBox) findViewById(R.id.checkBox_ID_Niederoesterreich)).isChecked());
-        bundle.putBoolean("checkBox_ID_Oberoesterreich", ((CheckBox) findViewById(R.id.checkBox_ID_Oberoesterreich)).isChecked());
-        bundle.putBoolean("checkBox_ID_Salzburg", ((CheckBox) findViewById(R.id.checkBox_ID_Salzburg)).isChecked());
-        bundle.putBoolean("checkBox_ID_Steiermark", ((CheckBox) findViewById(R.id.checkBox_ID_Steiermark)).isChecked());
-        bundle.putBoolean("checkBox_ID_Tirol", ((CheckBox) findViewById(R.id.checkBox_ID_Tirol)).isChecked());
-        bundle.putBoolean("checkBox_ID_Vorarlberg", ((CheckBox) findViewById(R.id.checkBox_ID_Vorarlberg)).isChecked());
-        bundle.putBoolean("checkBox_ID_Wien", ((CheckBox) findViewById(R.id.checkBox_ID_Wien)).isChecked());
-        bundle.putBoolean("checkBox_ID_Privat", ((CheckBox) findViewById(R.id.checkBox_ID_Privat)).isChecked());
-        bundle.putBoolean("checkBox_ID_Firma", ((CheckBox) findViewById(R.id.checkBox_ID_Firma)).isChecked());
-        bundle.putBoolean("checkBox_ID_Zustellung", ((CheckBox) findViewById(R.id.checkBox_ID_Zustellung)).isChecked());
-        bundle.putBoolean("checkBox_ID_Selbstabholung", ((CheckBox) findViewById(R.id.checkBox_ID_Selbstabholung)).isChecked());
-        bundle.putBoolean("checkBox_ID_NichtBenoetigt", ((CheckBox) findViewById(R.id.checkBox_ID_NichtBenoetigt)).isChecked());
-        bundle.putBoolean("checkBox_ID_BereitsGeerntet", ((CheckBox) findViewById(R.id.checkBox_ID_BereitsGeerntet)).isChecked());
-        bundle.putBoolean("checkBox_ID_SelbstErnten", ((CheckBox) findViewById(R.id.checkBox_ID_SelbstErnten)).isChecked());
-
-        bundle.putString("Spinner_ID_ExtendedSearch", ((Spinner) findViewById(R.id.Spinner_ID_ExtendedSearch)).getSelectedItem().toString());
-    }
-
-
-    private class GetProductTask extends AsyncTask<String, Void, ArrayList<Product>> implements View.OnClickListener {
+    private class GetProductTask extends AsyncTask<Filter, Void, ArrayList<Product>>
+            implements View.OnClickListener {
 
         @Override
-        protected ArrayList<Product> doInBackground(String... params) {
+        protected ArrayList<Product> doInBackground(Filter... params) {
             try {
                 return Core.getInstance().getProducts().getSearchedProducts(params[0]);
             } catch (Exception e) {
@@ -246,53 +196,27 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
             try {
 
-                LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayoutSearchResult);
-                for (Product p : result
-                        ) {
-                    System.out.println(getString(R.string.postExeNameProduct) + p.getName());
-                    String category;
-                    switch(p.getType())
-                    {
-                        case 1:
-                            category = getString(R.string.meat);
-                            break;
-                        case 2:
-                            category = getString(R.string.fruits);
-                            break;
-                        case 3:
-                            category = getString(R.string.vegetables);
-                            break;
-                        case 4:
-                            category = getString(R.string.dairy);
-                            break;
-                        case 5:
-                            category = getString(R.string.wheat);
-                            break;
-                        default:
-                            category = getString(R.string.other);
-                            break;
-                    }
+                if (result == null || result.isEmpty()) {
+                    CharSequence text = getString(R.string.nothingFound);
+                    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+
+                LinearLayout linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayoutProductPresentation);
+                linearLayoutHome.removeAllViews();
+
+               int index = ( (Spinner) findViewById(R.id.Spinner_ID_ExtendedSearch)).getSelectedItemPosition();
+
+
+
+              ProductComperator pc =  new ProductComperator(ProductSorting.fromInt(index));
+                Collections.sort(result, pc);
+                for (Product p :   result) {
                     LayoutInflater inflater = getLayoutInflater();
                     LinearLayout inflatedView = (LinearLayout) inflater.inflate(R.layout.product, linearLayoutHome);
-
-                    int productLayoutId = p.getId();
-                    LinearLayout productLayout = (LinearLayout) inflatedView.findViewById(R.id.linearLayout_product);
-                    (inflatedView.findViewById(R.id.linearLayout_product)).setId(productLayoutId);
-                    ImageButton image_load = (ImageButton) productLayout.findViewById(R.id.imageButtonProduct);
-                    image_load.setOnClickListener(this);
-                    Glide.with(getApplicationContext()).load(Core.getInstance().getProducts().getImageUri(p.getId())).into(image_load);
-                    (productLayout.findViewById(R.id.imageButtonProduct)).setOnClickListener(this);
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct1)).setText(p.getName());
-
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct2)).setText(getString(R.string.category) +
-                            getString(R.string.space) + category);
-
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct3)).setText(getString(R.string.productPrice) +
-                            getString(R.string.space) + String.valueOf(p.getPrice()) + (getString(R.string.euro) + getString(R.string.slash) +  String.valueOf(p.getUnit())));
-                    ((TextView) productLayout.findViewById(R.id.textViewRndProduct4)).setText(getString(R.string.region) +
-                            getString(R.string.space) +  String.valueOf(p.getUser().getCity()));
-
+                    CommonUi.fillProductPresentation(p, inflatedView, this);
                 }
+
 
             } catch (Exception ex) {
                 System.out.println(getString(R.string.productTaskException));
@@ -309,10 +233,11 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
             Intent myIntent = new Intent(SearchResultActivity.this, ProductDetailActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putInt("id", productId);
+            bundle.putInt(getString(R.string.id), productId);
             myIntent.putExtras(bundle);
             startActivity(myIntent);
         }
+
     }
 
 
@@ -369,40 +294,116 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
+        Filter filter;
         switch (v.getId()) {
             case R.id.expand:
-                expandableLayout.toggle();
+                ((ExpandableRelativeLayout) findViewById(R.id.expandableLayout)).toggle();
                 break;
+            case R.id.Button_ID_ExtendedSearchStart:
+                filter = getFilter();
+                ((ExpandableRelativeLayout) findViewById(R.id.expandableLayout)).collapse();
+                new GetProductTask().execute(getFilter());
+                break;
+            case R.id.Button_ID_ExtendedSearchStart2:
+                filter = getFilter();
+                ((ExpandableRelativeLayout) findViewById(R.id.expandableLayout)).toggle();
+                new GetProductTask().execute(getFilter());
+                break;
+            case R.id.Button_ID_ResetFilterExtendedSearch: {
+              /*  LinearLayout searchResultLayout = ((LinearLayout) findViewById(R.id.linearLayoutSearchResult));
+                for (int i = 0; i < searchResultLayout.getChildCount(); i++) {
+                    if (searchResultLayout.getChildAt(i) instanceof CheckBox) {
+                        ((CheckBox) searchResultLayout.getChildAt(i)).setChecked(false);
+                    }
+                }*/
+                LinearLayout ll_bio = ((LinearLayout) findViewById(R.id.ll_bio));
+                LinearLayout ll_category = ((LinearLayout) findViewById(R.id.ll_category));
+                LinearLayout ll_seller = ((LinearLayout) findViewById(R.id.ll_seller));
+                LinearLayout ll_transfer = ((LinearLayout) findViewById(R.id.ll_transfer));
+                for (int i = 0; i < ll_category.getChildCount(); i++) {
+                    if (ll_category.getChildAt(i) instanceof CheckBox) {
+                        ((CheckBox) ll_category.getChildAt(i)).setChecked(false);
+                    }
+                }
+                for (int i = 0; i < ll_seller.getChildCount(); i++) {
+                    if (ll_seller.getChildAt(i) instanceof CheckBox) {
+                        ((CheckBox) ll_seller.getChildAt(i)).setChecked(false);
+                    }
+                }
+                for (int i = 0; i < ll_transfer.getChildCount(); i++) {
+                    if (ll_transfer.getChildAt(i) instanceof CheckBox) {
+                        ((CheckBox) ll_transfer.getChildAt(i)).setChecked(false);
+                    }
+                }
+
+                for (int i = 0; i < ll_bio.getChildCount(); i++) {
+                    if (ll_transfer.getChildAt(i) instanceof CheckBox) {
+                        ((CheckBox) ll_bio.getChildAt(i)).setChecked(false);
+                    }
+                }
+            }
+            break;
             default:
                 break;
         }
+    }
 
-        if (v.getId() == R.id.Button_ID_ResetFilterExtendedSearch) {
-            checkBox_ID_BiologischerAnbau_.setChecked(false);
-            checkBox_ID_KategorieObst_.setChecked(false);
-            checkBox_ID_KategorieGemüse_.setChecked(false);
-            checkBox_ID_KategoriePilze_.setChecked(false);
-            checkBox_ID_KategoriePlanzenUndSamen_.setChecked(false);
-            checkBox_ID_KategorieHolz_.setChecked(false);
-            checkBox_ID_WeitereGartenprodukte_.setChecked(false);
-            checkBox_ID_Burgenland_.setChecked(false);
-            checkBox_ID_Kaernten_.setChecked(false);
-            checkBox_ID_Niederoesterreich_.setChecked(false);
-            checkBox_ID_Oberoesterreich_.setChecked(false);
-            checkBox_ID_Salzburg_.setChecked(false);
-            checkBox_ID_Steiermark_.setChecked(false);
-            checkBox_ID_Tirol_.setChecked(false);
-            checkBox_ID_Vorarlberg_.setChecked(false);
-            checkBox_ID_Wien_.setChecked(false);
-            checkBox_ID_Privat_.setChecked(false);
-            checkBox_ID_Firma_.setChecked(false);
-            checkBox_ID_Zustellung_.setChecked(false);
-            checkBox_ID_Selbstabholung_.setChecked(false);
-            checkBox_ID_NichtBenoetigt_.setChecked(false);
-            checkBox_ID_BereitsGeerntet_.setChecked(false);
-            checkBox_ID_SelbstErnten_.setChecked(false);
+    private Filter getFilter() {
+
+        Filter filter = new Filter(((SeekBar) findViewById(R.id.seekBar_ID_Entfernung)).getProgress() + 20);
+        filter.setBio(((CheckBox) findViewById(R.id.checkBox_ID_BiologischerAnbau)).isChecked());
+        filter.setQuery(((SearchView) findViewById(R.id.searchViewResult)).getQuery().toString());
+
+        List<Categories> categories = new ArrayList<>();
+        for (int i = 1; i < 7; i++) {
+            int resID = getResources().getIdentifier(getString(R.string.cb_category_) + i, getString(R.string.id), getPackageName());
+            if (((CheckBox) findViewById(resID)).isChecked()) {
+                categories.add(Categories.fromInt(i));
+            }
         }
+
+        for (int i = 0; i < 2; i++) {
+            int resID = getResources().getIdentifier(getString(R.string.cb_seller_) + i, getString(R.string.id), getPackageName());
+            if (((CheckBox) findViewById(resID)).isChecked()) {
+                categories.add(Categories.fromInt(i));
+            }
+        }
+
+        for (int i = 0; i < 3; i++) {
+            int resID = getResources().getIdentifier(getString(R.string.cb_transfer_) + i, getString(R.string.id), getPackageName());
+            if (((CheckBox) findViewById(resID)).isChecked()) {
+                categories.add(Categories.fromInt(i));
+            }
+        }
+
+        filter.setCategories(categories);
+        return filter;
     }
 
 
+    public class ProductComperator implements Comparator<Product> {
+
+        ProductSorting sorting_;
+
+        ProductComperator(ProductSorting sorting) {
+            sorting_ = sorting;
+        }
+
+        @Override
+        public int compare(Product o1, Product o2) {
+
+            switch (sorting_) {
+                case POPULARITY:
+                    return o1.getLikes() - o2.getLikes();
+                case PRICE_ASC:
+                    return (int) (o1.getPrice() - o2.getPrice());
+                case PRICE_DESC:
+                    return (int) (o2.getPrice() - o1.getPrice());
+                case ALPHATEICAL_DESC:
+                    return o2.getName().compareTo(o1.getName());
+                default:
+                    return o1.getName().compareTo(o2.getName());
+            }
+        }
+    }
 }

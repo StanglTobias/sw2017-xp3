@@ -12,10 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -39,7 +37,7 @@ import at.sw2017xp3.regionalo.util.OnTaskCompleted;
  * Created by Christof on 05.04.2017.
  */
 
-public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener, OnTaskCompleted, OnMapReadyCallback{
+public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener, OnTaskCompleted, OnMapReadyCallback {
     private ArrayList<View> list_of_elements = new ArrayList<>();
     private Product product_;
     private int like_button_counter_;
@@ -49,18 +47,14 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     MapFragment mapFragment;
 
 
-
-    public boolean googlServicesAvailable(){
+    public boolean googlServicesAvailable() {
         GoogleApiAvailability api = GoogleApiAvailability.getInstance();
 
-        int isAvailable = api.isGooglePlayServicesAvailable(this) ;
+        int isAvailable = api.isGooglePlayServicesAvailable(this);
 
-        if(isAvailable == ConnectionResult.SUCCESS)
-        {
+        if (isAvailable == ConnectionResult.SUCCESS) {
             return true;
-        }
-        else if(api.isUserResolvableError(isAvailable))
-        {
+        } else if (api.isUserResolvableError(isAvailable)) {
             Dialog dialog = api.getErrorDialog(this, isAvailable, 0);
             dialog.show();
         }
@@ -95,13 +89,10 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         Glide.with(getApplicationContext()).load(Core.getInstance().getProducts().getImageUri(id)).into(product_image);
 
         new GetProductTask(this).execute(id);
-        if(googlServicesAvailable())
-        {
-            Toast.makeText(this, "YAY", Toast.LENGTH_LONG).show();
+        if (googlServicesAvailable()) {
             mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);
         }
-
 
 
         new GetProductTask(this).execute(id);
@@ -111,7 +102,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     public void onTaskCompleted() {
         LatLng placeLocation = GeoUtils.getLocationFromAddress(this, p.getUser().getAddress());
         Marker placeMarker = googleMap.addMarker(new MarkerOptions().position(placeLocation)
-                .title("test"));
+                .title(getString(R.string.test)));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(placeLocation));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(15), 1000, null);
     }
@@ -129,8 +120,8 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             }
         }
 
-        public  GetProductTask(OnTaskCompleted listener){
-            this.listener=listener;
+        public GetProductTask(OnTaskCompleted listener) {
+            this.listener = listener;
 
         }
 
@@ -138,33 +129,34 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         protected void onPostExecute(Product result) {
             try {
 
-                 p = product_ = result;
-            ((TextView) findViewById(R.id.textViewDescripton)).setText(p.getDescription());
-            ((TextView) findViewById(R.id.textViewProductName)).setText(p.getName());
-            ((TextView) findViewById(R.id.textViewPrice)).setText("€" + Double.toString(p.getPrice()) + "/" + p.getUnit());
+                p = product_ = result;
+                ((TextView) findViewById(R.id.textViewDescripton)).setText(p.getDescription());
+                ((TextView) findViewById(R.id.textViewProductName)).setText(p.getName());
+                ((TextView) findViewById(R.id.textViewPrice)).setText(getString(R.string.euro) + Double.toString(p.getPrice()) + getString(R.string.slash) + p.getUnit());
 
-                ImageView isItBioView = (ImageView)findViewById(R.id.isItBio);
-                if (p.isBio() == false)
-                {isItBioView.setVisibility(View.INVISIBLE);}
-                else if (p.isBio()== true)
-                { isItBioView.setVisibility(View.VISIBLE);}
+                ImageView isItBioView = (ImageView) findViewById(R.id.isItBio);
+                if (p.isBio())
+                    isItBioView.setVisibility(View.VISIBLE);
+                else
+                    isItBioView.setVisibility(View.INVISIBLE);
 
-            ((TextView) findViewById(R.id.textViewCategroy)).setText("Kategorie: " + productCategorieName(p.getType()));
 
-            User user = p.getUser();
-            ((TextView) findViewById(R.id.textViewName)).setText(user.getFullName());
-            ((TextView) findViewById(R.id.textViewAdress)).setText(user.getPostalCode() + " " + user.getCity() + "\n" + user.getAddress());
-            ((TextView) findViewById(R.id.textViewNumber)).setText(user.getPhoneNumber());
-            ((TextView) findViewById(R.id.textViewEmail)).setText(user.getEmail());
-            ((TextView) findViewById(R.id.textViewLikeCount)).setText(Integer.toString(p.getLikes()));
+                ((TextView) findViewById(R.id.textViewCategroy)).setText(getString(R.string.kategorie) + productCategorieName(p.getType()));
 
-            findViewById(R.id.buttonLike).setEnabled(!p.CurrentUserHasLiked());
+                User user = p.getUser();
+                ((TextView) findViewById(R.id.textViewName)).setText(user.getFullName());
+                ((TextView) findViewById(R.id.textViewAdress)).setText(user.getPostalCode() + getString(R.string.space) + user.getCity() + getString(R.string.enter) + user.getAddress());
+                ((TextView) findViewById(R.id.textViewNumber)).setText(user.getPhoneNumber());
+                ((TextView) findViewById(R.id.textViewEmail)).setText(user.getEmail());
+                ((TextView) findViewById(R.id.textViewLikeCount)).setText(Integer.toString(p.getLikes()));
+
+                findViewById(R.id.buttonLike).setEnabled(!p.CurrentUserHasLiked());
 
 
                 listener.onTaskCompleted();
 
-            } catch(Exception e){
-                System.out.println("Halt Stop");
+            } catch (Exception e) {
+                System.out.println(getString(R.string.stop));
             }
         }
     }
@@ -223,20 +215,22 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        Button clickedButton = (Button)v;
+        Button clickedButton = (Button) v;
 
-        switch (clickedButton.getId()){
+        switch (clickedButton.getId()) {
             case R.id.buttonLike:
-                if(product_ != null && !product_.CurrentUserHasLiked())
+                if (product_ != null && !product_.CurrentUserHasLiked())
                     new LikeTask().execute(product_.getId());
                 break;
 
             case R.id.ButtonContact:
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:" + ((TextView) findViewById(R.id.textViewEmail)).getText().toString())); // only email apps should handle this
+                intent.setData(Uri.parse(getString(R.string.mailto) + ((TextView) findViewById(R.id.textViewEmail)).getText().toString())); // only email apps should handle this
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 }
+                break;
+            default:
                 break;
         }
     }
@@ -262,7 +256,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                     }
                 }
             } catch (Exception e) {
-                System.out.println("Halt Stop");
+                System.out.println(getString(R.string.stop));
             }
         }
     }
@@ -279,23 +273,24 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             case 1:
                 return getString(R.string.meat);
             case 2:
-                return getString(R.string.fruits);
-            case 3:
                 return getString(R.string.vegetables);
+            case 3:
+                return getString(R.string.fruits);
             case 4:
                 return getString(R.string.dairy);
             case 5:
                 return getString(R.string.wheat);
             case 6:
                 return getString(R.string.other);
+            default:
+                return "";
         }
-        return "";
     }
 
     @Override
     public void onMapReady(GoogleMap gMap) {
         googleMap = gMap;
-       googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         try {
             googleMap.setMyLocationEnabled(true);
         } catch (SecurityException se) {

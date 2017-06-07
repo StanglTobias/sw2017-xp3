@@ -3,8 +3,11 @@
 
     <string name="sort_prompt">Bitte eine Sortierung auswaehlen</string>
     <string-array name="sort_arrays">
-        <item>Standardsortierung</item>
-        <item>Alphabetisch</item>
+        <item>Alphabetisch A-Z</item>
+        <item>Alphabetisch Z-A</item>
+        <item>Preis aufsteigend</item>
+        <item>Preis absteigend</item>
+        <item>Beliebtheit</item>
     </string-array>
 
     <string name="releaseAd_prompt">Bitte zuerst eine Kategorie waehlen</string>
@@ -18,13 +21,20 @@
         <item>Unterkategorie 1</item>
         <item>Unterkategorie 2</item>
     </string-array>
-
+    <string name="nothingFound">Nichts gefunden!</string>
+    <string name="km"> km</string>
+    <string name="distance">Entfernung:</string>
     <string name="releaseAdEinheit_prompt">Bitte eine Einheit waehlen</string>
     <string-array name="releaseAdEinheit_arrays">
         <item>Kilogramm</item>
     </string-array>
     <string name="category">Kategorie:  </string>
     <string name="region">Region:  </string>
+
+    <string name="cb_seller_">cb_seller_</string>
+    <string name="cb_category_">cb_category_</string>
+    <string name="cb_transfer_">cb_transfer_</string>
+
     <string name="loadData">Daten geladen</string>
     <string name="nameofProduct">GetProductTask.onPostExecute name of product:</string>
     <string name="productID">Id: </string>
@@ -43,8 +53,11 @@
     <string name="biologisch">Biologisch:</string>
     <string name="kategorie">Kategorie:</string>
     <string name="stop">Halt Stop</string>
-    <string name="space">&#160;</string>
+
     <string name="yes">Ja</string>
+    <string name="per"> per </string>
+    <string name="space">&#160;</string>
+    <string name="empty"></string>
     <string name="no">Nein</string>
     <string name="meat">Fleisch</string>
     <string name="fruits">Obst</string>
@@ -55,9 +68,51 @@
     <string name="a">http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php?q=</string>
     <string name="phpLink">http://sw-ma-xp3.bplaced.net/MySQLadmin/search.php?q=</string>
     <string name="postExeNameProduct">GetProductTask.onPostExecute name of product:</string>
+    <string name="enterComulsoryFields">Pflichtfelder bitte ausfüllen!</string>
+    <string name="passwordNotMatching">Passwörter stimmen nicht überein</string>
+    <string name="userSucessfullyRegistered">Der User wurde erfolgreich erstellt</string>
 
 
     <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
         AIzaSyBXSKri2utmkn80rG3ERLWM-it2DO29Z54
 </string>
+    <string name="loginDataLink">http://sw-ma-xp3.bplaced.net/MySQLadmin/getLoginData.php</string>
+    <string name="loading">\\tLoading...</string>
+    <string name="POST">POST</string>
+    <string name="UTF8">UTF-8</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="exception">exception</string>
+    <string name="unsuccessful">unsuccessful</string>
+    <string name="falseStatement">false</string>
+    <string name="loggedUserId">logged_user_id</string>
+    <string name="falsePwandEmail">Invalid email or password</string>
+    <string name="oops">OOPs! Something went wrong. Connection Problem.</string>
+    <string name="YAY">YAY</string>
+    <string name="test">test</string>
+    <string name="enter">\\n</string>
+    <string name="mailto">mailto:</string>
+    <string name="linkRegister">http://sw-ma-xp3.bplaced.net/MySQLadmin/register.php</string>
+    <string name="companyName">company_name</string>
+    <string name="firstName">first_name</string>
+    <string name="lastName">last_name</string>
+    <string name="email">email</string>
+    <string name="phoneNumber">phone_number</string>
+    <string name="city">city</string>
+    <string name="postalCode">postal_code</string>
+    <string name="address">address</string>
+    <string name="linkAlreadyInDatabase">http://sw-ma-xp3.bplaced.net/MySQLadmin/userAlreadyInDatabase.php</string>
+    <string name="zero">0</string>
+    <string name="result">Ergebnis :</string>
+    <string name="result_">result</string>
+    <string name="registerError">Es ist ein Fehler bei der Registrierung aufgetreten!</string>
+    <string name="emailAlreadyUsed">Der User (EMAIL) ist bereits vorhanden - Registrierung fehlgeschlagen!</string>
+    <string name="et_register_ID_">et_register_ID_</string>
+    <string name="logged_user_id">logged_user_id</string>
+    <string name="checkBox_ID_BiologischerAnbau">checkBox_ID_BiologischerAnbau</string>
+    <string name="checkBox_ID_KategorieObst">checkBox_ID_KategorieObst</string>
+    <string name="checkBox_ID_KategorieGemüse">checkBox_ID_KategorieGemüse</string>
+    <string name="category_">category</string>
+    <string name="linkCurrentUser">http://sw-ma-xp3.bplaced.net/MySQLadmin/identification.php</string>
+    <string name="MYAPP">MYAPP</string>
 </resources>

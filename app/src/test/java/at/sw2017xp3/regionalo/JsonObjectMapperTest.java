@@ -65,6 +65,13 @@ public class JsonObjectMapperTest {
         int isBio = 1;
         int likes = 51;
 
+        double longitude = 1;
+        double latitude = 0;
+        int delivery = 1;
+        int yardSale = 1;
+        int selfHarvest = 0;
+        int commercial = 1;
+
         obj.put("id", id);
         obj.put("first_name", firstName);
         obj.put("last_name", lastName);
@@ -75,6 +82,12 @@ public class JsonObjectMapperTest {
         obj.put("phone_number", phone);
         obj.put("is_bio", isBio);
         obj.put("likes", likes);
+        obj.put("longitude", longitude);
+        obj.put("latitude", latitude);
+        obj.put("delivery", delivery);
+        obj.put("yard_sale", yardSale);
+        obj.put("self_harvest", selfHarvest);
+        obj.put("commercial", commercial);
 
         User u = JsonObjectMapper.CreateUser(obj);
 
@@ -86,6 +99,10 @@ public class JsonObjectMapperTest {
         assertTrue(email.equals(u.getEmail()));
         assertTrue(phone.equals(u.getPhoneNumber()));
         assertTrue((isBio == 1) == u.isBio());
+        assertTrue((delivery == 1) == u.isDelivery());
+        assertTrue((selfHarvest == 1) == u.isSelfHarvest());
+        assertTrue((yardSale == 1) == u.isYardSale());
+        assertTrue((commercial == 1) == u.isCommercial());
 
     }
 }

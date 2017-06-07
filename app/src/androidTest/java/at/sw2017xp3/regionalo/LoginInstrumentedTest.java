@@ -49,8 +49,8 @@ public class LoginInstrumentedTest {
     @Test
     public void checkGoToRegister(){
         onView(withId(R.id.buttonRegister)).perform(click());
-        onView(withId(R.id.textView_Register_ID_Hofname)).perform(typeText("Testhofname"));
-        onView(withId(R.id.textView_Register_ID_Hofname)).check(matches(withText("Testhofname")));
+        onView(withId(R.id.et_register_ID_0)).perform(typeText("Testhofname"));
+        onView(withId(R.id.et_register_ID_0)).check(matches(withText("Testhofname")));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class LoginInstrumentedTest {
         onView(withId(R.id.textViewEmail)).perform(typeText("max.mustermann@gmusterx.at"));
         closeSoftKeyboard();
         onView(withId(R.id.buttonLogin)).perform(click());
-        onView(withId(R.id.textView_ID_LoginErrors)).check(matches(withText("Bitte Passwort eingeben!")));
+        onView(withId(R.id.textView_ID_LoginErrors)).check(matches(withText("Bitte Email und Passwort eingeben!")));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class LoginInstrumentedTest {
         onView(withId(R.id.textViewPassword)).perform(typeText("max.mustermann@gmusterx.at"));
         closeSoftKeyboard();
         onView(withId(R.id.buttonLogin)).perform(click());
-        onView(withId(R.id.textView_ID_LoginErrors)).check(matches(withText("Bitte E-Mail eingeben!")));
+        onView(withId(R.id.textView_ID_LoginErrors)).check(matches(withText("Bitte Email und Passwort eingeben!")));
     }
 
     @Test
@@ -85,5 +85,19 @@ public class LoginInstrumentedTest {
         onView(withId(R.id.buttonLogin)).perform(click());
         onView(withId(R.id.textViewEmail)).perform(typeText("Hallo Welt!"));
         onView(withId(R.id.textViewEmail)).check(matches(withText("Hallo Welt!")));
+    }
+
+    @Test
+    public void WrongUsernameOrpassWord(){
+        onView(withId(R.id.textViewEmail)).perform(typeText("asd@asd.at"));
+        onView(withId(R.id.textViewPassword)).perform(typeText("passwort1234"));
+        closeSoftKeyboard();
+        onView(withId(R.id.buttonLogin)).perform(click());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withId(R.id.textView_ID_LoginErrors)).check(matches(withText("Bitte Email und Passwort eingeben!")));
     }
 }
