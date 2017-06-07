@@ -76,7 +76,6 @@
     <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
         AIzaSyBXSKri2utmkn80rG3ERLWM-it2DO29Z54
 </string>
-    <string name="loginDataLink">http://sw-ma-xp3.bplaced.net/MySQLadmin/getLoginData.php</string>
     <string name="loading">\\tLoading...</string>
     <string name="POST">POST</string>
     <string name="UTF8">UTF-8</string>
@@ -84,7 +83,7 @@
     <string name="password">password</string>
     <string name="exception">exception</string>
     <string name="unsuccessful">unsuccessful</string>
-    <string name="falseStatement">false</string>
+    <string name="falseStatement">false\n</string>
     <string name="loggedUserId">logged_user_id</string>
     <string name="falsePwandEmail">Invalid email or password</string>
     <string name="oops">OOPs! Something went wrong. Connection Problem.</string>
