@@ -8,8 +8,10 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.swipeUp;
@@ -33,12 +35,12 @@ public class ProductDetailActivityInstrumentedTest {
     @Ignore
     @Test
     public void checkButtonContact() {
-        onView(withId(R.id.ButtonContact)).perform(scrollTo(),click());
+        onView(withId(R.id.ButtonContact)).perform(scrollTo(), click());
     }
 
     @Test
     public void testLikeButton() {
-        if(!onView(withId(R.id.buttonLike)).equals(isEnabled())) {
+        if (!onView(withId(R.id.buttonLike)).equals(isEnabled())) {
             onView(withId(R.id.buttonLike)).perform(click());
         } else {
             onView(withId(R.id.buttonLike)).check(matches((isEnabled())));
@@ -48,7 +50,8 @@ public class ProductDetailActivityInstrumentedTest {
     }
 
     @Test
-    public void pressLoginButton(){
-        onView(withId(R.id.buttonMenuLogin)).perform(click());
+    public void pressLoginButton() {
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Login")).perform(click());
     }
 }

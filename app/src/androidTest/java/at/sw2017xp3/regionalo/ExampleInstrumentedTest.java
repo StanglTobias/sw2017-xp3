@@ -11,8 +11,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.pressKey;
@@ -129,12 +131,14 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testLoginButton() {
-        onView(withId(R.id.buttonMenuLogin)).perform(click());
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Login")).perform(click());
     }
 
     @Test
     public void onClick() {
-        onView(withId(R.id.buttonMenuLogin)).perform(click());
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Login")).perform(click());
         onView(withId(R.id.textViewEmail)).perform(typeText("Hallo Welt!"));
         onView(withId(R.id.textViewEmail)).check(matches(withText("Hallo Welt!")));
     }
@@ -239,8 +243,12 @@ public class ExampleInstrumentedTest {
     @Test
     public void checkBackButtonRegistry() {
         closeSoftKeyboard();
-        onView(withId(R.id.buttonMenuLogin)).perform(click());
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Login")).perform(click());
         onView(withId(R.id.buttonRegister)).perform(click());
         pressBack();
     }
+
+
 }

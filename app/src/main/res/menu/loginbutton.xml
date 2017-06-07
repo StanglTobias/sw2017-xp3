@@ -11,7 +11,7 @@
         android:title="Home"/>
 
     <item
-        android:id="@+id/buttonMenuLogin"
+        android:id="@+id/buttonMenuLoginOld"
         android:orderInCategory="0"
         android:title="Login"
         app:showAsAction="always" />
