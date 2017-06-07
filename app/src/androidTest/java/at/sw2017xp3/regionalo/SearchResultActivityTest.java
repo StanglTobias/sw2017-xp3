@@ -14,9 +14,7 @@ import org.junit.runner.RunWith;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.doubleClick;
 import static android.support.test.espresso.action.ViewActions.longClick;
 import static android.support.test.espresso.action.ViewActions.pressKey;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
@@ -154,6 +152,42 @@ public class SearchResultActivityTest {
 
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(withText("Login")).perform(click());
+    }
+
+    @Test
+    public void testSortPriceUp(){
+        onView(withId(R.id.expand)).perform(longClick());
+        onView(withId(R.id.Spinner_ID_ExtendedSearch)).perform(click());
+        onView(withText("Preis aufsteigend")).perform(click());
+        onView(withId(R.id.Button_ID_ExtendedSearchStart)).perform(click());
+
+    }
+
+    @Test
+    public void testSortPriceDown(){
+        onView(withId(R.id.expand)).perform(longClick());
+        onView(withId(R.id.Spinner_ID_ExtendedSearch)).perform(click());
+        onView(withText("Preis absteigend")).perform(click());
+        onView(withId(R.id.Button_ID_ExtendedSearchStart)).perform(click());
+
+    }
+
+    @Test
+    public void testSortPriceAZ(){
+        onView(withId(R.id.expand)).perform(longClick());
+        onView(withId(R.id.Spinner_ID_ExtendedSearch)).perform(click());
+        onView(withText("Alphabetisch A-Z")).perform(click());
+        onView(withId(R.id.Button_ID_ExtendedSearchStart)).perform(click());
+
+    }
+
+    @Test
+    public void testSortPriceZA(){
+        onView(withId(R.id.expand)).perform(longClick());
+        onView(withId(R.id.Spinner_ID_ExtendedSearch)).perform(click());
+        onView(withText("Alphabetisch Z-A")).perform(click());
+        onView(withId(R.id.Button_ID_ExtendedSearchStart)).perform(click());
+
     }
 
 
