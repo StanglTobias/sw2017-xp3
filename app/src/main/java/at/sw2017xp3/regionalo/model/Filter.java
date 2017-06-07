@@ -18,10 +18,6 @@ public class Filter {
         return distance_;
     }
 
-    public void setDistance_(int distance_) {
-        this.distance_ = distance_;
-    }
-
     public boolean isBio() {
         return isBio_;
     }

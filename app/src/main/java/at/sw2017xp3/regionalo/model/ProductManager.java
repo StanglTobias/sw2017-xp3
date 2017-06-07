@@ -173,7 +173,7 @@ public class ProductManager {
 
         builder.appendQueryParameter("lat", Double.toString(Regionalo.getInstance().getLastKnownLocation().getLatitude()));
         builder.appendQueryParameter("lon", Double.toString(Regionalo.getInstance().getLastKnownLocation().getLongitude()));
-        builder.appendQueryParameter("dist", Integer.toString(filter.getDistance_() == 0 ? 50 : filter.getDistance_()));
+        builder.appendQueryParameter("dist", Integer.toString(filter.getDistance_()));
 
         /*
         for (int i = 0; i < 2; i++) {
