@@ -2,7 +2,6 @@ package at.sw2017xp3.regionalo;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,31 +10,22 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import at.sw2017xp3.regionalo.model.Core;
+
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
-    private String phpurl;
     private String logged_user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        phpurl = getString(R.string.loginDataLink);
 
         list_of_elements.addAll(Arrays.asList(
                 findViewById(R.id.buttonRegister),
@@ -71,8 +61,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        final String email      = ((TextView)findViewById(R.id.textViewEmail)).getText().toString();
-        final String password   = ((TextView)findViewById(R.id.textViewPassword)).getText().toString();
+        final String email = ((TextView) findViewById(R.id.textViewEmail)).getText().toString();
+        final String password = ((TextView) findViewById(R.id.textViewPassword)).getText().toString();
 
         new AsyncLogin().execute(email, password);
     }
@@ -94,75 +84,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         @Override
         protected String doInBackground(String... params) {
+            String ret = "";
             try {
-                url = new URL(phpurl);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return getString(R.string.exception);
+                ret = Core.getInstance().getUsers().LogInUser(params[0], params[1]);
+                if (!ret.equals("false"))
+                    setLoggedUserId(ret);
+            } catch (Exception ex) {
+                return "false";
             }
-            try {
-                conn = (HttpURLConnection)url.openConnection();
-                conn.setReadTimeout(10000); //10 sec
-                conn.setConnectTimeout(5000); //5sec
-                conn.setRequestMethod(getString(R.string.POST));
-
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
-
-                Uri.Builder builder = new Uri.Builder()
-                        .appendQueryParameter(getString(R.string.username), params[0])
-                        .appendQueryParameter(getString(R.string.password), params[1]);
-
-                String query = builder.build().getEncodedQuery();
-
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, getString(R.string.UTF8)));
-                writer.write(query);
-                writer.flush();
-                writer.close();
-                os.close();
-                conn.connect();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-                return getString(R.string.exception);
-            }
-
-            try {
-                int response_code = conn.getResponseCode();
-
-                if(response_code == HttpURLConnection.HTTP_OK) {
-                    InputStream input = conn.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-                    StringBuilder result = new StringBuilder();
-                    String line;
-
-                    while((line = reader.readLine()) != null) {
-                        result.append(line);
-                    }
-
-                    setLoggedUserId(result.toString());
-                    return (result.toString());
-                } else {
-                    return getString(R.string.unsuccessful);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                return getString(R.string.exception);
-            } finally {
-                conn.disconnect();
-            }
+            return ret;
         }
 
         @Override
         protected void onPostExecute(String result) {
             pdLoading.dismiss();
 
-            if(logged_user_id.equals(getString(R.string.falseStatement))) {
+            if (logged_user_id.equals(getString(R.string.falseStatement))) {
                 setWrongUsernamePasswordTextView();
                 return;
             }
 
-            if(result.equalsIgnoreCase(logged_user_id)) {
+            if (result.equalsIgnoreCase(logged_user_id)) {
                 Intent intent = new Intent(LoginActivity.this, ReleaseAdActivity.class);
                 intent.putExtra(getString(R.string.loggedUserId), logged_user_id);
                 startActivity(intent);

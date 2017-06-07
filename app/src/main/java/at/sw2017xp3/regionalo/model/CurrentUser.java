@@ -33,22 +33,4 @@ public class CurrentUser {
     public static String getId() {
         return current_user_id_;
     }
-
-    public static boolean checkForLike(int pID) {
-        Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/identification.php")
-                .buildUpon()
-                .appendQueryParameter("pid", Integer.toString(pID))
-                .appendQueryParameter("uid", "test123").build();
-
-        Boolean checked = null;
-        try {
-         checked = new Boolean(HttpUtils.downloadContent(uri.toString()));
-        } catch (Exception ex) {
-        }
-
-        if(checked.booleanValue())
-            return true;
-        else
-            return false;
-    }
 }
