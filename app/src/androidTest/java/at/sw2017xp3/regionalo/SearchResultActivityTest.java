@@ -140,6 +140,7 @@ public class SearchResultActivityTest {
     }
 
 
+    @Ignore
     @Test
     public void testSearchSpeckDetailLogin() {
         onView(withId(R.id.searchViewResult)).perform(pressKey(KeyEvent.KEYCODE_ENTER));

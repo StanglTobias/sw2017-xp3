@@ -36,9 +36,8 @@ UserManager {
     }
 
     public void addUser(User u) {
-        if (!cache_.containsKey(u.getId())) {
-            cache_.put(u.getId(), u);
-        }
+        cache_.put(u.getId(), u);
+
     }
 
     public User getUser(int id) {
@@ -68,25 +67,6 @@ UserManager {
         return p;
     }
 
-    public void WriteLongLat(User u) {
-        try {
-            LatLng latLng = GeoUtils.getLocationFromAddress(Regionalo.getContext(), u.getAddress());
-            u.setLatitude(latLng.latitude);
-            u.setLongitude_(latLng.latitude);
-
-            Uri uri = Uri.parse("http://sw-ma-xp3.bplaced.net/MySQLadmin/userlonlat.php")
-                    .buildUpon()
-                    .appendQueryParameter("id", Integer.toString(u.getId()))
-                    .appendQueryParameter("lon", Double.toString(u.getLongitude()))
-                    .appendQueryParameter("lat", Double.toString(u.getLatitude())).build();
-
-
-            HttpUtils.downloadContent(uri.toString());
-        } catch (Exception ex) {
-            Log.e("Databas", "exception", ex);
-        }
-
-    }
 
     public String LogInUser(String userName, String password) {
         try {
