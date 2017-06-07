@@ -250,5 +250,62 @@ public class ExampleInstrumentedTest {
         pressBack();
     }
 
+    @Test
+    public void checkLoginDetailPageLogout() {
+        closeSoftKeyboard();
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Login")).perform(click());
+
+        onView(withId(R.id.textViewEmail)).perform(typeText("test@gmx.at"));
+        onView(withId(R.id.textViewPassword)).perform(typeText("test"));
+        closeSoftKeyboard();
+        onView(withId(R.id.buttonLogin)).perform(click());
+
+        closeSoftKeyboard();
+        pressBack();
+
+        onView(withId(1)).perform(scrollTo(), click());
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Logout")).perform(click());
+    }
+
+    @Test
+    public void checkLoginDetailPageProductAdd() {
+        closeSoftKeyboard();
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Login")).perform(click());
+
+        onView(withId(R.id.textViewEmail)).perform(typeText("test@gmx.at"));
+        onView(withId(R.id.textViewPassword)).perform(typeText("test"));
+        closeSoftKeyboard();
+        onView(withId(R.id.buttonLogin)).perform(click());
+
+        closeSoftKeyboard();
+        pressBack();
+
+        onView(withId(1)).perform(scrollTo(), click());
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Produkt hinzufügen")).perform(click());
+    }
+
+    @Test
+    public void checkDetailPageLogo() {
+        closeSoftKeyboard();
+        onView(withId(1)).perform(scrollTo(), click());
+        onView(withId(R.id.logo)).perform(click());
+    }
+
+    @Test
+    public void checkDetailPageProducerRegistration() {
+        closeSoftKeyboard();
+        onView(withId(1)).perform(scrollTo(), click());
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("als Produzent registrieren")).perform(click());
+    }
+
 
 }

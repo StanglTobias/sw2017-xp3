@@ -4,7 +4,7 @@
 
 
     <item
-        android:id="@+id/logo"
+        android:id="@+id/logoOld"
         android:orderInCategory="0"
         android:icon="@mipmap/ic_launcher"
         app:showAsAction="always"

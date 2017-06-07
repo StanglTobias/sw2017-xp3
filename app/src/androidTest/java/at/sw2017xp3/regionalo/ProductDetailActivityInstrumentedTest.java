@@ -54,4 +54,7 @@ public class ProductDetailActivityInstrumentedTest {
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(withText("Login")).perform(click());
     }
+
+
+
 }

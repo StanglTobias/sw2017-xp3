@@ -37,9 +37,7 @@ public class ProductManager {
     }
 
     public void addProduct(Product p) {
-        if (!cache_.containsKey(p.getId())) {
             cache_.put(p.getId(), p);
-        }
     }
 
     public String getProductUri(int id) {

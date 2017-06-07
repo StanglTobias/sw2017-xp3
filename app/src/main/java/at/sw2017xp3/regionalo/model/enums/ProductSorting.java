@@ -15,10 +15,6 @@ public enum ProductSorting {
         this.intValue = i;
     }
 
-    public int GetInt()
-    {
-        return  intValue;
-    }
 
     public static ProductSorting fromInt(int i){
         for (ProductSorting category : ProductSorting.values()){
