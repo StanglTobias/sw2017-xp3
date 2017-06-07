@@ -83,7 +83,7 @@
     <string name="password">password</string>
     <string name="exception">exception</string>
     <string name="unsuccessful">unsuccessful</string>
-    <string name="falseStatement">false</string>
+    <string name="falseStatement">false\n</string>
     <string name="loggedUserId">logged_user_id</string>
     <string name="falsePwandEmail">Invalid email or password</string>
     <string name="oops">OOPs! Something went wrong. Connection Problem.</string>

@@ -99,6 +99,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         protected void onPostExecute(String result) {
             pdLoading.dismiss();
 
+            String some = getString(R.string.falseStatement);
             if (logged_user_id.equals(getString(R.string.falseStatement))) {
                 setWrongUsernamePasswordTextView();
                 return;
