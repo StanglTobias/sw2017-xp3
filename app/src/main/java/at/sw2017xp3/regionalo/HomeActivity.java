@@ -141,7 +141,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.loginbutton, menu);
+        getMenuInflater().inflate(R.menu.overflow_menu, menu);
         return true;
     }
 
@@ -168,7 +168,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.buttonMenuLogin) {
             Intent myIntent = new Intent(this, LoginActivity.class);
@@ -177,15 +176,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             LoginActivity.loggedIn_ = false;
             Intent myIntent = new Intent(this, HomeActivity.class);
             startActivity(myIntent);}
-        if (id == R.id.buttonHome) {
+        if (id == R.id.logo) {
             Intent myIntent = new Intent(this, HomeActivity.class);
             startActivity(myIntent);}
         if (id == R.id.buttonProducerRegistration) {
             Intent myIntent = new Intent(this, RegisterActivity.class);
             startActivity(myIntent);}
         if (id == R.id.buttonAddProduct) {
-           /* Intent myIntent = new Intent(this, RegisterActivity.class);
-            startActivity(myIntent);*/}
+            Intent intent = new Intent(this, ReleaseAdActivity.class);
+            intent.putExtra(getString(R.string.loggedUserId), LoginActivity.getLoggedUserId());
+            startActivity(intent);
+
+        }
 
         return super.onOptionsItemSelected(item);
     }

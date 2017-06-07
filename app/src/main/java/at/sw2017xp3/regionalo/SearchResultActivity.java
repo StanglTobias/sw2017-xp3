@@ -279,15 +279,16 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             LoginActivity.loggedIn_ = false;
             Intent myIntent = new Intent(this, HomeActivity.class);
             startActivity(myIntent);}
-        if (id == R.id.buttonHome) {
+        if (id == R.id.logo) {
             Intent myIntent = new Intent(this, HomeActivity.class);
             startActivity(myIntent);}
         if (id == R.id.buttonProducerRegistration) {
             Intent myIntent = new Intent(this, RegisterActivity.class);
             startActivity(myIntent);}
         if (id == R.id.buttonAddProduct) {
-           /* Intent myIntent = new Intent(this, RegisterActivity.class);
-            startActivity(myIntent);*/}
+            Intent intent = new Intent(this, ReleaseAdActivity.class);
+            intent.putExtra(getString(R.string.loggedUserId), LoginActivity.getLoggedUserId());
+            startActivity(intent);}
 
         return super.onOptionsItemSelected(item);
     }

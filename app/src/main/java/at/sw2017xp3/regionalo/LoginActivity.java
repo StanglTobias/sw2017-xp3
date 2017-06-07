@@ -27,7 +27,7 @@ import java.util.Arrays;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<View> list_of_elements = new ArrayList<>();
     private String phpurl;
-    private String logged_user_id;
+    private static String logged_user_id;
 
     public static Boolean loggedIn_ = false;
 
@@ -166,6 +166,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
 
             if(result.equalsIgnoreCase(logged_user_id)) {
+                loggedIn_ = true;
                 Intent intent = new Intent(LoginActivity.this, ReleaseAdActivity.class);
                 intent.putExtra(getString(R.string.loggedUserId), logged_user_id);
                 startActivity(intent);
@@ -182,9 +183,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+
     public void setLoggedUserId(String value) {
         logged_user_id = value;
     }
+
+    public static String getLoggedUserId() {
+        return logged_user_id;
+    }
+
 
     public void setWrongUsernamePasswordTextView() {
         ((TextView) findViewById(R.id.textView_ID_LoginErrors)).setText(getString(R.string.missingPW_Email));
