@@ -49,6 +49,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testMenuButtonsFirstScreen() {
+        closeSoftKeyboard();
         onView(withId(R.id.buttonMeat)).perform(click());
         pressBack();
         onView(withId(R.id.buttonVegetables)).perform(click());
@@ -65,6 +66,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testSearchGouda() {
+        closeSoftKeyboard();
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Gouda"));
@@ -75,6 +77,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testSearchFleisch() {
+        closeSoftKeyboard();
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Spe"));
@@ -85,6 +88,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testSearchObst() {
+        closeSoftKeyboard();
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Birne"));
@@ -95,6 +99,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testSearchGemüse() {
+        closeSoftKeyboard();
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Tomaten"));
@@ -105,6 +110,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testSearchSonstiges() {
+        closeSoftKeyboard();
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Honig"));
@@ -115,6 +121,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testSearchGetreide() {
+        closeSoftKeyboard();
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Weizen"));
@@ -125,18 +132,21 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testSearchFunction() {
+        closeSoftKeyboard();
         onView(withId(R.id.searchViewHome)).perform(click());
         onView(withId(R.id.searchViewHome)).perform(typeText("Hallo"), click());
     }
 
     @Test
     public void testLoginButton() {
+        closeSoftKeyboard();
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(withText("Login")).perform(click());
     }
 
     @Test
     public void onClick() {
+        closeSoftKeyboard();
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(withText("Login")).perform(click());
         onView(withId(R.id.textViewEmail)).perform(typeText("Hallo Welt!"));
@@ -146,6 +156,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testSearchSpeckDetail() {
+        closeSoftKeyboard();
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Speck"));
@@ -158,6 +169,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testSpeckDetail() {
+        closeSoftKeyboard();
         onView(withId(1)).perform(scrollTo(), click());
         onView(withId(R.id.textViewProductName)).check(matches(withText("Speck")));
 
@@ -166,6 +178,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testLikeButtonSearchBirneNotLikedAndLiked() {
+        closeSoftKeyboard();
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Birne"));
@@ -200,7 +213,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testLikeButtonSpeckNotLikedAndLiked() {
-
+        closeSoftKeyboard();
 
         onView(withId(1)).perform(click());
         onView(withId(R.id.textViewProductName)).check(matches(withText("Speck")));
@@ -231,6 +244,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testSearchSpeckDetailLogin() {
+        closeSoftKeyboard();
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.searchViewHome)).perform(typeText("Speck"));
@@ -249,6 +263,10 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.buttonRegister)).perform(click());
         pressBack();
     }
+
+
+
+    // Detail Page Menu Items
 
     @Test
     public void checkLoginDetailPageLogout() {
@@ -303,6 +321,93 @@ public class ExampleInstrumentedTest {
     public void checkDetailPageProducerRegistration() {
         closeSoftKeyboard();
         onView(withId(1)).perform(scrollTo(), click());
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("als Produzent registrieren")).perform(click());
+    }
+
+
+
+    // Search Result Menu Items
+
+    @Test
+    public void checkLoginSearchResultLogout() {
+        closeSoftKeyboard();
+
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewHome)).perform(typeText("Weizen"));
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Login")).perform(click());
+
+        onView(withId(R.id.textViewEmail)).perform(typeText("test@gmx.at"));
+        onView(withId(R.id.textViewPassword)).perform(typeText("test"));
+        closeSoftKeyboard();
+        onView(withId(R.id.buttonLogin)).perform(click());
+
+        closeSoftKeyboard();
+        pressBack();
+        pressBack();
+        closeSoftKeyboard();
+
+
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Logout")).perform(click());
+    }
+
+    @Test
+    public void checkLoginSearchDetailProductAdd() {
+        closeSoftKeyboard();
+
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewHome)).perform(typeText("Weizen"));
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Login")).perform(click());
+
+        onView(withId(R.id.textViewEmail)).perform(typeText("test@gmx.at"));
+        onView(withId(R.id.textViewPassword)).perform(typeText("test"));
+        closeSoftKeyboard();
+        onView(withId(R.id.buttonLogin)).perform(click());
+
+        closeSoftKeyboard();
+        pressBack();
+        pressBack();
+        closeSoftKeyboard();
+
+
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Produkt hinzufügen")).perform(click());
+    }
+
+    @Test
+    public void checkSearchResultLogo() {
+        closeSoftKeyboard();
+
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewHome)).perform(typeText("Weizen"));
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+
+        onView(withId(R.id.logo)).perform(click());
+    }
+
+    @Test
+    public void checkSearchDetailProducerRegistration() {
+        closeSoftKeyboard();
+
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchViewHome)).perform(typeText("Weizen"));
+        onView(withId(R.id.searchViewHome)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(withText("als Produzent registrieren")).perform(click());
     }

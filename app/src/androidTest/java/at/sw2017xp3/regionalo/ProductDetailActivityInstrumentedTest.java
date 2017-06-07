@@ -49,12 +49,6 @@ public class ProductDetailActivityInstrumentedTest {
         }
     }
 
-    @Test
-    public void pressLoginButton() {
-        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
-        onView(withText("Login")).perform(click());
-    }
-
 
 
 }
