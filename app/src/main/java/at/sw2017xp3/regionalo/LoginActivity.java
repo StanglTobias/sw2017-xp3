@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import at.sw2017xp3.regionalo.model.Core;
+import at.sw2017xp3.regionalo.util.Security;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -67,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         final String email = ((TextView) findViewById(R.id.textViewEmail)).getText().toString();
-        final String password = ((TextView) findViewById(R.id.textViewPassword)).getText().toString();
+        final String password = Security.SHA1(((TextView) findViewById(R.id.textViewPassword)).getText().toString());
 
         new AsyncLogin().execute(email, password);
     }
